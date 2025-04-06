@@ -10,9 +10,9 @@
 ## 👥 팀 구성
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| 윤수빈 | 프론트엔드 | [@example1](https://github.com/example1) |
-| 김지성 | 백엔드 | [@example2](https://github.com/example2) |
-| 황재웅 | 기획/디자인 & 프론트 보조 | [@example3](https://github.com/example3) |
+| 예시1 | 프론트엔드 | [@example1](https://github.com/example1) |
+| 예시2 | 백엔드 | [@example2](https://github.com/example2) |
+| 예시3 | 기획/디자인 & 프론트 보조 | [@example3](https://github.com/example3) |
 
 ## 🛠 기술 스택
 - Frontend: HTML/CSS, JavaScript (또는 React)
@@ -35,10 +35,13 @@
 - 시작일: 2025.04.07
 - 배포 예정일: 2025.06.06
 
-
 ## 🚀 주요 기능
 - 회원가입 / 로그인 (역할 선택)
 - 프로젝트 생성 / 상세보기 / 전문가 모집
 - 펀딩 참여 / 리워드 선택 / 결제
 - 마이페이지 (일반/전문가)
 - 커뮤니티 게시판
+
+## 📚 프로젝트 문서
+- [개발 로드맵 보기](./docs/roadmap.md)
+- [기여 가이드라인 보기](./.github/CONTRIBUTING.md)

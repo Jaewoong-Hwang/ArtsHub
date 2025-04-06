@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArtsHub Clone</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Noto+Sans+KR:wght@100..900&family=Oswald:wght@200..700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/artshub_header.css">
+
+  <!-- 푸터 css -->
+  <link rel="stylesheet" href="./static/css/artshub_footer.css">
+
+  <!-- 구글 아이콘 -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+  <!-- Main css -->
+  <link rel="stylesheet" href="./static/css/artshub_main.css">
+  <!-- js -->
+  <!-- navbor_togleBtn.js -->
+  <script defer src="./static/js/navbar_togleBtn.js"></script>
+ <!-- sidebar -->
+ <link rel="stylesheet" href="./static/css/sidebar.css">
+
+
+
+  <style>
+
+
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navi">
+      <ul class="leftside">
+        <li class="logo">
+          <a href="../../index.html">
+            <img class="img-logo" src="./static/assets/img/mainlogo.png" alt="아츠 허브 로고">
+            <span class="artshub">Arts hub</span>
+          </a>
+        </li>
+        <ul class="depth1">
+          <li><a href="../funding/펀딩페이지.html">Funding</a>
+            <ul class="depth2">
+              <li><a href="javascript:void(0)">인기</a></li>
+              <li><a href="javascript:void(0)">신규</a></li>
+            </ul>
+          </li>
+          <li><a href="javascript:void(0)">Community</a>
+            <ul class="depth2">
+              <li><a href="javascript:void(0)">공연 후기</a></li>
+              <li><a href="javascript:void(0)">작품 이야기</a></li>
+              <li><a href="javascript:void(0)">자유 게시판</a></li>
+              <li><a href="javascript:void(0)">정보 공유</a></li>
+            </ul>
+          </li>
+          <li><a href="../project/프로젝트 페이지.html">Project</a>
+            <ul class="depth2">
+              <li><a href="javascript:void(0)">참가하기</a></li>
+              <li><a href="javascript:void(0)">모집하기</a></li>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+      <ul class="rightside">
+        <li class="logined" style="
+          "><a href="../userinfo/마이페이지_일반.html">내 정보</a></li>
+        <li class="project"><a href="javascript:void(0)">프로젝트 만들기</a></li>
+      </ul>
+      <a href="#" class="navbar_menu material-symbols-outlined">menu</a>
+
+      <!-- <div class="drop-icon">⋯</div> -->
+    </nav>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search in site">
+  </div>
+
+  <div class="category-nav">
+    <div class="nav-arrow material-symbols-outlined">arrow_back_ios</div>
+    <div class="categories">
+      <div class="category">재즈</div>
+      <div class="category">무용</div>
+      <div class="category">뮤지컬</div>
+      <div class="category">연극</div>
+      <div class="category">클래식</div>
+      <div class="category">국악</div>
+      <div class="category">어린이</div>
+      <div class="category">밴드</div>
+      <div class="category">아방가르드</div>
+      <div class="category">오페라</div>
+    </div>
+    <div class="nav-arrow material-symbols-outlined">arrow_forward_ios</div>
+  </div>
+
+  <section class="section-wrap">
+    <!-- 왼쪽 컬럼: 이달의 전문가와 그 밑에 취향 맞춤 프로젝트 -->
+    <div class="left-column">
+      <!-- 이달의 전문가 섹션 -->
+      <section class="expert-section">
+        <div class="title_1">이달의 전문가</div>
+        <a href="이달의 전문가 전체보기 페이지" class="totalview">전체보기</a>
+        <div class="expert-container">
+          <div class="expert-category">
+            <div class="expert-box">
+              <div class="expert-title">무대 디자인</div>
+              <div class="expert-top">
+                <div class="expert-info">
+                  <div class="bold">
+                    <div class="name">🥇 StageCraft Studio</div>
+                    <div class="amount">1,950,000,000원</div>
+                  </div>
+                </div>
+                <div class="profile-img" style="background-image: url(./static/assets/img/stageCraft.webp); "></div>
+              </div>
+            </div>
+            <div class="expert-list">
+              <ul>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥈 무대의 정석</div>
+                    <div class="amount">1,200,450,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/무대의\ 정석.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥉 Theater Vision</div>
+                    <div class="amount">1,045,800,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/Theater\ Vision.webp);">
+                  </div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">4 Scenic Artworks</div>
+                    <div class="amount">879,230,000원</div>
+                  </div>
+                  <div class="profile-img"
+                    style="background-image: url(./static/assets/img/Scenic\ Artworks.webp);">
+                  </div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">5 Lights & Shadows</div>
+                    <div class="amount">754,680,000원</div>
+                  </div>
+                  <div class="profile-img"
+                    style="background-image: url(./static/assets/img/Lights\ &\ Shadows.webp);">
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="expert-category">
+            <div class="expert-box">
+              <div class="expert-title">작곡</div>
+              <div class="expert-top">
+                <div class="expert-info">
+                  <div class="bold">
+                    <div class="name">🥇 Symphony Works</div>
+                    <div class="amount">1,950,000,000원</div>
+                  </div>
+                </div>
+                <div class="profile-img" style="background-image: url(./static/assets/img/Symphoney\ Works.webp);">
+                </div>
+              </div>
+            </div>
+            <div class="expert-list">
+              <ul>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥈 MusiLab Studio</div>
+                    <div class="amount">1,700,230,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/MusiLab\ studio.webp);">
+                  </div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥉 FilmScore</div>
+                    <div class="amount">1,580,400,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/FilmScore.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">4 오페라 사운드</div>
+                    <div class="amount">1,250,000,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/오페라\ 사운드.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">5 BGM Factoryn</div>
+                    <div class="amount">920,780,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/BGM\ Factory.webp);">
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="expert-category">
+            <div class="expert-box">
+              <div class="expert-title">기획</div>
+              <div class="expert-top">
+                <div class="expert-info">
+                  <div class="bold">
+                    <div class="name">🥇 StageDirect</div>
+                    <div class="amount">2,100,000,000원</div>
+                  </div>
+                </div>
+                <div class="profile-img" style="background-image: url(./static/assets/img/Stage\ Direct.webp);">
+                </div>
+              </div>
+            </div>
+            <div class="expert-list">
+              <ul>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥈 퍼포먼스 플래너</div>
+                    <div class="amount">1,860,340,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/포퍼먼스\ 플래너.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥉 Creative Theat</div>
+                    <div class="amount">1,540,720,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/Creat\ Theat.webp);">
+                  </div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">4 공연기획 랩</div>
+                    <div class="amount">1,120,380,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/공연기획\ 랩.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">5 Lights Productions</div>
+                    <div class="amount">1,120,380,000원</div>
+                  </div>
+                  <div class="profile-img"
+                    style="background-image: url(./static/assets/img/Lights\ Productions.webp);">
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="expert-category">
+            <div class="expert-box">
+              <div class="expert-title">연주자</div>
+              <div class="expert-top">
+                <div class="expert-info">
+                  <div class="bold">
+                    <div class="name">🥇 루카스 첸 (바이올린)</div>
+                    <div class="amount">2,340,000,000원</div>
+                  </div>
+                </div>
+                <div class="profile-img" style="background-image: url(./static/assets/img/루카스\ 챈.webp);"></div>
+              </div>
+            </div>
+            <div class="expert-list">
+              <ul>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥈 에밀리 장 (피아노)</div>
+                    <div class="amount">1,950,500,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/에밀리\ 장.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">🥉 크리스 리 (첼로)</div>
+                    <div class="amount">1,700,800,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/크리스\ 리.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">4 안나 김 (플루트)</div>
+                    <div class="amount">1,450,300,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/안니\ 김.webp);"></div>
+                </li>
+                <li>
+                  <div class="expert-info">
+                    <div class="name">5 데이비드 박 (트럼펫)</div>
+                    <div class="amount">1,250,000,000원</div>
+                  </div>
+                  <div class="profile-img" style="background-image: url(./static/assets/img/데이비드\ 박.webp);"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- .expert-container -->
+      </section><!-- .expert-section -->
+
+      <!-- 취향 맞춤 프로젝트 섹션  -->
+      <section class="recommend-section">
+        <div class="title_1">취향 맞춤 프로젝트</div>
+        <div class="recommend-subtitle">지금 함께 만드는 성공</div>
+        <div class="recommend-grid">
+          <a href="../project/프로젝트_상세페이지.html">
+            <div class="recommend-item">
+              <img src="./static/assets/img/마임의 세계.webp" alt="마임의 세계">
+              <div class="recommend-content">
+                <div class="percent">마임의 세계</div>
+                <div class="desc"> "대사 없이도 마음을 전할 수 있다면, 그 순간이 예술이 된다."
+                </div>
+                <p>모집중</p>
+              </div>
+            </div>
+          </a>
+          <div class="recommend-item">
+            <img src="./static/assets/img/브라스 파라다이스.webp" alt="브라스 파라다이스">
+            <div class="recommend-content">
+              <div class="percent">브라스 파라다이스</div>
+              <div class="desc"> "금관악기가 울릴 때, 그 순간이 가장 뜨거운 시간!"</div>
+              <p>모집중</p>
+            </div>
+          </div>
+          <div class="recommend-item">
+            <img src="./static/assets/img/소울의 울림.webp" alt="소울의 울림">
+            <div class="recommend-content">
+              <div class="percent">소울의 울림</div>
+              <div class="desc">"마음 깊숙이 울리는 목소리, 소울의 진짜 울림을 느껴라."</div>
+              <p>모집중</p>
+            </div>
+          </div>
+          <div class="recommend-item">
+            <img src="./static/assets/img/레트로 나이트.webp" alt="레트로 나이트">
+            <div class="recommend-content">
+              <div class="percent">레트로 나이트</div>
+              <div class="desc">"반짝이는 불빛 아래, 우리 모두 80년대로 타임슬립!"
+              </div>
+              <p>모집중</p>
+            </div>
+          </div>
+          <div class="recommend-item">
+            <img src="./static/assets/img/빛과 그림자.webp" alt="빛과 그림자">
+            <div class="recommend-content">
+              <div class="percent">빛과 그림자</div>
+              <div class="desc"> "빛이 있기에 그림자가 존재하고, 그림자가 있기에 빛은 더욱 빛난다."</div>
+              <p>모집중</p>
+            </div>
+          </div>
+          <div class="recommend-item">
+            <img src="./static/assets/img/환상의 오페라.webp" alt="환상의 오페라">
+            <div class="recommend-content">
+              <div class="percent">환상의 오페라</div>
+              <div class="desc">"비극과 희극이 교차하는 순간, 환상이 현실이 된다."</div>
+              <p>모집중</p>
+            </div>
+          </div>
+        </div><!-- .recommend-grid -->
+      </section><!-- .recommend-section -->
+    </div><!-- .left-column -->
+
+    <!-- 오른쪽: 펀딩 실시간 랭킹 -->
+    <section class="ranking-section">
+      <div class="ranking-title">펀딩 실시간 랭킹</div>
+      <ul class="ranking-list">
+        <a href="../funding/백조의호수.html">
+          <li class="ranking-item">
+
+            <div class="text-content">
+              <div class="title">1. [완판 임박] <br> 발레: 백조의 호수</div>
+              <div class="description">"신비로운 백조의 춤, 물 위에서 펼쳐지는 전설!"</div>
+              <div class="funding-info">펀딩 7,020% 달성 | D-4</div>
+            </div>
+            <div class="ranking-image" style="background-image: url(./static/assets/img/백조의\ 호수.webp)"></div>
+
+          </li>
+        </a>
+        <li class="ranking-item">
+          <div class="text-content">
+            <div class="title">2. [최초 공개] <br> 음악극: 사랑의 교차로</div>
+            <div class="description">"운명적인 만남, 사랑과 갈등을 음악으로 풀어내다!"</div>
+            <div class="funding-info">펀딩 6100% 달성 | D-16</div>
+          </div>
+          <div class="ranking-image" style="background-image: url(./static/assets/img/음악극\ 사랑의\ 교차로.webp)"></div>
+        </li>
+        <li class="ranking-item">
+          <div class="text-content">
+            <div class="title">3. [한정 이벤트]<br>무용극: 시간을 넘어</div>
+            <div class="description">"시간을 넘나드는 춤과 이야기!</div>
+            <div class="funding-info">펀딩 6,020% 달성 | D-3</div>
+          </div>
+          <div class="ranking-image" style="background-image: url(./static/assets/img/무용극\ 시간을\ 넘어.webp)"></div>
+        </li>
+        <li class="ranking-item">
+          <div class="text-content">
+            <div class="title">4. [전석 매진 예상]<br>연극: 어둠 속의 빛</div>
+            <div class="description">"어둠 속에서 빛을 찾는 여정, 극단의 새로운 도전!"</div>
+            <div class="funding-info">펀딩 4,300% 달성 | D-33</div>
+          </div>
+          <div class="ranking-image" style="background-image: url(./static/assets/img/극단\ 공연\ 어둠속의\ 빛.webp)"></div>
+        </li>
+        <li class="ranking-item">
+          <div class="text-content">
+            <div class="title">5. [급부상 공연]<br>고전극: 한 여름밤의 꿈</div>
+            <div class="description">"이 세상과 다른 세계의 경계에서 펼쳐지는 사랑과 마법!"</div>
+            <div class="funding-info">펀딩 4,200% 달성 | D-13</div>
+          </div>
+          <div class="ranking-image" style="background-image: url(./static/assets/img/뮤지컬\ 사랑의\ 꽃.webp)"></div>
+        </li>
+      </ul>
+    </section><!-- .ranking-section -->
+  </section><!-- .section-wrap -->
+
+  <footer>
+    <div class=" footer-top">
+      <ul class="footer-top-left">
+        <li><a href="">정책 약관</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </li>
+        <li><a href="">개인정보처리방침</a><span class="material-symbols-outlined">open_in_new</span>
+        </li>
+      </ul>
+      <ul class="footer-top-right">
+        <li><a href="">제휴문의</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </li>
+        <li><a href="">공지사항</a><span class="material-symbols-outlined">open_in_new</span>
+        </li>
+        <li><a href="">아츠허브 IR</a><span class="material-symbols-outlined">open_in_new</span>
+        </li>
+        <li><a href="">인재채용</a><span class="material-symbols-outlined">open_in_new</span>
+        </li>
+        <li><a href="">SNS</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </li>
+        <li><a href="">Language</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-contents">
+      <div class="footer-left">
+        <ul>
+          <li><span class="material-symbols-outlined">help</span><a href="">아츠허브 고객센터</a><span
+              class="material-symbols-outlined">
+              keyboard_arrow_right</span>
+          </li>
+          <li><a href="">채팅 상담하기</a><span class="material-symbols-outlined">keyboard_arrow_right</span>
+          </li>
+          <li><a href="">문의 등록하기</a><span class="material-symbols-outlined">
+              keyboard_arrow_right</span>
+          </li>
+          <li><a href="">도움말 센터 바로가기</a><span class="material-symbols-outlined">
+              keyboard_arrow_right</span>
+          </li>
+          <li><a href="">Contact for Global</a><span class="material-symbols-outlined">
+              keyboard_arrow_right</span>
+          </li>
+        </ul>
+        <ul>
+          <li>상담 가능시간</li>
+          <li>평일 오전 9시 ~ 오후 6시 (주말, 공휴일 제외)</li>
+        </ul>
+      </div>
+      <div class="footer-right">
+        <ul>
+          <ul>
+            <li>아츠허브</li>
+            <li>대표이사 황재웅</li>
+            <li>사업자 등록번호 123-45-67890</li>
+            <li>통신판매업신고번호 2025-대구-1226 </li>
+            <li>사업자: 아츠 허브</li>
+          </ul>
+          <ul>
+            <li>대구광역시 중구 중앙대로 366 반월센트럴타워9층</li>
+            <li style="cursor: pointer;">이메일 상담 info@artshub.com</li>
+            <li style="cursor: pointer;">유선 상담 1234-5678</li>
+            <li style="font-weight: bold;">© ArtsHub Co., Ltd.</li>
+          </ul>
+        </ul>
+        <ul>
+          <li>ArtsHub은 공연 기획자, 연주자, 무대 디자이너, 스텝 등을 연결하는 플랫폼으로, 개별 공연 및 프로젝트의 진행 책임은 해당 등록자에게 있습니다.
+          </li>
+          <li>사이트 내 공연 정보, 리뷰, 예매 정보 등 콘텐츠의 무단 복제, 전송, 배포, 크롤링 등은 저작권법 및 관련 법령에 의해 금지됩니다.
+          </li>
+          <li>자세한 내용은 콘텐츠 이용 정책을 참고하세요.
+          </li>
+        </ul>
+        <ul>
+          <a href=""><span class="material-symbols-outlined">
+              android
+            </span>안드로이드 앱</a>
+          <a href=""><img src="./static/assets/img/apple.png" alt=""> iOS 앱</a>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div class="side-nav">
+    <div class="hamburger">
+        <li><a href="">☰</a></li>
+        <li><a href=""></a></li>
+    </div>
+    <ul>
+        <li><a href="../../index.html">🏠</a></li>
+        <li><a href="../../index.html">홈</a></li>
+    </ul>
+    <ul>
+        <li><a href="../login/로그인 페이지.html">🔓</a></li>
+        <li><a href="../login/로그인 페이지.html">로그인</a></li>
+    </ul>
+    <ul>
+        <li><a href="../funding/펀딩페이지.html">💰</a></li>
+        <li><a href="../funding/펀딩페이지.html">펀딩</a></li>
+    </ul>
+    <ul>
+        <li><a href="../project/프로젝트 페이지.html">👩‍👩‍👦‍👦</a></li>
+        <li><a href="../project/프로젝트 페이지.html">프로젝트</a></li>
+    </ul>
+    <ul>
+        <li><a href="#">💬</a></li>
+        <li><a href="#">커뮤니티</a></li>
+    </ul>
+    <ul>
+        <li><a href="#">❔</a></li>
+        <li><a href="#">문의하기</a></li>
+    </ul>
+</div>
+</body>
+
+</html>

@@ -16,9 +16,9 @@
 
 ## 🛠 기술 스택
 - Frontend: HTML/CSS, JavaScript (또는 React)
-- Backend: Node.js, Express (or Spring, Django 등)
-- DB: MySQL / MongoDB / Firebase
-- Deployment: Vercel / Firebase / Netlify
+- Backend: 미정
+- DB: MySQL 
+- Deployment: 미정
 - 협업: GitHub, Notion, Figma
 
 ## 📂 디렉토리 구조

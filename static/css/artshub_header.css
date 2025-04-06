@@ -1,0 +1,385 @@
+/* 기본적인 세팅 */
+
+* {
+    margin: 0;
+    padding: 0;
+    /* margin-top: 10px; */
+    box-sizing: border-box;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    align-items: center;
+    list-style: none;
+}
+
+/* 네비 세팅 */
+
+header {}
+
+.navi {
+    max-width: 1280px;
+
+    /* height: 60px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 20px;
+    padding: 0 20px;
+    gap: 10px;
+    z-index: 102;
+}
+
+.navi>ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navi ul li {
+    /* margin: 0 10px; */
+    position: relative;
+}
+
+/* 로고 */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.navi>.leftside {
+    gap: 20px;
+
+}
+
+.navi>ul.leftside>li.logo>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navi>ul.rightside {
+    display: flex;
+    gap: 15px;
+}
+
+
+.artshub {
+    font-size: 28px;
+    margin-left: 10px;
+    font-weight: bold;
+    display: block;
+    margin-top: 0;
+}
+
+.img-logo {
+    width: 35px;
+}
+
+/* 1뎁스 2뎁스 */
+.depth1 {
+    height: 100%;
+    position: relative;
+    display: flex;
+    /* left: 30px; */
+    font-weight: 400;
+    gap: 20px;
+}
+
+.depth1>li {
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    line-height: 40px;
+
+}
+
+.depth1>li>a {
+    display: block;
+}
+
+.depth2 {
+    width: 100%;
+
+    position: relative;
+    /* top: 20px;
+    left: 0; */
+    padding: 0;
+    /* margin-top: 5px; */
+    z-index: 100;
+    /* 텍스트를 한줄로 출력 */
+    /* white-space: nowrap; */
+    background-color: rgb(255, 255, 255);
+    /* display: none; */
+
+    text-align: left;
+    max-height: 0;
+    overflow: hidden;
+
+}
+
+.depth2>li {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    /* display: none; */
+    /* height: 100%; */
+    /* margin: 5px 0; */
+    /* display: block; */
+    left: 0;
+    top: 0;
+    border: 1px solid gainsboro;
+    border-bottom: none;
+
+    /* transition: 1s; */
+}
+
+.depth2>li:last-child {
+    border-bottom: 1px solid gainsboro;
+}
+
+.depth2>li>a {
+    display: block;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+
+/* 프로젝트 버튼 */
+.project {
+    background-color: #29c3ff;
+    border: none;
+    border-radius: 10px;
+    align-items: center;
+    height: 30px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.project>a {
+    display: block;
+    margin: 0;
+}
+
+
+/* 햄버거 메뉴 1100 block */
+.navi>a.navbar_menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 45px;
+    display: none;
+    font-variation-settings:'wght' 400;
+}
+
+/* 호버 */
+/* 2뎁스 호버 시 드롭다운 효과 */
+.navi>.leftside>.depth1>li:hover .depth2 {
+    max-height: 100vh;
+    transition: 1s;
+    display: block;
+
+
+    /* border: 1px solid gainsboro; */
+}
+
+
+.navi>.leftside>.depth1>li>a:hover {
+    color: #29c3ff;
+}
+
+.navi>.leftside>.depth1>li>ul.depth2>li>a:hover {
+    color: #29c3ff;
+}
+
+.navi>.rightside>li>a:hover {
+    color: #29c3ff;
+}
+
+.project:hover {
+    background-color: #0c7dff;
+}
+
+.project:hover a {
+    color: white;
+}
+
+/* 반응형 화면 */
+/* 사용할 아이콘 */
+.drop-icon {
+    display: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #29c3ff;
+    position: fixed;
+    right: 60px;
+}
+
+.drop-icon:hover {}
+
+/* 1100 이하일때 로그인창 없앰 */
+@media(max-width: 1100px) {
+    .navi {
+        justify-content: center;
+        align-items: end;
+        margin-top: 15px;
+        flex-direction: column;
+        gap: 0;
+        padding: 0 20px 0 20px;
+    }
+
+    .navi>ul.leftside {
+        flex-direction: column;
+        align-items: end;
+        width: 100%;
+        gap: 0;
+
+    }
+
+    .navi>ul.leftside>.logo {
+        width: 100%;
+    }
+
+    .navi>ul.leftside>.depth1 {
+        position: absolute;
+        top: 100%;
+        height: 180%;
+        flex-direction: column;
+        width: 200px;
+        background-color: white;
+
+        font-weight: 400;
+        gap: 0;
+        border: 1px solid gainsboro;
+
+        display: none;
+
+    }
+
+    .navi>ul.leftside>.depth1>li {
+        width: 100%;
+        border-bottom: 1px solid gainsboro;
+
+    }
+
+    .navi>ul.leftside>.depth1>li:last-child {
+        border-bottom: none;
+    }
+
+    .navi>ul.rightside {
+        position: absolute;
+        top: 280%;
+        flex-direction: column;
+        background-color: white;
+
+        width: 200px;
+        justify-content: center;
+        align-items: center;
+        gap: 1px;
+        border: 1px solid gainsboro;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        display: none;
+
+    }
+
+    .navi>ul.rightside>li {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+
+
+        text-align: center;
+    }
+
+
+    .project {
+        /* display: none; */
+    }
+
+    .depth2 {
+        width: 70%;
+        position: absolute;
+        top: 0;
+        left: -70%;
+    }
+
+    .leftside li {
+        /* width: 150%; */
+        font-size: 20px;
+    }
+
+    .img-logo {
+        width: 60px;
+    }
+
+    .artshub {
+        font-size: 40px
+    }
+
+    .drop-icon {
+        display: block;
+    }
+
+    .navi>ul.rightside>li.logined{
+        width: 100%;
+        
+    }
+    .navi>ul.rightside>li.logined>a {
+
+        display: block; background-color: #0c7dff;
+          color: white;
+          border-radius: 10px;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center; cursor: pointer
+    }
+
+    /* 햄버거메뉴 */
+    .navi>a.navbar_menu {
+        display: block;
+    }
+
+    /* 햄버거메뉴 클릭시  */
+    .navi>ul.leftside>.depth1.active,
+    .navi>ul.rightside.active{
+        display: block;
+    }
+
+}
+
+/* 800 이하일때 메뉴창도 없앰 */
+/* @media(max-width: 800px) {
+    .navi {
+        margin-top: 20px;
+    }
+    .depth1 {
+        display: none;
+    }
+
+    .artshub {
+        font-size: 55px
+    }
+
+    .img-logo {
+        width: 80px;
+    }
+
+    .drop-icon {
+        font-size: 30px;
+    }
+} */

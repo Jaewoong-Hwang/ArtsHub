@@ -10,7 +10,6 @@
 ## 👥 팀 구성
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-
 | 윤수빈 | 프론트엔드 | [@example1](https://github.com/example1) |
 | 김지성 | 백엔드 | [@example2](https://github.com/example2) |
 | 황재웅 | 기획/디자인 & 프론트 보조 | [@example3](https://github.com/example3) |

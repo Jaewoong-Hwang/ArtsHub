@@ -1,44 +1,55 @@
-# 🎭 ArtsHub - 공연예술 크라우드 펀딩 플랫폼
+# 🤝 ArtsHub 협업 가이드
 
-## 📌 프로젝트 개요
-공연 예술 창작자와 후원자를 연결하는 펀딩 및 협업 플랫폼
+## ✅ 브랜치 네이밍 규칙
 
-- 공연 전문가들의 프로젝트 개설 및 협업 지원
-- 후원자 참여 기반의 투명한 펀딩 시스템
-- 커뮤니티 기능과 마이페이지로 소통 강화
+브랜치는 작업 목적에 맞게 아래 규칙을 따릅니다:
 
-## 👥 팀 구성
-| 이름 | 역할 | GitHub |
-|------|------|--------|
-| 윤수빈 | 프론트엔드 | [@example1](https://github.com/example1) |
-| 김지성 | 백엔드 | [@example2](https://github.com/example2) |
-| 황재웅 | 기획/디자인 & 프론트 보조 | [@example3](https://github.com/example3) |
+- feature/기능명: 새로운 기능 개발
+- fix/버그명: 버그 수정
+- refactor/리팩토링대상: 코드 구조 개선
+- style/UI작업: CSS/UI 변경
+- docs/문서명: 문서 관련 작업
+- test/테스트명: 테스트 코드 작업
+- chore/환경설정: 설정, 패키지, 빌드
 
-## 🛠 기술 스택
-- Frontend: HTML/CSS, JavaScript (또는 React)
-- Backend: Node.js, Express (or Spring, Django 등)
-- DB: MySQL / MongoDB / Firebase
-- Deployment: Vercel / Firebase / Netlify
-- 협업: GitHub, Notion, Figma
-
-## 📂 디렉토리 구조
-```bash
-📦 src/
-┣ 📁 components/
-┣ 📁 pages/
-┣ 📁 assets/
-┣ 📁 api/
-┣ 📜 index.html
+예시:
+```
+feature/login-form
+fix/modal-close-error
 ```
 
-## 🗓 개발 기간
-- 시작일: 2025.04.07
-- 배포 예정일: 2025.06.06
+## ✅ 커밋 메시지 규칙
 
+한글로 작성하며, 형식은 아래와 같습니다:
 
-## 🚀 주요 기능
-- 회원가입 / 로그인 (역할 선택)
-- 프로젝트 생성 / 상세보기 / 전문가 모집
-- 펀딩 참여 / 리워드 선택 / 결제
-- 마이페이지 (일반/전문가)
-- 커뮤니티 게시판
+```
+[태그] 한 줄 요약
+
+- 변경 이유
+- 영향 받는 기능 등
+```
+
+### 커밋 태그 목록
+- Feat: 새로운 기능 추가
+- Fix: 버그 수정
+- Refactor: 코드 리팩토링
+- Style: UI 및 스타일 수정
+- Docs: 문서 작성 및 수정
+- Test: 테스트 코드 추가/수정
+- Chore: 환경 설정, 패키지 등 작업
+
+예시:
+```
+[Feat] 로그인 기능 구현
+[Fix] 펀딩 페이지 정렬 오류 수정
+```
+
+## ✅ Pull Request 작성 가이드
+
+- 제목 예시: `[Feat] 프로젝트 개설 기능 구현`
+- 설명에 다음을 포함할 것:
+  - 어떤 기능인지 요약
+  - 주의할 점
+  - 연결된 이슈 번호 (`#23` 등)
+- PR 대상: `feature/xxx` → `dev`
+- 최소 1명 이상 코드 확인 후 Merge 진행

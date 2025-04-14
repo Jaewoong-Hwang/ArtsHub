@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+    <!-- font noto sans kr-->
+    <link
+        href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@300..800&family=Noto+Sans+KR:wght@100..900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet">
+    <!-- 헤더 -->
+    <link rel="stylesheet" href="../../static/css/artshub_header.css">
+    <!-- 푸터 -->
+    <link rel="stylesheet" href="../../static/css/artshub_footer.css">
+    <!-- 메인 프로젝트.css -->
+    <link rel="stylesheet" href="../../static/css/artshub_project.css">
+    <!-- js -->
+    <!-- navbor_togleBtn.js -->
+    <script defer src="../../static/js/navbar_togleBtn.js"></script>
+    <!-- sidebar -->
+    <link rel="stylesheet" href="../../static/css/sidebar.css">
+
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <nav class="navi">
+                <ul class="leftside">
+                    <li class="logo">
+                        <a href="../../index.html">
+                            <img class="img-logo" src="../../static/assets/img/mainlogo.png" alt="아츠 허브 로고">
+                            <span class="artshub">Arts hub</span>
+                        </a>
+                    </li>
+                    <ul class="depth1">
+                        <li><a href="../funding/펀딩페이지.html">Funding</a>
+                            <ul class="depth2">
+                                <li><a href="javascript:void(0)">인기</a></li>
+                                <li><a href="javascript:void(0)">신규</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0)">Community</a>
+                            <ul class="depth2">
+                                <li><a href="javascript:void(0)">공연 후기</a></li>
+                                <li><a href="javascript:void(0)">작품 이야기</a></li>
+                                <li><a href="javascript:void(0)">자유 게시판</a></li>
+                                <li><a href="javascript:void(0)">정보 공유</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./프로젝트 페이지.html">Project</a>
+                            <ul class="depth2">
+                                <li><a href="javascript:void(0)">참가하기</a></li>
+                                <li><a href="javascript:void(0)">모집하기</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ul>
+                <ul class="rightside">
+                    <li><a href="../login/로그인 페이지.html">로그인</a></li>
+                    <li><a href="javascript:void(0)">회원가입</a></li>
+                    <li class="project"><a href="javascript:void(0)">프로젝트 만들기</a></li>
+                </ul>
+                <a href="#" class="navbar_menu material-symbols-outlined">menu</a>
+
+                <!-- <div class="drop-icon">⋯</div> -->
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <div class="slide-block">
+                    <input type="radio" name="slide" id="slide-1" checked>
+                    <input type="radio" name="slide" id="slide-2">
+                    <input type="radio" name="slide" id="slide-3">
+                    <input type="radio" name="slide" id="slide-4">
+                    <div class="slide-wrap">
+                        <ul class="slide-list">
+                            <li class="slideli">
+                                <a href="https://naver.com">
+                                    <img src="../../static/assets/img/빛과_그림자.webp" alt="빛과_그림자">
+                                    <div>
+                                        <p class="p1">그림자는..<br />빛과 함께여야 빛난다..!</p>
+                                        <p class="p2">빛과 그림자</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="slideli">
+                                <a href="">
+                                    <img src="../../static/assets/img/거리의_선율.webp" alt="거리의_선율">
+                                    <div>
+                                        <p class="p1">거리에 피어오르는 선율<br />우리의 이야기를 담다</p>
+                                        <p class="p2">거리의 선율</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="slideli">
+                                <a href="">
+                                    <img src="../../static/assets/img/환상의_오페라.webp" alt="환상_오페라">
+                                    <div>
+                                        <p class="p1">비극과 희극이 교차하는 순간,<br />환상이 현실이 된다!</p>
+                                        <p class="p2">환상의 오페라</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="slideli">
+                                <a href="./프로젝트_상세페이지.html">
+                                    <img src="../../static/assets/img/마임의_세계.webp" alt="마임의_세계">
+                                    <div>
+                                        <p class="p1">대사가 없더라도<br />전할 수 있다면 예술이다</p>
+                                        <p class="p2">마임의 세계</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="control">
+                                <div class="control-1">
+                                    <label for="slide-4" class="left material-symbols-outlined">arrow_left</label>
+                                    <label for="slide-2" class="right material-symbols-outlined">arrow_right</label>
+                                </div>
+
+                            </li>
+                            <li class="control">
+                                <div class="control-2">
+                                    <label for="slide-1" class="left material-symbols-outlined">arrow_left</label>
+                                    <label for="slide-3" class="right material-symbols-outlined">arrow_right</label>
+                                </div>
+
+                            </li>
+                            <li class="control">
+                                <div class="control-3">
+                                    <label for="slide-2" class="left material-symbols-outlined">arrow_left</label>
+                                    <label for="slide-4" class="right material-symbols-outlined">arrow_right</label>
+                                </div>
+
+                            </li>
+                            <li class="control">
+                                <div class="control-4">
+                                    <label for="slide-3" class="left material-symbols-outlined">arrow_left</label>
+                                    <label for="slide-1" class="right material-symbols-outlined">arrow_right</label>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <p class="content-1">
+                        Project Recruitment
+                    </p>
+
+                    <p class="content-2">
+                        함께하길 기다리는 팀원에 합류하세요 !!
+                    </p>
+                </div>
+            </section>
+            <section>
+                <div class="category">
+                    <ul class="category-list">
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/뮤지컬아이콘.png" alt="뮤지컬아이콘">
+                            </a>
+                            <p>뮤지컬</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/연극아이콘.png" alt="연극아이콘">
+                            </a>
+                            <p>연극</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/클래식아이콘.png" alt="클래식아이콘">
+                            </a>
+                            <p>클래식</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/국악아이콘.png" alt="국악아이콘">
+                            </a>
+                            <p>국악</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/어린이아이콘.png" alt="어린이아이콘">
+                            </a>
+                            <p>어린이</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+
+                                <img src="../../static/assets/img/밴드아이콘.png" alt="밴드아이콘">
+                            </a>
+                            <p>밴드</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <div class="projectMAIN">
+                    <div class="project-list">
+                        <div class="pl-1">
+
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/빛과_그림자.webp" alt="빛과_그림자">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">빛과 그림자
+                                    </p>
+                                    <p class="project-content2">빛이 있기에 그림자가 존재하고,<br />그림자가 있기에 빛은 더욱 빛난다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">5일 남음</p>
+                                        <p class="project-content4">연극</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/거리의_선율.webp" alt="거리의_선율">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">거리의 선율</p>
+                                    <p class="project-content2">거리 위에서 울려 퍼지는 자유로운 선율,</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">7일 남음</p>
+                                        <p class="project-content4">밴드</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-2">
+
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/몽환의_숲.webp" alt="몽환의_숲">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">몽환의 숲</p>
+                                    <p class="project-content2">현실을 벗어난 환상의 숲에서,<br />음악이 자연과 하나가 된다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">5일 남음</p>
+                                        <p class="project-content4">오케스트라</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/레트로_나이트.webp" alt="레트로_나이트">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">레트로 나이트</p>
+                                    <p class="project-content2">반짝이는 불빛 아래,<br />우리 모두 80년대로 타임슬립!</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">10일 남음</p>
+                                        <p class="project-content4">디스코, 펑크, 힙합</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-list">
+                        <div class="pl-1">
+
+                            <div class="project-item">
+                                <a href="./프로젝트_상세페이지.html">
+
+                                    <img src="../../static/assets/img/마임의_세계.webp" alt="마임의_세계">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">마임의 세계
+                                    </p>
+                                    <p class="project-content2">대사 없이도 마음을 전할 수 있다면,<br />그 순간이 예술이 된다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">11일 남음</p>
+                                        <p class="project-content4">마임, 무언극</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/소울의_울림.webp" alt="소울의_울림.webp">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">소울의 울림</p>
+                                    <p class="project-content2">마음 깊숙이 울리는 목소리,<br />소울의 진짜 울림을 느껴라.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">17일 남음</p>
+                                        <p class="project-content4">R&B, 소울, 블루스</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-2">
+
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/사이버_펑크_비트.webp" alt="사이버_펑크_비트">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">사이버 펑크 비트</p>
+                                    <p class="project-content2">네온빛이 춤추는 미래 도시에서,<br />비트와 함께 뛰어들어라!</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">3일 남음</p>
+                                        <p class="project-content4">EDM, 테크노, 하우스</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/브라스_파라다이스.webp" alt="브라스_파라다이스">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">브라스 파라다이스</p>
+                                    <p class="project-content2">금관악기가 울릴 때,<br />그 순간이 가장 뜨거운 시간!</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">9일 남음</p>
+                                        <p class="project-content4">재즈, 빅밴드</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-list">
+                        <div class="pl-1">
+
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/클래식의_혁신.webp" alt="클래식의_혁신">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">클래식의 혁신
+                                    </p>
+                                    <p class="project-content2">전통과 현대가 만나는 순간,<br />클래식은 새롭게 태어난다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">7일 남음</p>
+                                        <p class="project-content4">클래식, 크로스오버</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/낭독의_밤.webp" alt="낭독의_밤">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">낭독의 밤</p>
+                                    <p class="project-content2">한 줄의 시가, 한 편의 이야기가<br />당신의 마음을 울릴 수 있다면.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">8일 남음</p>
+                                        <p class="project-content4">시낭송, 연극</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pl-2">
+
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/미스터리_서커스.webp" alt="미스터리 서커스">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">미스터리 서커스</p>
+                                    <p class="project-content2">환상과 현실이 뒤섞이는 순간,<br />서커스가 시작된다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">21일 남음</p>
+                                        <p class="project-content4">서커스, 아크로바틱</p>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="project-item">
+                                <a href="javascript:void(0)">
+
+                                    <img src="../../static/assets/img/환상의_오페라.webp" alt="환상의_오페라">
+                                </a>
+                                <div>
+
+                                    <p class="project-content1">환상의 오페라</p>
+                                    <p class="project-content2">비극과 희극이 교차하는 순간,<br />환상이 현실이 된다.</p>
+                                    <p class="project-content3">기획 ArtsHub</p>
+                                    <ul>
+                                        <p class="project-content4">모집중</p>
+                                        <p class="project-content4">30일 남음</p>
+                                        <p class="project-content4">오페라, 클래식</p>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class=" footer-top">
+                <ul class="footer-top-left">
+                    <li><a href="">정책 약관</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </li>
+                    <li><a href="">개인정보처리방침</a><span class="material-symbols-outlined">open_in_new</span>
+                    </li>
+                </ul>
+                <ul class="footer-top-right">
+                    <li><a href="">제휴문의</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </li>
+                    <li><a href="">공지사항</a><span class="material-symbols-outlined">open_in_new</span>
+                    </li>
+                    <li><a href="">아츠허브 IR</a><span class="material-symbols-outlined">open_in_new</span>
+                    </li>
+                    <li><a href="">인재채용</a><span class="material-symbols-outlined">open_in_new</span>
+                    </li>
+                    <li><a href="">SNS</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </li>
+                    <li><a href="">Language</a><span class="material-symbols-outlined">keyboard_arrow_down</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-contents">
+                <div class="footer-left">
+                    <ul>
+                        <li><span class="material-symbols-outlined">help</span><a href="">아츠허브 고객센터</a><span
+                                class="material-symbols-outlined">
+                                keyboard_arrow_right</span>
+                        </li>
+                        <li><a href="">채팅 상담하기</a><span class="material-symbols-outlined">keyboard_arrow_right</span>
+                        </li>
+                        <li><a href="">문의 등록하기</a><span class="material-symbols-outlined">
+                                keyboard_arrow_right</span>
+                        </li>
+                        <li><a href="">도움말 센터 바로가기</a><span class="material-symbols-outlined">
+                                keyboard_arrow_right</span>
+                        </li>
+                        <li><a href="">Contact for Global</a><span class="material-symbols-outlined">
+                                keyboard_arrow_right</span>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>상담 가능시간</li>
+                        <li>평일 오전 9시 ~ 오후 6시 (주말, 공휴일 제외)</li>
+                    </ul>
+                </div>
+                <div class="footer-right">
+                    <ul>
+                        <ul>
+                            <li>아츠허브</li>
+                            <li>대표이사 황재웅</li>
+                            <li>사업자 등록번호 123-45-67890</li>
+                            <li>통신판매업신고번호 2025-대구-1226 </li>
+                            <li>사업자: 아츠 허브</li>
+                        </ul>
+                        <ul>
+                            <li>대구광역시 중구 중앙대로 366 반월센트럴타워9층</li>
+                            <li style="cursor: pointer;">이메일 상담 info@artshub.com</li>
+                            <li style="cursor: pointer;">유선 상담 1234-5678</li>
+                            <li style="font-weight: bold;">© ArtsHub Co., Ltd.</li>
+                        </ul>
+                    </ul>
+                    <ul>
+                        <li>ArtsHub은 공연 기획자, 연주자, 무대 디자이너, 스텝 등을 연결하는 플랫폼으로, 개별 공연 및 프로젝트의 진행 책임은 해당 등록자에게 있습니다.
+                        </li>
+                        <li>사이트 내 공연 정보, 리뷰, 예매 정보 등 콘텐츠의 무단 복제, 전송, 배포, 크롤링 등은 저작권법 및 관련 법령에 의해 금지됩니다.
+                        </li>
+                        <li>자세한 내용은 콘텐츠 이용 정책을 참고하세요.
+                        </li>
+                    </ul>
+                    <ul>
+                        <a href=""><span class="material-symbols-outlined">
+                                android
+                            </span>안드로이드 앱</a>
+                        <a href=""><img src="../../static/assets/img/apple.png" alt=""> iOS 앱</a>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="side-nav">
+        <div class="hamburger">
+            <li><a href="">☰</a></li>
+            <li><a href=""></a></li>
+        </div>
+        <ul>
+            <li><a href="../../index.html">🏠</a></li>
+            <li><a href="../../index.html">홈</a></li>
+        </ul>
+        <ul>
+            <li><a href="../login/로그인 페이지.html">🔓</a></li>
+            <li><a href="../login/로그인 페이지.html">로그인</a></li>
+        </ul>
+        <ul>
+            <li><a href="../funding/펀딩페이지.html">💰</a></li>
+            <li><a href="../funding/펀딩페이지.html">펀딩</a></li>
+        </ul>
+        <ul>
+            <li><a href="../project/프로젝트 페이지.html">👩‍👩‍👦‍👦</a></li>
+            <li><a href="../project/프로젝트 페이지.html">프로젝트</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">💬</a></li>
+            <li><a href="#">커뮤니티</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">❔</a></li>
+            <li><a href="#">문의하기</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 1000px;
+    padding: 30px 50px;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-section {
+    flex: 1;
+    padding: 20px;
+    margin-right: 50px;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-section img {
+    width: 200px;
+    height: 200px;
+}
+
+/***************************************/
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+h1{
+    text-align: center;
+    margin: 40px 0 50px 0;
+    font-size: 50px;
+    font-family: Bold;
+}
+
+/********************************/
+.user-info-section > label{
+    display: flex;
+    border: 1px solid var(--Dark-gray-textured-background---1-rgba);
+    margin: 8px 0;
+    align-items: center;
+    border-radius: 50px;
+    background-color: white;
+}
+.user-info-section input{
+    flex: 1;
+    border: none;
+    padding: 15px;
+    font-size: var(--font-size-small);
+    outline: none;
+    border-radius: 50px;
+}
+/* .user-info-section i{
+    font-size: var(--font-size-normal);
+    margin: 0 8px;
+    cursor: pointer;
+} */
+
+/********************************/
+
+.login-config-section{
+    text-align: right;
+    margin: 4px 0;
+}
+.login-config-section label{
+    margin-left: 20px;
+    color: var(--abstract-gray-background---1-rgba);
+}
+.login-config-section input{
+    margin-right: 5px;
+}
+
+/********************************/
+
+.link-section{
+    margin: 30px 0;
+    text-align: center;
+}
+.link-section a{
+    color: var(--Dark-gray-textured-background---5-rgba);
+    text-decoration: none;
+    font-size: var(--font-size-x-small);
+    &:hover{
+        text-decoration: underline;
+    }
+}
+.link-section a:not(:last-child):after{
+    content: "|";
+    margin: 0 10px;
+    color: var(--Dark-gray-textured-background---1-rgba);
+}
+#login-btn{
+    width: 100%;
+    padding: 14px 0;
+    font-size: var(--font-size-normal);
+    border: 1px solid rgb(255, 255, 255);
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    border-radius: 50px;
+    &:hover{
+        background-color:orange ;
+    }
+}
+#login-btn > a{
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,105 @@
+/* common 설정 */
+* {
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    height: 100%;
+}
+content{
+    text-align: center;
+    
+}
+
+#content1{
+    width: 1200px;
+}
+content > #content1> .row> a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid gray;
+    height: 100%;
+    padding: 10px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 80px;
+    font-size: .8rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    width: 1200px;
+    height: auto;
+    border: 10px solid orange;
+    margin: 50px auto;
+    border-radius: 20px;
+    padding : 20px;
+}
+
+form> content > .row {
+    margin: 30px;
+    gap: 5px;
+    height: 10px;
+}
+
+form> content > #content1 > .row >label {
+    height: 100%;
+    font-size: 20px;
+}
+
+form> content> #content1 >.row>input[type="text"],
+form> content> #content1 > .row>input[type="password"],
+form> content> #content1 > .row>select {
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 10px;
+}
+
+
+form>content>.row.title > h4 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+
+form> content>.row.line {
+    border: 0;
+    height: 1px;
+    background-color: gray;
+    margin: 100px 0;
+    margin-bottom: 25px;
+}
+
+form> content> .row.agreement {
+    height: 15px;
+}
+
+form> content> .row.agreement>label {
+    height: 100%;
+    line-height: 12px;
+}
+
+form> content> .row.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form> content> .row.btn-group>button,
+form> content> .row.btn-group>input[type="submit"] {
+    width: 75px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    outline: none;
+    cursor: pointer;
+}

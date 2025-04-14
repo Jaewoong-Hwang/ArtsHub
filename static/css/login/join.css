@@ -1,104 +1,104 @@
-/* common 설정 */
 * {
     font-size: 0.9rem;
     box-sizing: border-box;
-    height: 100%;
-}
-content{
-    text-align: center;
-    
 }
 
-#content1{
-    width: 1200px;
-}
-content > #content1> .row> a {
+a {
     text-decoration: none;
     color: black;
     border: 1px solid gray;
+    display: block;
     height: 100%;
-    padding: 10px;
-    line-height: 30px;
+    line-height: 35px;
     text-align: center;
-    border-radius: 30px;
     width: 100%;
     max-width: 80px;
     font-size: .8rem;
 }
 
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 }
 
 form {
-    width: 1200px;
-    height: auto;
-    border: 10px solid orange;
+    width: 1500px;
     margin: 50px auto;
-    border-radius: 20px;
-    padding : 20px;
+    background-color: rgb(197, 197, 197);
 }
 
-form> content > .row {
-    margin: 30px;
-    gap: 5px;
-    height: 10px;
-}
-
-form> content > #content1 > .row >label {
-    height: 100%;
-    font-size: 20px;
-}
-
-form> content> #content1 >.row>input[type="text"],
-form> content> #content1 > .row>input[type="password"],
-form> content> #content1 > .row>select {
-    width: 200px;
-    height: 30px;
-    text-align: center;
+form>.row {
+    margin: 50px auto;
+    display: flex;
+    justify-content: left;
     align-items: center;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid gray;
-    margin: 10px;
+    gap: 10px;
+    height: 40px;
+    width: 1300px;
 }
 
-
-form>content>.row.title > h4 {
+form>.row>label {
+    display: block;
+    min-width: 85px;
+    height: 100%;
+    line-height: 40px;
     text-align: center;
-    font-size: 3rem;
 }
 
+form>.row>input[type="text"],
+form>.row>input[type="password"],
+form>.row>select {
+    width: 300px;
+    height: 100%;
+    outline: none;
+    border-radius: 0;
+    border: 1px solid gray;
+    padding: 0 3px;
+}
 
-form> content>.row.line {
+form>.row.header {
+    height: 15px;
+    border: 1px solid;
+    margin: 0;
+    background-color: black;
+}
+
+form>.row.title {
+    justify-content: center;
+}
+
+form>.row.title>h4 {
+    font-size: 1.5rem;
+}
+
+form>.row.line {
     border: 0;
     height: 1px;
     background-color: gray;
-    margin: 100px 0;
+    margin: 10px 0;
     margin-bottom: 25px;
 }
 
-form> content> .row.agreement {
+form>.row.agreement {
     height: 15px;
 }
 
-form> content> .row.agreement>label {
+form>.row.agreement>label {
     height: 100%;
     line-height: 12px;
 }
 
-form> content> .row.btn-group {
+form>.row.btn-group {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-form> content> .row.btn-group>button,
-form> content> .row.btn-group>input[type="submit"] {
-    width: 75px;
-    height: 40px;
-    border-radius: 10px;
+form>.row.btn-group>button,
+form>.row.btn-group>input[type="submit"] {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
     border: 1px solid gray;
     outline: none;
     cursor: pointer;

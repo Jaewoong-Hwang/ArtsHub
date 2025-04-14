@@ -1,122 +1,178 @@
-
-.container {
+body {
+    margin: 0;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: none;
-    width: 1000px;
-    padding: 30px 50px;
-    border-radius: 50px;
-    background-color: white;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 40px;
+}
+/* fontfamily */
+/* 글꼴 등록 */
+@font-face {
+    font-family: 'custom-font-01';
+    src: url("../../static/assets/font/NotoSansKR-VariableFont_wght.ttf");
+    font-size: normal;
 }
 
-.form-section {
-    flex: 1;
-    padding: 20px;
-    margin-right: 50px;
+body{
+    font-family: "custom-font-01";
 }
 
-.image-section {
-    flex: 1;
+
+a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.663);
+    font-size: 14px;
+    padding: 0 10px;
+    
+}
+
+.mainlogo {
+    display: flex;
+    margin: 40px auto;
+    margin-top: 0px;
+    width: 150px;
+    height: 180px;
+}
+
+.custom-input {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 48px;
+    width: 462px;
+    margin-bottom: 14px;
+    border-color: rgb(238, 234, 234);
 }
 
-.image-section img {
-    width: 200px;
-    height: 200px;
+.custom-input:hover {
+    border-color: gray;
 }
 
-/***************************************/
-
-main{
+.cb {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 100px;
+    justify-content: flex-end;
 }
 
-h1{
-    text-align: center;
-    margin: 40px 0 50px 0;
-    font-size: 50px;
-    font-family: Bold;
-}
-
-/********************************/
-.user-info-section > label{
+.btn-custom {
     display: flex;
-    border: 1px solid var(--Dark-gray-textured-background---1-rgba);
-    margin: 8px 0;
     align-items: center;
-    border-radius: 50px;
-    background-color: white;
-}
-.user-info-section input{
-    flex: 1;
+    justify-content: center;
+    position: relative;
     border: none;
-    padding: 15px;
-    font-size: var(--font-size-small);
-    outline: none;
-    border-radius: 50px;
-}
-/* .user-info-section i{
-    font-size: var(--font-size-normal);
-    margin: 0 8px;
-    cursor: pointer;
-} */
+    margin-top: 12px;
+    width: 462px;
+    height: 48px;
+    padding: 9px 23px;
 
-/********************************/
-
-.login-config-section{
-    text-align: right;
-    margin: 4px 0;
-}
-.login-config-section label{
-    margin-left: 20px;
-    color: var(--abstract-gray-background---1-rgba);
-}
-.login-config-section input{
-    margin-right: 5px;
 }
 
-/********************************/
+.box1 {
+    border: 1px solid;
+    border-radius: 17px;
+    padding: 48px 36px;
+    border-color: rgb(238, 234, 234);
+}
 
-.link-section{
-    margin: 30px 0;
-    text-align: center;
+.btn1 {
+    background-color: #29c3ff;
+    color: white;
+    border-radius: 5px;
 }
-.link-section a{
-    color: var(--Dark-gray-textured-background---5-rgba);
-    text-decoration: none;
-    font-size: var(--font-size-x-small);
-    &:hover{
-        text-decoration: underline;
-    }
+
+.btn1:hover {
+    background-color: #0c7dff;
 }
-.link-section a:not(:last-child):after{
-    content: "|";
-    margin: 0 10px;
-    color: var(--Dark-gray-textured-background---1-rgba);
+
+.btn2 {
+    background-color: #fee500;
+    color: black;
+    border-radius: 5px;
 }
-#login-btn{
+
+.btn2:hover {
+    background-color: #d1bc03;
+}
+
+.btn3 {
+    background-color: #00d337;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn3:hover {
+    background-color: #01a12c;
+}
+
+.hypertext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.hypertext a:not(:last-child) {
+    border-right: 1px solid lightgray;
+    padding-right: 15px;
+}
+
+.naver {
+    filter: brightness(0) invert(1);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 15px;
+}
+
+.kakao {
+    width: 23px;
+    height: 23px;
+    position: absolute;
+    left: 18px;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+    border-radius: 50%;
+    gap: 10px;
+}
+
+.img-social {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.img-social:hover {
+    filter: brightness(0.8);
+}
+
+.btn-social {
+    border: none;
+    background-color: white;
+    border-radius: 50%;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 14px 0;
-    font-size: var(--font-size-normal);
-    border: 1px solid rgb(255, 255, 255);
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    transition-duration: 0.2s;
-    border-radius: 50px;
-    &:hover{
-        background-color:orange ;
+    height: 56px;
+    display: none;
+    z-index: 1000; 
+   }
+@media (max-width: 1000px) {
+    .header {
+        display: flex;
     }
 }
-#login-btn > a{
-    text-decoration: none;
-    color: white;
+.header-icon{
+    display: flex;
+    justify-content: space-between;
+    transition: 0.3s ease;
 }

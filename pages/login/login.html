@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- BS5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- 로그인 css -->
+    <link rel="stylesheet" href="../../static/css/login/login.css">
+    <!-- sidebar -->
+    <link rel="stylesheet" href="../../static/css/home/main.css">
+
+</head>
+
+<body>
+
+
+    <form action="/test.jsp" method="get" class="mt-5 p-0 m-0">
+
+        <div class="row header">
+            <header></header>
+            <div class="col header-icon">
+                <a href="">
+                    <img src="../../static/assets/img/login/back.svg" style="width: 24px; " alt="back">
+                </a>
+                <a href="">
+                    <img src="../../static/assets/img/login/home.svg" style="width: 24px; " alt="home">
+                </a>
+            </div>
+        </div>
+        <!-- 메인 로고 -->
+        <div class="row main-logo">
+            <div class="col">
+                <a href="../../index.html">
+                    <img src="../../static/img/mainlogo.png" alt="이미지로고" class="mainlogo img-fluid">
+                </a>
+            </div>
+        </div>
+        <!-- 로그인유지 체크박스 -->
+        <div class="box1">
+            <!-- 이메일 입력 -->
+            <div class="row custom-input">
+                <div class="col">
+                    <input type="text" name="userid" class="form-control custom-input" placeholder="이메일 입력" id="userid">
+                </div>
+            </div>
+            <!-- 비밀번호 입력 -->
+            <div class="row custom-input">
+                <div class="col">
+                    <input type="password" name="userpw" class="form-control custom-input" placeholder="비밀번호 입력">
+                </div>
+            </div>
+            <div class="cb mb-3">
+                <div>
+                    <input type="checkbox" id="login">
+                    <!-- 커스텀 체크박스 -->
+                    <span class="custom-chk"></span>
+                    <label for="login" style="font-size: 14px;">로그인 유지</label>
+                </div>
+            </div>
+            <!-- 이메일로 로그인하기 버튼 -->
+            <div class="row mt-4">
+                <div class="col">
+                    <button type="button" class="btn1 btn-custom"
+                        onclick="location.href='../mainLogin/loginedMain.html'">이메일로
+                        로그인하기</button>
+                </div>
+            </div>
+            <!-- 카카오로 시작하기 -->
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn2 btn-custom"
+                        onclick="location.href='../mainLogin/loginedMain.html'">
+                        <img src="../../static/img/kakao.png" alt="카카오" class="kakao"> 카카오로 시작하기</button>
+                </div>
+            </div>
+            <!-- 네이버로 시작하기 -->
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn3 btn-custom"
+                        onclick="location.href='../mainLogin/loginedMain.html'">
+                        <img src="../../static/img/naver.png" alt="네이버" class="naver">네이버로 시작하기</button>
+                    <!-- </div>
+            </div> -->
+                    <!-- 구글, 페북, 애플 이미지 -->
+                    <div class="logos">
+                        <!-- <div class="col"> -->
+                        <button type="button" class="btn-social">
+                            <img src="../../static/img/google.png" alt="구글" class="img-social">
+                        </button>
+                        <button type="button" class="btn-social"
+                            onclick="location.href='../mainLogin/loginedMain.html'">
+                            <img src="../../static/img/facebook.png" alt="페북" class="img-social">
+                        </button>
+                        <button type="button" class="btn-social"
+                            onclick="location.href='../mainLogin/loginedMain.html'">
+                            <img src="../../static/img/apple.png" alt="애플" class="img-social">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hypertext">
+            <a href="">아이디/비밀번호 찾기</a>
+            <a href="./join.html">회원가입</a>
+            <a href="../mainLogin/loginedMain.html">마이페이지</a>
+        </div>
+    </form>
+    <div class="side-nav">
+        <div class="hamburger">
+            <li><a href="">☰</a></li>
+            <li><a href=""></a></li>
+        </div>
+        <ul>
+            <li><a href="../../index.html">🏠</a></li>
+            <li><a href="../../index.html">홈</a></li>
+        </ul>
+        <ul>
+            <li><a href="../login/로그인 페이지.html">🔓</a></li>
+            <li><a href="../login/로그인 페이지.html">로그인</a></li>
+        </ul>
+        <ul>
+            <li><a href="../funding/펀딩페이지.html">💰</a></li>
+            <li><a href="../funding/펀딩페이지.html">펀딩</a></li>
+        </ul>
+        <ul>
+            <li><a href="../project/프로젝트 페이지.html">👩‍👩‍👦‍👦</a></li>
+            <li><a href="../project/프로젝트 페이지.html">프로젝트</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">💬</a></li>
+            <li><a href="#">커뮤니티</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">❔</a></li>
+            <li><a href="#">문의하기</a></li>
+        </ul>
+    </div>
+
+</body>
+
+</html>

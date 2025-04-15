@@ -1,48 +1,90 @@
-* {
-    font-size: 0.9rem;
-    box-sizing: border-box;
+@font-face {
+    font-family: 'custom-font-01';
+    src: url("../../static/assets/font/NotoSansKR-VariableFont_wght.ttf");
+    font-size: normal;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    border: 1px solid gray;
-    display: block;
-    height: 100%;
-    line-height: 35px;
-    text-align: center;
-    width: 100%;
-    max-width: 80px;
-    font-size: .8rem;
+main {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    font-family: "custom-font-01";
 }
 
-body {
-    margin: 0 auto;
-    padding: 0;
+.addImage{
+    width: 250px;
+    height: 250px;
+    background-color: lightblue;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 120px;
+    margin-left: 90px;
+}
+
+.inputImg>input{
+    position: absolute;
+    margin-left: 500px;
+    margin-top: 300px;
+    
+}
+.inputImg{
+    justify-content: center;
+    display: flex; 
 }
 
 form {
-    width: 1500px;
-    margin: 50px auto;
-    background-color: rgb(197, 197, 197);
+    align-items: center;   
 }
 
-form>.row {
-    margin: 50px auto;
+/* 이미지 업로드 하는 곳 css 입니다. */
+form>div>.col{
+    justify-content: center;
     display: flex;
-    justify-content: left;
-    align-items: center;
+    padding-left: 100px;
+}
+
+form>div>.col>a>img{
+    height: 300px;
+    width: 400px;
+}
+
+
+form>.row {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
     gap: 10px;
-    height: 40px;
+    height: 35px;
     width: 1300px;
 }
 
+form>.rowm{
+    text-align: center;
+    display: flex;
+    margin: 40px auto;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+form>.rowm>input{
+    height: 31px;
+    width: 300px;
+    justify-content: center; 
+}
+
+form>.rowm>label{
+    padding-left: 105px;
+}
+
+
 form>.row>label {
     display: block;
-    min-width: 85px;
+    min-width: 80px;
     height: 100%;
     line-height: 40px;
     text-align: center;
+    justify-content: center;
 }
 
 form>.row>input[type="text"],
@@ -102,4 +144,21 @@ form>.row.btn-group>input[type="submit"] {
     border: 1px solid gray;
     outline: none;
     cursor: pointer;
+}
+
+main> form> .repassword{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    
+}
+
+main> form> .repassword>input{
+    padding: 8px;
+    font-size: 1em;
+}
+
+#match-message{
+    margin-top: 5px;
+    font-size: 0.9em;
 }

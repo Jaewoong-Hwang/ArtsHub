@@ -6,143 +6,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../static/css/login/join.css">
-    <link rel="stylesheet" href="../../static/css/home/main.css">
+    <script src="../../static/js/user/join.js" defer></script>
 
-    <!-- BS5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    
 </head>
 
-<body>
-    <form action="/test.jsp" method="get" class="mt-5 p-0 m-0">
+<body>  
+        <!-- 이미지 첨부하는 곳 -->
+        <form class="inputImg" method="post" enctype="multipart/form-data">
+            <div class="addImage" id = "image-show">
+            </div>
+            <input type="file" accept="image/*" onchange="loadFile(this)">
+        </form>
         
-        <div class="row header">
-            <header></header>
-            <div class="col header-icon">
-                <a href="">
-                    <img src="../../static/assets/img/login/back.svg" style="width: 24px; " alt="back">
-                </a>
-                <a href="">
-                    <img src="../../static/assets/img/login/home.svg" style="width: 24px; " alt="home">
-                </a>
-            </div>
-        </div>
-        <!-- 메인 로고 -->
-        <div class="row main-logo">
-            <div class="col">
-                <a href="../../index.html">
-                    <img src="../../static/img/mainlogo.png" alt="이미지로고" class="mainlogo img-fluid">
-                </a>
-            </div>
-        </div>
+        <main>
+            <form method="get" class="mt-5 p-0 m-0">
+                <div class="rowm">
+                    <label for="">아이디</label>
+                    <input type="text" name="userid">
+                    <a href="javascript:void(0)">중복확인</a>
+                </div>
 
-        <div class="row line">
-        </div>
-        <div class="row">
-            <label for="">아이디</label>
-            <input type="text" name="userid">
-            <a href="javascript:void(0)">중복확인</a>
-        </div>
-        <div class="row">
-            <label for="">비밀번호</label>
-            <input 
-            type="text" 
-            pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$" 
-            name="password" 
-            oninvalid="this.setCustomValidity('8자이상 25자 이하 영문소문자 혹은 대문자, 숫자를 1개이상 포함하셔야됩니다.')"
-            required>
-            <!-- 
-                ^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$
-                ^ : 시작
-                $ : 끝
-                () : 하나의식(묶는단위)
-                {8,25} : 길이(8자이상 25자 이하)
-                ?= : 전방탐색
-                . : 모든문자(길이 1)
-                * : 모든문자(길이 제한 없음)
-                [a-zA-Z] : 알파벳 a-z or A-Z 까지 탐색
-                [0-9] : 숫자 0-9 까지 탐색
-            -->
-        </div>
-        <div class="row">
-            <label for=""></label>
-            <input type="password" name="re-password" placeholder="비밀번호 재확인" readonly>
-        </div>
-        <div class="row">
-            <label for="">이름</label>
-            <input type="text" name="username">
-        </div>
-        <div class="row">
-            <label for="">주소</label>
-            <input type="text" name="zipcode">
-            <a href="javascript:void(0)">우편번호</a>
-        </div>
-        <div class="row">
-            <label for=""></label>
-            <input type="text" name="addr1">
-        </div>
-        <div class="row">
-            <label for=""></label>
-            <input type="text" name="addr2">
-        </div>
-        <div class="row">
-            <label for="">휴대전화</label>
-            <select name="phone1">
-                <option value="010">010</option>
-                <option value="011">011</option>
-            </select>
-            <input type="text" pattern="[0-9]{3,4}">
-            <input type="text" pattern="[0-9]{4,4}">
-        </div>
-        <div class="row">
-            <label for="">전화번호</label>
-            <select name="phone2">
-                <option value="">053</option>
-            </select>
-            <input type="text">
-            <input type="text">
-        </div>
-        <div class="row">
-            <label for="">이메일</label>
-            <input type="text" name="email">
-            <select>
-                <option value="">@naver.com</option>
-                <option value="">@daum.net</option>
-            </select>
-        </div>
-        <div class="row">
-            <label for="">생년월일</label>
-            <input type="radio" name="cal" value="1"> 양
-            <input type="radio" name="cal" value="0"> 음
-        </div>
-        <div class="row">
-            <select>
-                <option value="">2025</option>
-            </select>
-            <select>
-                <option value="">09</option>
-            </select>
-            <select>
-                <option value="">30</option>
-            </select>
-        </div>
-        <hr />
-        <div class="row agreement">
-            <input type="checkbox" name="email-recv">
-            <label for="">00의 이메일을 수신합니다.</label>
-        </div>
-        <div class="row agreement">
-            <input type="checkbox" name="sns-recv">
-            <label for="">00의 SMS를 수신합니다.</label>
-        </div>
-        <div class="row btn-group">
-            <input type="submit" value="가입 취소">
-            <button>회원 가입</button>
-        </div>
-    </form>
+                <div class="row">
+                    <label for="">비밀번호</label>
+                    <input 
+                        type="password"
+                        name="password"
+                        id="password" 
+                        pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$"  
+                        oninvalid="this.setCustomValidity('8자이상 25자 이하 영문소문자 혹은 대문자, 숫자를 1개이상 포함하셔야됩니다.')"
+                        oninput="setCustomValidity('')"
+                        required>
+                </div>
+
+                <div class="repassword">
+                    <label for=""></label>
+                    <input 
+                        type="password" 
+                        name="re-password" 
+                        id="re-password"
+                        placeholder="비밀번호 재확인" 
+                        oninput="checkPasswordMatch()"
+                        required>
+                        <span id="match-message"></span>
+                </div>
+
+                <div class="rowm">
+                    <label for="">닉네임</label>
+                    <input type="text" name="usernick">    
+                    <a href="javascript:void(0)">중복확인</a>
+                </div>
+                
+                
+                <div class="row">
+                    <label for="">이름</label>
+                    <input type="text" name="username">
+                </div>
+
+                <div class="row">
+                    <label for="">주소</label>
+                    <input type="text" name="zipcode">
+                </div>
+                <div class="row">
+                    <label for=""></label>
+                    <input type="text" name="addr1">
+                </div>
+                <div class="row">
+                    <label for=""></label>
+                    <input type="text" name="addr2">
+                </div>
+
+
+                <div class="row">
+                    <label for="">휴대전화</label>
+                    <input type="text" pattern="[0-9]{3}">
+                    <input type="text" pattern="[0-9]{3,4}">
+                    <input type="text" pattern="[0-9]{4,4}">
+                </div>
+            
+                <div class="row">
+                    <label for="">이메일</label>
+                    <input type="text" name="email">
+                    <select id="emailSelect">
+                        <option value="">==선택==</option>
+                        <option value="naver.com">@naver.com</option>
+                        <option value="daum.net">@daum.net</option>
+                        <option value="gmail.com">@gmail.com</option>
+                        <option value="custom">직접입력하기</option>
+                    </select>
+                </div>
+
+
+                <div class="row">
+                    <label for="">생년월일</label>
+                    <input type="radio" name="cal" value="1"> 양
+                    <input type="radio" name="cal" value="0"> 음 <br>
+
+                    <select id="year" style="max-height: 120px; overflow-y: auto;" ></select>년
+                    <select id="month"></select>월
+                    <select id="day" ></select>일
+                </div>
+
+                <hr />
+                <div class="row agreement">
+                    <input type="checkbox" name="email-recv">
+                    <label for="">이메일을 수신합니다.</label>
+                </div>
+                <div class="row agreement">
+                    <input type="checkbox" name="sns-recv">
+                    <label for="">SMS를 수신합니다.</label>
+                </div>
+                <div class="row btn-group">
+                    <input type="submit" value="가입 취소">
+                    <button>회원 가입</button>
+                </div>
+        </form>
+    </main>
 
 </body>
 

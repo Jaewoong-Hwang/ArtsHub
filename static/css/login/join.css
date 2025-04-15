@@ -65,12 +65,16 @@ form>.rowm{
     justify-content: center;
     gap: 20px;
 }
-
+form>.rowm>a{
+    text-decoration: none;
+    padding: 5px;
+}
 
 form>.rowm>input{
     height: 31px;
     width: 300px;
     justify-content: center; 
+    outline:none;
 }
 
 form>.rowm>label{
@@ -93,7 +97,6 @@ form>.row>select {
     width: 300px;
     height: 100%;
     outline: none;
-    border-radius: 0;
     border: 1px solid gray;
     padding: 0 3px;
 }
@@ -140,7 +143,6 @@ form>.row.btn-group>button,
 form>.row.btn-group>input[type="submit"] {
     width: 100%;
     height: 100%;
-    border-radius: 0;
     border: 1px solid gray;
     outline: none;
     cursor: pointer;
@@ -149,13 +151,14 @@ form>.row.btn-group>input[type="submit"] {
 main> form> .repassword{
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-    
+    padding-left: 540px;
 }
 
 main> form> .repassword>input{
-    padding: 8px;
     font-size: 1em;
+    outline:none;
+    height: 35px;
+    width: 300px;
 }
 
 #match-message{

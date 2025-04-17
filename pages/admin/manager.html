@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/css/admin/manager.css">
+
+    <script src="../../static/js/admin/manager.js" defar></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+
+<nav class="nav-container">
+	<a class="notification">
+		<span id="notification-name"><img src="../../static/img/mainlogo.png"></span>
+	</a>
+</nav>
+
+<section>
+	<div class="ani-navbar">
+		<aside class="ani-navbar-menu" id="menu1">
+			<div class="menu-title">대시보드</div>
+		</aside>
+		<aside class="ani-navbar-menu" id="menu2">
+			<div class="menu-title">프로젝트 관리</div>
+		</aside>
+		<aside class="ani-navbar-menu" id="menu3">
+			<div class="menu-title">회원 관리</div>
+		</aside>
+		<aside class="ani-navbar-menu" id="menu4">
+			<div class="menu-title">정산 관리</div>
+		</aside>
+		<aside class="ani-navbar-menu" id="menu5">
+			<div class="menu-title">신고 관리</div>
+		</aside>
+		<aside class="ani-navbar-menu" id="menu5">
+			<div class="menu-title">콘텐츠 관리</div>
+		</aside>
+	</div>
+
+	<!-- 대시보드 -->
+	<div class="content" id="content1">
+		<canvas id="line-chart" width="800" height="450"></canvas>
+
+		<h2>최신 회원 정보</h2>
+		<button type="button" class="delete-selected-btn" id="delete">삭제</button>
+
+		<table class="checklist1" border="1">
+			<thead>
+			<tr>
+				<th>아이디</th>
+				<th>전화번호</th>
+				<th>변경날짜</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td >User123</td>
+				<td >닉네임 변경</td>
+				<td >2025-01-30</td>
+				<td><input type="checkbox"></td>
+			</tr>
+			</tbody>
+		</table>
+
+		<h2>회원 정보</h2>
+		<table class="checklist" border="1">
+			<thead>
+			<tr>
+				<th>닉네임</th>
+				<th>가입 날짜</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td >NewUser456</td>
+				<td >2024-12-15</td>
+				<td><button class="promote-btn">승급</button></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- 📌 책 정보 -->
+	<div class="content" id="content2">
+		<h2>책 정보</h2>
+		<table class="checklist2" border="1">
+			<thead>
+			<tr>
+				<th>책 제목</th>
+				<th>남은 권수</th>
+				<th>isbn</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>해를 품은 달</td>
+				<td>12권</td>
+				<td id="bookIsbn">12</td>
+				<td><button class="book-delete-btn">삭제</button></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- 📌 Q&A 리스트 -->
+	<div class="content" id="content3">
+		<h2>Q&A 리스트</h2>
+		<table class="checklist5">
+			<tbody>
+			<tr data-complain-no="1234">
+				<td colspan="3">
+					<ul>
+						<li class="comment-trigger"></li>
+						<li class="comment-trigger">문의 제목</li>
+						<li class="comment-trigger"></li>
+					</ul>
+					<div class="reply-box"></div>
+				</td>
+			</tr>
+
+			<tr data-complain-no="124">
+				<td colspan="3">
+					<ul>
+						<li class="comment-trigger"></li>
+						<li class="comment-trigger">문의 제목</li>
+						<li class="comment-trigger"></li>
+					</ul>
+					<div class="reply-box"></div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+</body>
+</html>

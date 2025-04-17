@@ -3,7 +3,7 @@
  */
 $(function () {
   const contentIds = [
-    "content-userinfo",
+    "content-userinfo_Authentication",
     "content-funding",
     "content-inquiry",
     "content-project"

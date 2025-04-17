@@ -3,7 +3,7 @@
 
 /* 콘텐트 레이아웃 */
 .content{
-    width: 100%;
+    width: 1000px;
     height: 100%;
     padding: 50px;
     background-color: none;
@@ -143,14 +143,40 @@
 .content>.my_update>form>.my_update_list{
     width: 100%;
     height: 100%;
-    background-color: rosybrown;
+
 }
+
+
+.content>.my_update>form>.my_update_list>.input_list{
+    width: 486px;
+    height: 52px;
+    border-bottom: 1px solid #BCBCBC;
+}
+
+.content>.my_update>form>.my_update_list>.input_list>label,
+.content>.my_update>form>.my_update_list>.input_list>input   {
+    font-size: 1.3rem;
+    height: 100%;
+    padding : 0 13px;
+    background-color: transparent;
+    border: none;
+} 
+
+.content>.my_update>form>.my_update_list>.input_list>label{
+    border-right: 1px solid #BCBCBC;
+    
+}
+
 
 
 /* 회원 수정/ 탈퇴버튼 */
 .content>.my_update>form>.my_update_button{
+    width: 500px;
     position: absolute;
-    top: 100%;
+    top: 85%;
+    transform: translateY(-100%);
+    display: flex;
+    justify-content: center;
 }
 
 .content>.my_update>form>.my_update_button>button{

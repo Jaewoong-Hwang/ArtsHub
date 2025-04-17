@@ -1,0 +1,167 @@
+@font-face {
+    font-family: 'custom-font-01';
+    src: url("../../static/assets/font/NotoSansKR-VariableFont_wght.ttf");
+    font-size: normal;
+}
+
+main {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    font-family: "custom-font-01";
+}
+
+.addImage{
+    width: 250px;
+    height: 250px;
+    background-color: lightblue;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 120px;
+    margin-left: 90px;
+}
+
+.inputImg>input{
+    position: absolute;
+    margin-left: 500px;
+    margin-top: 300px;
+    
+}
+.inputImg{
+    justify-content: center;
+    display: flex; 
+}
+
+form {
+    align-items: center;   
+}
+
+/* 이미지 업로드 하는 곳 css 입니다. */
+form>div>.col{
+    justify-content: center;
+    display: flex;
+    padding-left: 100px;
+}
+
+form>div>.col>a>img{
+    height: 300px;
+    width: 400px;
+}
+
+
+form>.row {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 35px;
+    width: 1300px;
+}
+
+form>.rowm{
+    text-align: center;
+    display: flex;
+    margin: 40px auto;
+    justify-content: center;
+    gap: 20px;
+}
+form>.rowm>a{
+    text-decoration: none;
+    padding: 5px;
+}
+
+form>.rowm>input{
+    height: 31px;
+    width: 300px;
+    justify-content: center; 
+    outline:none;s
+}
+
+form>.rowm>label{
+    padding-left: 105px;
+}
+
+
+form>.row>label {
+    display: block;
+    min-width: 80px;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+form>.row>input[type="text"],
+form>.row>input[type="password"],
+form>.row>select {
+    width: 300px;
+    height: 100%;
+    outline: none;
+    border: 1px solid gray;
+    padding: 0 3px;
+}
+
+form>.row.header {
+    height: 15px;
+    border: 1px solid;
+    margin: 0;
+    background-color: black;
+}
+
+form>.row.title {
+    justify-content: center;
+}
+
+form>.row.title>h4 {
+    font-size: 1.5rem;
+}
+
+form>.row.line {
+    border: 0;
+    height: 1px;
+    background-color: gray;
+    margin: 10px 0;
+    margin-bottom: 25px;
+}
+
+form>.row.agreement {
+    height: 15px;
+}
+
+form>.row.agreement>label {
+    height: 100%;
+    line-height: 12px;
+}
+
+form>.row.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form>.row.btn-group>button,
+form>.row.btn-group>input[type="submit"] {
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    outline: none;
+    cursor: pointer;
+}
+
+main> form> .repassword{
+    display: flex;
+    flex-direction: column;
+    padding-left: 540px;
+}
+
+main> form> .repassword>input{
+    font-size: 1em;
+    outline:none;
+    height: 35px;
+    width: 300px;
+}
+
+#match-message{
+    margin-top: 5px;
+    font-size: 0.9em;
+}

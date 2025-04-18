@@ -1,55 +1,63 @@
-# 🤝 ArtsHub 협업 가이드
+# [AdminLTE - Bootstrap 5 Admin Dashboard](https://adminlte.io)
 
-## ✅ 브랜치 네이밍 규칙
+[![npm version](https://img.shields.io/npm/v/admin-lte/latest.svg)](https://www.npmjs.com/package/admin-lte)
+[![Packagist](https://img.shields.io/packagist/v/almasaeed2010/adminlte.svg)](https://packagist.org/packages/almasaeed2010/adminlte)
+[![cdn version](https://data.jsdelivr.com/v1/package/npm/admin-lte/badge)](https://www.jsdelivr.com/package/npm/admin-lte)
+[![Discord Invite](https://img.shields.io/badge/discord-join%20now-green)](https://discord.gg/jfdvjwFqfz)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1277b36b-08f3-43fa-826a-4b4d24614b3c/deploy-status)](https://app.netlify.com/sites/adminlte-v4/deploys)
 
-브랜치는 작업 목적에 맞게 아래 규칙을 따릅니다:
+**AdminLTE** is a fully responsive administration template. Based on **[Bootstrap 5](https://getbootstrap.com/)** framework and also the JavaScript plugins.
+Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops.
 
-- feature/기능명: 새로운 기능 개발
-- fix/버그명: 버그 수정
-- refactor/리팩토링대상: 코드 구조 개선
-- style/UI작업: CSS/UI 변경
-- docs/문서명: 문서 관련 작업
-- test/테스트명: 테스트 코드 작업
-- chore/환경설정: 설정, 패키지, 빌드
+## Looking for Premium Templates?
 
-예시:
-```
-feature/login-form
-fix/modal-close-error
-```
+AdminLTE.io just opened a new premium templates page. Hand picked to ensure the best quality and the most affordable
+prices. Visit <https://adminlte.io/premium> for more information.
 
-## ✅ 커밋 메시지 규칙
+!["AdminLTE Presentation"](https://adminlte.io/AdminLTE3.png "AdminLTE Presentation")
 
-한글로 작성하며, 형식은 아래와 같습니다:
+**AdminLTE** has been carefully coded with clear comments in all of its JS, SCSS and HTML files.
+SCSS has been used to increase code customizability.
 
-```
-[태그] 한 줄 요약
+## Quick start
 
-- 변경 이유
-- 영향 받는 기능 등
-```
+### Compile dist files
 
-### 커밋 태그 목록
-- Feat: 새로운 기능 추가
-- Fix: 버그 수정
-- Refactor: 코드 리팩토링
-- Style: UI 및 스타일 수정
-- Docs: 문서 작성 및 수정
-- Test: 테스트 코드 추가/수정
-- Chore: 환경 설정, 패키지 등 작업
+To compile the dist files you need Node.js/npm, clone/download the repo then:
 
-예시:
-```
-[Feat] 로그인 기능 구현
-[Fix] 펀딩 페이지 정렬 오류 수정
-```
+1. `npm install` (install npm deps)
+2. _Optional:_ `npm run dev` (developer mode, autocompile with browsersync support for live demo)
+3. `npm run production` (compile css/js files)
 
-## ✅ Pull Request 작성 가이드
 
-- 제목 예시: `[Feat] 프로젝트 개설 기능 구현`
-- 설명에 다음을 포함할 것:
-  - 어떤 기능인지 요약
-  - 주의할 점
-  - 연결된 이슈 번호 (`#23` 등)
-- PR 대상: `feature/xxx` → `dev`
-- 최소 1명 이상 코드 확인 후 Merge 진행
+## Contributing
+
+- Highly welcome.
+- For your extra reference check [AdminLTE v4 Contribution Guide](https://github.com/ColorlibHQ/AdminLTE#contributing)
+- First thing first, you should have bit knowledge about NodeJS.
+- Github Knowledge.
+- Install NodeJS LTS version.
+- Clone this Repository to your machine and change to `master` branch.
+- Go to Cloned Folder.
+- In cli/bash run `npm install` it will install dependency from `package.json`.
+- After installation completes, run `npm run dev`
+- Cool, Send urs changes in PR to `master` branch.
+
+## Sponsorship
+
+Support AdminLTE development by becoming a sponsor.
+[Github Sponsors](https://github.com/sponsors/danny007in) or
+[PayPal](https://www.paypal.me/daniel007in)
+
+## License
+
+AdminLTE is an open source project by [AdminLTE.io](https://adminlte.io) that is licensed under [MIT](https://opensource.org/licenses/MIT).
+AdminLTE.io reserves the right to change the license of future releases.
+
+## Image Credits
+
+- [Pixeden](http://www.pixeden.com/psd-web-elements/flat-responsive-showcase-psd)
+- [Graphicsfuel](https://www.graphicsfuel.com/2013/02/13-high-resolution-blur-backgrounds/)
+- [Pickaface](https://pickaface.net/)
+- [Unsplash](https://unsplash.com/)
+- [Uifaces](http://uifaces.com/)

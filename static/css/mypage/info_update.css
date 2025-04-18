@@ -135,6 +135,8 @@
     border: none;
     border-radius: 5px;
     color: white;
+    line-height: 30px;
+    cursor: pointer;
     
 }
 
@@ -166,24 +168,36 @@
     border-right: 1px solid #BCBCBC;
     
 }
-
+/* 닉네임 중복검사버튼 */
+.content>.my_update>form>.my_update_list>.input_list>button{
+    width: 80px;
+    height: 30px;
+    background-color: #27C5FF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    line-height: 30px;
+    cursor: pointer;
+}
 
 
 /* 회원 수정/ 탈퇴버튼 */
-.content>.my_update>form>.my_update_button{
-    width: 500px;
-    position: absolute;
-    top: 85%;
-    transform: translateY(-100%);
+.content>.my_update_button{
+    margin-top: 80px;
+    position: relative;
     display: flex;
     justify-content: center;
+    gap: 50px;
 }
 
-.content>.my_update>form>.my_update_button>button{
+.content>.my_update_button>button{
     width: 220px;
     height: 50px;
     background-color: #27C5FF;
     border: none;
     border-radius: 5px;
     color: white;
+    line-height: 50px;
+    font-size: 1rem;
+    cursor: pointer;
 }

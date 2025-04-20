@@ -1,18 +1,21 @@
 
-
-
-/* 콘텐트 레이아웃 */
+/* 콘텐츠 공통 */
 .content{
-    width: 1000px;
+    flex: 1;
+    display: none;
     height: 100%;
     padding: 50px;
     background-color: none;
 }
 
+.content.active {
+    display: block;
+  }
+
 /* 콘텐트 제목 */
 .content>p{
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 
@@ -201,3 +204,287 @@
     font-size: 1rem;
     cursor: pointer;
 }
+
+
+
+/* --------------------------- */
+/* 펀딩한 목록*/
+/* --------------------------- */
+
+/** 펀딩한 목록*/
+
+.funding-list{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.funding-list th,
+.funding-list td {
+  border-bottom: 1px solid #BCBCBC;
+  border-right:  1px solid #BCBCBC;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.funding-list td{
+    font-size: 0.8rem;
+}
+
+.funding-list th:last-child,
+.funding-list td:last-child{
+    border-right:  none;
+
+} 
+
+.funding-list td {
+    word-break: break-all; /*긴 줄바꿈*/
+    padding: 8px;
+  }
+
+
+
+  /** 펀딩한 목록>내역*/
+
+  .funding-list-check{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.funding-list-check th,
+.funding-list-check td {
+  border-bottom: 1px solid #BCBCBC;
+  border-right:  1px solid #BCBCBC;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.funding-list-check td{
+    font-size: 0.8rem;
+}
+.funding-list-check th:last-child,
+.funding-list-check td:last-child{
+    border-right:  none;
+
+} 
+.funding-list-check td:nth-child(4){
+    color: #FF0004;
+}
+.funding-list-check td:nth-child(5){
+    color: #29C3FF;
+}
+
+.funding-list-check td {
+    word-break: break-all; /*긴 줄바꿈*/
+    padding: 8px;
+  }
+
+
+
+  /** 펀딩한 목록>환불*/
+
+  .funding-list-refund{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.funding-list-refund th,
+.funding-list-refund td {
+  border-bottom: 1px solid #BCBCBC;
+  border-right:  1px solid #BCBCBC;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.funding-list-refund td{
+    font-size: 0.8rem;
+}
+.funding-list-refund th:last-child,
+.funding-list-refund td:last-child{
+    border-right:  none;
+
+} 
+
+.funding-list-refund td:nth-child(5){
+    color: #29C3FF;
+}
+
+.funding-list-refund td {
+    word-break: break-all; /*긴 줄바꿈*/
+    padding: 8px;
+  }
+
+
+/* --------------------------- */
+/* 문의 */
+/* --------------------------- */
+
+  /** 문의-list */
+
+  .inquiry-list{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.inquiry-list td {
+
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+
+.inquiry-list td:nth-child(2){
+    text-align: center;
+    vertical-align: bottom;
+    border-right:  none;
+    font-size: 1.1rem;
+    color: #29C3FF;
+    padding-left: 100px;
+
+} 
+
+.inquiry-list td {
+    word-break: break-all; /*긴 줄바꿈*/
+  }
+
+  .inquiry-list .inquiry-date>td>div{
+    text-align: left;
+    border-bottom: 1px solid #BCBCBC;
+    color: #BCBCBC;
+    padding: 7px 0;
+    font-size: 0.8rem;
+
+  }
+
+
+
+
+  /** 문의 > 문의 수정 */
+
+  .inquiry-list-update{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.inquiry-list-update td {
+
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+
+.inquiry-list-update td:nth-child(2){
+    text-align: center;
+    vertical-align: bottom;
+    border-right:  none;
+    font-size: 1.1rem;
+    color: #29C3FF;
+    padding-left: 100px;
+
+} 
+
+.inquiry-list-update td {
+    word-break: break-all; /*긴 줄바꿈*/
+  }
+
+
+  .inquiry-list-update .inquiry-date>td>div{
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #BCBCBC;
+    padding: 7px 0;
+    color: #BCBCBC;
+    font-size: 0.8rem;
+  }
+
+
+
+  /* --------------------------- */
+/* 프로젝트 */
+/* --------------------------- */
+    /** 프로젝트-내가만든프로젝트*/
+
+    .project-list{
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        margin-top: 50px;
+    }
+    
+    .project-list th,
+    .project-list td {
+      border-bottom: 1px solid #BCBCBC;
+      border-right:  1px solid #BCBCBC;
+      padding: 8px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    
+    .project-list td{
+        font-size: 0.8rem;
+    }
+    .project-list th:last-child,
+    .project-list td:last-child{
+        border-right:  none;
+    
+    } 
+    .project-list td:nth-child(4){
+        color: #29C3FF;
+    }
+    .project-list td:nth-child(5){
+        color: #FF0004;
+  
+    }
+    
+    .project-list td {
+        word-break: break-all; /*긴 줄바꿈*/
+        padding: 8px;
+      }
+
+
+    /** 프로젝트-참여하는 프로젝트*/
+
+    .project-list-party{
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+        margin-top: 50px;
+    }
+    
+    .project-list-party th,
+    .project-list-party td {
+      border-bottom: 1px solid #BCBCBC;
+      border-right:  1px solid #BCBCBC;
+      padding: 8px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    
+    .project-list-party td{
+        font-size: 0.8rem;
+    }
+    .project-list-party th:last-child,
+    .project-list-party td:last-child{
+        border-right:  none;
+    
+    } 
+
+    
+    .project-list td {
+        word-break: break-all; /*긴 줄바꿈*/
+        padding: 8px;
+      }

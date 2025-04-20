@@ -4,30 +4,56 @@
 $(function () {
   const contentIds = [
     "content-userinfo_Authentication",
+    "content-userinfo_update",
     "content-funding",
+    "content-funding-history",
+    "content-funding-refund",
     "content-inquiry",
+    "content-inquiry-write",
+    "content-inquiry-list",
     "content-project",
-    "content-logout",
-    "content-userinfo_update"
+    "content-project-join",
+    "content-logout"
   ];
 
-  $(".menu-item").click(function () {
-    const index = $(".menu-item").index(this);
+  // 메인 메뉴 클릭
+  $(".menu-item").click(function (e) {
+    const isSubmenu = $(this).hasClass("has-submenu");
+    const target = $(this).data("target");
 
-    // 메뉴 활성화 처리
+    // 콘텐츠 전환
+    contentIds.forEach((id) => $("#" + id).hide());
+    if (target) $("#" + target).show();
+
+    // 메뉴 상태 초기화
+    $(".menu-item").removeClass("active open");
+    $(".submenu-item").removeClass("active");
+
+    if (isSubmenu) {
+      // 서브메뉴 토글
+      $(this).addClass("open active");
+    } else {
+      $(this).addClass("active");
+    }
+  });
+
+  // 서브메뉴 클릭
+  $(".submenu-item").click(function (e) {
+    e.stopPropagation(); // 부모 menu-item 클릭 방지
+    const target = $(this).data("target");
+
+    // 콘텐츠 전환
+    contentIds.forEach((id) => $("#" + id).hide());
+    $("#" + target).show();
+
+    // 메뉴 상태 표시
+    $(".submenu-item").removeClass("active");
     $(".menu-item").removeClass("active");
+    $(this).closest(".menu-item").addClass("active open");
     $(this).addClass("active");
-
-    // 콘텐츠 표시 제어
-    contentIds.forEach((id, i) => {
-      if (i === index) {
-        $("#" + id).show();
-      } else {
-        $("#" + id).hide();
-      }
-    });
   });
 });
+
 
 
 /**

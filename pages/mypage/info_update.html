@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 
-      <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
   <!-- css -->
   <link rel="stylesheet" href="../../static/css/home/main.css">
@@ -31,15 +31,34 @@
         <p class="nickname">닉네임</p>
       </div>
       <ul class="menu">
-        <li class="menu-item active">회원 정보 수정</li>
-        <li class="menu-item">펀딩한 목록</li>
-        <li class="menu-item">문의</li>
-        <li class="menu-item">프로젝트</li>
-        <li class="menu-item">로그아웃</li>
+        <li class="menu-item active" data-target="content-userinfo_Authentication">회원 정보 수정</li>
+
+        <li class="menu-item has-submenu" data-target="content-funding">펀딩한 목록
+          <ul class="submenu">
+            <li class="submenu-item" data-target="content-funding-history">내역</li>
+            <li class="submenu-item" data-target="content-funding-refund">환불</li>
+          </ul>
+        </li>
+
+        <li class="menu-item has-submenu" data-target="content-inquiry">문의
+          <ul class="submenu">
+            <li class="submenu-item" data-target="content-inquiry-write">문의 하러가기</li>
+            <li class="submenu-item" data-target="content-inquiry-list">문의 내역</li>
+          </ul>
+        </li>
+
+        <li class="menu-item has-submenu" data-target="content-project">프로젝트
+          <ul class="submenu">
+            <li class="submenu-item" data-target="content-project-join">참여중인 프로젝트</li>
+          </ul>
+        </li>
+
+        <li class="menu-item" data-target="content-logout">로그아웃</li>
       </ul>
+
     </div>
     <!-- 회원 정보 수정 인증 -->
-    <div class="content" id="content-userinfo_Authentication">
+    <div class="content" id="content-userinfo_Authentication" style="display: none;">
       <p>회원 정보 수정</p>
 
       <div class="Authentication">
@@ -84,7 +103,7 @@
           </div>
 
           <div class="my_update_list">
-            <div class="input_list"> 
+            <div class="input_list">
               <label for="nickname">닉네임</label>
               <input type="text" name="nickname">
               <button>중복검사</button>
@@ -118,18 +137,283 @@
       </div>
     </div>
 
-    <!-- 펀딩한 목록 영역 -->
+    <!-- 펀딩한 목록 -->
     <div class="content" id="content-funding" style="display: none">
       <p>펀딩한 목록</p>
+      <p style="font-size: 1rem; color: #B5AFAF;">최근 1개월 안에 있던 목록만 조회가 가능합니다. 그 이후로는 자동삭제 됩니다.</p>
+      <table class="funding-list">
+        <colgroup>
+          <col style="width: 24%;">
+          <col style="width: 40%;">
+          <col style="width: 18%;">
+          <col style="width: 18%;">
+        </colgroup>
+        <tr>
+          <th>제목</th>
+          <th>내용</th>
+          <th>가격</th>
+          <th>날짜</th>
+        </tr>
+        <tr>
+          <td>이 세계는 멀까?</td>
+          <td>내용...</td>
+          <td>10,000</td>
+          <td>2025.06.03</td>
+        </tr>
+        <tr>
+          <td>미지의 세계</td>
+          <td>내용...</td>
+          <td>20,000</td>
+          <td>2025.06.03</td>
+        </tr>
+        <tr>
+          <td>저승에서 온 바이브</td>
+          <td>내용...</td>
+          <td>30,000</td>
+          <td>2025.06.03</td>
+        </tr>
+        <tr>
+          <td>시카고</td>
+          <td>내용...</td>
+          <td>10,000</td>
+          <td>2025.06.03</td>
+        </tr>
+      </table>
     </div>
-    <!-- 문의 영역 -->
+    <!-- 펀딩한 목록 - 내역 -->
+    <div class="content" id="content-funding-history" style="display: none">
+      <p>펀딩한 목록 > 내역</p>
+      <p style="font-size: 1rem; color: #B5AFAF;">최근 1개월 안에 있던 목록만 조회가 가능합니다. 그 이후로는 자동삭제 됩니다.</p>
+      <table class="funding-list-check">
+        <colgroup>
+          <col style="width: 25%;">
+          <col style="width: 30%;">
+          <col style="width: 25%;">
+          <col style="width: 10%;">
+          <col style="width: 10%;">
+        </colgroup>
+        <tr>
+          <th>결제 일자</th>
+          <th>제목</th>
+          <th>가격</th>
+          <th>환불</th>
+          <th>삭제</th>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목...</td>
+          <td>10,000</td>
+          <td>환불</td>
+          <td>삭제</td>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목...</td>
+          <td>20,000</td>
+          <td>환불</td>
+          <td>삭제</td>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목...</td>
+          <td>30,000</td>
+          <td>환불</td>
+          <td>삭제</td>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목...</td>
+          <td>10,000</td>
+          <td>환불</td>
+          <td>삭제</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 펀딩한 목록 - 환불 -->
+    <div class="content" id="content-funding-refund" style="display: none">
+      <p>펀딩한 목록 > 환불</p>
+      <p style="font-size: 1rem; color: #B5AFAF;">최근 1개월 안에 있던 목록만 조회가 가능합니다. 그 이후로는 자동삭제 됩니다.</p>
+      <table class="funding-list-refund">
+        <colgroup>
+          <col style="width: 25%;">
+          <col style="width: 35%;">
+          <col style="width: 25%;">
+          <col style="width: 15%;">
+          <col style="width: 10%;">
+        </colgroup>
+        <tr>
+          <th>환불 일자</th>
+          <th>제목 및 사유</th>
+          <th>가격</th>
+          <th>진행</th>
+          <th>삭제</th>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목../사유..</td>
+          <td>10,000</td>
+          <td>처리 완료</td>
+          <td>삭제</td>
+        </tr>
+        <tr>
+          <td>2025.06.03</td>
+          <td>제목../사유..</td>
+          <td>10,000</td>
+          <td>처리중</td>
+          <td>삭제</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 문의 - 메인 메뉴 자체 콘텐츠 -->
     <div class="content" id="content-inquiry" style="display: none">
       <p>문의</p>
+      <table class="inquiry-list">
+        <tbody>
+
+          <colgroup>
+            <col style="width: 65%;">
+            <col style="width: 35%;">
+
+          </colgroup>
+          <tr>
+            <td>결제창에서 안 넘어가요.</td>
+            <td>답변 완료</td>
+          </tr>
+          <tr class="inquiry-date">
+            <td colspan="2">
+              <div>2025.01.23</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>회원 정보 수정이 안되요</td>
+            <td></td>
+          </tr>
+          <tr class="inquiry-date">
+            <td colspan="2">
+              <div>2025.01.23</div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
     </div>
-    <!-- 프로젝트 영역 -->
+
+    <!-- 문의 - 문의 하러가기 -->
+    <div class="content" id="content-inquiry-write" style="display: none">
+      <p>문의 작성 페이지</p>
+    </div>
+
+    <!-- 문의 - 문의 수정 -->
+    <div class="content" id="content-inquiry-list" style="display: none">
+      <p>문의 > 문의 수정</p>
+      <table class="inquiry-list-update">
+        <tbody>
+
+          <colgroup>
+            <col style="width: 65%;">
+            <col style="width: 35%;">
+
+          </colgroup>
+          <tr>
+            <td>결제창에서 안 넘어가요.</td>
+            <td>수정</td>
+          </tr>
+          <tr class="inquiry-date">
+            <td colspan="2">
+              <div>2025.01.23</div>
+            </td>
+          </tr>
+          <tr>
+            <td>회원 정보 수정이 안되요</td>
+            <td>수정</td>
+          </tr>
+          <tr class="inquiry-date">
+            <td colspan="2">           
+              <div>2025.01.23</div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- 프로젝트 - 내가 만든 프로젝트 -->
     <div class="content" id="content-project" style="display: none">
       <p>프로젝트</p>
+      <table class="project-list">
+        <colgroup>
+          <col style="width: 20%;">
+          <col style="width: 40%;">
+          <col style="width: 13%;">
+          <col style="width: 9%;">
+          <col style="width: 9%;">
+          <col style="width: 9%;">
+        </colgroup>
+        <tr>
+          <th>제목</th>
+          <th>내용</th>
+          <th>참가인원</th>
+          <th>수정</th>
+          <th>삭제</th>
+          <th>등록일</th>
+        </tr>
+        <tr>
+          <td>안녕</td>
+          <td>내용...</td>
+          <td>50</td>
+          <td>수정</td>
+          <td>삭제</td>
+          <td>2025.06.03</td>
+        </tr>
+        <tr>
+          <td>여기가어디야?</td>
+          <td>내용...</td>
+          <td>60</td>
+          <td>수정</td>
+          <td>삭제</td>
+          <td>2025.06.03</td>
+        </tr>
+      </table>
     </div>
+
+    <!-- 프로젝트 - 참여중인 프로젝트 -->
+    <div class="content" id="content-project-join" style="display: block">
+      <p>프로젝트 > 참여중인 프로젝트</p>
+      <table class="project-list-party">
+        <colgroup>
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+          <col style="width: 25%;">
+
+        </colgroup>
+        <tr>
+          <th>제목</th>
+          <th>기획자</th>
+          <th>신청일</th>
+          <th>신청상태</th>
+        </tr>
+        <tr>
+          <td>안녕</td>
+          <td>artshub</td>
+          <td>2025.06.03</td>
+          <td>참여확정</td>
+        </tr>
+        <tr>
+          <td>여기가어디야?</td>
+          <td>artshub</td>
+          <td>2025.06.03</td>
+          <td>대기중</td>
+        </tr>
+      </table>
+    </div>
+
     <!-- 로그아웃 영역 -->
     <div class="content" id="content-logout" style="display: none">
       <p>로그아웃</p>

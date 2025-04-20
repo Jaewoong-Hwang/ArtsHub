@@ -2,15 +2,17 @@
 /* 마이페이지 제목 */
 .mypageh1{
   max-width: 1348px;  
-  margin: 0 auto;;
+  height: 100%;
+  margin: 0 auto;
   margin-top: 100px;
   margin-bottom: 100px;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 /* 마이페이지 전체 세션 너비(사이드메뉴,콘텐트포함) */
 .mypage_section{ 
   max-width: 1348px;
   margin: 0 auto;
+  margin-bottom: 140px;
   display: flex;
   background-color: none;
   
@@ -67,6 +69,51 @@
   }
   
   .menu-item:hover,
-  .menu-item.active {
+  .menu-item.active,
+  .submenu-item.active,
+  .submenu-item:hover {
     color: #29C3FF;
   }
+
+
+
+  /* 서브메뉴 */
+
+/* 서브메뉴 기본 숨김 */
+.submenu {
+  display: none;
+  list-style: none;
+}
+
+/* 클릭된 메뉴의 서브메뉴 표시 */
+.menu-item.open > .submenu {
+  display: block;
+}
+
+.submenu-item {
+  cursor: pointer;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+
+.submenu-item.active {
+  position: relative;
+  color: #29C3FF;
+  font-weight: 600;
+}
+
+.submenu-item.active::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 2px;
+  background-color: #29C3FF;
+  margin: 4px auto 0 auto;
+  border-radius: 2px;
+}
+

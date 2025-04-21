@@ -1,19 +1,18 @@
-
 /* 콘텐츠 공통 */
-.content{
+.content {
     flex: 1;
     display: none;
     height: 100%;
-    padding: 50px;
+    padding: 0 50px;
     background-color: none;
 }
 
 .content.active {
     display: block;
-  }
+}
 
 /* 콘텐트 제목 */
-.content>p{
+.content>p {
     font-size: 1.5rem;
     font-weight: 500;
 }
@@ -24,7 +23,7 @@
 /* 회원정보 수정 인증 */
 /* --------------------------- */
 
-.content>.Authentication{
+.content>.Authentication {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -32,18 +31,19 @@
 }
 
 /* 아츠허브 로고 이미지 */
-.content>.Authentication>.logo{
+.content>.Authentication>.logo {
     width: 100px;
     height: 130px;
 }
-.content>.Authentication>.logo>img{
+
+.content>.Authentication>.logo>img {
     width: 100%;
     height: 100%;
 }
 
 
 /* 소셜 로고 이미지 */
-.content>.Authentication .social{
+.content>.Authentication .social {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,19 +52,19 @@
     margin-bottom: 20px;
 }
 
-.content>.Authentication .social_logo{
+.content>.Authentication .social_logo {
     width: 40px;
     height: 40px;
 }
 
-.content>.Authentication .social img{
+.content>.Authentication .social img {
     width: 100%;
     height: 100%;
 }
 
 
 /* 비밀번호 인풋 */
-.content>.Authentication input{
+.content>.Authentication input {
     width: 100%;
     height: 50px;
     padding: 10px;
@@ -76,7 +76,7 @@
 }
 
 /* 비밀번호확인 버튼 */
-.content>.Authentication button{
+.content>.Authentication button {
     width: 100%;
     height: 50px;
     margin-top: 20px;
@@ -93,13 +93,13 @@
 /* 회원정보 수정 */
 /* --------------------------- */
 
-.content>.my_update{
+.content>.my_update {
     padding: 40px;
     width: 100%;
     height: 100%;
 }
 
-.content>.my_update>form{
+.content>.my_update>form {
     display: flex;
     justify-content: center;
     gap: 100px;
@@ -108,71 +108,73 @@
 
 /* form - 프로필변경 */
 
-.content>.my_update>form>.profile_img{
+.content>.my_update>form>.profile_img {
     position: relative;
     width: 250px;
     height: 250px;
 }
-.content>.my_update>form>.profile_img>.profile_img_show{
+
+.content>.my_update>form>.profile_img>.profile_img_show {
     position: relative;
     width: 250px;
     height: 250px;
-    border-radius: 50%; 
+    border-radius: 50%;
     object-fit: cover;
     overflow: hidden;
 }
 
-.content>.my_update>form>.profile_img>.profile_img_show>img{
+.content>.my_update>form>.profile_img>.profile_img_show>img {
     width: 100%;
     height: 100%;
 }
 
-.content>.my_update>form>.profile_img>button{
+.content>.my_update>form>.profile_img>button {
     position: absolute;
     width: 80px;
     height: 30px;
     top: 100%;
     left: 100%;
-    transform: translate(-100%,-100%);
+    transform: translate(-100%, -100%);
     background-color: #27C5FF;
     border: none;
     border-radius: 5px;
     color: white;
     line-height: 30px;
     cursor: pointer;
-    
+
 }
 
 
 /* form-정보입력 */
-.content>.my_update>form>.my_update_list{
+.content>.my_update>form>.my_update_list {
     width: 100%;
     height: 100%;
 
 }
 
 
-.content>.my_update>form>.my_update_list>.input_list{
+.content>.my_update>form>.my_update_list>.input_list {
     width: 486px;
     height: 52px;
     border-bottom: 1px solid #BCBCBC;
 }
 
 .content>.my_update>form>.my_update_list>.input_list>label,
-.content>.my_update>form>.my_update_list>.input_list>input   {
+.content>.my_update>form>.my_update_list>.input_list>input {
     font-size: 1.3rem;
     height: 100%;
-    padding : 0 13px;
+    padding: 0 13px;
     background-color: transparent;
     border: none;
-} 
-
-.content>.my_update>form>.my_update_list>.input_list>label{
-    border-right: 1px solid #BCBCBC;
-    
 }
+
+.content>.my_update>form>.my_update_list>.input_list>label {
+    border-right: 1px solid #BCBCBC;
+
+}
+
 /* 닉네임 중복검사버튼 */
-.content>.my_update>form>.my_update_list>.input_list>button{
+.content>.my_update>form>.my_update_list>.input_list>button {
     width: 80px;
     height: 30px;
     background-color: #27C5FF;
@@ -185,7 +187,7 @@
 
 
 /* 회원 수정/ 탈퇴버튼 */
-.content>.my_update_button{
+.content>.my_update_button {
     margin-top: 80px;
     position: relative;
     display: flex;
@@ -193,7 +195,7 @@
     gap: 50px;
 }
 
-.content>.my_update_button>button{
+.content>.my_update_button>button {
     width: 220px;
     height: 50px;
     background-color: #27C5FF;
@@ -213,7 +215,7 @@
 
 /** 펀딩한 목록*/
 
-.funding-list{
+.funding-list {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -222,33 +224,34 @@
 
 .funding-list th,
 .funding-list td {
-  border-bottom: 1px solid #BCBCBC;
-  border-right:  1px solid #BCBCBC;
-  padding: 8px;
-  text-align: center;
-  font-size: 1.1rem;
+    border-bottom: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
-.funding-list td{
+.funding-list td {
     font-size: 0.8rem;
 }
 
 .funding-list th:last-child,
-.funding-list td:last-child{
-    border-right:  none;
+.funding-list td:last-child {
+    border-right: none;
 
-} 
+}
 
 .funding-list td {
-    word-break: break-all; /*긴 줄바꿈*/
+    word-break: break-all;
+    /*긴 줄바꿈*/
     padding: 8px;
-  }
+}
 
 
 
-  /** 펀딩한 목록>내역*/
+/** 펀딩한 목록>내역*/
 
-  .funding-list-check{
+.funding-list-check {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -257,38 +260,42 @@
 
 .funding-list-check th,
 .funding-list-check td {
-  border-bottom: 1px solid #BCBCBC;
-  border-right:  1px solid #BCBCBC;
-  padding: 8px;
-  text-align: center;
-  font-size: 1.1rem;
+    border-bottom: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
-.funding-list-check td{
+.funding-list-check td {
     font-size: 0.8rem;
 }
-.funding-list-check th:last-child,
-.funding-list-check td:last-child{
-    border-right:  none;
 
-} 
-.funding-list-check td:nth-child(4){
+.funding-list-check th:last-child,
+.funding-list-check td:last-child {
+    border-right: none;
+
+}
+
+.funding-list-check td:nth-child(4) {
     color: #FF0004;
 }
-.funding-list-check td:nth-child(5){
+
+.funding-list-check td:nth-child(5) {
     color: #29C3FF;
 }
 
 .funding-list-check td {
-    word-break: break-all; /*긴 줄바꿈*/
+    word-break: break-all;
+    /*긴 줄바꿈*/
     padding: 8px;
-  }
+}
 
 
 
-  /** 펀딩한 목록>환불*/
+/** 펀딩한 목록>환불*/
 
-  .funding-list-refund{
+.funding-list-refund {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -297,82 +304,136 @@
 
 .funding-list-refund th,
 .funding-list-refund td {
-  border-bottom: 1px solid #BCBCBC;
-  border-right:  1px solid #BCBCBC;
-  padding: 8px;
-  text-align: center;
-  font-size: 1.1rem;
+    border-bottom: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
-.funding-list-refund td{
+.funding-list-refund td {
     font-size: 0.8rem;
 }
+
 .funding-list-refund th:last-child,
-.funding-list-refund td:last-child{
-    border-right:  none;
+.funding-list-refund td:last-child {
+    border-right: none;
 
-} 
+}
 
-.funding-list-refund td:nth-child(5){
+.funding-list-refund td:nth-child(5) {
     color: #29C3FF;
 }
 
 .funding-list-refund td {
-    word-break: break-all; /*긴 줄바꿈*/
+    word-break: break-all;
+    /*긴 줄바꿈*/
     padding: 8px;
-  }
+}
 
 
 /* --------------------------- */
 /* 문의 */
 /* --------------------------- */
 
-  /** 문의-list */
+/** 문의-list */
+li {
+    list-style: none;
+}
 
-  .inquiry-list{
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
+.inquiry-list {
+    position: relative;
+}
+
+.inquiry-list>.inquiry-question {
     margin-top: 50px;
 }
 
-.inquiry-list td {
+.inquiry-list>.inquiry-question>div {
+    width: 100%;
+    height: 100%;
 
-  text-align: left;
-  font-size: 1.1rem;
-  font-weight: 500;
+}
+
+.inquiry-list>.inquiry-question>div>p {
+
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 
-.inquiry-list td:nth-child(2){
-    text-align: center;
+.inquiry-list>.inquiry-question>div>p:nth-child(2) {
+    text-align: right;
     vertical-align: bottom;
-    border-right:  none;
+    border-right: none;
     font-size: 1.1rem;
     color: #29C3FF;
-    padding-left: 100px;
+    padding-right: 50px;
 
-} 
+}
 
-.inquiry-list td {
-    word-break: break-all; /*긴 줄바꿈*/
-  }
 
-  .inquiry-list .inquiry-date>td>div{
+.inquiry-list>.inquiry-question>.inquiry-date>p {
     text-align: left;
     border-bottom: 1px solid #BCBCBC;
     color: #BCBCBC;
-    padding: 7px 0;
+    padding-bottom: 7px;
     font-size: 0.8rem;
 
-  }
+}
+
+.inquiry-list>.inquiry-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.inquiry-list.active>.inquiry-answer {
+    max-height: 200px;
+    border: 1px solid #BCBCBC;
+    border-radius: 10px;
+    background-color: #e7f9f9;
+    margin-top: 10px;
+    padding: 15px 5px;
+    transition: max-height 0.3s ease-in-out;
+}
+
+
+.inquiry_btn {
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 38px;
+    transform: translateY(-50%);
+    right: 0%;
+    border: 0;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.inquiry_icon.close {
+    display: none;
+}
+
+.inquiry-list.active .inquiry_icon.close {
+    color: #ffffff;
+    display: block;
+}
+
+.inquiry-list.active .inquiry_icon.open {
+    display: none;
+}
 
 
 
+/** 문의 > 문의 수정 */
 
-  /** 문의 > 문의 수정 */
-
-  .inquiry-list-update{
+.inquiry-list-update {
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -381,110 +442,117 @@
 
 .inquiry-list-update td {
 
-  text-align: left;
-  font-size: 1.1rem;
-  font-weight: 500;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 
-.inquiry-list-update td:nth-child(2){
+.inquiry-list-update td:nth-child(2) {
     text-align: center;
     vertical-align: bottom;
-    border-right:  none;
+    border-right: none;
     font-size: 1.1rem;
     color: #29C3FF;
     padding-left: 100px;
 
-} 
+}
 
 .inquiry-list-update td {
-    word-break: break-all; /*긴 줄바꿈*/
-  }
+    word-break: break-all;
+    /*긴 줄바꿈*/
+}
 
 
-  .inquiry-list-update .inquiry-date>td>div{
+.inquiry-list-update .inquiry-date>td>div {
     text-align: left;
     margin-bottom: 30px;
     border-bottom: 1px solid #BCBCBC;
     padding: 7px 0;
     color: #BCBCBC;
     font-size: 0.8rem;
-  }
+}
 
 
 
-  /* --------------------------- */
+/* --------------------------- */
 /* 프로젝트 */
 /* --------------------------- */
-    /** 프로젝트-내가만든프로젝트*/
+/** 프로젝트-내가만든프로젝트*/
 
-    .project-list{
-        width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-        margin-top: 50px;
-    }
-    
-    .project-list th,
-    .project-list td {
-      border-bottom: 1px solid #BCBCBC;
-      border-right:  1px solid #BCBCBC;
-      padding: 8px;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-    
-    .project-list td{
-        font-size: 0.8rem;
-    }
-    .project-list th:last-child,
-    .project-list td:last-child{
-        border-right:  none;
-    
-    } 
-    .project-list td:nth-child(4){
-        color: #29C3FF;
-    }
-    .project-list td:nth-child(5){
-        color: #FF0004;
-  
-    }
-    
-    .project-list td {
-        word-break: break-all; /*긴 줄바꿈*/
-        padding: 8px;
-      }
+.project-list {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.project-list th,
+.project-list td {
+    border-bottom: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.project-list td {
+    font-size: 0.8rem;
+}
+
+.project-list th:last-child,
+.project-list td:last-child {
+    border-right: none;
+
+}
+
+.project-list td:nth-child(4) {
+    color: #29C3FF;
+}
+
+.project-list td:nth-child(5) {
+    color: #FF0004;
+
+}
+
+.project-list td {
+    word-break: break-all;
+    /*긴 줄바꿈*/
+    padding: 8px;
+}
 
 
-    /** 프로젝트-참여하는 프로젝트*/
+/** 프로젝트-참여하는 프로젝트*/
 
-    .project-list-party{
-        width: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-        margin-top: 50px;
-    }
-    
-    .project-list-party th,
-    .project-list-party td {
-      border-bottom: 1px solid #BCBCBC;
-      border-right:  1px solid #BCBCBC;
-      padding: 8px;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-    
-    .project-list-party td{
-        font-size: 0.8rem;
-    }
-    .project-list-party th:last-child,
-    .project-list-party td:last-child{
-        border-right:  none;
-    
-    } 
+.project-list-party {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
 
-    
-    .project-list td {
-        word-break: break-all; /*긴 줄바꿈*/
-        padding: 8px;
-      }
+.project-list-party th,
+.project-list-party td {
+    border-bottom: 1px solid #BCBCBC;
+    border-right: 1px solid #BCBCBC;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.project-list-party td {
+    font-size: 0.8rem;
+}
+
+.project-list-party th:last-child,
+.project-list-party td:last-child {
+    border-right: none;
+
+}
+
+
+.project-list td {
+    word-break: break-all;
+    /*긴 줄바꿈*/
+    padding: 8px;
+}

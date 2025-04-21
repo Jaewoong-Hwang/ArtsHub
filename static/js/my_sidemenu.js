@@ -72,3 +72,59 @@ $(document).ready(function () {
     $('.menu-item').eq(0).addClass('active'); // 첫 번째 메뉴 항목에 active 설정
   });
 });
+
+
+// 문의 아코디언
+const btns = document.querySelectorAll(".inquiry_btn");
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const faqItem = btn.parentNode;
+    const isActive = faqItem.classList.contains("active");
+
+    removeActiveClasses();
+
+    if (!isActive) {
+      faqItem.classList.add("active");
+    }
+  });
+});
+
+function removeActiveClasses() {
+  btns.forEach((btn) => {
+    btn.parentNode.classList.remove("active");
+  });
+}
+
+
+
+
+// URL에 해시값이 있으면 해당 콘텐츠 자동 show
+$(document).ready(function () {
+  if (window.location.hash === "#inquiry") {
+    const contentIds = [
+      "content-userinfo_Authentication",
+      "content-userinfo_update",
+      "content-funding",
+      "content-funding-history",
+      "content-funding-refund",
+      "content-inquiry",
+      "content-inquiry-write",
+      "content-inquiry-list",
+      "content-project",
+      "content-project-join",
+      "content-logout"
+    ];
+
+    // 모든 콘텐츠 숨기고 inquiry만 show
+    contentIds.forEach((id) => $("#" + id).hide());
+    $("#content-inquiry").show();
+
+    // 메뉴 상태 갱신
+    $(".menu-item").removeClass("active open");
+    $(".submenu-item").removeClass("active");
+
+    // '문의' 메뉴 활성화
+    $(".menu-item[data-target='content-inquiry']").addClass("active open");
+  }
+});

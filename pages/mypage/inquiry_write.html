@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../../static/css/home/main.css">
   <link rel="stylesheet" href="../../static/css/mypage/info_update.css">
   <link rel="stylesheet" href="../../static/css/mypage/sidemenu.css">
+  <link rel="stylesheet" href="../../static/css/mypage/inquiry_write.css">
 
 
 </head>
@@ -269,42 +270,44 @@
     <!-- 문의 - 메인 메뉴 자체 콘텐츠 -->
     <div class="content" id="content-inquiry" style="display: none">
       <p>문의</p>
-      <table class="inquiry-list">
-        <tbody>
-
-          <colgroup>
-            <col style="width: 65%;">
-            <col style="width: 35%;">
-
-          </colgroup>
-          <tr>
-            <td>결제창에서 안 넘어가요.</td>
-            <td>답변 완료</td>
-          </tr>
-          <tr class="inquiry-date">
-            <td colspan="2">
-              <div>2025.01.23</div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>회원 정보 수정이 안되요</td>
-            <td></td>
-          </tr>
-          <tr class="inquiry-date">
-            <td colspan="2">
-              <div>2025.01.23</div>
-            </td>
-          </tr>
-
-        </tbody>
-
-      </table>
+      <ul>        
+        <li class="inquiry-list active">
+            <div class="inquiry-question">
+              <div>
+                <p>결제창에서 안 넘어가요.</p>
+                <p>답변 완료</p>
+              </div>
+              <div class="inquiry-date">
+                <p>2025.01.23</p>
+              </div>
+            </div>
+  
+            <div class="inquiry-answer">
+              <p>해결했습니다.</p>
+            </div>
+  
+            <button class="inquiry_btn">
+              <span class="inquiry_icon open">+</span>
+              <span class="inquiry_icon close">-</span>
+            </button>
+        </li>
+      </ul>
+      
     </div>
 
     <!-- 문의 - 문의 하러가기 -->
-    <div class="content" id="content-inquiry-write" style="display: none">
+    <div class="content" id="content-inquiry-write" style="display: block">
       <p>문의 작성 페이지</p>
+      <form class="inquiry-write" action="../mypage/my_page.html#inquiry" method="get">
+        <table> 
+            <tr><td><h2>글쓰기</h2></td></tr>
+            <tr><td class="header">Title</td></tr>
+            <tr><td><input type="text" placeholder="제목을 입력하세요" name="title"></td></tr>
+            <tr><td class="header">Comment</td></tr>
+            <tr><td><textarea placeholder="내용을 입력하세요" name="detail"></textarea></td></tr>
+            <tr><td><input type="submit" value="등록" onclick="alert('작성 완료!')"></td></tr>
+        </table>
+        </form>
     </div>
 
     <!-- 문의 - 문의 수정 -->
@@ -383,7 +386,7 @@
     </div>
 
     <!-- 프로젝트 - 참여중인 프로젝트 -->
-    <div class="content" id="content-project-join" style="display: block">
+    <div class="content" id="content-project-join" style="display: none">
       <p>프로젝트 > 참여중인 프로젝트</p>
       <table class="project-list-party">
         <colgroup>

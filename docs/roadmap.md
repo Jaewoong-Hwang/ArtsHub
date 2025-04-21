@@ -28,20 +28,20 @@
 ---
 
 ### 🔹 1주차 (04.07 ~ 04.13) — 기획 및 구조 정의
-- 프로젝트 목적, 사용자 역할 정리
-- 전체 기능 목록 도출 및 페이지 플로우 설계
-- Notion 구조, GitHub 초기 세팅
-- 관리자 요구사항, ERD 기초 설계
-- 📁 공통 레이아웃 HTML/CSS 초안 개발 시작 (`header`, `footer` 등)
+[] 프로젝트 목적, 사용자 역할 정리
+[] 전체 기능 목록 도출 및 페이지 플로우 설계
+[] Notion 구조, GitHub 초기 세팅
+[] 관리자 요구사항, ERD 기초 설계
+[] 📁 공통 레이아웃 HTML/CSS 초안 개발 시작 (`header`, `footer` 등)
 
 ---
 
 ### 🔹 2주차 (04.14 ~ 04.20) — DB 설계 및 로그인 화면 개발
-- ~~ERD 세부화 (User, Project, Funding, Report, Admin 등)~~
-- 역할 기반 구조 정의 (`ROLE_USER`, `ROLE_CREATOR`, `ROLE_ADMIN`)
-- ~~회원가입 / 로그인 UI HTML/CSS/JS로 개발~~
-- 관리자 UX 흐름 기획서 정리
-- 🎨 로그인/회원가입 Figma 시안 적용
+[] ~~ERD 세부화 (User, Project, Funding, Report, Admin 등)~~
+[] 역할 기반 구조 정의 (`ROLE_USER`, `ROLE_CREATOR`, `ROLE_ADMIN`)
+[] ~~회원가입 / 로그인 UI HTML/CSS/JS로 개발~~
+[] 관리자 UX 흐름 기획서 정리
+[] 🎨 로그인/회원가입 Figma 시안 적용
 
 ---
 

@@ -37,15 +37,17 @@
 ---
 
 ### 🔹 2주차 (04.14 ~ 04.20) — DB 설계 및 로그인 화면 개발
-- ERD 세부화 (User, Project, Funding, Report, Admin 등)
+- ~~ERD 세부화 (User, Project, Funding, Report, Admin 등)~~
 - 역할 기반 구조 정의 (`ROLE_USER`, `ROLE_CREATOR`, `ROLE_ADMIN`)
-- 회원가입 / 로그인 UI HTML/CSS/JS로 개발
+- ~~회원가입 / 로그인 UI HTML/CSS/JS로 개발~~
 - 관리자 UX 흐름 기획서 정리
 - 🎨 로그인/회원가입 Figma 시안 적용
 
 ---
 
 ### 🔹 3주차 (04.21 ~ 04.27) — 프로젝트 등록/목록 구현
+- 회원가입 / 로그인 UI HTML/CSS/JS로 개발
+- ERD 세부화 (User, Project, Funding, Report, Admin 등)
 - 프로젝트 등록/상세 UI 구현 (전문가용)
 - 프로젝트 목록 + 필터 정렬 기능 구현 (더미 데이터 활용)
 - 리워드 선택 화면 구상

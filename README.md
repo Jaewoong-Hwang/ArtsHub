@@ -11,7 +11,7 @@
 ## 👥 팀 구성
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| 황재웅 | 기획/디자인 & 프론트 | [@example](https://github.com/Jaewoong-Hwang) |
+| 황재웅 | 기획/디자인 & 프론트 | [@Jaewoong-Hwang](https://github.com/Jaewoong-Hwang) |
 | 김지성 | 백엔드 | [@JiwebD](https://github.com/JiwebD) |
 
 

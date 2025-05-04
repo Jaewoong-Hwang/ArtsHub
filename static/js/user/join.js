@@ -61,3 +61,18 @@ function checkPasswordMatch() {
       message.style.color = 'red';
     }
   }
+
+  function setEmailDomain(selectElement) {
+    const domainInput = document.getElementById("emailDomain");
+  
+    if (selectElement.value) {
+      // 도메인 선택된 경우 → 자동 입력 + 읽기 전용
+      domainInput.value = selectElement.value;
+      domainInput.readOnly = true;
+    } else {
+      // '직접입력' 선택된 경우 → 빈값 + 직접 입력 허용
+      domainInput.value = "";
+      domainInput.readOnly = false;
+      domainInput.focus();  // 사용자 편의
+    }
+  }

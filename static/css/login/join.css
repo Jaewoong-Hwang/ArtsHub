@@ -5,163 +5,98 @@
 }
 
 main {
-    height: auto;
     display: flex;
     justify-content: center;
-    font-family: "custom-font-01";
-}
-
-.addImage{
-    width: 250px;
-    height: 250px;
-    background-color: lightblue;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: 120px;
-    margin-left: 90px;
-}
-
-.inputImg>input{
-    position: absolute;
-    margin-left: 500px;
-    margin-top: 300px;
-    
-}
-.inputImg{
-    justify-content: center;
-    display: flex; 
-}
-
-form {
-    align-items: center;   
-}
-
-/* 이미지 업로드 하는 곳 css 입니다. */
-form>div>.col{
-    justify-content: center;
-    display: flex;
-    padding-left: 100px;
-}
-
-form>div>.col>a>img{
-    height: 300px;
-    width: 400px;
-}
-
-
-form>.row {
-    margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    height: 35px;
-    width: 1300px;
-}
-
-form>.rowm{
-    text-align: center;
-    display: flex;
-    margin: 40px auto;
-    justify-content: center;
-    gap: 20px;
-}
-form>.rowm>a{
-    text-decoration: none;
-    padding: 5px;
-}
-
-form>.rowm>input{
-    height: 31px;
-    width: 300px;
-    justify-content: center; 
-    outline:none;s
-}
-
-form>.rowm>label{
-    padding-left: 105px;
-}
-
-
-form>.row>label {
-    display: block;
-    min-width: 80px;
-    height: 100%;
-    line-height: 40px;
-    text-align: center;
-    justify-content: center;
-}
-
-form>.row>input[type="text"],
-form>.row>input[type="password"],
-form>.row>select {
-    width: 300px;
-    height: 100%;
-    outline: none;
-    border: 1px solid gray;
-    padding: 0 3px;
-}
-
-form>.row.header {
-    height: 15px;
-    border: 1px solid;
-    margin: 0;
-    background-color: black;
-}
-
-form>.row.title {
-    justify-content: center;
-}
-
-form>.row.title>h4 {
-    font-size: 1.5rem;
-}
-
-form>.row.line {
-    border: 0;
-    height: 1px;
-    background-color: gray;
-    margin: 10px 0;
-    margin-bottom: 25px;
-}
-
-form>.row.agreement {
-    height: 15px;
-}
-
-form>.row.agreement>label {
-    height: 100%;
-    line-height: 12px;
-}
-
-form>.row.btn-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-form>.row.btn-group>button,
-form>.row.btn-group>input[type="submit"] {
-    width: 100%;
-    height: 100%;
-    border: 1px solid gray;
-    outline: none;
-    cursor: pointer;
-}
-
-main> form> .repassword{
+    padding: 50px 0;
+    background-color: #f8f8f8;
+    font-family: 'custom-font-01', sans-serif;
+  }
+  
+  .join-form {
+    width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  /* 공통 입력 그룹 */
+  .form-group {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    padding-left: 540px;
-}
-
-main> form> .repassword>input{
-    font-size: 1em;
-    outline:none;
-    height: 35px;
-    width: 300px;
-}
-
-#match-message{
+  }
+  
+  .form-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+  }
+  
+  /* 이메일 그룹 */
+  .email-group, .phone-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .email-group select {
+    padding: 5px;
+    font-size: 0.95rem;
+  }
+  
+  /* 이미지 업로드 */
+  .image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .image-preview {
+    width: 150px;
+    height: 150px;
+    background-color: #d0e8ff;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  
+  /* 버튼 그룹 */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .button-group button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .button-group button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .button-group button[type="reset"] {
+    background-color: #e0e0e0;
+  }
+  
+  /* 체크박스 */
+  .checkbox-group label {
+    display: block;
     margin-top: 5px;
-    font-size: 0.9em;
-}
+  }

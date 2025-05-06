@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <!-- 구글아이콘 -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="../../../static/css/home/main.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/myinfo1.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/sidemenu copy.css">
+
+
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <div class="question-write-content">
+    <p class="question-write-title">문의 글 쓰기</p>
+
+    <form class="question-write-form">
+      <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" placeholder="제목을 입력하세요" disabled>
+      </div>
+
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content"placeholder="내용을 입력하세요" disabled></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="reply">답변</label>
+        <textarea id="reply" name="reply"placeholder="내용을 입력하세요" disabled></textarea>
+      </div>
+
+    </form>
+    <div class="question-write-button">
+      <button onclicd="javascript:void(0)">목록 보기</button>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../../static/js/home.js"></script>
+
+</body>
+
+</html>

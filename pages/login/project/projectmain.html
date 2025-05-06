@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtsHub - 프로젝트 메인</title>
+  <link rel="stylesheet" href="../../../static/css/project/projectmain.css">
+</head>
+<body>
+
+  <!-- ✅ 상단 영역: 인기 프로젝트 슬라이드 -->
+  <section id="popular-section">
+    <h2>🔥 인기 프로젝트</h2>
+    <div class="slider" id="popular-slider">
+      <!-- JavaScript로 카드 자동 삽입 -->
+    </div>
+  </section>
+
+  <!-- ✅ 중단 영역: 추천 프로젝트 -->
+  <section id="recommended-section">
+    <h2>🎯 추천 프로젝트</h2>
+    <div class="card-grid" id="recommended-projects">
+      <!-- JavaScript로 카드 삽입 -->
+    </div>
+  </section>
+
+  <!-- ✅ 하단 영역: 신규 등록 프로젝트 -->
+  <section id="new-section">
+    <h2>🆕 신규 프로젝트</h2>
+    <div class="card-grid" id="new-projects">
+      <!-- JavaScript로 카드 삽입 -->
+    </div>
+  </section>
+
+  <!-- ✅ CTA + 조건부 버튼 -->
+  <section id="cta-section">
+    <div class="cta-banner">
+      <p>지금 당신의 예술을 시작하세요</p>
+      <button onclick="handleProjectCreate()">+ 프로젝트 만들기</button>
+    </div>
+
+    <div id="my-project-btn" style="display: none;">
+      <a href="/mypage/project">내 프로젝트 보기 →</a>
+    </div>
+  </section>
+
+  <script src="../../../static/js/project/projectmain.js" defer></script>
+</body>
+</html>

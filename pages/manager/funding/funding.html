@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<!-- css -->
+	<link rel="stylesheet" href="/static/css/manager/manager.css">
+	<link rel="stylesheet" href="/static/css/manager/manager_funding.css">
+
+	<!-- js -->
+	<script src="/static/js/funding_chart.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+	<!-- 전체 div -->
+	<div class="container">
+		<div class="top-nav">
+			<div class="nav-logo">관리자</div>
+			<div class="top-menu">
+				<button class="menu-button"
+					onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
+					관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/contents/contents.html'">컨텐츠
+					관리</button>
+			</div>
+		</div>
+
+		<section>
+			<div class="side-nav">
+				<h2>펀딩 관리</h2>
+
+				<div class="side-menu">
+					<div class="side-title">펀딩 현황</div>
+					<ul>
+						<li>누적 펀딩 금액</li>
+						<li>이번 달 펀딩 금액</li>
+						<li>펀딩 성공률</li>
+					</ul>
+
+				</div>
+				<div class="side-menu">
+					<div class="side-title">통계 분석</div>
+					<ul>
+						<li>월별 펀딩 추이</li>
+						<li>장르별 펀딩 비중</li>
+						<li>목표 달성률 분포</li>
+					</ul>
+				</div>
+
+				<div class="side-menu">
+					<div class="side-title">정산 관리</div>
+					<ul>
+						<li>정산 대기 목록</li>
+						<li>정산 완료 목록</li>
+						<li>정산 지연 알림</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div class="main-content">
+				<h2>펀딩 현황</h2>
+				<div class="funding">
+					<div class="card funding-total">
+						<h3>누적 펀딩 금액</h3>
+						<p>₩123,456,789</p>
+					</div>
+					<div class="card funding-month">
+						<h3>이번 달 펀딩 금액</h3>
+						<p>₩3,456,789</p>
+					</div>
+				</div>
+				<h2>통계 분석</h2>
+				<div class="content-chart">
+					<canvas id="funding_monthly" width="800" height="500"></canvas>
+				</div>
+				<div class="content-chart">
+					<canvas id="funding_genre" width="400" height="400"></canvas>
+					<canvas id="funding_success" width="500" height="400"></canvas>
+				</div>
+				<h2>정산 관리</h2>
+				<div class="funding">
+					<div class="card">
+						<h3>정산 대기</h3>
+						<p>21</p>
+					</div>
+					<div class="card">
+						<h3>정산 완료</h3>
+						<p>35</p>
+					</div>
+					<div class="card">
+						<h3>정산 지연</h3>
+						<p>5</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+
+</html>

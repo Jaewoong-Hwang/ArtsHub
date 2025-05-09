@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- css -->
+  <link rel="stylesheet" href="/static/css/manager/manager.css">
+  <link rel="stylesheet" href="/static/css/manager/manager_project.css">
+  <!-- js -->
+  <script src="/static/js/project_chart.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- 전체 div -->
+  <div class="container">
+    <div class="top-nav">
+      <div class="nav-logo">관리자</div>
+      <div class="top-menu">
+        <button class="menu-button" onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
+        <button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
+          관리</button>
+        <button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
+        <button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
+        <button class="menu-button" onclick="location.href='/pages/manager/contents/contents.html'">컨텐츠
+          관리</button>
+      </div>
+    </div>
+
+    <section>
+      <div class="side-nav">
+        <h2>프로젝트 관리</h2>
+        <div class="side-menu">
+          <div class="side-title">프로젝트 상태</div>
+          <ul>
+            <li>전체 프로젝트</li>
+            <li>승인 대기</li>
+            <li>진행 중</li>
+            <li>종료됨</li>
+            <li>반려됨</li>
+          </ul>
+        </div>
+        <div class="side-menu">
+          <div class="side-title">정산 관리</div>
+          <ul>
+            <li>정산 대기</li>
+            <li>정산 완료</li>
+          </ul>
+        </div>
+        <div class="side-menu">
+          <div class="side-title">전문가 요청</div>
+          <ul>
+            <li>프로젝트 수정 요청</li>
+            <li>전문가 문의 내역</li>
+          </ul>
+        </div>
+
+        <div class="side-menu">
+          <div class="side-title">카테고리 분석</div>
+          <ul>
+            <li>장르별 프로젝트 수</li>
+            <li>달성률 순위</li>
+          </ul>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="top-content">
+          <div class="left-panel">
+            <h2>프로젝트 상태</h2>
+            <div class="card-box">
+              <div class="card project-total">
+                <h3>전체 프로젝트</h3>
+                <p>176</p>
+              </div>
+            </div>
+            <div class="card-box">
+              <div class="card project-waiting-approval">
+                <h3>승인대기</h3>
+                <p>21</p>
+              </div>
+              <div class="card project-total">
+                <h3>진행중</h3>
+                <p>44</p>
+              </div>
+            </div>
+            <div class="card-box">
+              <div class="card project-waiting-approval">
+                <h3>종료됨</h3>
+                <p>113</p>
+              </div>
+              <div class="card project-total">
+                <h3>반려됨</h3>
+                <p>5</p>
+              </div>
+            </div>
+          </div>
+          <div class="right-panel">
+            <h2> 정산 관리 </h2>
+            <div class="card-box">
+              <div class="card project-waiting-approval">
+                <h3>정산 대기</h3>
+                <p>21</p>
+              </div>
+              <div class="card project-total">
+                <h3>정산 완료</h3>
+                <p>92</p>
+              </div>
+            </div>
+            <h2>전문가 요청</h2>
+            <ul class="status-list">
+              <div>
+                <span class="label">수정 요청</span>
+                <span class="badge">3</span>
+              </div>
+              <div>
+                <span class="label">문의 내역</span>
+                <span class="badge">12</span>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <h2>카테고리 분석</h2>
+        <div class="content-chart">
+          <canvas id="project_genre" width="400" height="400"></canvas>
+          <canvas id="project_rank" width="400" height="400"></canvas>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+
+</html>

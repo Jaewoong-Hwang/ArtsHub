@@ -22,7 +22,9 @@
     width: 100%;
     max-width: 1000px;
 }
-
+.card-box{
+    width: 1000px;
+}
 .card {
     background-color: white;
     border-radius: 8px;

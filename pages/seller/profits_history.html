@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 구글아이콘 -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../../static/css/home/main.css" />
+    <link rel="stylesheet" href="../../../static/css/mypage/seller.css" />
+    <link
+      rel="stylesheet"
+      href="../../../static/css/mypage/sidemenu_seller.css"
+    />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div class="mypage_section">
+      <div class="sidebar_menu">
+        <div class="profile">
+          <img
+            src="../../../static/img/apple.png"
+            alt="프로필 이미지"
+            class="profile-img"
+          />
+          <p class="nickname">닉네임</p>
+        </div>
+
+        <a class="change" href="javascript:void(0)">
+          <span class="material-symbols-outlined"> swap_horiz </span>
+          <span> 전문가로 전환 </span>
+        </a>
+
+        <p class="My_Arts">My Arts</p>
+        <ul class="menu">
+          <li
+            class="menu-item active"
+            data-status="content-userinfo_Authentication"
+          >
+            펀딩관리
+            <ul class="submenu">
+              <li class="submenu-item active" data-status="ALL">전체</li>
+              <li class="submenu-item" data-status="PROGRESS">진행중</li>
+              <li class="submenu-item" data-status="WAITING">승인 대기중</li>
+              <li class="submenu-item" data-status="END">펀딩 종료</li>
+              <li class="submenu-item" data-status="REJECTED">비승인</li>
+            </ul>
+          </li>
+
+          <li class="menu-item" data-status="content-funding">
+            프로젝트 관리
+            <ul class="submenu" style="display: none">
+              <li class="submenu-item active" data-status="ALL">전체</li>
+              <li class="submenu-item" data-status="RECRUITING">모집중</li>
+              <li class="submenu-item" data-status="RECRUITMENT_ENDED">
+                모집 종료
+              </li>
+              <li class="submenu-item" data-status="REQUESTED">참여요청</li>
+            </ul>
+          </li>
+
+          <li class="menu-item">참가신청 프로젝트 관리</li>
+
+          <li class="menu-item">수익 관리</li>
+
+          <li class="menu-item">프로필</li>
+
+          <li class="menu-item">로그아웃</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <p class="title">수익 관리</p>
+
+
+        <div class="profit-box">
+          <div class="profit-block-box">
+            <div class="profit-block">
+              <p class="label">출금 가능 수익금</p>
+              <p class="value">0원</p>
+            </div>
+
+            <div class="profit-button-block">
+              <button class="withdraw-button">출금 신청</button>
+            </div>
+          </div>
+
+
+          <div class="divider"></div>
+
+          <div class="profit-block">
+            <p class="label">예상 수익금</p>
+            <p class="value">9,950,000원</p>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="profit-block">
+            <p class="label">출금 금액</p>
+            <p class="value">100,000원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/home.js"></script>
+    <script src="../../static/js/seller-funding.js"></script>
+  </body>
+</html>

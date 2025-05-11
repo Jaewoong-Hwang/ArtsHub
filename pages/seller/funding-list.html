@@ -44,35 +44,42 @@
 
       <p class="My_Arts">My Arts</p>
       <ul class="menu">
-        <li class="menu-item active" data-target="content-userinfo_Authentication">펀딩관리
+        <li class="menu-item active" data-status="content-userinfo_Authentication">펀딩관리
           <ul class="submenu">
-            <li class="submenu-item active" data-target="content-funding-history">전체</li>
-            <li class="submenu-item" data-target="content-funding-refund">진행중</li>
-            <li class="submenu-item" data-target="content-funding-refund">승인 대기중</li>
-            <li class="submenu-item" data-target="content-funding-refund">펀딩 종료</li>
-            <li class="submenu-item" data-target="content-funding-refund">비승인</li>
+            <li class="submenu-item active" data-status="ALL">전체</li>
+            <li class="submenu-item" data-status="PROGRESS">진행중</li>
+            <li class="submenu-item" data-status="WAITING">승인 대기중</li>
+            <li class="submenu-item" data-status="END">펀딩 종료</li>
+            <li class="submenu-item" data-status="REJECTED">비승인</li>
           </ul>
         </li>
 
-        <li class="menu-item" data-target="content-funding">프로젝트 관리
+        <li class="menu-item" data-status="content-funding">프로젝트 관리
           <ul class="submenu" style="display: none;">
-            <li class="submenu-item" data-target="content-funding-history">전체</li>
-            <li class="submenu-item" data-target="content-funding-refund">모집중</li>
-            <li class="submenu-item" data-target="content-funding-refund">모집 종료</li>
-            <li class="submenu-item" data-target="content-funding-refund">참여요청</li>
+            <li class="submenu-item active" data-status="ALL">전체</li>
+            <li class="submenu-item" data-status="RECRUITING">모집중</li>
+            <li class="submenu-item" data-status="RECRUITMENT_ENDED">모집 종료</li>
+            <li class="submenu-item" data-status="REQUESTED">참여요청</li>
           </ul>
         </li>
 
-        <li class="menu-item" data-target="content-inquiry">문의
-        </li>
+        <li class="menu-item">참가신청 프로젝트 관리</li>
 
-        <li class="menu-item" data-target="content-logout">로그아웃</li>
+        <li class="menu-item">수익 관리</li>
+
+        <li class="menu-item">프로필</li>
+
+        <li class="menu-item">로그아웃</li>
       </ul>
     </div>
 
     <div class="content">
 
+      <p class="title">펀딩 관리</p>
+
       <div class="funding-item">
+
+        <!-- 진행중 -->
         <div class="funding-card">
           <div class="funding-thumbnail">
             <img src="../../static/img/마임의 세계.webp" alt="썸네일">
@@ -83,7 +90,7 @@
             <p class="funding-goal">목표 : 1,000,000</p>
             <p class="funding-supporter">후원자수 : 1명</p>
             <div class="status">
-              <button class="status-btn selling">진행중</button> 
+              <button class="status-btn SELLING">진행중</button>
             </div>
           </div>
 
@@ -93,6 +100,89 @@
             <ul class="dropdown-menu">
               <li onclick="handleSelect('end')">펀딩 종료</li>
               <li onclick="handleSelect('edit')">편집</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 임시저장 , 승인대기중 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000002</p>
+            <p class="funding-title">나는 누구인가&lt;기억삭제&gt;</p>
+            <p class="funding-goal">목표 : 2,000,000</p>
+            <p class="funding-supporter">후원자수 : 0명</p>
+            <div class="status">
+              <button class="status-btn save">임시저장</button>
+              <button class="status-btn WAITING">승인대기중</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 핀딩 종료 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000003</p>
+            <p class="funding-title">당신은 누구?&lt;초면&gt;</p>
+            <p class="funding-goal">목표 : 2,000,000</p>
+            <p class="funding-supporter">후원자수 :0명</p>
+            <div class="status">
+              <button class="status-btn END">펀딩종료</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 임시저장 , 비승인 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000004</p>
+            <p class="funding-title">어떻게 가요?&lt;길치&gt;</p>
+            <p class="funding-goal">목표 : 3,000,000</p>
+            <p class="funding-supporter">후원자수 : 0명</p>
+            <div class="status">
+              <button class="status-btn SAVE">임시저장</button>
+              <button class="status-btn REJECTED">비승인</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
             </ul>
           </div>
 

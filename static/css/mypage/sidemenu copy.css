@@ -103,9 +103,10 @@
   margin-top: 8px;
 }
 
-.submenu-item {
+.submenu-item a{
   cursor: pointer;
   font-size: 14px;
+  font-weight: 400;
   color: #999999;
   text-align: left;
   padding: 5px 0;
@@ -113,7 +114,7 @@
 
 
 
-.submenu-item.active {
+.submenu-item.active a{
   color: #000000;
 }
  

@@ -29,3 +29,54 @@
     }
   });
 
+
+
+
+
+
+
+// #region 전문가 프로필 수정버튼
+
+  function startEdit(el) {
+    const container = el.closest('.expert-info-data');
+    const input = container.querySelector('input');
+    const editLink = container.querySelector('.edit-link');
+    const editActions = container.querySelector('.edit-actions');
+
+    input.dataset.original = input.value; // 원본 값 저장
+    input.disabled = false;
+    input.focus();
+
+    editLink.style.display = 'none';
+    editActions.style.display = 'flex';
+  }
+
+  function cancelEdit(el) {
+    const container = el.closest('.expert-info-data');
+    const input = container.querySelector('input');
+    const editLink = container.querySelector('.edit-link');
+    const editActions = container.querySelector('.edit-actions');
+
+    input.value = input.dataset.original; // 원래 값으로 복원
+    input.disabled = true;
+
+    editLink.style.display = 'inline';
+    editActions.style.display = 'none';
+  }
+
+  function applyEdit(el) {
+    const container = el.closest('.expert-info-data');
+    const input = container.querySelector('input');
+    const editLink = container.querySelector('.edit-link');
+    const editActions = container.querySelector('.edit-actions');
+
+    input.disabled = true;
+
+    editLink.style.display = 'inline';
+    editActions.style.display = 'none';
+
+    // 필요 시 서버 전송도 여기에 추가
+    console.log('수정된 값:', input.value);
+  }
+
+// #endregion

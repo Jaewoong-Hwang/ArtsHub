@@ -515,6 +515,7 @@
 }
 
 .profit-block-box {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -571,71 +572,226 @@
 
 /* #region 전문가 프로필 단순정보 */
 
+
+
 .expert-box {
-  border: 1px solid #ddd;
+  border: 1px solid #bcbcbc;
   border-radius: 12px;
   padding: 30px;
-  background-color: #fff;
+  background-color: transparent;
   max-width: 700px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  align-items: flex-start;
+
+}
+
+.expert-box .expert-grade{
+  text-align: start;
 }
 
 .expert-box .expert-grade .label {
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 6px;
+  font-size: 1rem;
+  color: #6d6d6d;
+  margin-bottom: 16px;
+  font-weight: 500;
 }
 
 .expert-box .expert-grade .value {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.expert-box .expert-grade .value .grade-name{
+  font-weight: 600;
 }
 
 .expert-box .edit-profile {
-  color: #007bff;
-  font-size: 0.9rem;
-  text-decoration: none;
-}
-
-.expert-box .expert-divider {
-  border: none;
-  border-top: 1px solid #eee;
-}
-
-.expert-box .expert-info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.expert-box .expert-info-label {
-  font-size: 0.95rem;
-  color: #555;
-  flex-shrink: 0;
-}
-
-.expert-box .expert-info-data {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.expert-box .expert-info-data span {
+  color: #29C3FF;
   font-size: 1rem;
+  
+}
+
+.expert-box .profile_hr{
+  width: 100%;
+  height: 1px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: #bcbcbc;
+}
+
+.expert-info-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 70%; 
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+.expert-info-label {
+  font-size: 1rem;
+  color: #6d6d6d;
   font-weight: 500;
 }
 
-.expert-box .edit-link {
-  color: #007bff;
-  font-size: 0.85rem;
+.expert-info-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;   
+  gap: 10px;
+}
+
+.expert-edit-input {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid #E4E5ED;
+  border-radius: 10px;
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.expert-edit-input:disabled {
+  color: #555;
+  background-color: #FAFAFC;
+  border-color: #E4E5ED;
+}
+
+.expert-edit-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #bcbcbc; /* 동일한 색상으로 두께 변화 없이 유지 */
+}
+
+.edit-buttons {
+  position: absolute;
+  width: 90px;
+  top: 0;
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.edit-buttons a {
+  color: #29C3FF;
+  font-size: 1rem;
+  cursor: pointer;
   text-decoration: none;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
 }
 
 
 /* #endregion */
+
+
+
+
+
+
+/* #region 전문가 프로필 상세 */
+.expert-profile-container {
+  width: 950px;
+  padding : 0 20px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 33px;
+}
+
+.profile-name {
+  font-size: 1.563rem;
+  font-weight: 500;
+}
+
+.expert-info-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 40px 27px;
+  margin-bottom: 40px;
+}
+
+.expert-info-item {
+  margin-bottom: 70px;
+}
+
+.expert-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-title {
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.info-content {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.portfolio-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 46px 64px 70px 27px;
+}
+
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.view-all {
+  font-size: 0.9rem;
+  color: #999;
+  text-decoration: none;
+}
+
+.portfolio-content{
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 18px;
+}
+
+.portfolio-list {
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio-item {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  border-radius: 6px;
+}
+
+
+
+/* #endregion */
+
+
 
 
 

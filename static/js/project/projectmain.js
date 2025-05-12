@@ -71,3 +71,28 @@ const dummyProjects = [
 
 // ❗예시 호출: 탐색 페이지에서 사용
 // renderProjectCards('recommended-projects', dummyProjects);
+
+// 페이지 로딩 이후 0.8초 후 히어로 섹션 보여주기
+window.addEventListener('load', () => {
+  const hero = document.querySelector('.hero');
+  setTimeout(() => {
+    hero.classList.add('visible');
+  }, 800);
+});
+
+// IntersectionObserver로 다른 섹션 등장 효과
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target); // 한 번만 작동
+    }
+  });
+}, {
+  threshold: 0.3
+});
+
+// 감지 대상 등록
+document.querySelectorAll('.intro-section, .howto-section, .cta').forEach(section => {
+  observer.observe(section);
+});

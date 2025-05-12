@@ -19,7 +19,7 @@
   }
   
   .hero h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
   }
   
@@ -38,7 +38,7 @@
   }
   
   .feature-card {
-    width: 420px;  /*  카드 크기 확대 */
+    width: 420px;  
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -65,7 +65,7 @@
   
   .feature-card p {
     margin: 1rem 1.2rem;
-    font-size: 1rem;  /* ✅ 글씨도 약간 키움 */
+    font-size: 1rem;  
     color: #333;
     line-height: 1.5;
   }
@@ -86,6 +86,22 @@
     text-align: center;
     padding: 3rem 2rem;
   }
+
+  /* 초기 상태: 숨겨진 상태 */
+.hero,
+.intro-section,
+.howto-section,
+.cta {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* 보일 때 적용될 클래스 */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
   
   .cta-buttons .btn {
     padding: 0.8rem 2rem;
@@ -131,12 +147,12 @@
   .btn.blue {
     background-color: var(--main-blue);
     color: white;
-    border: none;
+    border: 1px solid var(--main-blue);
   }
   
   .btn.outline {
     background: none;
-    border: 2px solid var(--main-blue);
+    border: 1px solid var(--main-blue);
     color: var(--main-blue);
   }
   

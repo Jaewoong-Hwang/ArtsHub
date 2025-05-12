@@ -1,0 +1,798 @@
+
+.mypage_section>.content{
+  width: 100%;
+  margin-left: 33px;
+}
+
+.content>.title{
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+/* #region funding-list */
+
+
+
+.funding-card {
+  position: relative;
+  display: flex;
+  border: 1px solid #bcbcbc;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.funding-card .funding-thumbnail img {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+}
+
+.funding-card .funding-info {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.funding-card .funding-info p{
+  font-weight: 500;
+}
+
+.funding-card .funding-info .funding-id {
+ font-size: 0.75rem;
+ color: #999999;
+}
+.funding-card .funding-info .funding-title {
+ font-size: 1rem;
+ color: #3d3d3d;
+
+}
+
+.funding-card .funding-info .funding-goal{
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.funding-card .funding-info .funding-supporter{
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.funding-card .funding-card .status{
+  display: flex;
+  gap: 10px;
+}
+
+.funding-card .status-btn {
+  width: 60px;
+  padding: 3px 0;
+  border: none;
+  color: #fff;
+  font-size: 0.688rem;
+  margin-top: 5px;
+}
+
+.funding-card .status-btn.SELLING {
+  background-color: #0C7DFF;
+} 
+.funding-card .status-btn.END {
+  background-color: #3d3d3d;
+}
+.funding-card .status-btn.SAVE {
+  background-color: #29C3FF;
+}
+.funding-card .status-btn.REJECTED {
+  background-color: #6d6d6d;
+}
+.funding-card .status-btn.WAITING {
+  background-color: #9d9d9d;
+}
+
+.funding-card .edit-dropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.funding-card .edit-button {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.funding-card .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.funding-card .dropdown-menu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:  0.688rem;
+}
+
+.funding-card .dropdown-menu li:hover {
+  background-color: #f3f3f3;
+}
+
+
+/* #endregion */
+
+
+/* #region project-list */
+
+
+
+.project-card {
+  position: relative;
+  display: flex;
+  border: 1px solid #bcbcbc;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.project-thumbnail img {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+}
+
+.project-info {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.project-info p{
+  font-weight: 500;
+}
+
+.project-info .project-id {
+ font-size: 0.75rem;
+ color: #999999;
+}
+.project-info .project-title {
+ font-size: 1rem;
+ color: #3d3d3d;
+
+}
+
+.project-info .project-goal{
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.project-info .project-supporter{
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.project-card .status{
+  display: flex;
+  gap: 10px;
+}
+
+.project-card .status-btn {
+  width: 60px;
+  padding: 3px 0;
+  border: none;
+  color: #fff;
+  font-size: 0.688rem;
+  margin-top: 5px;
+}
+
+.project-card .status-btn.RECRUITING {
+  background-color: #0C7DFF;
+} 
+
+.project-card .status-btn.RECRUIT_PENDING {
+  background-color: #29C3FF;
+}
+
+
+.project-card .edit-dropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.project-card .edit-button {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.project-card .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.project-card .dropdown-menu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:  0.688rem;
+}
+
+.project-card .dropdown-menu li:hover {
+  background-color: #f3f3f3;
+}
+
+
+/* #endregion */
+
+
+/* #region 참여요청 */
+.projectapplication-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.projectapplication-card {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 24px 60px 24px 20px;
+  background-color: transparent;
+}
+
+.projectapplication-card .projectapplication-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.projectapplication-card .projectapplication-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.projectapplication-card .projectapplication-date {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: 5000;
+}
+
+.projectapplication-card .projectapplication-status {
+  font-size: 0.875rem;
+  color: #29C3FF;
+  font-weight: 500;
+}
+
+.projectapplication-card .projectapplication-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.projectapplication-card .projectapplication-button button {
+  width: 240px;
+  padding: 17px 0;
+  background-color: #007dff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem; 
+  cursor: pointer;
+}
+
+
+.projectapplication-card .edit-dropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.projectapplication-card .edit-button {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.projectapplication-card .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.projectapplication-card .dropdown-menu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:  0.688rem;
+}
+
+.projectapplication-card .dropdown-menu li:hover {
+  background-color: #f3f3f3;
+}
+
+/* #endregion */
+
+
+/* #region 내가 신청한 프로젝트 */
+
+
+
+
+.projectrequest-card {
+  position: relative;
+  display: flex;
+  border: 1px solid #bcbcbc;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.projectrequest-card .projectrequest-thumbnail img {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+}
+
+.projectrequest-card .projectrequest-info {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.projectrequest-card .projectrequest-info p{
+  font-weight: 500;
+}
+
+.projectrequest-card .projectrequest-info .projectrequest-id {
+ font-size: 0.75rem;
+ color: #999999;
+}
+.projectrequest-card .projectrequest-info .projectrequest-title {
+ font-size: 1rem;
+ color: #3d3d3d;
+
+}
+
+.projectrequest-card .projectrequest-info .projectrequest-goal{
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.projectrequest-card .projectrequest-info .projectrequest-supporter{
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.projectrequest-card .status{
+  display: flex;
+  gap: 10px;
+}
+
+.projectrequest-card .status-btn {
+  width: 60px;
+  padding: 3px 0;
+  border: none;
+  color: #fff;
+  font-size: 0.688rem;
+  margin-top: 5px;
+}
+
+
+
+.projectrequest-card .status-btn.APROVED {
+  background-color: #29C3FF;
+}
+
+.projectrequest-card .status-btn.WAITING {
+  background-color: #9d9d9d;
+} 
+
+.projectrequest-card .status-btn.REJECTED {
+  background-color: #6d6d6d;
+} 
+
+
+.projectrequest-card .edit-dropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.projectrequest-card .edit-button {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.projectrequest-card .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.projectrequest-card .dropdown-menu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:  0.688rem;
+}
+
+.projectrequest-card .dropdown-menu li:hover {
+  background-color: #f3f3f3;
+}
+
+/* #endregion */
+
+
+/* #region 수익 관리 */
+
+.profit-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 30px;
+  background-color: #fff;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.profit-block-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 2;
+}
+
+.profit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+
+
+.profit-block .label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.profit-block .value {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.profit-block-box .profit-button-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profit-block-box .withdraw-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 구분선 */
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #ddd;
+}
+
+/* #endregion */
+
+
+/* #region 전문가 프로필 단순정보 */
+
+
+
+.expert-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: transparent;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.expert-box .expert-grade{
+  text-align: start;
+}
+
+.expert-box .expert-grade .label {
+  font-size: 1rem;
+  color: #6d6d6d;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.expert-box .expert-grade .value {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+
+.expert-box .expert-grade .value .grade-name{
+  font-weight: 600;
+}
+
+.expert-box .edit-profile {
+  color: #29C3FF;
+  font-size: 1rem;
+  
+}
+
+.expert-box .profile_hr{
+  width: 100%;
+  height: 1px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  background-color: #bcbcbc;
+}
+
+.expert-info-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 70%; 
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+.expert-info-label {
+  font-size: 1rem;
+  color: #6d6d6d;
+  font-weight: 500;
+}
+
+.expert-info-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;   
+  gap: 10px;
+}
+
+.expert-edit-input {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid #E4E5ED;
+  border-radius: 10px;
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.expert-edit-input:disabled {
+  color: #555;
+  background-color: #FAFAFC;
+  border-color: #E4E5ED;
+}
+
+.expert-edit-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #bcbcbc; /* 동일한 색상으로 두께 변화 없이 유지 */
+}
+
+.edit-buttons {
+  position: absolute;
+  width: 90px;
+  top: 0;
+  left: 100%;
+  transform: translateX(-100%);
+}
+
+.edit-buttons a {
+  color: #29C3FF;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* #endregion */
+
+
+
+
+
+
+/* #region 전문가 프로필 상세 */
+.expert-profile-container {
+  width: 950px;
+  padding : 0 20px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 33px;
+}
+
+.profile-name {
+  font-size: 1.563rem;
+  font-weight: 500;
+}
+
+.expert-info-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 40px 27px;
+  margin-bottom: 40px;
+}
+
+.expert-info-item {
+  margin-bottom: 70px;
+}
+
+.expert-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-title {
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.info-content {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.portfolio-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 46px 64px 70px 27px;
+}
+
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.view-all {
+  font-size: 0.9rem;
+  color: #999;
+  text-decoration: none;
+}
+
+.portfolio-content{
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 18px;
+}
+
+.portfolio-list {
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio-item {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  border-radius: 6px;
+}
+
+
+
+/* #endregion */
+
+
+
+
+
+

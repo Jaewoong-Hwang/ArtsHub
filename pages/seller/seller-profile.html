@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- 폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 구글아이콘 -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../../static/css/home/main.css" />
+    <link rel="stylesheet" href="../../../static/css/mypage/seller.css" />
+    <link
+      rel="stylesheet"
+      href="../../../static/css/mypage/sidemenu_seller.css"
+    />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div class="mypage_section">
+      <div class="sidebar_menu">
+        <div class="profile">
+          <img
+            src="../../../static/img/apple.png"
+            alt="프로필 이미지"
+            class="profile-img"
+          />
+          <p class="nickname">닉네임</p>
+        </div>
+
+        <a class="change" href="/pages/buyer/order/order-list.html">
+          <span class="material-symbols-outlined"> swap_horiz </span>
+          <span> 일반으로 전환 </span>
+        </a>
+
+        <p class="My_Arts">My Arts</p>
+        <ul class="menu">
+          <li class="menu-item" data-status="content-userinfo_Authentication">
+            <a href="/pages/seller/funding-list.html">펀딩관리</a>
+            <ul class="submenu" style="display: none">
+              <li class="submenu-item active" data-status="ALL">
+                <a href="/pages/seller/funding-list.html">전체</a>
+              </li>
+              <li class="submenu-item" data-status="PROGRESS">
+                <a href="/pages/seller/funding-list.html">진행중</a>
+              </li>
+              <li class="submenu-item" data-status="WAITING">
+                <a href="/pages/seller/funding-list.html">승인 대기중</a>
+              </li>
+              <li class="submenu-item" data-status="END">
+                <a href="/pages/seller/funding-list.html">펀딩 종료</a>
+              </li>
+              <li class="submenu-item" data-status="REJECTED">
+                <a href="/pages/seller/funding-list.html">비승인</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item" data-status="content-funding">
+            <a href="/pages/seller/project-list.html">프로젝트 관리</a>
+            <ul class="submenu">
+              <li class="submenu-item active" data-status="ALL">
+                <a href="/pages/seller/project-list.html">전체</a>
+              </li>
+              <li class="submenu-item" data-status="RECRUITING">
+                <a href="/pages/seller/project-list.html">모집중</a>
+              </li>
+              <li class="submenu-item" data-status="RECRUITMENT_ENDED">
+                <a href="/pages/seller/project-list.html">모집 종료</a>
+              </li>
+              <li class="submenu-item" data-status="REQUESTED">
+                <a href="/pages/seller/project-application.html">참여요청</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="/pages/seller/project-request.html"
+              >참가신청 프로젝트 관리</a
+            >
+          </li>
+
+          <li class="menu-item">
+            <a href="/pages/seller/profits_history.html">수익 관리</a>
+          </li>
+
+          <li class="menu-item active">
+            <a href="/pages/seller/seller-profile.html">프로필</a>
+          </li>
+
+          <li class="menu-item">로그아웃</li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <p class="title">전문가 정보</p>
+
+        <div class="expert-box">
+          <!-- 전문가 등급 안내 -->
+          <div class="expert-grade">
+            <p class="label">전문가 등급</p>
+            <p class="value">아츠님의 등급은 <span class="grade-name">브론즈</span>입니다.</p>
+            <a href="/pages/seller/seller-profile-detail.html" class="edit-profile">프로필 편집하러 가기</a>
+          </div>
+
+          <div class="profile_hr"></div>
+
+          <!-- 연락처 정보 -->
+          <div class="expert-info-row">
+            <label class="expert-info-label">연락 가능한 연락처</label>
+            <div class="expert-info-data">
+              <input
+                type="text"
+                class="expert-edit-input"
+                value="010-0000-0000"
+                disabled
+              />
+              <div class="edit-buttons">
+                <a href="#" class="edit-link" onclick="startEdit(this)">수정</a>
+                <div class="edit-actions" style="display: none">
+                  <a href="#" onclick="applyEdit(this)">완료</a>
+                  <a href="#" onclick="cancelEdit(this)">취소</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 연락 시간 정보 -->
+          <div class="expert-info-row">
+            <label class="expert-info-label">연락 가능한 시간</label>
+            <div class="expert-info-data">
+              <input
+                type="text"
+                class="expert-edit-input"
+                value="19:00-21:00"
+                disabled
+              />
+              <div class="edit-buttons">
+                <a href="#" class="edit-link" onclick="startEdit(this)">수정</a>
+                <div class="edit-actions" style="display: none">
+                  <a href="#" onclick="applyEdit(this)">완료</a>
+                  <a href="#" onclick="cancelEdit(this)">취소</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+      function enableEdit(linkElement) {
+        const container = linkElement.closest(".expert-info-data");
+        const input = container.querySelector("input");
+        input.disabled = false;
+        input.focus();
+      }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/home.js"></script>
+    <script src="../../static/js/seller-funding.js"></script>
+  </body>
+</html>

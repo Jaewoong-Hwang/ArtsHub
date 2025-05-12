@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <!-- 구글아이콘 -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="../../../static/css/home/main.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/seller.css">
+  <link rel="stylesheet" href="../../../static/css/mypage/sidemenu_seller.css">
+
+
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+
+  <div class="mypage_section">
+    <div class="sidebar_menu">
+      <div class="profile">
+        <img src="../../../static/img/apple.png" alt="프로필 이미지" class="profile-img" />
+        <p class="nickname">닉네임</p>
+      </div>
+
+      <a class="change" href="/pages/buyer/order/order-list.html">
+        <span class="material-symbols-outlined">
+          swap_horiz
+        </span>
+        <span>
+          일반으로 전환
+        </span>
+      </a>
+
+      <p class="My_Arts">My Arts</p>
+      <ul class="menu">
+        <li class="menu-item active" data-status="content-userinfo_Authentication"><a href="/pages/seller/funding-list.html">펀딩관리</a>
+          <ul class="submenu">
+            <li class="submenu-item active" data-status="ALL"><a href="/pages/seller/funding-list.html">전체</a></li>
+            <li class="submenu-item" data-status="PROGRESS"><a href="/pages/seller/funding-list.html">진행중</a></li>
+            <li class="submenu-item" data-status="WAITING"><a href="/pages/seller/funding-list.html">승인 대기중</a></li>
+            <li class="submenu-item" data-status="END"><a href="/pages/seller/funding-list.html">펀딩 종료</a></li>
+            <li class="submenu-item" data-status="REJECTED"><a href="/pages/seller/funding-list.html">비승인</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-item" data-status="content-funding"><a href="/pages/seller/project-list.html">프로젝트 관리</a>
+          <ul class="submenu" style="display: none;">
+            <li class="submenu-item active" data-status="ALL"><a href="/pages/seller/project-list.html">전체</a></li>
+            <li class="submenu-item" data-status="RECRUITING"><a href="/pages/seller/project-list.html">모집중</a></li>
+            <li class="submenu-item" data-status="RECRUITMENT_ENDED"><a href="/pages/seller/project-list.html">모집 종료</a></li>
+            <li class="submenu-item" data-status="REQUESTED"><a href="/pages/seller/project-application.html">참여요청</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-item"><a href="/pages/seller/project-request.html">참가신청 프로젝트 관리</a></li>
+
+        <li class="menu-item"><a href="/pages/seller/profits_history.html">수익 관리</a></li>
+
+        <li class="menu-item"><a href="/pages/seller/seller-profile.html">프로필</a></li>
+
+        <li class="menu-item">로그아웃</li>
+      </ul>
+    </div>
+
+    <div class="content">
+
+      <p class="title">펀딩 관리</p>
+
+      <div class="funding-item">
+
+        <!-- 진행중 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <a href="javascript:void(0)">
+              <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+            </a>
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000001</p>
+            <p class="funding-title">여기가 어딘가요&lt;기억상실&gt;</p>
+            <p class="funding-goal">목표 : 1,000,000</p>
+            <p class="funding-supporter">후원자수 : 1명</p>
+            <div class="status">
+              <button class="status-btn SELLING">진행중</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 종료</li>
+              <li onclick="handleSelect('edit')">편집</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 임시저장 , 승인대기중 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <a href="javascript:void(0)">
+              <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+            </a>
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000002</p>
+            <p class="funding-title">나는 누구인가&lt;기억삭제&gt;</p>
+            <p class="funding-goal">목표 : 2,000,000</p>
+            <p class="funding-supporter">후원자수 : 0명</p>
+            <div class="status">
+              <button class="status-btn save">임시저장</button>
+              <button class="status-btn WAITING">승인대기중</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 핀딩 종료 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <a href="javascript:void(0)">
+              <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+            </a>
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000003</p>
+            <p class="funding-title">당신은 누구?&lt;초면&gt;</p>
+            <p class="funding-goal">목표 : 2,000,000</p>
+            <p class="funding-supporter">후원자수 :0명</p>
+            <div class="status">
+              <button class="status-btn END">펀딩종료</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 임시저장 , 비승인 -->
+        <div class="funding-card">
+          <div class="funding-thumbnail">
+            <a href="javascript:void(0)">
+              <img src="../../static/img/마임의 세계.webp" alt="썸네일">
+            </a>
+          </div>
+          <div class="funding-info">
+            <p class="funding-id">#0000004</p>
+            <p class="funding-title">어떻게 가요?&lt;길치&gt;</p>
+            <p class="funding-goal">목표 : 3,000,000</p>
+            <p class="funding-supporter">후원자수 : 0명</p>
+            <div class="status">
+              <button class="status-btn SAVE">임시저장</button>
+              <button class="status-btn REJECTED">비승인</button>
+            </div>
+          </div>
+
+          <div class="edit-dropdown">
+            <button class="edit-button" onclick="toggleDropdown(this)">서비스 편집</button>
+
+            <ul class="dropdown-menu">
+              <li onclick="handleSelect('end')">펀딩 진행</li>
+              <li onclick="handleSelect('edit')">편집</li>
+              <li onclick="handleSelect('delete')">삭제</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  </div>
+
+  <div id="footer"></div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../../static/js/home.js"></script>
+  <script src="../../static/js/seller-funding.js"></script>
+
+</body>
+
+</html>

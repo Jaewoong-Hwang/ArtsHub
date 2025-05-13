@@ -1,4 +1,13 @@
 
+a{
+  text-decoration: none;
+}
+
+ul li{
+  text-decoration: none;
+}
+
+
 .mypage_section>.content{
   width: 100%;
   margin-left: 33px;

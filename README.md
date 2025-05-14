@@ -13,7 +13,7 @@
 |------|------|--------|
 | 황재웅 | 팀장 | [@Jaewoong-Hwang](https://github.com/Jaewoong-Hwang) |
 | 김지성 | 조원 | [@JiwebD](https://github.com/JiwebD) |
-| 하태형 | 조원 | [@JiwebD](https://github.com/JiwebD) |
+| 하태형 | 조원 | [@HTH-0](https://github.com/HTH-0) |
 
 
 ## 🛠 기술 스택

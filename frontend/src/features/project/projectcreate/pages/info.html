@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>아츠허브 - 프로젝트 만들기</title>
+  <link rel="stylesheet" href="../../../../assets/styles/resest.css">
+  <link rel="stylesheet" href="./css/info.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- ✅ 사이드바: 각 항목은 다른 페이지로 이동 -->
+    <aside class="sidebar">
+      <ul>
+        <li class="active"><a href="info.html">📄 프로젝트 정보</a></li>
+        <li><a href="description.html">📝 상세 내용</a></li>
+        <li><a href="reward.html">🎁 리워드</a></li>
+        <li><a href="policy.html">🔁 환불 정책</a></li>
+      </ul>
+    </aside>
+
+    <!-- ✅ 이 페이지에서는 프로젝트 정보만 입력 -->
+    <main class="content">
+      <section>
+        <h2>📄 프로젝트 기본 정보</h2>
+
+        <form>
+          <label>프로젝트명
+            <input type="text" name="title" placeholder="예: 2025 예술 콘서트" required />
+          </label>
+
+          <label>장르 선택
+            <select name="genre" required>
+              <option disabled selected>장르를 선택하세요</option>
+              <option>클래식</option>
+              <option>재즈</option>
+              <option>연극</option>
+            </select>
+          </label>
+
+          <label>모집 인원 수
+            <input type="number" name="headcount" placeholder="예: 5" min="1" required />
+          </label>
+
+          <label>모집 마감일
+            <input type="date" name="deadline" required />
+          </label>
+
+          <div class="cta-buttons">
+            <button type="submit" class="btn blue">다음 단계로</button>
+            <button type="button" class="btn outline">임시 저장</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

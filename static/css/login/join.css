@@ -29,7 +29,7 @@ hr {
     position: relative;
     border: none;
     margin-top: 12px;
-    width: 550px;
+    width: 584px;
     height: 48px;
     padding: 9px 23px;
 }
@@ -129,6 +129,7 @@ hr {
     border-radius: 8px;
     margin-bottom: 25px;
     outline: none;
+    max-width: 554px;
 }
 .join-input:hover {
     border-color: gray;
@@ -136,19 +137,41 @@ hr {
 
 .btn-small{
     border: none;
-    width: 70px;
-    height: 40px;
+    width: 120px;
+    height: 50px;
 }
 
 .id-box{
     display: flex;
-    width: 496px;
+    width: 584px;
+    gap: 15px;
 }
 .address-box{
     display: flex;
+    width: 584px;
+    gap: 15px;
 }
-
-
+.tel{
+    width: 584px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.tel1, .tel2, .tel3{
+    width: 120px;
+    height: 50px;
+    padding: 0 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+h6{
+    margin: 0;
+    width: 100%;
+    text-align: left;
+}
+.tel-hypen{
+    margin-top: 10px;
+}
 .header {
     position: fixed;
     top: 0;

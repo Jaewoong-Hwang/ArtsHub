@@ -13,16 +13,22 @@ body {
   color: var(--text-dark);
 }
 
+
 .layout {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
   display: flex;
-  min-height: 100vh;
+  /* background-color: none; */
 }
 
 /* 사이드바 */
 .sidebar {
   width: 220px;
-  background-color: #f2f4f8;
+  /* background-color: #f2f4f8; */
   border-right: 1px solid var(--gray);
+  border-left: 1px solid var(--gray);
   padding: 2rem 1rem;
 }
 
@@ -60,7 +66,7 @@ body {
 .content {
   flex: 1;
   padding: 3rem 2rem;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .content h2 {

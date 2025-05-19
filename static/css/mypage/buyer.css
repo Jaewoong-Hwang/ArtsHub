@@ -6,6 +6,17 @@ ul li{
   text-decoration: none;
 }
 
+/* 마이페이지 전체 세션 너비(사이드메뉴,콘텐트포함) */
+.mypage_section{ 
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  display: flex;
+  background-color: none;
+  
+}
+
 .mypage_section>.content{
   width: 100%;
   margin-left: 33px;

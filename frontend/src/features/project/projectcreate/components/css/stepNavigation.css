@@ -1,0 +1,42 @@
+/* CTA 버튼들 */
+.cta-buttons {
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.cta-buttons .btn {
+  padding: 0.75rem 1.5rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+/* 기본 파란 버튼 */
+.btn.blue {
+  background-color: var(--main-blue);
+  color: white;
+  border-color: var(--main-blue);
+}
+
+.btn.blue:hover {
+  background-color: white;
+  color: var(--main-blue);
+  box-shadow: 0 4px 12px rgba(41, 195, 255, 0.3);
+}
+
+/* 아웃라인 버튼 */
+.btn.outline {
+  background-color: transparent;
+  color: var(--main-blue);
+  border-color: var(--main-blue);
+}
+
+.btn.outline:hover {
+  background-color: var(--main-blue);
+  color: white;
+  box-shadow: 0 4px 12px rgba(12, 125, 255, 0.3);
+}

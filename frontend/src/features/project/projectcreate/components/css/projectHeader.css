@@ -1,0 +1,54 @@
+.project-header {
+  background-color: #f9f9f9;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.project-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-header .logo {
+  font-size: 1.4rem;
+  color: var(--main-blue);
+  font-weight: 700;
+  margin: 0;
+}
+
+.top-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn.small {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn.small {
+  background-color: var(--main-blue);
+  color: white;
+  border: none;
+}
+
+.btn.small.outline {
+  background: none;
+  border: 1.5px solid var(--main-blue);
+  color: var(--main-blue);
+}
+
+.btn.small:hover {
+  background-color: var(--sub-blue);
+  color: #fff;
+}
+
+.btn.small.outline:hover {
+  background-color: var(--main-blue);
+  color: white;
+}

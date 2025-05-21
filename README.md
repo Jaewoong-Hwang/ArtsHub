@@ -1,3 +1,4 @@
+
 # 🤝 ArtsHub 협업 가이드
 
 ## ✅ 브랜치 네이밍 규칙
@@ -27,6 +28,42 @@ fix/modal-close-error
 
 - 변경 이유
 - 영향 받는 기능 등
+=======
+# 🎭 ArtsHub - 공연예술 크라우드 펀딩 플랫폼
+- [깃헙 페이지](https://jaewoong-hwang.github.io/ArtsHub/)
+
+## 📌 프로젝트 개요
+공연 예술 창작자와 후원자를 연결하는 펀딩 및 협업 플랫폼
+
+- 공연 전문가들의 프로젝트 개설 및 협업 지원
+- 후원자 참여 기반의 투명한 펀딩 시스템
+- 커뮤니티 기능과 마이페이지로 소통 강화
+
+## 👥 팀 구성
+| 이름 | 역할 | GitHub |
+|------|------|--------|
+| 황재웅 | 팀장 | [@Jaewoong-Hwang](https://github.com/Jaewoong-Hwang) |
+| 김지성 | 조원 | [@JiwebD](https://github.com/JiwebD) |
+| 하태형 | 조원 | [@HTH-0](https://github.com/HTH-0) |
+
+
+## 🛠 기술 스택
+- Frontend: HTML/CSS, JavaScript (또는 React)
+- Backend: 미정
+- DB: MySQL 
+- Deployment: 미정
+
+- 협업: GitHub, Notion, Figma
+
+## 📂 디렉토리 구조
+```bash
+docs/
+├── index.html
+├── pages/
+│   ├── funding/
+│   ├── login/
+│   └── ...
+├── static/
 ```
 
 ### 커밋 태그 목록
@@ -43,13 +80,3 @@ fix/modal-close-error
 [Feat] 로그인 기능 구현
 [Fix] 펀딩 페이지 정렬 오류 수정
 ```
-
-## ✅ Pull Request 작성 가이드
-
-- 제목 예시: `[Feat] 프로젝트 개설 기능 구현`
-- 설명에 다음을 포함할 것:
-  - 어떤 기능인지 요약
-  - 주의할 점
-  - 연결된 이슈 번호 (`#23` 등)
-- PR 대상: `feature/xxx` → `dev`
-- 최소 1명 이상 코드 확인 후 Merge 진행

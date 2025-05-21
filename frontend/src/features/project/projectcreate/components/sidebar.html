@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="../components/css/sidebar.css" />
+
+<aside class="sidebar">
+  <ul>
+    <li class="active"><a href="info.html">프로젝트 정보</a></li>
+    <li><a href="description.html"> 상세 내용</a></li>
+    <li><a href="reward.html"> 리워드</a></li>
+    <li><a href="policy.html"> 환불 정책</a></li>
+  </ul>
+</aside>
+
+<script>
+      // 현재 페이지에 따라 사이드바 active 처리
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentPage = location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll(".sidebar li");
+
+        navLinks.forEach((li) => {
+          const link = li.querySelector("a");
+          if (link && link.getAttribute("href") === currentPage) {
+            li.classList.add("active");
+          } else {
+            li.classList.remove("active");
+          }
+        });
+      });
+    </script>

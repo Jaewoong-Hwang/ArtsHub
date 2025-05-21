@@ -1,128 +1,145 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>아츠허브 - 프로젝트 만들기</title>
-  <link rel="stylesheet" href="../../../../assets/styles/resest.css">
-  <link rel="stylesheet" href="./css/info.css" />
-</head>
-<body>
-<!-- 헤더 -->
-  <div id="header-placeholder"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>아츠허브 - 프로젝트 만들기</title>
+    <link rel="stylesheet" href="../../../../assets/styles/resest.css" />
+    <link rel="stylesheet" href="./css/info.css" />
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header-placeholder"></div>
+    
 
+    <div class="layout">
+      <div id="sidebar-palceholder"></div>
+      <!-- 이 페이지에서는 프로젝트 정보만 입력 -->
+      <main class="content">
+        <section>
+          <h2>프로젝트 기본 정보</h2>
 
-  <div class="layout">
-    <!-- 사이드바: 각 항목은 다른 페이지로 이동 -->
-    <aside class="sidebar">
-      <ul>
-        <li class="active"><a href="info.html">프로젝트 정보</a></li>
-        <li><a href="description.html"> 상세 내용</a></li>
-        <li><a href="reward.html"> 리워드</a></li>
-        <li><a href="policy.html"> 환불 정책</a></li>
-      </ul>
-    </aside>
+          <form>
+            <label
+              >프로젝트명
+              <input
+                type="text"
+                name="title"
+                placeholder="예: 2025 예술 콘서트"
+                required
+              />
+            </label>
 
-    <!-- 이 페이지에서는 프로젝트 정보만 입력 -->
-    <main class="content">
-      <section>
-        <h2>프로젝트 기본 정보</h2>
+            <label
+              >장르 선택
+              <select name="genre" required>
+                <option disabled selected>장르를 선택하세요</option>
+                <option>클래식</option>
+                <option>재즈</option>
+                <option>연극</option>
+              </select>
+            </label>
 
-        <form>
-          <label>프로젝트명
-            <input type="text" name="title" placeholder="예: 2025 예술 콘서트" required />
-          </label>
+            <label
+              >모집 인원 수
+              <input
+                type="number"
+                name="headcount"
+                placeholder="예: 5"
+                min="1"
+                required
+              />
+            </label>
 
-          <label>장르 선택
-            <select name="genre" required>
-              <option disabled selected>장르를 선택하세요</option>
-              <option>클래식</option>
-              <option>재즈</option>
-              <option>연극</option>
-            </select>
-          </label>
+            <label
+              >모집 마감일
+              <input type="date" name="deadline" required />
+            </label>
 
-          <label>모집 인원 수
-            <input type="number" name="headcount" placeholder="예: 5" min="1" required />
-          </label>
+            <div class="cta-buttons">
+              <div id="step-nav-placeholder"></div>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
 
-          <label>모집 마감일
-            <input type="date" name="deadline" required />
-          </label>
+    <!-- 모달  -->
+    <div id="save-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>임시 저장이 완료되었습니다!</p>
+        <button id="close-modal">확인</button>
+      </div>
+    </div>
 
-          <div class="cta-buttons">
-           <div id="step-nav-placeholder"></div>
-            
-          </div>
-        </form>
-      </section>
-    </main>
-  </div>
+    <script src="./js/info.js" defer></script>
 
-  <!-- 모달  -->
-<div id="save-modal" class="modal hidden">
-  <div class="modal-content">
-    <p>임시 저장이 완료되었습니다!</p>
-    <button id="close-modal">확인</button>
-  </div>
-</div>
-
-<script src="./js/info.js" defer></script>
-
-<script>
-// ✅ 공통 컴포넌트 로더
-document.addEventListener('DOMContentLoaded', () => {
-  // 헤더 컴포넌트 삽입
-  const header = document.getElementById('header-placeholder');
-  if (header) {
-    fetch('../components/projectHeader.html')
-      .then(res => res.text())
-      .then(html => {
-        header.innerHTML = html;
-      });
-  }
-
-  // 스텝 네비게이션 컴포넌트 삽입
-  const nav = document.getElementById('step-nav-placeholder');
-  if (nav) {
-    fetch('../components/stepNavigation.html')
-      .then(res => res.text())
-      .then(html => {
-        nav.innerHTML = html;
-
-        // 삽입 후 동작도 함께 처리 (여기서 현재 단계 자동 계산)
-        const stepOrder = ['info.html', 'description.html', 'reward.html', 'policy.html'];
-        const currentPage = location.pathname.split('/').pop();
-        const currentIndex = stepOrder.indexOf(currentPage);
-
-        const prevBtn = document.getElementById('prev-step');
-        const nextBtn = document.getElementById('next-step');
-
-        if (prevBtn && currentIndex > 0) {
-          prevBtn.addEventListener('click', () => {
-            window.location.href = stepOrder[currentIndex - 1];
-          });
-        } else if (prevBtn) {
-          prevBtn.style.display = 'none';
+    <script>
+      //  공통 컴포넌트 로더
+      document.addEventListener("DOMContentLoaded", () => {
+        // 헤더 컴포넌트 삽입
+        const header = document.getElementById("header-placeholder");
+        if (header) {
+          fetch("../components/projectHeader.html")
+            .then((res) => res.text())
+            .then((html) => {
+              header.innerHTML = html;
+            });
         }
 
-        if (nextBtn && currentIndex < stepOrder.length - 1) {
-          nextBtn.addEventListener('click', () => {
-            const form = document.querySelector('form');
-            if (form) {
-              form.action = stepOrder[currentIndex + 1];
-              form.submit();
-            }
-          });
-        } else if (nextBtn) {
-          nextBtn.textContent = '제출하기';
+        const sidebar = document.getElementById("sidebar-palceholder");
+        if (sidebar) {
+          fetch("../components/sidebar.html")
+            .then((res) => res.text())
+            .then((html) => {
+              sidebar.innerHTML = html;
+
+
+            });
+        }
+
+        // 스텝 네비게이션 컴포넌트 삽입
+        const nav = document.getElementById("step-nav-placeholder");
+        if (nav) {
+          fetch("../components/stepNavigation.html")
+            .then((res) => res.text())
+            .then((html) => {
+              nav.innerHTML = html;
+
+              // 삽입 후 동작도 함께 처리 (여기서 현재 단계 자동 계산)
+              const stepOrder = [
+                "info.html",
+                "description.html",
+                "reward.html",
+                "policy.html",
+              ];
+              const currentPage = location.pathname.split("/").pop();
+              const currentIndex = stepOrder.indexOf(currentPage);
+
+              const prevBtn = document.getElementById("prev-step");
+              const nextBtn = document.getElementById("next-step");
+
+              if (prevBtn && currentIndex > 0) {
+                prevBtn.addEventListener("click", () => {
+                  window.location.href = stepOrder[currentIndex - 1];
+                });
+              } else if (prevBtn) {
+                prevBtn.style.display = "none";
+              }
+
+              if (nextBtn && currentIndex < stepOrder.length - 1) {
+                nextBtn.addEventListener("click", () => {
+                  const form = document.querySelector("form");
+                  if (form) {
+                    form.action = stepOrder[currentIndex + 1];
+                    form.submit();
+                  }
+                });
+              } else if (nextBtn) {
+                nextBtn.textContent = "제출하기";
+              }
+            });
         }
       });
-  }
-});
-</script>
-  
-  
-  
-
-</body>
+    </script>
+  </body>
 </html>

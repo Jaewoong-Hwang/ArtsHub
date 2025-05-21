@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- 로그인 css -->
+    <link rel="stylesheet" href="../../static/css/login/join.css">
+
+</head>
+
+<body>
+
+    <div class="header"></div>
+    <h1 class="main-title">Arts Hubs</h1>
+    <hr />
+    <div class="container-join-social">
+        <h2>간편 가입</h2>
+        <!-- 카카오로 시작하기 -->
+        <div>
+            <button type="button" class="btn-kakao btn-standard" onclick="location.href='#'">
+                <img src="/static/img/kakao.png" alt="카카오" class="kakao"> 카카오로 시작하기</button>
+        </div>
+        <!-- 네이버로 시작하기 -->
+        <div>
+            <button type="button" class="btn-naver btn-standard">
+                <img src="/static/img/naver.png" alt="네이버" class="naver">네이버로 시작하기</button>
+        </div>
+        <!-- 구글, 페북, 애플 이미지 -->
+        <div class="logos">
+            <!-- <div class="col"> -->
+            <button type="button" class="btn-social">
+                <img src="/static/img/google.png" alt="구글" class="img-social">
+            </button>
+            <button type="button" class="btn-social">
+                <img src="/static/img/facebook.png" alt="페북" class="img-social">
+            </button>
+            <button type="button" class="btn-social">
+                <img src="/static/img/apple.png" alt="애플" class="img-social">
+            </button>
+        </div>
+    </div>
+    <form action="/test.jsp" method="get">
+        <div class="container-join-artshub">
+            <div class="id-box">
+                <input type="text" name="userid" class="join-input" placeholder="아이디" id="userid">
+                <button class="btn-normal btn-small">중복확인</button>
+            </div>
+            <!-- 비밀번호 -->
+            <input type="password" name="password" class="join-input" placeholder="비밀번호" id="password">
+            <!-- 비밀번호 재확인 -->
+            <input type="repassword" name="repassword" class="join-input" placeholder="비밀번호 재확인" id="repassword">
+            <!-- 이름 -->
+            <input type="text" name="username" class="join-input" placeholder="이름" id="username">
+            <!-- 주소 -->
+            <div class="address-box">
+                <input type="text" name="zip" class="join-input" placeholder="우편번호" id="zip">
+                <button type="submit" class="btn-normal btn-small">우편번호 검색</button>
+            </div>
+            <!-- 상세주소 -->
+            <input type="text" name="addr" class="join-input" placeholder="상세 주소" id="addr">
+            
+            <!-- 휴대전화 -->
+            <h6>휴대전화</h6>
+            <div class="tel">
+                <select name="tel1" class="join-input tel1" id="tel1">
+                    <option value="010">010</option>
+                    <option value="011">011</option>
+                    <option value="012">012</option>
+                </select>
+                <span class="tel-hypen">-</span>
+                <input type="text" name="tel2" class="join-input tel2" id="tel2">
+                <span class="tel-hypen">-</span>
+                <input type="text" name="tel3" class="join-input tel3" id="tel3">
+                <button class="btn-normal btn-small">인증번호 받기</button>
+            </div>
+            <!-- 이메일로 로그인하기 버튼 -->
+            <div>
+                <button type="button" class="btn-normal btn-standard">회원가입 하기</button>
+            </div>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+
+## 📁 주메뉴 - 프로젝트 페이지 ERD 설계 요약
+
+### ✅ 목적
+
+* 플랫폼 내에서 등록된 **팀 모집형 프로젝트** 목록을 사용자들에게 공개
+* 전문가(ROLE\_EXPERT)만 프로젝트 생성 및 관리 가능
+* 썸네일 및 마감일(`end_date`)을 기반으로 시각적 목록 및 모집 상태 판단 가능
+
+---
+
+## 🗂️ 프로젝트 관련 주요 테이블 정리
+
+| 테이블명                  | 주요 컬럼                                                                                                                                                       | 설명                                  |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `project`             | `project_id`, `title`, `description`, `required_specialty`, `target_count`, `current_count`, `thumbnail_url`, `status`, `created_at`, `end_date`, `user_id` | 프로젝트 기본 테이블. 프로젝트 등록, 수정, 상태 판단의 중심 |
+| `specialty_mapping`   | `project_id`, `required_specialty_id`                                                                                                                       | 프로젝트가 요구하는 전문 분야 매핑                 |
+| `required_specialty`  | `required_specialty_id`, `required_specialty_name`                                                                                                          | 프로젝트에서 설정 가능한 전문 분야명 (기획, 연출 등)     |
+| `project_application` | `application_id`, `project_id`, `user_id`, `status`, `applied_at`                                                                                           | 전문가가 해당 프로젝트에 참가 신청한 내역             |
+| `project_participant` | `participant_id`, `project_id`, `user_id`, `status`, `joined_at`                                                                                            | 프로젝트 수락된 참가자 목록 (상태: 멤버/탈퇴)         |
+
+---
+
+## 📦 `project` 테이블 구조 요약
+
+| 컬럼명                  | 타입                  | 설명                               |
+| -------------------- | ------------------- | -------------------------------- |
+| `project_id`         | BIGINT (PK)         | 프로젝트 고유번호                        |
+| `title`              | VARCHAR(100)        | 프로젝트 제목                          |
+| `description`        | TEXT                | 프로젝트 상세 설명                       |
+| `required_specialty` | VARCHAR(50)         | 주요 모집 분야 (보완용, 실제 매핑은 별도 테이블 사용) |
+| `target_count`       | INT                 | 목표 모집 인원                         |
+| `current_count`      | INT                 | 현재 참여 인원                         |
+| `thumbnail_url`      | VARCHAR(300)        | 프로젝트 대표 이미지 URL                  |
+| `status`             | ENUM('모집중', '모집종료') | 프로젝트 상태                          |
+| `created_at`         | DATETIME            | 생성일시                             |
+| `end_date`           | DATETIME            | 모집 마감일 **(🆕 추가됨)**              |
+| `user_id`            | BIGINT              | 등록한 전문가의 user\_id (FK → user)    |
+
+---
+
+## 🧭 전체 기능 흐름 (주메뉴 > 프로젝트)
+
+### 🔹 \[모든 사용자] 접근 가능
+
+* `/project` 목록 페이지
+
+  * 썸네일, 제목, 분야, 인원 수, 상태(모집중/종료) 등 표시
+  * 정렬/필터: 최신순, 마감순, 분야별 필터
+* `/project/{id}` 상세 페이지
+
+  * 프로젝트 정보 전체 출력
+  * 전문가일 경우 ‘참가 신청’ 버튼 활성화
+
+---
+
+### 🔹 \[전문가 전용 기능]
+
+* `/project/create` (생성)
+* `/project/edit/{id}` (수정)
+* 필수입력: 제목, 설명, 썸네일 URL, 마감일, 목표 인원, 모집분야 선택
+
+---
+
+### 🔹 모집 상태 자동화 예시
+
+* 현재 날짜가 마감일(`end_date`) 이후인 경우:
+
+```sql
+UPDATE project SET status = '모집종료'
+WHERE end_date < NOW() AND status = '모집중';
+```
+
+---
+
+## 🔧 고려 사항
+
+| 항목            | 설명                                             |
+| ------------- | ---------------------------------------------- |
+| 썸네일 업로드       | 향후 파일 업로드 기능 연동 필요 (예: S3, 서버 로컬 등)            |
+| 마감 자동 처리      | 배치 스케줄러 or 로그인 시점 조건 처리로 자동 상태 전환              |
+| 모집인원 도달 자동 종료 | `current_count >= target_count` 조건 시 자동 종료도 가능 |
+| 분야 다중선택 처리    | `specialty_mapping` 통해 체크박스 기반 다중 등록 처리 권장     |
+

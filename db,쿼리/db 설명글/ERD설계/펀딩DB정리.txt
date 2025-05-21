@@ -1,0 +1,134 @@
+
+
+## 🎯 펀딩(Funding) 관련 ERD 구성
+
+### ✅ 목적
+
+* 전문가(ROLE\_EXPERT)가 펀딩을 생성하고,
+* 일반 사용자(ROLE\_USER 포함)가 원하는 상품과 옵션을 선택해 후원하며,
+* 펀딩 마감일에 자동 결제가 진행되고,
+* 후원 내역 및 결제 상태를 마이페이지에서 확인 가능하도록 구성
+
+---
+
+## 📦 펀딩 관련 주요 테이블 요약
+
+| 테이블명                   | 설명                     |
+| ---------------------- | ---------------------- |
+| `funding`              | 펀딩 기본 정보               |
+| `category`             | 펀딩 카테고리(장르 등) 목록       |
+| `category_mapping`     | 펀딩 ↔ 카테고리 다대다 매핑       |
+| `product`              | 후원 선택 상품/옵션            |
+| `funding_support`      | 유저가 후원한 내역(1건당 1레코드)   |
+| `funding_support_item` | 후원 시 선택한 상품 구성 (수량 포함) |
+| `payment`              | 결제 정보 및 상태 기록          |
+
+---
+
+## 🧱 테이블 구조 상세
+
+### 1️⃣ `funding` – 펀딩 기본 정보
+
+| 컬럼명                       | 설명                                          |
+| ------------------------- | ------------------------------------------- |
+| `funding_id`              | PK, 펀딩 고유번호                                 |
+| `title` / `subtitle`      | 제목 및 부제목                                    |
+| `description`             | 상세 설명                                       |
+| `goal_amount`             | 목표 금액                                       |
+| `thumbnail_url`           | 썸네일 이미지                                     |
+| `start_date` / `end_date` | 펀딩 시작/종료일                                   |
+| `category`                | 대표 카테고리명 (표기용, 실제는 `category_mapping`에서 관리) |
+| `status`                  | `진행중`, `승인대기`, `승인거절`, `펀딩종료`               |
+| `user_id`                 | 펀딩을 만든 전문가 FK                               |
+
+---
+
+### 2️⃣ `category` + `category_mapping` – 펀딩 장르(분류)
+
+* 펀딩은 하나 이상의 카테고리와 연결 가능
+* 예: 클래식, 연극, 국악, 미디어 등
+
+```sql
+category (category_id, name)
+category_mapping (funding_id, category_id)
+```
+
+---
+
+### 3️⃣ `product` – 후원 선택 상품 및 옵션
+
+| 컬럼명              | 설명              |
+| ---------------- | --------------- |
+| `product_id`     | PK              |
+| `product_name`   | 예: 티켓세트 A       |
+| `product_option` | 예: 공연 날짜, 시간    |
+| `price`          | 상품 1개당 가격       |
+| `funding_id`     | 해당 상품이 속한 펀딩 ID |
+
+---
+
+### 4️⃣ `funding_support` – 유저의 후원 1건당 1개 레코드
+
+| 컬럼명              | 설명                 |
+| ---------------- | ------------------ |
+| `support_id`     | PK                 |
+| `extra_donation` | 추가 후원금 (자발적 입력 가능) |
+| `amount_total`   | 총 결제금액             |
+| `support_status` | 후원중 / 취소           |
+| `order_status`   | 결제예약 / 결제완료 / 결제취소 |
+| `payment_method` | 사용자가 선택한 결제 수단     |
+| `pg_order_id`    | PG사 주문 ID          |
+| `supported_at`   | 후원일                |
+| `funding_id`     | FK – 후원한 펀딩 ID     |
+
+---
+
+### 5️⃣ `funding_support_item` – 선택한 상품 목록
+
+* `support_id` 1건에 대해 여러 개의 상품을 선택할 수 있음
+
+| 컬럼명                       | 설명                       |
+| ------------------------- | ------------------------ |
+| `funding_support_item_id` | PK                       |
+| `support_id`              | FK – 어떤 후원건인지            |
+| `product_id`              | 어떤 상품인지                  |
+| `quantity`                | 몇 개 샀는지                  |
+| `product_price`           | 당시에 책정된 가격 (후에 가격 변동 고려) |
+
+---
+
+### 6️⃣ `payment` – 실제 결제 처리 내역
+
+| 컬럼명              | 설명                   |
+| ---------------- | -------------------- |
+| `payment_id`     | PK                   |
+| `payment_method` | 카드, 네이버페이 등          |
+| `payment_status` | 예정 / 완료 / 취소         |
+| `paid_at`        | 결제 완료 시간             |
+| `amount_total`   | 최종 결제 금액             |
+| `pg_provider`    | PG사 명 (예: 포트원)       |
+| `transaction_id` | PG 거래 번호             |
+| `payment_token`  | imp\_uid 등           |
+| `pg_response`    | 응답 본문 저장용            |
+| `support_id`     | FK – 어떤 후원건에 대한 결제인지 |
+
+---
+
+## 🔄 전체 흐름 요약
+
+1. 전문가가 펀딩 등록 → 관리자의 승인 필요
+2. 일반 유저가 상품/옵션 선택 후 후원 → `funding_support`, `funding_support_item` 생성
+3. 마감일 도달 → `payment` 처리됨 (`결제예약` → `결제완료` or `결제취소`)
+4. 마이페이지에서 후원 내역과 결제 상태 확인 가능
+
+---
+
+## 📌 추후 확장 고려 항목
+
+| 항목           | 설명                |
+| ------------ | ----------------- |
+| 펀딩 문의 게시판    | 후원자와 전문가 간 커뮤니케이션 |
+| 관리자 승인 테이블   | 승인 요청, 승인일시 기록    |
+| 펀딩 수익 정산 테이블 | 수익 관리용 (출금 가능액 등) |
+
+---

@@ -1,0 +1,102 @@
+
+## 📌 마이페이지 기능 개요
+
+마이페이지는 사용자 역할에 따라 제공되는 기능이 다릅니다.
+
+* **일반 사용자 (ROLE\_USER):**
+
+  * 내 정보 확인 및 수정
+  * 배송 주소 관리
+  * 후원 내역 조회 및 관리
+  * 문의 내역 확인 및 작성
+  * 전문가로 전환 신청
+
+* **전문가 사용자 (ROLE\_EXPERT):**
+
+  * 펀딩 관리
+  * 프로젝트 관리
+  * 참여 중인 프로젝트 확인
+  * 수익 관리
+  * 전문가 프로필 관리
+
+---
+
+## 🗂️ 마이페이지 관련 테이블 정리
+
+| 테이블명                   | 주요 컬럼                                                                                                                                                                    | 설명            |              |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------ |
+| `user`                 | `user_id`, `email`, `password`, `name`, `phone_number`, `gender`, `create_at`, `update_at`, `role`, `profile_image`                                                      | 사용자 기본 정보     |              |
+| `shiping_addrass`      | `id`, `addrass`, `is_default`, `user_id`                                                                                                                                 | 배송 주소 정보      |              |
+| `funding_support`      | `support_id`, `extra_donation`, `amount_total`, `support_status`, `order_status`, `payment_method`, `pg_order_id`, `supported_at`, `funding_id`                          | 후원 정보         |              |
+| `funding_support_item` | `funding_support_item_id`, `quantity`, `product_price`, `support_id`, `product_id`                                                                                       | 후원한 상품 정보     |              |
+| `payment`              | `payment_id`, `payment_method`, `payment_status`, `paid_at`, `amount_total`, `pg_provider`, `transaction_id`, `payment_token`, `pg_response`, `greated_at`, `support_id` | 결제 정보         |              |
+| `expert_profile`       | `user_id`, `nickname`, `introdution`, `career`                                                                                                                           | 전문가 프로필 정보    |              |
+| `portfolio`            | `portfolio_id`, `title`, `description`, `create_at`, `expert_profile_user_id`                                                                                            | 전문가 포트폴리오     |              |
+| `portfolio_image`      | `portfolio_image`, `image_url`, `image_order`, `portfolio_id`                                                                                                            | 포트폴리오 이미지     |              |
+| `project`              | `project_id`, `title`, `description`, `required_specialty`, `target_count`, `current_count`, `status`, `created_at`, `user_id`                                           | 프로젝트 정보       |              |
+| `project_application`  | `application_id`, `applied_at`, `status`, `project_id`, `user_id`                                                                                                        | 프로젝트 참여 신청 정보 |              |
+| `project_participant`  | `participant_id`, `joined_at`, `status`, `user_id`, `project_id`                                                                                                         | 프로젝트 참여자 정보   | ([Figma][1]) |
+
+---
+
+## 🧭 마이페이지 기능 흐름
+
+### 1. 내 정보 관리
+
+* **기능:** 사용자는 자신의 기본 정보를 확인하고 수정할 수 있습니다.
+* **관련 테이블:** `user`
+
+### 2. 배송 주소 관리
+
+* **기능:** 사용자는 배송 주소를 추가, 수정, 삭제할 수 있습니다. 기본 배송 주소 설정도 가능합니다.
+* **관련 테이블:** `shiping_addrass`
+
+### 3. 후원 내역 조회 및 관리
+
+* **기능:** 사용자는 자신이 후원한 내역을 조회하고, 결제 상태를 확인하거나 후원을 취소할 수 있습니다.
+* **관련 테이블:** `funding_support`, `funding_support_item`, `payment`
+
+### 4. 문의 내역 확인 및 작성
+
+* **기능:** 사용자는 관리자에게 문의를 작성하고, 이전 문의 내역을 확인할 수 있습니다.
+* **관련 테이블:** 현재 DB 설계에 포함되어 있지 않으므로, 추가 설계가 필요합니다.
+
+### 5. 전문가로 전환 신청
+
+* **기능:** 사용자는 전문가로 전환을 신청할 수 있으며, 승인이 완료되면 전문가 기능을 사용할 수 있습니다.
+* **관련 테이블:** `user` (`role` 컬럼을 통해 상태 관리)
+
+### 6. 펀딩 관리 (전문가)
+
+* **기능:** 전문가는 자신이 등록한 펀딩을 관리할 수 있습니다. 펀딩의 상태를 변경하거나 수정, 삭제할 수 있습니다.
+* **관련 테이블:** 현재 DB 설계에 포함되어 있지 않으므로, 추가 설계가 필요합니다.
+
+### 7. 프로젝트 관리 (전문가)
+
+* **기능:** 전문가는 자신이 등록한 프로젝트를 관리할 수 있습니다. 프로젝트의 상태를 변경하거나 수정, 삭제할 수 있습니다.
+* **관련 테이블:** `project`
+
+### 8. 참여 중인 프로젝트 확인 (전문가)
+
+* **기능:** 전문가는 자신이 참여 중인 프로젝트를 확인할 수 있습니다.
+* **관련 테이블:** `project_participant`
+
+### 9. 수익 관리 (전문가)
+
+* **기능:** 전문가는 자신의 수익을 확인하고, 출금을 신청할 수 있습니다.
+* **관련 테이블:** 현재 DB 설계에 포함되어 있지 않으므로, 추가 설계가 필요합니다.
+
+### 10. 전문가 프로필 관리
+
+* **기능:** 전문가는 자신의 프로필을 관리하고, 포트폴리오를 추가하거나 수정할 수 있습니다.
+* **관련 테이블:** `expert_profile`, `portfolio`, `portfolio_image`
+
+---
+
+## 🔧 추가 설계 필요 사항
+
+* **문의 기능:** 사용자의 문의 내역을 저장하고 관리하기 위한 테이블이 필요합니다.
+* **펀딩 관리:** 전문가가 등록한 펀딩을 관리하기 위한 테이블이 필요합니다.
+* **수익 관리:** 전문가의 수익 정보를 저장하고 관리하기 위한 테이블이 필요합니다.
+
+---

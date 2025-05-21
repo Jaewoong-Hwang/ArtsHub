@@ -1,0 +1,125 @@
+
+
+## 🎨 ArtsHub 프로젝트 기능 설계 요약 (DB 연동 중심)
+
+### 📌 1. 메인페이지 및 메뉴 구성
+
+* **메인페이지**: 인기 펀딩 리스트 출력 (장르/카테고리별 필터)
+* **상단 메뉴**
+
+  * 펀딩: 전체 등록된 펀딩 리스트
+  * 프로젝트: 전체 등록된 팀 모집 리스트
+
+---
+
+### 👥 2. 사용자 유형 및 역할
+
+| 역할            | 설명                                    |
+| ------------- | ------------------------------------- |
+| `ROLE_USER`   | 일반 유저. 후원 가능. 전문가 전환 버튼 표시            |
+| `ROLE_EXPERT` | 전문가 권한. 펀딩 생성, 프로젝트 생성, 전문가 프로필 작성 가능 |
+
+---
+
+### 🧾 3. 마이페이지 메뉴 구성
+
+#### ▶ ROLE\_USER
+
+* 내 정보 수정
+* 후원 관리 (서브 탭: 전체 / 진행중 / 취소)
+
+  * 상세 클릭 시: 후원 정보 확인
+  * 결제 상태 변경 확인(예정/완료/취소)
+  * 상품 옵션 변경 / 추가 후원 / 결제수단 변경
+  * **취소된 후원은 수정 불가**
+* 문의 (DB 설계 필요)
+* 로그아웃
+
+#### ▶ 전문가 전환 시 (`ROLE_EXPERT`)
+
+* 전문가 프로필 작성 후 아래 메뉴 활성화
+
+| 메뉴         | 설명                                              |
+| ---------- | ----------------------------------------------- |
+| 펀딩 관리      | 내가 만든 펀딩 리스트. 상태별 편집 (등록/수정/종료/삭제). 관리자 승인 필요   |
+| 프로젝트 관리    | 내가 만든 프로젝트 확인/편집. 다른 전문가의 참여요청 수락/거절            |
+| 참여 중인 프로젝트 | 내가 참여 신청한 프로젝트 리스트 및 상태(대기/수락/거절) 확인            |
+| 수익 관리      | 출금 가능 수익, 예상 수익, 출금 내역 확인 (→ 수익 테이블 설계 필요)      |
+| 프로필        | 전문가 정보 및 연락 수단 수정. “명함” 형식. 프로필 상세는 모든 유저 열람 가능 |
+
+---
+
+### 💰 4. 펀딩 구조 및 흐름
+
+* `funding`: 전문가가 등록. 관리자 승인 후 공개
+* `product`: 펀딩별 후원상품
+* `funding_support`: 유저 후원 정보 (상태: 후원중/취소, 결제: 예정/완료/취소)
+* `funding_support_item`: 후원 시 선택한 상품 및 수량
+* `payment`: 실제 결제 데이터 저장 (펀딩 마감일 기준 결제)
+
+> 결제수단 변경, 추가 후원, 상품 변경은 `funding_support` 및 `funding_support_item`을 갱신
+
+---
+
+### 👥 5. 프로젝트 구조 및 흐름
+
+* `project`: 전문가가 생성한 팀 모집
+* `project_application`: 참여 신청 테이블 (상태: 대기/수락/거절)
+* `project_participant`: 실제 참여 확정자 기록
+* `specialty_mapping`: 프로젝트가 요구하는 전문분야 매핑
+
+> 프로젝트 생성자만 신청 목록을 보고 수락/거절 가능
+
+---
+
+### 🧑‍🎨 6. 전문가 프로필
+
+* `expert_profile`: 전문가 자기소개, 경력 등
+* `portfolio`: 전문가 포트폴리오
+* `portfolio_image`: 포트폴리오 이미지
+* `Profile_Specialty`: 전문가가 보유한 전문분야
+
+---
+
+### 📦 7. 기타 테이블
+
+* `category`: 펀딩 장르/카테고리
+* `category_mapping`: 펀딩-카테고리 매핑
+* `required_specialty`: 프로젝트에 요구되는 전문 분야
+* `specialty`: 전문가가 가진 전문 기술
+* `shiping_addrass`: 사용자 배송지 (오타는 `shipping_address`로 수정 추천)
+
+---
+
+### 🛠️ 추가 설계 필요 항목
+
+1. **문의 테이블**
+
+```sql
+CREATE TABLE inquiry (
+  inquiry_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  title VARCHAR(100),
+  content TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
+);
+```
+
+2. **수익 관리 테이블 (출금 및 정산 내역)**
+
+```sql
+CREATE TABLE earnings (
+  earning_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  type ENUM('예상', '확정', '출금') NOT NULL,
+  amount BIGINT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE
+);
+```
+
+3. **전문가 등급 필드**
+
+* `expert_profile`에 `grade VARCHAR(20)` 필드 추가 제안
+

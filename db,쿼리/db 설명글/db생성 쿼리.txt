@@ -1,0 +1,466 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema artshubdb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema artshubdb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `artshubdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `artshubdb` ;
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`category`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`category` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`category` (
+  `category_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`category_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`user` (
+  `user_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '고유 식별자',
+  `email` VARCHAR(255) NOT NULL COMMENT '로그인용 이메일',
+  `password` VARCHAR(255) NOT NULL COMMENT '암호화 저장',
+  `name` VARCHAR(45) NOT NULL COMMENT '실명',
+  `phone_number` VARCHAR(20) NOT NULL COMMENT '인증 및 연락용 번호',
+  `gender` VARCHAR(10) NOT NULL COMMENT 'male / female',
+  `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입 시각',
+  `update_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '마지막 수정일',
+  `role` VARCHAR(50) NOT NULL DEFAULT 'ROLE_USER' COMMENT 'USER / EXPERT',
+  `profile_image` VARCHAR(300) NOT NULL DEFAULT 'default.jpg' COMMENT '프로필 이미지 URL',
+  PRIMARY KEY (`user_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`expert_profile`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`expert_profile` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`expert_profile` (
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  `nickname` VARCHAR(100) NOT NULL,
+  `introdution` TEXT NULL DEFAULT NULL,
+  `career` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_expert_profile_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`funding`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`funding` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`funding` (
+  `funding_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '펀딩고유번호',
+  `title` VARCHAR(100) NOT NULL,
+  `subtitle` VARCHAR(100) NOT NULL,
+  `description` TEXT NOT NULL,
+  `goal_amount` BIGINT NOT NULL,
+  `thumbnail_url` VARCHAR(300) NOT NULL,
+  `start_date` DATETIME NOT NULL,
+  `end_date` DATETIME NOT NULL,
+  `Category` VARCHAR(10) NOT NULL,
+  `status` ENUM('진행중', '승인대기', '승인거절', '펀딩종료') NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`funding_id`),
+  INDEX `fk_funding_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_funding_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`funding_support`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`funding_support` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`funding_support` (
+  `support_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '고유식별자',
+  `extra_donation` BIGINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '추가후원금',
+  `amount_total` BIGINT UNSIGNED NOT NULL COMMENT '총 결제금액',
+  `support_status` ENUM('후원중', '취소') NOT NULL COMMENT '후원중, 취소',
+  `order_status` ENUM('결제예약', '결제완료', '결제취소') NOT NULL COMMENT '결제예약,결제완료,결제취소',
+  `payment_method` VARCHAR(45) NOT NULL COMMENT '네이버페이, 신용카드 등..',
+  `pg_order_id` VARCHAR(100) NOT NULL COMMENT 'pg주문고유번호',
+  `supported_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '후원날짜',
+  `funding_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`support_id`),
+  INDEX `fk_funding_support_funding1_idx` (`funding_id` ASC) VISIBLE,
+  CONSTRAINT `fk_funding_support_funding1`
+    FOREIGN KEY (`funding_id`)
+    REFERENCES `artshubdb`.`funding` (`funding_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`product`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`product` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`product` (
+  `product_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_name` VARCHAR(100) NOT NULL,
+  `product_option` VARCHAR(45) NOT NULL COMMENT '티켓 날짜선택',
+  `price` BIGINT UNSIGNED NOT NULL COMMENT '상품 개당 가격',
+  `funding_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`product_id`),
+  INDEX `fk_product_funding1_idx` (`funding_id` ASC) VISIBLE,
+  CONSTRAINT `fk_product_funding1`
+    FOREIGN KEY (`funding_id`)
+    REFERENCES `artshubdb`.`funding` (`funding_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`funding_support_item`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`funding_support_item` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`funding_support_item` (
+  `funding_support_item_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `quantity` INT NOT NULL,
+  `product_price` BIGINT UNSIGNED NOT NULL COMMENT '상품 가격 변경시 결제 가격 기억용',
+  `support_id` BIGINT UNSIGNED NOT NULL,
+  `product_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`funding_support_item_id`),
+  INDEX `fk_funding_support_item_funding_support1_idx` (`support_id` ASC) VISIBLE,
+  INDEX `fk_funding_support_item_product1_idx` (`product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_funding_support_item_funding_support1`
+    FOREIGN KEY (`support_id`)
+    REFERENCES `artshubdb`.`funding_support` (`support_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_funding_support_item_product1`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `artshubdb`.`product` (`product_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`payment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`payment` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`payment` (
+  `payment_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `payment_method` VARCHAR(45) NOT NULL COMMENT '카드, 네이버페이 등',
+  `payment_status` ENUM('예정', '완료', '취소') NOT NULL COMMENT '예정, 완료, 취소',
+  `paid_at` DATETIME NULL DEFAULT NULL COMMENT '결제 완료된 시점(결졔 예정일땐 null)',
+  `amount_total` BIGINT UNSIGNED NOT NULL,
+  `pg_provider` VARCHAR(45) NOT NULL COMMENT '포트원, 카카오페이 등',
+  `transaction_id` VARCHAR(100) NOT NULL COMMENT 'PG사 고유 거래번호',
+  `payment_token` VARCHAR(100) NOT NULL COMMENT 'imp_uid 등',
+  `pg_response` TEXT NULL DEFAULT NULL,
+  `greated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `support_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  INDEX `fk_payment_funding_support1_idx` (`support_id` ASC) VISIBLE,
+  CONSTRAINT `fk_payment_funding_support1`
+    FOREIGN KEY (`support_id`)
+    REFERENCES `artshubdb`.`funding_support` (`support_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`portfolio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`portfolio` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`portfolio` (
+  `portfolio_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `description` TEXT NOT NULL,
+  `create_at` DATETIME NOT NULL COMMENT 'CURRENT_TIMESTAMP',
+  `expert_profile_user_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`portfolio_id`),
+  INDEX `fk_portfolio_expert_profile1_idx` (`expert_profile_user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_portfolio_expert_profile1`
+    FOREIGN KEY (`expert_profile_user_id`)
+    REFERENCES `artshubdb`.`expert_profile` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`portfolio_image`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`portfolio_image` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`portfolio_image` (
+  `portfolio_image` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `image_url` VARCHAR(300) NOT NULL,
+  `image_order` INT NOT NULL,
+  `portfolio_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`portfolio_image`),
+  INDEX `fk_portfolio_image_portfolio1_idx` (`portfolio_id` ASC) VISIBLE,
+  CONSTRAINT `fk_portfolio_image_portfolio1`
+    FOREIGN KEY (`portfolio_id`)
+    REFERENCES `artshubdb`.`portfolio` (`portfolio_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`project`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`project` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`project` (
+  `project_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `description` TEXT NOT NULL,
+  `required_specialty` VARCHAR(50) NOT NULL,
+  `target_count` INT NOT NULL,
+  `current_count` INT NOT NULL DEFAULT 0,
+  `status` ENUM('모집중', '모집종료') NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`project_id`),
+  INDEX `fk_project_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_project_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`project_application`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`project_application` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`project_application` (
+  `application_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '고유 식별자',
+  `applied_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('대기', '수락', '거절') NOT NULL COMMENT '대기, 수락,거절',
+  `project_id` BIGINT UNSIGNED NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`application_id`),
+  INDEX `fk_project_application_project1_idx` (`project_id` ASC) VISIBLE,
+  INDEX `fk_project_application_user1_idx` (`user_id` ASC) VISIBLE,
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_project_application_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `artshubdb`.`project` (`project_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_project_application_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`project_participant`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`project_participant` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`project_participant` (
+  `participant_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `joined_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('멤버', '탈퇴') NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  `project_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`participant_id`),
+  INDEX `fk_project_participant_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_project_participant_project1_idx` (`project_id` ASC) VISIBLE,
+  CONSTRAINT `fk_project_participant_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_project_participant_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `artshubdb`.`project` (`project_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`required_specialty`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`required_specialty` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`required_specialty` (
+  `required_specialty_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `required_specialty_name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`required_specialty_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`shiping_addrass`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`shiping_addrass` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`shiping_addrass` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `addrass` VARCHAR(100) NOT NULL,
+  `is_default` TINYINT(1) NOT NULL,
+  `user_id` BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_shiping_addrass_user_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_shiping_addrass_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `artshubdb`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`specialty`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`specialty` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`specialty` (
+  `specialty_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `specialty_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`specialty_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`Profile_Specialty`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`Profile_Specialty` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`Profile_Specialty` (
+  `expert_profile_user_id` BIGINT UNSIGNED NOT NULL,
+  `specialty_id` BIGINT UNSIGNED NOT NULL,
+  INDEX `fk_Profile_Specialty_expert_profile1_idx` (`expert_profile_user_id` ASC) VISIBLE,
+  INDEX `fk_Profile_Specialty_specialty1_idx` (`specialty_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Profile_Specialty_expert_profile1`
+    FOREIGN KEY (`expert_profile_user_id`)
+    REFERENCES `artshubdb`.`expert_profile` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_Profile_Specialty_specialty1`
+    FOREIGN KEY (`specialty_id`)
+    REFERENCES `artshubdb`.`specialty` (`specialty_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`specialty_mapping`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`specialty_mapping` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`specialty_mapping` (
+  `project_id` BIGINT UNSIGNED NOT NULL,
+  `required_specialty_id` BIGINT UNSIGNED NOT NULL,
+  INDEX `fk_specialty_mapping_project1_idx` (`project_id` ASC) VISIBLE,
+  INDEX `fk_specialty_mapping_required_specialty1_idx` (`required_specialty_id` ASC) VISIBLE,
+  CONSTRAINT `fk_specialty_mapping_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `artshubdb`.`project` (`project_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_specialty_mapping_required_specialty1`
+    FOREIGN KEY (`required_specialty_id`)
+    REFERENCES `artshubdb`.`required_specialty` (`required_specialty_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `artshubdb`.`category_mapping`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `artshubdb`.`category_mapping` ;
+
+CREATE TABLE IF NOT EXISTS `artshubdb`.`category_mapping` (
+  `funding_id` BIGINT UNSIGNED NOT NULL,
+  `category_id` INT UNSIGNED NOT NULL,
+  INDEX `fk_category_mapping_funding1_idx` (`funding_id` ASC) VISIBLE,
+  INDEX `fk_category_mapping_category1_idx` (`category_id` ASC) VISIBLE,
+  CONSTRAINT `fk_category_mapping_funding1`
+    FOREIGN KEY (`funding_id`)
+    REFERENCES `artshubdb`.`funding` (`funding_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_category_mapping_category1`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `artshubdb`.`category` (`category_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

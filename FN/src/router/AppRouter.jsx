@@ -6,14 +6,17 @@ import { AdminRoutes } from '../features/admin/AdminRoutes';
 import { AuthRoutes } from '../features/auth/AuthRoutes';
 
 
+
 export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
+
       {MypageRoutes()}
       {/* {FundingRoutes()}
       {ProjectRoutes()}
       {ProjectRoutes()}
       {AdminRoutes()} */}
+
 
     </Routes>
   </BrowserRouter>

@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { MypageRoutes } from '../features/mypage/MypageRoutes';
-import { FundingRoutes } from '../features/funding/FundingRoutes';
-import { ProjectRoutes } from '../features/project/ProjectRoutes';
-import { AdminRoutes } from '../features/admin/AdminRoutes';
-import { AuthRoutes } from '../features/auth/AuthRoutes';
+// import { FundingRoutes } from '../features/funding/FundingRoutes';
+// import { ProjectRoutes } from '../features/project/ProjectRoutes';
+// import { AdminRoutes } from '../features/admin/AdminRoutes';
+// import { AuthRoutes } from '../features/auth/AuthRoutes';
 
 
 
@@ -12,10 +12,10 @@ export const AppRouter = () => (
     <Routes>
 
       {MypageRoutes()}
-      {FundingRoutes()}
-      {ProjectRoutes()}
-      {ProjectRoutes()}
-      {AdminRoutes()}
+      {/* {FundingRoutes()} */}
+      {/* {ProjectRoutes()} */}
+      {/* {ProjectRoutes()} */}
+      {/* {AdminRoutes()} */}
 
 
     </Routes>

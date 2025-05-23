@@ -1,8 +1,10 @@
 import { Route } from 'react-router-dom';
-import userinfo from './pages/user/userinfo';
+import Userinfo from './pages/user/userinfo';
+import Funding_history from './pages/user/funding_history';
 
-export const AuthRoutes = () => (
+export const MypageRoutes = () => (
   <>
-    <Route path="/userinfo" element={<userinfo />} />
+    <Route path="/userinfo" element={<Userinfo />} />
+    <Route path="/funding_history" element={<Funding_history />} />
   </>
 );

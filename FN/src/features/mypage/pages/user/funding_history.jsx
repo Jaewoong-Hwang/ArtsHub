@@ -1,14 +1,14 @@
 
 
 
-const userinfo  = () => {
+const Funding_history = () => {
     return(
         <div>
-            <h1>유저정보페이지</h1>
+            <h1>펀딩후원관리페이지</h1>
             <p>테스트페이지입니다.</p>
             
         </div>
     )
 }
 
-export default userinfo ;
+export default Funding_history;

@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
-import { MypageRoutes } from '../features/mypage/MypageRoutes';
+import { AdminRoutes } from '../features/admin/adminRoutes';
 
 
 export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
-      {MypageRoutes()}
+      {AdminRoutes()}
 
     </Routes>
   </BrowserRouter>

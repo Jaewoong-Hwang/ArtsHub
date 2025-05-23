@@ -12,10 +12,10 @@ export const AppRouter = () => (
     <Routes>
 
       {MypageRoutes()}
-      {/* {FundingRoutes()}
+      {FundingRoutes()}
       {ProjectRoutes()}
       {ProjectRoutes()}
-      {AdminRoutes()} */}
+      {AdminRoutes()}
 
 
     </Routes>

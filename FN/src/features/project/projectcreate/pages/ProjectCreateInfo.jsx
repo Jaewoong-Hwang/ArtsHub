@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ProjectCreateHeader from '../components/ProjectCreateHeader';
 import Sidebar from '../components/SideBar';
 import StepNavigation from '../components/StepNav';
+import useModal from '../hooks/useModal'; 
 
-// CSS
 import '../../../../assets/styles/reset.css';
 import './css/ProjecCreatetInfo.css';
 
 const ProjectCreateInfo = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setModalVisible(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const handleOpenModal = () => setModalVisible(true);
-  const handleCloseModal = () => setModalVisible(false);
+  const { isVisible, open, close } = useModal();
 
   return (
     <>
@@ -61,23 +48,22 @@ const ProjectCreateInfo = () => {
               </label>
 
               <div className="cta-buttons">
-                <button type="button" className="btn outline" onClick={handleOpenModal}>
+                <button type="button" className="btn outline" onClick={open}>
                   임시 저장
                 </button>
-                
+
                 <StepNavigation />
-                
               </div>
             </form>
           </section>
         </main>
       </div>
 
-      {isModalVisible && (
+      {isVisible && (
         <div id="save-modal" className="modal">
           <div className="modal-content">
             <p>임시 저장이 완료되었습니다!</p>
-            <button id="close-modal" onClick={handleCloseModal}>
+            <button id="close-modal" onClick={close}>
               확인
             </button>
           </div>

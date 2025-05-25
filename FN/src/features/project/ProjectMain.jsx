@@ -23,7 +23,7 @@ const ProjectMain = () => {
     } else if (!isExpert) {
       alert("전문가 권한이 필요합니다.");
     } else {
-      navigate('/create/info');
+      navigate('/project/create/info');
     }
   };
 

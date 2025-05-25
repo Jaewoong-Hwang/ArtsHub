@@ -7,7 +7,7 @@ import ProjectCreateInfo from './projectcreate/pages/ProjectCreateInfo';
 
 export const ProjectRoutes = () => [
   <Route key="main" path="projectmain" element={<ProjectMain />} />,
-  <Route key="info" path="create/info" element={<ProjectCreateInfo />} />,
+  <Route key="info" path="project/create/info" element={<ProjectCreateInfo />} />,
 //   <Route key="description" path="create/description" element={<ProjectCreateDescription />} />,
 //   <Route key="reward" path="create/reward" element={<ProjectCreateReward />} />,
 //   <Route key="policy" path="create/policy" element={<ProjectCreatePolicy />} />,

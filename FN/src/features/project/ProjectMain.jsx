@@ -30,7 +30,7 @@ const ProjectMain = () => {
   };
 
   const handleJoinClick = () => {
-    navigate('/project/explore');
+    navigate('/project/participate');
   };
 
   // ▶ 애니메이션 효과: 로딩 후 hero 섹션 등장

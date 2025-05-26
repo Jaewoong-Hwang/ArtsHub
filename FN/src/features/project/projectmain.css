@@ -112,8 +112,8 @@
     text-decoration: none;
     cursor: pointer;
     display: inline-block;
-    transition: all 0.3s ease; /* 🔥 트랜지션 추가 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
   }
   
   /* 파란색 CTA 버튼 (기본 강조) */

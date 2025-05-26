@@ -11,7 +11,7 @@ const ProjectCreateHeader = () => {
         <h1 className="logo">ArtsHub</h1>
         <div className="top-actions">
           <a href="/mypage/project" className="btn small">내 프로젝트 보기</a>
-          <a href="../../projectmain.html" className="btn small outline">나가기</a>
+          <a href="../../ProjectMain" className="btn small outline">나가기</a>
         </div>
       </div>
     </div>

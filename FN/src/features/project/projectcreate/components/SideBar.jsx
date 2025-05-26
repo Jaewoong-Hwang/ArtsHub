@@ -2,19 +2,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-//css
+// CSS
 import '../../../../assets/styles/reset.css';
 import '../components/css/sidebar.css';
 
 const Sidebar = () => {
   const location = useLocation();
-  const currentPage = location.pathname.split('/').pop(); // 현재 경로의 마지막 segment
+  const pathParts = location.pathname.split('/');
+  const currentStep = pathParts[3]; // /project/create/[info|description|...]
 
   const menuItems = [
-    { path: 'info', label: '프로젝트 정보' },
-    { path: 'description', label: '상세 내용' },
-    { path: 'reward', label: '리워드' },
-    { path: 'policy', label: '환불 정책' },
+    { path: '/project/create/info', step: 'info', label: '프로젝트 정보' },
+    { path: '/project/create/description', step: 'description', label: '상세 내용' },
+    { path: '/project/create/reward', step: 'reward', label: '리워드' },
+    
   ];
 
   return (
@@ -22,8 +23,8 @@ const Sidebar = () => {
       <ul>
         {menuItems.map((item) => (
           <li
-            key={item.path}
-            className={currentPage === item.path ? 'active' : ''}
+            key={item.step}
+            className={currentStep === item.step ? 'active' : ''}
           >
             <Link to={item.path}>{item.label}</Link>
           </li>

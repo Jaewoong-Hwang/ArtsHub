@@ -1,10 +1,12 @@
 .project-header {
+  
   background-color: #f9f9f9;
   padding: 1rem 2rem;
   border-bottom: 1px solid #ddd;
 }
 
 .project-header .container {
+  
   display: flex;
   justify-content: space-between;
   align-items: center;

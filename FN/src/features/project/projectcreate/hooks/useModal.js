@@ -1,11 +1,19 @@
-
+// src/hooks/useModal.js
 import { useState, useEffect } from 'react';
 
 const useModal = () => {
   const [isVisible, setVisible] = useState(false);
+  const [modalType, setModalType] = useState(null); // 예: 'tempSave', 'submit'
 
-  const open = () => setVisible(true);
-  const close = () => setVisible(false);
+  const open = (type = null) => {
+    setModalType(type);
+    setVisible(true);
+  };
+
+  const close = () => {
+    setVisible(false);
+    setModalType(null);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -15,7 +23,7 @@ const useModal = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  return { isVisible, open, close };
+  return { isVisible, modalType, open, close };
 };
 
 export default useModal;

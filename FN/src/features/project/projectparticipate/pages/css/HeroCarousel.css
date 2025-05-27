@@ -1,0 +1,84 @@
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  background-color: #e9f5fb;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slide.wide {
+  background-color: #f0faff;
+}
+
+.carousel-slide.narrow {
+  background-color: #fffaf0;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+.slide-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  color: white;
+  max-width: 60%;
+}
+
+.slide-overlay h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.slide-overlay p {
+  margin: 0.2rem 0;
+  font-size: 1rem;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: var(--gray);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicator.active {
+  background-color: var(--main-blue);
+}

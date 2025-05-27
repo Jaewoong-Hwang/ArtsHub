@@ -39,6 +39,12 @@ a {
   color: inherit;
 }
 
+:root {
+    --main-blue: rgb(41, 195, 255);
+    --sub-blue: rgb(12, 125, 255);
+    --gray: rgb(188, 188, 188);
+  }
+
 /* 기본 폰트 설정 */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',

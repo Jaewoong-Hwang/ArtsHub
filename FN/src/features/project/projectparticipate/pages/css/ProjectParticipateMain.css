@@ -12,6 +12,10 @@
   padding-bottom: 4rem;
 }
 
+.title{
+  text-align: center;
+}
+
 .projects-section {
   max-width: 1200px;
   margin: 0 auto;

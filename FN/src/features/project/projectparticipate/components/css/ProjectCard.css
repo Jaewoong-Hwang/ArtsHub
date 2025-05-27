@@ -1,9 +1,17 @@
+.project-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .project-card {
@@ -12,11 +20,7 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  transition: transform 0.2s;
-}
-
-.project-card:hover {
-  transform: translateY(-4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card img {
@@ -44,19 +48,4 @@
 .project-views {
   font-size: 0.85rem;
   color: #888;
-}
-
-.btn-apply {
-  margin-top: 0.6rem;
-  background-color: var(--main-blue);
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn-apply:hover {
-  background-color: var(--sub-blue);
 }

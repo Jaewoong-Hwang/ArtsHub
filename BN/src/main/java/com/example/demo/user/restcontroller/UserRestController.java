@@ -1,4 +1,4 @@
-package com.example.demo.user.controller;
+package com.example.demo.user.restcontroller;
 
 import com.example.demo.config.auth.jwt.JwtProperties;
 import com.example.demo.config.auth.jwt.JwtTokenProvider;

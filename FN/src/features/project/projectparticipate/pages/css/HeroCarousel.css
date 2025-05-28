@@ -9,6 +9,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+
   padding: 2rem 0;
 }
 
@@ -22,12 +23,13 @@
 .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
+ 
 }
 
 /* 슬라이드 기본 스타일 */
 .carousel-slide {
   flex: 0 0 calc(100% / 3);
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
   box-sizing: border-box;
   border-radius: 10px;
   opacity: 0.6;
@@ -42,7 +44,7 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 /* 텍스트 영역 */
@@ -53,21 +55,21 @@
 
 /* 기본 상태에서 가운데 슬라이드 강조 */
 .carousel-slide.center {
-  transform: scale(1.05);
+  transform: scale(0.8);
   opacity: 1;
   z-index: 2;
 }
 
 /* 마우스 hover 된 슬라이드 */
 .carousel-slide.hovered {
-  transform: scale(1.05);
+  transform: scale(0.9);
   opacity: 1;
   z-index: 3;
 }
 
 /* 축소된 슬라이드 (기본 좌우 또는 hover 외 슬라이드) */
 .carousel-slide.compressed {
-  transform: scale(0.85);
+  transform: scale(0.5);
   opacity: 0.4;
   z-index: 0;
 }
@@ -78,11 +80,11 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background-color: white;
-  border: 1px solid var(--gray);
+  /* border: 0.5px solid var(--gray); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,8 +111,8 @@
 
 /* 화살표 hover 효과 */
 .carousel-arrow:hover {
-  background-color: var(--main-blue);
-  transform: translateY(-50%) scale(1.15);
+  background-color: var(--main-gray);
+  transform: translateY(-50%) scale(1.05);
 }
 
 .carousel-arrow:hover svg {

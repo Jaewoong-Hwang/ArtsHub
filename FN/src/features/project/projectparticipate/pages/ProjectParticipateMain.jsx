@@ -80,8 +80,9 @@ const ProjectParticipateMain = () => {
           <p className="section-subtitle">
             함께하길 기다리는 팀원에 합류하세요 !!
           </p>
+          <CategoryList />
         </div>
-        <CategoryList />
+        
         <ProjectCardList projects={projects} />
       </section>
     </main>

@@ -1,14 +1,24 @@
-import React from 'react';
-import ProjectCreateHeader from '../components/ProjectCreateHeader';
-import Sidebar from '../components/SideBar';
-import StepNavigation from '../components/StepNav';
-import useModal from '../hooks/useModal';
+import React, { useState } from "react";
+import ProjectCreateHeader from "../components/ProjectCreateHeader";
+import Sidebar from "../components/SideBar";
+import StepNavigation from "../components/StepNav";
+import useModal from "../hooks/useModal";
 
-import '../../../../assets/styles/reset.css';
-import './css/ProjecCreatetInfo.css'; // 공통 스타일 재사용
+import "../../../../assets/styles/reset.css";
+import "./css/Description.css";
 
 const ProjectCreateDescription = () => {
   const { isVisible, open, close } = useModal();
+  const [thumbnail, setThumbnail] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  const handleThumbnailChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setThumbnail(file);
+      setPreviewUrl(URL.createObjectURL(file)); // 이미지 미리보기용 URL 생성
+    }
+  };
 
   return (
     <>
@@ -22,6 +32,27 @@ const ProjectCreateDescription = () => {
             <h2>프로젝트 상세 내용</h2>
 
             <form>
+              {/* 썸네일 이미지 업로드 */}
+              <label>
+                썸네일 이미지 업로드 (선택)
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleThumbnailChange}
+                />
+              </label>
+
+              {/* 이미지 미리보기 */}
+              {previewUrl && (
+                <div className="thumbnail-preview">
+                  <img
+                    src={previewUrl}
+                    alt="썸네일 미리보기"
+                    style={{ maxWidth: "200px", marginTop: "1rem" }}
+                  />
+                </div>
+              )}
+
               <label>
                 프로젝트 개요
                 <textarea
@@ -75,8 +106,9 @@ const ProjectCreateDescription = () => {
                 <button type="button" className="btn outline" onClick={open}>
                   임시 저장
                 </button>
-
-                <StepNavigation />
+                <div>
+                  <StepNavigation />
+                </div>
               </div>
             </form>
           </section>

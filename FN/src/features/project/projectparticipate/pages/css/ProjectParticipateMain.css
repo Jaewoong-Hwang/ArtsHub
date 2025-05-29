@@ -1,0 +1,37 @@
+
+:root {
+  --main-blue: #29c3ff;
+  --sub-blue: #0c7dff;
+  --gray: #bcbcbc;
+  --light-bg: #f9fafb;
+  --text-dark: #333;
+}
+
+.project-page {
+  background-color: var(--light-bg);
+  padding-bottom: 4rem;
+}
+
+.title{
+  text-align: center;
+  
+}
+
+.projects-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--sub-blue);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}

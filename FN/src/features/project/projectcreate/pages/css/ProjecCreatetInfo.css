@@ -1,0 +1,70 @@
+:root {
+  --main-blue: #29c3ff;
+  --sub-blue: #0c7dff;
+  --gray: #bcbcbc;
+  --light-bg: #f9fafb;
+  --text-dark: #333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
+
+.layout {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: flex;
+  /* background-color: none; */
+}
+
+
+/* 콘텐츠 영역 */
+.content {
+  flex: 1;
+  padding: 3rem 2rem;
+  /* background-color: #fff; */
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--sub-blue);
+}
+
+/* 폼 요소 */
+form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border 0.2s ease-in-out;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--main-blue);
+  box-shadow: 0 0 0 3px rgba(41, 195, 255, 0.2);
+}
+
+
+

@@ -1,0 +1,133 @@
+:root {
+  --main-blue: #29c3ff;
+  --sub-blue: #0c7dff;
+  --gray: #bcbcbc;
+  --light-bg: #f9fafb;
+  --text-dark: #333;
+  --btn-hover-bg: #29c3ff;
+  --btn-hover-stroke: #fff;
+}
+
+/* 전체 래퍼: 중앙 정렬 + 버튼 표시 */
+.category-wrapper {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+/* 카테고리 리스트: 스크롤 가능한 줄형 구조 */
+.category-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 0;
+  scrollbar-width: none; /* Firefox */
+}
+
+.category-list::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+/* 개별 카테고리 항목 */
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 72px;
+  flex-shrink: 0;
+}
+
+.category-item:hover {
+  transform: translateY(-4px);
+}
+
+/* 이모지 아이콘 */
+.emoji {
+  font-size: 2.2rem;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* 텍스트 */
+.category-item p {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* 좌우 스크롤 버튼 */
+.arrow-button {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* border: 1px solid var(--gray); */
+}
+
+/* 방향 */
+.arrow-button.left {
+  left: 0;
+}
+
+.arrow-button.right {
+  right: 0;
+}
+
+/* 아이콘 내부 SVG */
+.arrow-button svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--main-blue);
+}
+
+/* hover 시 효과 */
+.arrow-button:hover {
+  background-color: rgba(218, 218, 218, 0.08);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.arrow-button:hover svg {
+  stroke: var(--btn-hover-stroke);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .category-wrapper {
+    padding: 0 1rem;
+  }
+
+  .arrow-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .arrow-button svg {
+    width: 16px;
+    height: 16px;
+  }
+}

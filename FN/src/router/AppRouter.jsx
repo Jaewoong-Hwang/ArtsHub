@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes } from 'react-router-dom';
-import { MypageRoutes } from '../features/mypage/MypageRoutes';
+// import { MypageRoutes } from '../features/mypage/MypageRoutes';
 // import { FundingRoutes } from '../features/funding/FundingRoutes';
-// import { ProjectRoutes } from '../features/project/ProjectRoutes';
+import { ProjectRoutes } from '../features/project/projectRoutes';
 // import { AdminRoutes } from '../features/admin/AdminRoutes';
 // import { AuthRoutes } from '../features/auth/AuthRoutes';
 
@@ -11,10 +11,10 @@ export const AppRouter = () => (
   <BrowserRouter>
     <Routes>
 
-      {MypageRoutes()}
+      {/* {MypageRoutes()} */}
       {/* {FundingRoutes()} */}
-      {/* {ProjectRoutes()} */}
-      {/* {ProjectRoutes()} */}
+      {ProjectRoutes()}
+      {/* {AuthRoutes()} */}
       {/* {AdminRoutes()} */}
 
 

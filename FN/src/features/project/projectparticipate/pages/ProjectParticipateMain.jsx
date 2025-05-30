@@ -3,14 +3,31 @@ import HeroCarousel from "./HeroCarousel";
 import CategoryList from "./CategoryList";
 import ProjectCardList from "./ProjectCardList";
 import Header from "../../../../components/layout/Header";
+import SearchBar from "../../../../components/common/SearchBar";
+import ProjectFilterStatus from "../components/ProjectFilterStatus";
 
-//css
+// css
 import "../../../../assets/styles/reset.css";
 import "./css/ProjectParticipateMain.css";
 
 const ProjectParticipateMain = () => {
   const [slides, setSlides] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+  const handleSearch = (keyword) => {
+    setSearchKeyword(keyword);
+  };
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleResetFilter = () => {
+    setSelectedCategory(null);
+    setSearchKeyword("");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +42,7 @@ const ProjectParticipateMain = () => {
       } catch (err) {
         console.error("API 오류:", err);
 
-        // ✅ 더미 슬라이드 데이터
+        // 더미 슬라이드 데이터
         setSlides([
           {
             id: 1,
@@ -56,7 +73,7 @@ const ProjectParticipateMain = () => {
           },
         ]);
 
-        // ✅ 더미 프로젝트 카드 데이터
+        // 더미 프로젝트 카드 데이터
         setProjects([
           {
             id: 1,
@@ -72,9 +89,20 @@ const ProjectParticipateMain = () => {
     fetchData();
   }, []);
 
+  const filteredProjects = projects.filter((project) => {
+    const matchCategory = selectedCategory
+      ? project.category === selectedCategory
+      : true;
+    const matchSearch = searchKeyword
+      ? project.title.includes(searchKeyword) ||
+        project.description.includes(searchKeyword)
+      : true;
+    return matchCategory && matchSearch;
+  });
+
   return (
     <main className="project-page">
-      <Header/>
+      <Header />
       <HeroCarousel slides={slides} />
       <section className="content">
         <div className="title">
@@ -82,10 +110,22 @@ const ProjectParticipateMain = () => {
           <p className="section-subtitle">
             함께하길 기다리는 팀원에 합류하세요 !!
           </p>
-          <CategoryList />
+          <SearchBar onSearch={handleSearch} />
+          <div className="category-header">
+            <CategoryList
+              onCategorySelect={handleCategorySelect}
+              selectedCategory={selectedCategory}
+            />
+          </div>
         </div>
-        
-        <ProjectCardList projects={projects} />
+
+        <ProjectFilterStatus
+          totalCount={filteredProjects.length}
+          selectedCategory={selectedCategory}
+          keyword={searchKeyword}
+          onReset={handleResetFilter}
+        />
+        <ProjectCardList projects={filteredProjects} />
       </section>
     </main>
   );

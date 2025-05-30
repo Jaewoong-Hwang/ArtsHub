@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "./css/Header.css";
 
 /**
  * @param {Object} props
@@ -47,7 +47,7 @@ const Header = ({ user }) => {
           <li className="logo">
             <Link to="/">
               <img className="img-logo" src="/static/assets/img/mainlogo.png" alt="아츠 허브 로고" />
-              <span className="artshub">Arts hub</span>
+              {/* <span className="artshub">Arts hub</span> */}
             </Link>
           </li>
           <ul className="depth1">

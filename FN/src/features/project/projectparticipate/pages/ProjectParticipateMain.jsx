@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HeroCarousel from "./HeroCarousel";
 import CategoryList from "./CategoryList";
 import ProjectCardList from "./ProjectCardList";
+import Header from "../../../../components/layout/Header";
 
 //css
 import "../../../../assets/styles/reset.css";
@@ -73,6 +74,7 @@ const ProjectParticipateMain = () => {
 
   return (
     <main className="project-page">
+      <Header/>
       <HeroCarousel slides={slides} />
       <section className="content">
         <div className="title">

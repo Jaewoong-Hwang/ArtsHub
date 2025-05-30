@@ -16,7 +16,7 @@
 
 .project-card {
   background-color: #fff;
-  border: 1px solid var(--gray);
+  /* border: 1px solid var(--gray); */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);

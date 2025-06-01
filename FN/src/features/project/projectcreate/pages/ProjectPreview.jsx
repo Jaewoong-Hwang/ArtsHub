@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TextWithBreaks from "../components/TextWithBreaks"; // 실제 경로에 맞게 수정
+import TextWithBreaks from "../components/TextWithBreaks"; 
 import "../../../../assets/styles/reset.css";
 import "./css/ProjectPreview.css";
 

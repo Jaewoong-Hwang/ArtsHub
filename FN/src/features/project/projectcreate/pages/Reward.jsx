@@ -3,7 +3,7 @@ import ProjectCreateHeader from "../components/ProjectCreateHeader";
 import Sidebar from "../components/SideBar";
 import StepNavigation from "../components/StepNav";
 import useRewardForm from "../hooks/useRewardForm";
-import useModal from "../hooks/useModal";
+import { useStepModal } from "../components/StepModalContext";
 
 import RewardForm from "../components/RewardForm";
 import RewardCard from "../components/RewardCard";
@@ -14,7 +14,7 @@ import "./css/Reward.css";
 
 const ProjectCreateReward = () => {
   const [rewards, setRewards] = useState([]);
-  const { isVisible, open, close } = useModal();
+  const { open } = useStepModal(); // ✅ 모달 훅 변경
 
   const {
     currentReward,
@@ -33,7 +33,7 @@ const ProjectCreateReward = () => {
     const saved = localStorage.getItem("projectRewards");
     if (saved) {
       const loaded = JSON.parse(saved);
-      console.log("✅ 불러온 리워드:", loaded); // ✅ 확인용 로그
+      console.log("✅ 불러온 리워드:", loaded);
       setRewards(loaded);
     }
   }, []);
@@ -44,15 +44,15 @@ const ProjectCreateReward = () => {
     const newRewards = [...updated, currentReward];
     setRewards(newRewards);
     localStorage.setItem("projectRewards", JSON.stringify(newRewards));
-    console.log("✅ 저장된 리워드:", newRewards); // ✅ 확인용 로그
+    console.log("✅ 저장된 리워드:", newRewards);
     cancelEditing();
   };
 
   // ✅ 임시 저장
   const handleTempSave = () => {
     localStorage.setItem("projectRewards", JSON.stringify(rewards));
-    console.log("✅ 임시 저장된 리워드:", rewards); // ✅ 확인용 로그
-    open();
+    console.log("✅ 임시 저장된 리워드:", rewards);
+    open("saved"); // ✅ 모달 호출
   };
 
   // ✅ 리워드 삭제
@@ -111,17 +111,6 @@ const ProjectCreateReward = () => {
           </section>
         </main>
       </div>
-
-      {isVisible && (
-        <div id="save-modal" className="modal">
-          <div className="modal-content">
-            <p>임시 저장이 완료되었습니다!</p>
-            <button id="close-modal" onClick={close}>
-              확인
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 };

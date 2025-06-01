@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import ProjectCreateHeader from "../components/ProjectCreateHeader";
 import Sidebar from "../components/SideBar";
 import StepNavigation from "../components/StepNav";
-import useModal from "../hooks/useModal";
+import { useStepModal } from "../components/StepModalContext";
 
 import "../../../../assets/styles/reset.css";
 import "./css/Description.css";
 
 const ProjectCreateDescription = () => {
-  const { isVisible, open, close } = useModal();
+  const { open } = useStepModal(); // ✅ useStepModal로 변경
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const ProjectCreateDescription = () => {
     const saved = localStorage.getItem("project_description");
     if (saved) {
       const data = JSON.parse(saved);
-      console.log("✅ 불러온 상세 설명:", data); // ✅ 확인용 로그
+      console.log("✅ 불러온 상세 설명:", data);
       setFormData(data);
       if (data.previewUrl) setPreviewUrl(data.previewUrl);
     }
@@ -55,8 +55,12 @@ const ProjectCreateDescription = () => {
 
   const handleTempSave = () => {
     localStorage.setItem("project_description", JSON.stringify(formData));
-    console.log("✅ 저장된 상세 설명:", formData); // ✅ 확인용 로그
-    open();
+    console.log("✅ 저장된 상세 설명:", formData);
+  };
+
+  const handleTempSaveWithModal = () => {
+    handleTempSave();
+    open("saved"); // ✅ 모달 열기
   };
 
   return (
@@ -143,7 +147,7 @@ const ProjectCreateDescription = () => {
                 <button
                   type="button"
                   className="btn outline"
-                  onClick={handleTempSave}
+                  onClick={handleTempSaveWithModal}
                 >
                   임시 저장
                 </button>
@@ -153,15 +157,6 @@ const ProjectCreateDescription = () => {
           </section>
         </main>
       </div>
-
-      {isVisible && (
-        <div className="modal" id="save-modal">
-          <div className="modal-content">
-            <p>임시 저장이 완료되었습니다!</p>
-            <button onClick={close}>확인</button>
-          </div>
-        </div>
-      )}
     </>
   );
 };

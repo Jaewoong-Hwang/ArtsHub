@@ -1,0 +1,117 @@
+.reward-form {
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.reward-form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.reward-form input,
+.reward-form textarea,
+.reward-form select {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.reward-form input:focus,
+.reward-form textarea:focus,
+.reward-form select:focus {
+  border-color: #0c7dff;
+  outline: none;
+}
+
+.reward-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.reward-options {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.reward-options h4 {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #444;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.option-row input {
+  flex: 1;
+}
+
+.option-row .btn.remove {
+  background-color: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.option-row .btn.remove:hover {
+  background-color: #e55353;
+}
+
+.btn.small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.reward-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.2rem;
+  transition: background-color 0.2s;
+}
+
+.btn.outline {
+  background-color: transparent;
+  border: 1px solid #0c7dff;
+  color: #0c7dff;
+}
+
+.btn.outline:hover {
+  background-color: #eaf4ff;
+}
+
+.btn.primary {
+  background-color: #0c7dff;
+  color: white;
+  border: none;
+}
+
+.btn.primary:hover {
+  background-color: #006ae1;
+}

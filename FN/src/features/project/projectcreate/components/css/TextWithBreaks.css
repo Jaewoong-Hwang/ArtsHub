@@ -1,0 +1,10 @@
+.text-block {
+  margin-bottom: 1.5rem;
+}
+
+.text-block p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.3rem;
+  color: #444;
+}

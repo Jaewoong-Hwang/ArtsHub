@@ -3,7 +3,7 @@
   padding: 1rem;
   /* background-color: #f3f3f3; */
   /* border: 1px solid var(--gray); */
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   font-size: 0.95rem;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,12 @@
 }
 
 .reset-button {
+  width: 10%;
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
   border: 1px solid var(--sub-blue);
   background: white;
-  color: var(--sub-blue);
+  /* color: var(--sub-blue); */
   border-radius: 1.2rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

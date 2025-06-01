@@ -93,10 +93,18 @@ const ProjectParticipateMain = () => {
     const matchCategory = selectedCategory
       ? project.category === selectedCategory
       : true;
-    const matchSearch = searchKeyword
-      ? project.title.includes(searchKeyword) ||
-        project.description.includes(searchKeyword)
-      : true;
+
+    // 소문자로 통일한 키워드 배열 생성
+    const keywordList = searchKeyword.toLowerCase().split(" ").filter(Boolean);
+
+    // keyword가 모두 포함되는지 확인
+    const matchSearch = keywordList.every(
+      (kw) =>
+        project.title.toLowerCase().includes(kw) ||
+        project.description.toLowerCase().includes(kw) ||
+        project.category.toLowerCase().includes(kw)
+    );
+
     return matchCategory && matchSearch;
   });
 
@@ -117,6 +125,16 @@ const ProjectParticipateMain = () => {
               selectedCategory={selectedCategory}
             />
           </div>
+          {selectedCategory && (
+            <div className="category-reset-container">
+              <p
+                className="reset-text"
+                onClick={() => setSelectedCategory(null)}
+              >
+                전체 보기
+              </p>
+            </div>
+          )}
         </div>
 
         <ProjectFilterStatus

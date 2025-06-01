@@ -98,21 +98,19 @@ input[type="file"] {
   margin-top: 2rem;
 }
 
-/* 버튼 스타일 */
+
+/* 테두리만 있는 버튼 (보조 강조) */
 .btn.outline {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid var(--main-blue);
-  color: var(--main-blue);
   background-color: transparent;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  color: var(--main-blue);
+  border: 2px solid var(--main-blue);
 }
 
 .btn.outline:hover {
   background-color: var(--main-blue);
   color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(12, 125, 255, 0.3);
 }
 
 /* 모달 (임시 저장) */

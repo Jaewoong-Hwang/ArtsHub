@@ -68,7 +68,7 @@ const Header = ({ user }) => {
               </ul>
             </li>
             <li>
-              <Link to="/project">Project</Link>
+              <Link to="/projectmain">Project</Link>
               <ul className="depth2">
                 <li><a href="#">참가하기</a></li>
                 <li><a href="#">모집하기</a></li>

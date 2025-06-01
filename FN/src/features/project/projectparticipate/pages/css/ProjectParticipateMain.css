@@ -82,20 +82,22 @@
   gap: 0.5rem;
 }
 
-.reset-button {
-  padding: 0.4rem 0.9rem;
-  background-color: var(--main-blue);
-  border: none;
-  border-radius: 20px;
-  color: white;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+.category-reset-container {
+  text-align: center;
+  margin-top: 1rem;
 }
 
-.reset-button:hover {
-  background-color: var(--sub-blue);
+.reset-text {
+  color: var(--main-blue);
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s ease;
 }
+
+/* .reset-text:hover {
+  color: var(--sub-blue);
+} */
 
 /* 조건에 맞는 프로젝트가 없을 때 */
 .no-result-message {

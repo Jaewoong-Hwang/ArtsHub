@@ -42,22 +42,16 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
             className={`category-item ${
               selectedCategory === cat.name ? "active" : ""
             }`}
-            onClick={() => onCategorySelect(cat.name)}
+            onClick={() =>
+              onCategorySelect(selectedCategory === cat.name ? null : cat.name)
+            }
           >
             <div className="emoji">{cat.emoji}</div>
             <p>{cat.name}</p>
           </div>
         ))}
 
-        {selectedCategory && (
-          <div
-            className="category-item reset"
-            onClick={() => onCategorySelect(null)}
-          >
-            <div className="emoji">🔁</div>
-            <p>전체 보기</p>
-          </div>
-        )}
+        
       </div>
 
       <button className="arrow-button right" onClick={scrollRight}>

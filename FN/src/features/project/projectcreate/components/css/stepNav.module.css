@@ -1,11 +1,12 @@
-/* step-navigation 영역 */
-.step-navigation {
-  display:contents;
+/* stepNav.module.css */
+
+.navigation {
+  display: contents;
   text-align: right;
   margin-top: 0;
 }
 
-.step-navigation .step-btn {
+.stepBtn {
   padding: 0.75rem 1.5rem;
   margin-left: 1rem;
   font-size: 1rem;
@@ -16,38 +17,29 @@
   border: 2px solid transparent;
 }
 
-.step-navigation .step-btn.primary {
+.primary {
   background-color: var(--main-blue);
   color: white;
   border-color: var(--main-blue);
 }
-
-.step-navigation .step-btn.primary:hover {
+.primary:hover {
   background-color: white;
   color: var(--main-blue);
   box-shadow: 0 4px 12px rgba(41, 195, 255, 0.3);
 }
 
-.step-navigation .step-btn.outline {
+.outline {
   background-color: transparent;
   color: var(--main-blue);
   border-color: var(--main-blue);
 }
-
-.step-navigation .step-btn.outline:hover {
+.outline:hover {
   background-color: var(--main-blue);
   color: white;
   box-shadow: 0 4px 12px rgba(12, 125, 255, 0.3);
 }
 
-
-/* modal */
-
-.modal.hidden {
-  display: none;
-}
-
-
+/* 모달 */
 .modal {
   position: fixed;
   top: 0;
@@ -61,7 +53,11 @@
   z-index: 1000;
 }
 
-.modal-content {
+.hidden {
+  display: none;
+}
+
+.modalContent {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
@@ -70,37 +66,27 @@
   animation: fadeIn 0.3s ease;
 }
 
-.modal-content p {
+.modalContent p {
   font-size: 1.1rem;
   margin-bottom: 1rem;
 }
 
-.modal-content button {
-  padding: 0.6rem 1.4rem;
-  background-color: var(--main-blue);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-
-.modal-buttons {
+.modalButtons {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.modal-buttons .btn {
+.modalButtons button {
   padding: 0.6rem 1.4rem;
   font-size: 0.95rem;
   border-radius: 6px;
   cursor: pointer;
+  border: none;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
-

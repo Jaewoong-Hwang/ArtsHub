@@ -1,4 +1,4 @@
-.reward-card {
+.rewardCard {
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -8,25 +8,25 @@
   transition: box-shadow 0.3s ease;
 }
 
-.reward-card:hover {
+.rewardCard:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.reward-card h4 {
+.rewardCard h4 {
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #222;
 }
 
-.reward-card p {
+.rewardCard p {
   margin-bottom: 1rem;
   font-size: 0.95rem;
   line-height: 1.5;
   color: #444;
 }
 
-.reward-options {
+.rewardOptions {
   margin-top: 0.5rem;
   background-color: #f9f9f9;
   padding: 0.75rem 1rem;
@@ -34,18 +34,23 @@
   font-size: 0.9rem;
 }
 
-.reward-options ul {
+.rewardOptions ul {
   list-style-type: disc;
   padding-left: 1.2rem;
   margin-top: 0.5rem;
   color: #333;
 }
 
-.reward-options li {
+.rewardOptions li {
   margin-bottom: 0.3rem;
 }
 
-.reward-actions {
+.emptyOption {
+  color: #999;
+  margin-top: 0.5rem;
+}
+
+.rewardActions {
   display: flex;
   justify-content: flex-end;
   margin-top: 1rem;
@@ -60,22 +65,22 @@
   transition: background-color 0.2s;
 }
 
-.btn.outline {
+.outline {
   background-color: transparent;
   border: 1px solid #0c7dff;
   color: #0c7dff;
 }
 
-.btn.outline:hover {
+.outline:hover {
   background-color: #eaf4ff;
 }
 
-.btn.remove {
+.remove {
   background-color: #ff6b6b;
   color: white;
   border: none;
 }
 
-.btn.remove:hover {
+.remove:hover {
   background-color: #e55353;
 }

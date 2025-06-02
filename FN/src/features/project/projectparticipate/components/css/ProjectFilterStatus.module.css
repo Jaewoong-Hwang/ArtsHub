@@ -1,0 +1,39 @@
+.projectFilterStatus {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filterDescription {
+  color: #333;
+}
+
+.resetButton {
+  width: 10%;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--sub-blue);
+  background: white;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.resetButton:hover {
+  background-color: var(--sub-blue);
+  color: white;
+}
+
+.noResultMessage {
+  text-align: center;
+  color: #777;
+}

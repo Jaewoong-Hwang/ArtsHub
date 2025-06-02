@@ -1,22 +1,19 @@
-.reward-form {
-  background-color: #fff;
-  border: 1px solid #e1e1e1;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+.rewardForm {
+  /* 기존 그대로 유지 */
 }
 
-.reward-form label {
+.labelInput,
+.labelTextarea,
+.labelSelect {
   display: block;
   margin-bottom: 1rem;
   font-weight: 500;
   color: #333;
 }
 
-.reward-form input,
-.reward-form textarea,
-.reward-form select {
+.input,
+.textarea,
+.select {
   width: 100%;
   padding: 0.6rem 0.9rem;
   margin-top: 0.4rem;
@@ -26,19 +23,19 @@
   transition: border-color 0.2s;
 }
 
-.reward-form input:focus,
-.reward-form textarea:focus,
-.reward-form select:focus {
+.input:focus,
+.textarea:focus,
+.select:focus {
   border-color: #0c7dff;
   outline: none;
 }
 
-.reward-form textarea {
+.textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-.reward-options {
+.rewardOptions {
   margin-top: 1.5rem;
   padding: 1rem;
   background-color: #f8f9fa;
@@ -46,72 +43,76 @@
   border-radius: 8px;
 }
 
-.reward-options h4 {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
-  color: #444;
-}
-
-.option-row {
+.optionRow {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
-.option-row input {
+.optionInput {
   flex: 1;
 }
 
-.option-row .btn.remove {
+.removeBtn {
   background-color: #ff6b6b;
   border: none;
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.option-row .btn.remove:hover {
+.removeBtn:hover {
   background-color: #e55353;
 }
 
-.btn.small {
-  padding: 0.4rem 0.8rem;
+.addOptionBtn {
+  background-color: #29c3ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.reward-buttons {
+.addOptionBtn:hover {
+  background-color: #0c7dff;
+}
+
+.rewardButtons {
   display: flex;
   justify-content: flex-end;
   gap: 0.8rem;
   margin-top: 2rem;
 }
 
-.btn {
-  cursor: pointer;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  padding: 0.5rem 1.2rem;
-  transition: background-color 0.2s;
-}
-
-.btn.outline {
+.cancelBtn {
   background-color: transparent;
   border: 1px solid #0c7dff;
   color: #0c7dff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
 }
 
-.btn.outline:hover {
+.cancelBtn:hover {
   background-color: #eaf4ff;
 }
 
-.btn.primary {
+.saveBtn {
   background-color: #0c7dff;
   color: white;
   border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
 }
 
-.btn.primary:hover {
+.saveBtn:hover {
   background-color: #006ae1;
 }

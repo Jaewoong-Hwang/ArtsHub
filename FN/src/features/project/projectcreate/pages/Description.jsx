@@ -98,7 +98,7 @@ const ProjectCreateDescription = () => {
                   value={formData.summary}
                   onChange={handleChange}
                   rows="2"
-                  placeholder="한 줄로 소개해주세요."
+                  placeholder="예: 2030 세대를 위한 재즈 콘서트 프로젝트입니다."
                   required
                 />
               </label>
@@ -110,6 +110,7 @@ const ProjectCreateDescription = () => {
                   value={formData.background}
                   onChange={handleChange}
                   rows="4"
+                  placeholder="예: MZ세대를 위한 공연 콘텐츠의 부재를 느껴 본 프로젝트를 기획하게 되었습니다. 이번 프로젝트는 지역 아티스트들과 협업하여 새로운 창작 경험을 제공합니다."
                 />
               </label>
 
@@ -120,6 +121,11 @@ const ProjectCreateDescription = () => {
                   value={formData.roles}
                   onChange={handleChange}
                   rows="4"
+                  placeholder={`예: 
+                  - 피아니스트 1명 (즉흥 연주 가능자 우대)
+                  - 무대 연출 담당 1명
+                  - 영상 촬영/편집 인력 1명 (촬영 장비 보유자 우대)
+                  `}
                 />
               </label>
 
@@ -130,6 +136,11 @@ const ProjectCreateDescription = () => {
                   value={formData.schedule}
                   onChange={handleChange}
                   rows="3"
+                   placeholder={`예: 
+                    - 리허설: 2025년 6월 15일
+                    - 공연: 2025년 6월 29일
+                    - 회의 및 준비: 주 1회 온라인 회의
+                    `}
                 />
               </label>
 
@@ -140,6 +151,11 @@ const ProjectCreateDescription = () => {
                   value={formData.compensation}
                   onChange={handleChange}
                   rows="3"
+                   placeholder={`예: 
+                  - 공연 수익 분배: 출연자 1/N 배분
+                  - 교통비 실비 지원
+                  - 영상 촬영본 제공
+                  `}
                 />
               </label>
 
@@ -151,7 +167,9 @@ const ProjectCreateDescription = () => {
                 >
                   임시 저장
                 </button>
+                <div>
                 <StepNavigation onBeforeNext={handleTempSave} />
+                </div>
               </div>
             </form>
           </section>

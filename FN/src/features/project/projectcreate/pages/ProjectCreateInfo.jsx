@@ -108,8 +108,9 @@ const ProjectCreateInfo = () => {
           >
             임시 저장
           </button>
-
+          <div>
           <StepNavigation onBeforeNext={handleTempSave} />
+          </div>
         </div>
       </form>
     </ProjectCreateLayout>

@@ -106,7 +106,9 @@ const ProjectCreateReward = () => {
               >
                 임시 저장
               </button>
+              <div>
               <StepNavigation />
+              </div>
             </div>
           </section>
         </main>

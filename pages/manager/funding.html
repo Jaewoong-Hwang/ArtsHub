@@ -18,53 +18,25 @@
 <body>
 	<!-- 전체 div -->
 	<div class="container">
-		<div class="top-nav">
-			<div class="nav-logo">관리자</div>
-			<div class="top-menu">
+		<div class="side-nav">
+			<div class="nav-logo">ADMIN</div>
+			<div class="side-menu">
 				<button class="menu-button"
 					onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
 					관리</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
-				<button class="menu-button" onclick="location.href='/pages/manager/contents/contents.html'">컨텐츠
-					관리</button>
+
 			</div>
 		</div>
-
 		<section>
-			<div class="side-nav">
-				<h2>펀딩 관리</h2>
-
-				<div class="side-menu">
-					<div class="side-title">펀딩 현황</div>
-					<ul>
-						<li>누적 펀딩 금액</li>
-						<li>이번 달 펀딩 금액</li>
-						<li>펀딩 성공률</li>
-					</ul>
-
+			<div class="top-nav">
+				<p>ArtsHub</p>
+				<div class="admin-logout">
+					<button><span>로그아웃</span></button>
 				</div>
-				<div class="side-menu">
-					<div class="side-title">통계 분석</div>
-					<ul>
-						<li>월별 펀딩 추이</li>
-						<li>장르별 펀딩 비중</li>
-						<li>목표 달성률 분포</li>
-					</ul>
-				</div>
-
-				<div class="side-menu">
-					<div class="side-title">정산 관리</div>
-					<ul>
-						<li>정산 대기 목록</li>
-						<li>정산 완료 목록</li>
-						<li>정산 지연 알림</li>
-					</ul>
-				</div>
-
 			</div>
-
 			<div class="main-content">
 				<h2>펀딩 현황</h2>
 				<div class="funding">

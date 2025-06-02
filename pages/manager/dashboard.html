@@ -14,48 +14,25 @@
 <body>
 	<!-- 전체 div -->
 	<div class="container">
-		<div class="top-nav">
-			<div class="nav-logo">관리자</div>
-			<div class="top-menu">
+		<div class="side-nav">
+			<div class="nav-logo">ADMIN</div>
+			<div class="side-menu">
 				<button class="menu-button"
 					onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
 					관리</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
 				<button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
-				<button class="menu-button" onclick="location.href='/pages/login/login.html'">로그인</button>
+
 			</div>
 		</div>
-
 		<section>
-			<div class="side-nav">
-				<h2>대시보드</h2>
-
-				<div class="side-menu">
-					<div class="side-title">펀딩</div>
-					<ul>
-						<li>누적 펀딩 금액</li>
-						<li>이번 달 펀딩 금액</li>
-					</ul>
-				</div>
-				<div class="side-menu">
-					<div class="side-title">프로젝트</div>
-					<ul>
-						<li>전체 프로젝트</li>
-						<li>진행 중인 프로젝트</li>
-						<li>대기 중 정산 건수</li>
-					</ul>
-				</div>
-				<div class="side-menu">
-					<div class="side-title">회원</div>
-					<ul>
-						<li>총 회원수</li>
-						<li>이번 달 신규 가입자</li>
-						<li>신고 대상자</li>
-					</ul>
+			<div class="top-nav">
+				<p>ArtsHub</p>
+				<div class="admin-logout">
+					<button><span>로그아웃</span></button>
 				</div>
 			</div>
-
 			<div class="main-content">
 				<h2>펀딩</h2>
 				<div class="card-box">

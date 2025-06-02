@@ -16,55 +16,25 @@
 <body>
   <!-- 전체 div -->
   <div class="container">
-    <div class="top-nav">
-      <div class="nav-logo">관리자</div>
-      <div class="top-menu">
-        <button class="menu-button" onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
-        <button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
-          관리</button>
-        <button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
-        <button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
-        <button class="menu-button" onclick="location.href='/pages/manager/contents/contents.html'">컨텐츠
-          관리</button>
-      </div>
-    </div>
+		<div class="side-nav">
+			<div class="nav-logo">ADMIN</div>
+			<div class="side-menu">
+				<button class="menu-button"
+					onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
+					관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
 
-    <section>
-      <div class="side-nav">
-        <h2>프로젝트 관리</h2>
-        <div class="side-menu">
-          <div class="side-title">프로젝트 상태</div>
-          <ul>
-            <li>전체 프로젝트</li>
-            <li>승인 대기</li>
-            <li>진행 중</li>
-            <li>종료됨</li>
-            <li>반려됨</li>
-          </ul>
-        </div>
-        <div class="side-menu">
-          <div class="side-title">정산 관리</div>
-          <ul>
-            <li>정산 대기</li>
-            <li>정산 완료</li>
-          </ul>
-        </div>
-        <div class="side-menu">
-          <div class="side-title">전문가 요청</div>
-          <ul>
-            <li>프로젝트 수정 요청</li>
-            <li>전문가 문의 내역</li>
-          </ul>
-        </div>
-
-        <div class="side-menu">
-          <div class="side-title">카테고리 분석</div>
-          <ul>
-            <li>장르별 프로젝트 수</li>
-            <li>달성률 순위</li>
-          </ul>
-        </div>
-      </div>
+			</div>
+		</div>
+		<section>
+			<div class="top-nav">
+				<p>ArtsHub</p>
+				<div class="admin-logout">
+					<button><span>로그아웃</span></button>
+				</div>
+			</div>
       <div class="main-content">
         <div class="top-content">
           <div class="left-panel">

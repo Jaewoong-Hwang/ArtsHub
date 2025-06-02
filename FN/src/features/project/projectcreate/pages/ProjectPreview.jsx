@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import TextWithBreaks from "../components/TextWithBreaks"; 
+import { useNavigate } from "react-router-dom";
+import TextWithBreaks from "../components/TextWithBreaks";
+import Modal from "../components/Modal"; // 모달 컴포넌트
 import "../../../../assets/styles/reset.css";
 import "./css/ProjectPreview.css";
 
 const ProjectPreview = () => {
+  const navigate = useNavigate();
   const [previewData, setPreviewData] = useState({
     info: {},
     description: {},
     rewards: [],
   });
+
+  const [showModal, setShowModal] = useState(false); // 모달 상태
 
   useEffect(() => {
     try {
@@ -47,7 +52,6 @@ const ProjectPreview = () => {
             <img src={description.previewUrl} alt="썸네일" />
           </div>
         )}
-
         <TextWithBreaks label="개요" text={description.summary} />
         <TextWithBreaks label="기획 배경" text={description.background} />
         <TextWithBreaks label="모집 역할" text={description.roles} />
@@ -86,13 +90,13 @@ const ProjectPreview = () => {
         <button className="btn outline" onClick={() => window.history.back()}>
           수정하러 가기
         </button>
-        <button
-          className="btn primary"
-          onClick={() => alert("제출은 아직 준비 중입니다.")}
-        >
-          제출하기
+        <button className="btn primary" onClick={() => setShowModal(true)}>
+          등록하기
         </button>
       </div>
+
+      {/* 모달 렌더링 */}
+      {showModal && <Modal type="submit" onClose={() => setShowModal(false)} />}
     </div>
   );
 };

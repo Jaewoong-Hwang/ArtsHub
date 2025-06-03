@@ -9,8 +9,11 @@
 }
 
 .project-page {
+  max-width: 1348px;
   background-color: var(--light-bg);
   min-height: 100vh;
+    margin: 0 auto;
+
   font-family: 'Pretendard', sans-serif;
 }
 

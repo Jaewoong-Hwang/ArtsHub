@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../../assets/styles/reset.css'
 import "./css/SearchBar.css";
 import { FiSearch } from "react-icons/fi"; // 돋보기 아이콘
 

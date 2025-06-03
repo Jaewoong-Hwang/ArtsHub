@@ -1,8 +1,4 @@
-:root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-}
+
 
 /* ✅ 헤더 기본 설정 */
 .navi {
@@ -10,9 +6,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background-color: white;
+  background-color: var(--light-bg);
   /* border-bottom: 1px solid var(--gray); */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  /* box-shadow: 0 2px 6px rgba(0,0,0,0.06); */
   font-family: 'Noto Sans KR', sans-serif;
   position: sticky;
   top: 0;

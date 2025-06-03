@@ -18,8 +18,9 @@ const Home = () => {
       <CategoryList />
       <div className={styles.sectionWrap}>
         <div className={styles.leftColumn}>
-          <ExpertSection />
+          
           <RecommendedProjects />
+          <ExpertSection />
         </div>
         <SidebarRanking />
       </div>

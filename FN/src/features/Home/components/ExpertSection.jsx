@@ -16,6 +16,49 @@ const expertData = [
       { name: "Lights & Shadows", amount: 754680000, img: "/static/assets/img/Lights & Shadows.webp" },
     ],
   },
+  {
+    category: "무대 디자인",
+    topExpert: {
+      name: "StageCraft Studio",
+      amount: 1950000000,
+      img: "/static/assets/img/stageCraft.webp",
+    },
+    list: [
+      { name: "무대의 정석", amount: 1200450000, img: "/static/assets/img/무대의 정석.webp" },
+      { name: "Theater Vision", amount: 1045800000, img: "/static/assets/img/Theater Vision.webp" },
+      { name: "Scenic Artworks", amount: 879230000, img: "/static/assets/img/Scenic Artworks.webp" },
+      { name: "Lights & Shadows", amount: 754680000, img: "/static/assets/img/Lights & Shadows.webp" },
+    ],
+  },
+  {
+    category: "무대 디자인",
+    topExpert: {
+      name: "StageCraft Studio",
+      amount: 1950000000,
+      img: "/static/assets/img/stageCraft.webp",
+    },
+    list: [
+      { name: "무대의 정석", amount: 1200450000, img: "/static/assets/img/무대의 정석.webp" },
+      { name: "Theater Vision", amount: 1045800000, img: "/static/assets/img/Theater Vision.webp" },
+      { name: "Scenic Artworks", amount: 879230000, img: "/static/assets/img/Scenic Artworks.webp" },
+      { name: "Lights & Shadows", amount: 754680000, img: "/static/assets/img/Lights & Shadows.webp" },
+    ],
+  },
+  {
+    category: "무대 디자인",
+    topExpert: {
+      name: "StageCraft Studio",
+      amount: 1950000000,
+      img: "/static/assets/img/stageCraft.webp",
+    },
+    list: [
+      { name: "무대의 정석", amount: 1200450000, img: "/static/assets/img/무대의 정석.webp" },
+      { name: "Theater Vision", amount: 1045800000, img: "/static/assets/img/Theater Vision.webp" },
+      { name: "Scenic Artworks", amount: 879230000, img: "/static/assets/img/Scenic Artworks.webp" },
+      { name: "Lights & Shadows", amount: 754680000, img: "/static/assets/img/Lights & Shadows.webp" },
+    ],
+  },
+  
   // 더 많은 카테고리는 이 배열에 추가 가능
 ];
 

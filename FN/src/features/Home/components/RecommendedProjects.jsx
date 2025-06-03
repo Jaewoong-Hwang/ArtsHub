@@ -60,8 +60,10 @@ const RecommendedProjects = () => {
           <div className={styles.card} key={index}>
             <img src={project.image} alt={project.title} className={styles.image} />
             <div className={styles.content}>
-              <div className={styles.name}>{project.title}</div>
-              <div className={styles.desc}>{project.description}</div>
+              <div>
+                <div className={styles.name}>{project.title}</div>
+                <div className={styles.desc}>{project.description}</div>
+              </div>
               <p className={styles.status}>{project.status}</p>
             </div>
           </div>

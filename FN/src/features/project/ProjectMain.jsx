@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "../../../src/assets/styles/reset.css";
 import "./projectmain.css";
+import ProjectCTA from "./components/ProjectCTA"; // ✅ CTA 컴포넌트 import
 
 const ProjectMain = () => {
   const navigate = useNavigate();
 
-  // 로그인/전문가 여부 (실제로는 서버 또는 Context/Redux에서 받아야 함)
+  // 로그인/전문가 여부 (나중엔 Context 등에서 받아오도록)
   const isLoggedIn = true;
   const isExpert = true;
 
@@ -15,23 +17,7 @@ const ProjectMain = () => {
   const howtoRef = useRef(null);
   const ctaRef = useRef(null);
 
-  // ▶ CTA 버튼 클릭 핸들러
-  const handleCreateClick = () => {
-    if (!isLoggedIn) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
-    } else if (!isExpert) {
-      alert("전문가 권한이 필요합니다.");
-    } else {
-      navigate("/project/create/info");
-    }
-  };
-
-  const handleJoinClick = () => {
-    navigate("/project/participate");
-  };
-
-  // ▶ 애니메이션 효과: 로딩 후 hero 섹션 등장
+  // ▶ hero 등장 애니메이션
   useEffect(() => {
     setTimeout(() => {
       if (heroRef.current) {
@@ -40,7 +26,7 @@ const ProjectMain = () => {
     }, 800);
   }, []);
 
-  // ▶ IntersectionObserver 적용
+  // ▶ IntersectionObserver 등록
   useEffect(() => {
     const targets = [introRef.current, howtoRef.current, ctaRef.current];
 
@@ -57,13 +43,12 @@ const ProjectMain = () => {
     );
 
     targets.forEach((target) => target && observer.observe(target));
-
-    return () => observer.disconnect(); // cleanup
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div>
-      {/* 히어로 섹션 */}
+      {/* Hero Section */}
       <section className="hero" ref={heroRef}>
         <div className="hero-text">
           <h1>
@@ -80,16 +65,14 @@ const ProjectMain = () => {
         </div>
       </section>
 
-      {/* 소개 섹션 */}
+      {/* Intro Section */}
       <section className="intro-section" ref={introRef}>
         <h2>ArtsHub project 란?</h2>
         <p>
-          예술가들이 함께 모여 공연을 만들고, 팀을 구성하고, 펀딩을 시작하는
-          공간입니다.
+          예술가들이 함께 모여 공연을 만들고, 팀을 구성하고, 펀딩을 시작하는 공간입니다.
         </p>
 
         <div className="feature-cards">
-          {/* 카드 3개 구성 */}
           {[
             {
               src: "/static/img/몽환의 숲.webp",
@@ -119,7 +102,7 @@ const ProjectMain = () => {
         </div>
       </section>
 
-      {/* 참여 방법 설명 섹션 */}
+      {/* How-to Section */}
       <section className="howto-section" ref={howtoRef}>
         <div className="how-box">
           <h3>
@@ -139,20 +122,10 @@ const ProjectMain = () => {
         </div>
       </section>
 
-      {/* CTA 섹션 */}
-      <section className="cta" ref={ctaRef}>
-        <h2>ArtsHub 서비스는 누구나 이용할 수 있습니다.</h2>
-        <p>개인, 개인 사업자, 법인 사업자도 자유롭게 참여 가능합니다.</p>
-
-        <div className="cta-buttons">
-          <button className="btn blue" onClick={handleCreateClick}>
-            프로젝트 만들기
-          </button>
-          <button className="btn outline" onClick={handleJoinClick}>
-            프로젝트 참가하기
-          </button>
-        </div>
-      </section>
+      {/* CTA Section → 컴포넌트로 분리 */}
+      <div ref={ctaRef}>
+        <ProjectCTA isLoggedIn={isLoggedIn} isExpert={isExpert} />
+      </div>
     </div>
   );
 };

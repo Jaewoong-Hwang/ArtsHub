@@ -1,0 +1,143 @@
+:root {
+  --main-blue: #29c3ff;
+  --sub-blue: #0c7dff;
+  --gray: #bcbcbc;
+}
+
+/* ✅ 헤더 기본 설정 */
+.navi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background-color: white;
+  /* border-bottom: 1px solid var(--gray); */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  font-family: 'Noto Sans KR', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* ✅ 왼쪽 로고 영역 */
+.leftside {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.img-logo {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+.artshub {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--sub-blue);
+}
+
+/* ✅ 1차 메뉴 (Funding, Community, Project) */
+.depth1 {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.depth1 > li {
+  position: relative;
+}
+
+.depth1 > li > a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.depth1 > li:hover > a {
+  color: var(--sub-blue);
+}
+
+/* ✅ 2차 드롭다운 메뉴 */
+.depth2 {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 1rem;
+  list-style: none;
+  display: none;
+  border-radius: 6px;
+  white-space: nowrap;
+  min-width: 160px;
+  z-index: 100;
+}
+
+.depth2 li {
+  padding: 0.3rem 0;
+}
+
+.depth2 li a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.depth1 > li:hover .depth2 {
+  display: block;
+}
+
+/* ✅ 오른쪽 메뉴 */
+.rightside {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rightside li {
+  margin-left: 1.5rem;
+}
+
+.rightside a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.rightside a:hover {
+  color: var(--main-blue);
+}
+
+/* ✅ 모바일 메뉴 (햄버거) */
+.navbar_menu {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/* ✅ 반응형 대응 */
+@media screen and (max-width: 768px) {
+  .depth1,
+  .rightside {
+    display: none;
+  }
+
+  .navbar_menu {
+    display: block;
+  }
+}

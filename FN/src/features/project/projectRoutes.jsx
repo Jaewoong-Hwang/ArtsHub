@@ -4,6 +4,8 @@ import ProjectCreateInfo from './projectcreate/pages/ProjectCreateInfo';
 import ProjectCreateDescription from './projectcreate/pages/Description';
 import ProjectCreateReward from './projectcreate/pages/Reward';
 import ProjectParticipateMain from './projectparticipate/pages/ProjectParticipateMain';
+import ProjectPreview from './projectcreate/pages/ProjectPreview';
+
 
 
 export const ProjectRoutes = () => [
@@ -12,5 +14,6 @@ export const ProjectRoutes = () => [
   <Route key="description" path="project/create/description" element={<ProjectCreateDescription />} />,
   <Route key="reward" path="project/create/reward" element={<ProjectCreateReward />} />,
   <Route key="Participate" path="project/participate" element={<ProjectParticipateMain />} />,
+  <Route key="Preview" path="project/preview" element={<ProjectPreview />} />,
 
 ];

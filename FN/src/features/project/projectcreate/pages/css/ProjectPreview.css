@@ -1,0 +1,139 @@
+/* 전체 레이아웃 */
+.preview-wrapper {
+  padding: 2rem;
+  max-width: 960px;
+  margin: 2rem auto;
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(12, 125, 255, 0.05);
+  font-family: 'Pretendard', sans-serif;
+  color: #333;
+}
+
+/* 페이지 제목 */
+.preview-wrapper h1 {
+  font-size: 2rem;
+  color: #0c7dff;
+  border-bottom: 2px solid #29c3ff;
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+/* 각 섹션 구간 */
+.preview-section {
+  margin-bottom: 3rem;
+}
+
+.preview-section h2,
+.preview-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #0c7dff;
+}
+
+/* 텍스트 라벨 + 멀티라인 */
+.preview-text-block {
+  margin-bottom: 1.25rem;
+}
+
+.preview-text-block strong {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.preview-text-block p {
+  white-space: pre-line;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+  margin: 0;
+  background-color: #f9f9f9;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+}
+
+/* 썸네일 미리보기 */
+.preview-thumbnail {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.preview-thumbnail img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 리워드 카드 */
+.preview-reward {
+  background-color: #f5faff;
+  border: 1px solid #d3e9ff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.preview-reward h4 {
+  font-size: 1.1rem;
+  color: #0c7dff;
+  margin-bottom: 0.5rem;
+}
+
+.preview-reward p {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.preview-reward ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.preview-reward li {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 버튼 영역 */
+.cta-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn.outline {
+  background-color: transparent;
+  color: var(--main-blue);
+  border: 2px solid var(--main-blue);
+}
+
+.btn.outline:hover {
+  background-color: var(--main-blue);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(12, 125, 255, 0.3);
+}
+
+.btn.primary {
+  background-color: #29c3ff;
+  color: #fff;
+}
+
+.btn.primary:hover {
+  background-color: #0c7dff;
+}

@@ -1,0 +1,96 @@
+주제
+Spring Boot 기반의 JWT + Redis 인증 시스템 구현 (로그인 인증 → 토큰 발급 → 인증 유지 흐름)
+
+목표
+사용자가 로그인하면 AccessToken / RefreshToken 발급
+AccessToken은 쿠키로 전달, RefreshToken은 Redis에 저장
+이후 사용자가 요청할 때마다 AccessToken으로 인증
+만료되면 RefreshToken으로 AccessToken 재발급
+Spring Security + JWT + Redis를 실무처럼 연동하는 방식 연습
+
+
+00. Spring Boot 프로젝트 생성 
+
+00. Gradle 의존성 추가 (Security, JWT, Redis 등)
+
+01. User 엔티티 및 UserRepository 작성
+
+---------------------------------
+02. UserDto.java 작성
+---------------------------------
+UserDto.java 필요 이유.
+Spring Security는 UserDetails를 구현한 객체(우리가 만든 PrincipalDetails)로
+로그인 처리를 한다.
+그런데 DB에서 꺼낸 건 User 엔티티.
+그러면 UserDto 로 한번 감싸서 Spring Security에 넘기기 쉽게 만들어 줄 필요가 있음.
+==> Entity -> Dto 작업.
+
+DB -> User (Entity) -> UserDto(Entity-> Dto) -> PrincipalDetails(Spring Security에서 사용)
+
+
+다음 단계 UserDto를 품고 있는 로그인 인증 객체 PrincipalDetails.java 작성.
+
+
+---------------------------------
+03. PrincipalDetails.java 
+---------------------------------
+Spring Security가 로그인 인증에 사용하는 "사용자 정보 객체".
+
+우리가 DB에서 꺼낸 User -> UserDto 로 변환후 -> PrincipalDetails에 담아서
+Spring Security 내부에서 인증 정보로 사용하게 해주는 클래스
+
+
+다음 단계 PrincipalDetailsService.java 코드 작성.
+
+---------------------------------
+04. PrincipalDetailsService.java
+---------------------------------
+목표
+- 로그인 시 Spring Security가 사용자 정보를 어떻게 가져오는지 이해.
+- PrincipalDetailsService의 역할과 동작 방식 숙지
+- 직접 따라 치며 코드 + 로그로 확인
+
+PrincipalDetailsService란?
+ Spring Security는 로그인을 처리할 때 내부적으로 
+ UserDetailsService의 loadUserByUsername() 메서드를 호출한다.
+ 그래서 우리는 UserDetailsService를 상속해서 커스터마이징 해야함.
+
+다음 단계 SecurityConfig.java 코드 작성.
+
+
+---------------------------------
+05. SecurityConfig.java
+---------------------------------
+목표
+ - 로그인 요청 처리 설정  어떤 URL(/login)로 요청이 오면 로그인 처리를 할지 지정
+ - 필터 체인 구성 (SecurityFilterChain) 어떤 URL은 인증 없이 허용할지, 어떤 URL은 인증 필요할지 설정
+ - 사용자 인증 서비스 등록 사용자 인증 시 어떤 방식으로 User를 찾을지 지정
+
+→ 이 세 가지를 설정함으로써,
+POST /login 요청이 들어올 때:
+내부적으로 UsernamePasswordAuthenticationFilter
+ → PrincipalDetailsService.loadUserByUsername() 호출
+ → 우리가 만든 UserRepository로 사용자 인증
+
+다음 단계 로그인 화면(login.html) 을 만들고,
+직접 POST /login 요청을 보내서
+→ 로그인이 잘 되는지 확인.
+
+
+---------------------------------
+06. login 폼 만들어서 POST /login요청 보내기 실습
+---------------------------------
+
+-------
+06-1 login.html 만들기
+-------
+testBN/src/main/resources/static/login.html
+
+/login.html로 접속 → form에서 /login으로 POST 요청 전송
+
+SecurityConfig 설정한 대로 로그인 인증 흐름 작동
+
+성공 시 PrincipalDetailsService 로그 출력 확인
+
+
+

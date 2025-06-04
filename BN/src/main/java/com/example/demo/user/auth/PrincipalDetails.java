@@ -1,64 +1,91 @@
 package com.example.demo.user.auth;
 
-import com.example.demo.user.Entity.User;
+
+import com.example.demo.user.dto.UserDto;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Map;
 
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class PrincipalDetails implements UserDetails {
+public class PrincipalDetails implements UserDetails, OAuth2User {
+	private UserDto userDto;
+	public PrincipalDetails(UserDto userDto){
+		this.userDto = userDto;
+	}
 
-    // 로그인한 사용자의 정보를 담고 있는 객체
-    // 우리가 만든 User 엔티티를 이 클래스에 포함시켜서,
-    // Security가 사용하는 인증 객체로 포장해주는 역할
-    private final User user;
+	//----------------------------
+	// Oauth2User
+	//----------------------------
+	Map<String, Object > attributes;
+	String access_token;
 
-    // 사용자의 권한(Role)을 반환
-    // 예: ROLE_USER, ROLE_ADMIN
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 사용자 1명당 권한 1개라고 가정하고, 하나만 반환함
-        return Collections.singleton(() -> user.getRole());
-    }
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
 
-    // 로그인에 사용되는 비밀번호
-    @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
+	@Override
+	public String getName() {
+		return userDto.getUsername();
+	}
 
-    // 로그인에 사용되는 사용자 ID (username)
-    @Override
-    public String getUsername() {
-        return user.getUsername();
-    }
 
-    // 계정이 만료되지 않았는가? → true면 사용 가능
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
 
-    // 계정이 잠겨있지 않은가? → true면 사용 가능
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	//----------------------------
+	// UserDetails
+	//----------------------------
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection <GrantedAuthority> authorities = new ArrayList();
+		authorities.add(new SimpleGrantedAuthority(userDto.getRole()));
+		return authorities;
+	}
 
-    //  비밀번호가 만료되지 않았는가? → true면 사용 가능
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return userDto.getPassword();
+	}
 
-    // 계정이 활성화되어 있는가? → true면 사용 가능
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return userDto.getUsername();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
 }

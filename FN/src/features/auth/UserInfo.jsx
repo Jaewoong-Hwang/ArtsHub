@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../services/axiosInstance';
 
 function UserInfo() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // 서버에 인증된 사용자 정보 요청 (accessToken은 쿠키로 자동 전송됨)
-    axios.get('/api/user/me', { withCredentials: true })
+    axiosInstance.get('/api/user/me')
       .then(res => {
-        setMessage(res.data); // "인증된 사용자: testuser"
+        console.log(" 응답 구조:", res.data);
+        // 문자열이면 그대로, 객체면 .message 처리
+        setMessage(typeof res.data === 'string' ? res.data : res.data.message);
       })
       .catch(err => {
         setMessage('인증 실패 또는 로그인 필요');
-        console.error(err);
+        console.error('❌ 인증 실패:', err);
       });
   }, []);
 

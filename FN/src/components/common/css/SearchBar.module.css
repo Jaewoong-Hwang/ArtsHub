@@ -1,5 +1,5 @@
 /* 🔷 서치바 전체 영역 */
-.search-bar {
+.searchBar {
   width: 100%;
   background-color: #f9f9f9;
   padding: 1.2rem 1rem;
@@ -9,28 +9,28 @@
 }
 
 /* 🔷 입력창 wrapper */
-.search-input-wrapper {
+.searchInputWrapper {
   position: relative;
   width: 100%;
   max-width: 600px;
 }
 
 /* ✅ 기본 input 스타일 */
-.search-input-wrapper input {
+.searchInput {
   width: 100%;
   font-size: 1rem;
   padding: 0.75rem 3rem 0.75rem 1.2rem;
-  border: 1.5px solid #ccc;
+  border: 2px solid #ccc;
   border-radius: 25px;
   outline: none;
   background-color: #fff;
-  transition: all 0.3s ease;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   z-index: 1;
 }
 
-/* ✅ 포커스 시 테두리에 그라데이션 애니메이션 */
-.search-input-wrapper input.focused {
+/* ✅ 포커스 시 그라데이션 border 효과 */
+.searchInput:focus {
   border: 2px solid transparent;
   background:
     linear-gradient(#fff, #fff) padding-box,
@@ -40,10 +40,11 @@
   background-size: 200% auto;
   background-position: 0% 50%;
   animation: gradientMove 3s linear infinite;
+  transition: all 0.4s ease;
 }
 
 /* ✅ placeholder 스타일 */
-.search-input-wrapper input::placeholder {
+.searchInput::placeholder {
   color: rgba(0, 0, 0, 0.3);
   font-size: 0.95rem;
   font-weight: 400;
@@ -51,10 +52,10 @@
 }
 
 /* 🔍 돋보기 아이콘 버튼 */
-.search-icon {
+.searchIcon {
   position: absolute;
   right: 1rem;
-  top: 50%;
+  top: 55%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -64,17 +65,17 @@
   z-index: 2;
 }
 
-.search-icon:hover {
+.searchIcon:hover {
   color: var(--main-blue, #29c3ff);
 }
 
 /* 📱 반응형 대응 */
 @media screen and (max-width: 768px) {
-  .search-bar {
+  .searchBar {
     padding: 1rem;
   }
 
-  .search-input-wrapper input {
+  .searchInput {
     width: 100%;
   }
 }

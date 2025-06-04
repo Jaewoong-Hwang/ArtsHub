@@ -46,10 +46,10 @@ const ProjectCreateInfo = () => {
         <Sidebar />
 
         <div className={styles.content}>
-          <h2>프로젝트 기본 정보</h2>
+          <h2 className={styles.heading}>프로젝트 기본 정보</h2>
 
           <form>
-            <label>
+            <label className={styles.label}>
               프로젝트명
               <input
                 type="text"
@@ -58,16 +58,18 @@ const ProjectCreateInfo = () => {
                 required
                 value={formData.title}
                 onChange={handleChange}
+                className={styles.input}
               />
             </label>
 
-            <label>
+            <label className={styles.label}>
               장르 선택
               <select
                 name="genre"
                 required
                 value={formData.genre}
                 onChange={handleChange}
+                className={styles.input}
               >
                 <option value="" disabled>
                   장르를 선택하세요
@@ -78,7 +80,7 @@ const ProjectCreateInfo = () => {
               </select>
             </label>
 
-            <label>
+            <label className={styles.label}>
               모집 인원 수
               <input
                 type="number"
@@ -88,10 +90,11 @@ const ProjectCreateInfo = () => {
                 required
                 value={formData.headcount}
                 onChange={handleChange}
+                className={styles.input}
               />
             </label>
 
-            <label>
+            <label className={styles.label}>
               모집 마감일
               <input
                 type="date"
@@ -99,6 +102,7 @@ const ProjectCreateInfo = () => {
                 required
                 value={formData.deadline}
                 onChange={handleChange}
+                className={styles.input}
               />
             </label>
 

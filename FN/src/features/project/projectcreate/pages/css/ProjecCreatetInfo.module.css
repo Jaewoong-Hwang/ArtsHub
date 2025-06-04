@@ -9,22 +9,19 @@
   padding: 3rem 2rem;
 }
 
-.content h2 {
+.heading {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   color: var(--sub-blue);
 }
 
-/* 폼 요소 */
-form label {
+.label {
   display: block;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
-input,
-select,
-textarea {
+.input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #ccc;
@@ -36,9 +33,7 @@ textarea {
   margin-bottom: 1.5rem;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.input:focus {
   outline: none;
   border-color: var(--main-blue);
   box-shadow: 0 0 0 3px rgba(41, 195, 255, 0.2);
@@ -60,6 +55,7 @@ textarea:focus {
   border-radius: 6px;
   font-size: 0.95rem;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btnOutline:hover {

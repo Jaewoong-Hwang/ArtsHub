@@ -1,10 +1,18 @@
 .layout {
+  max-width: 1348px;
+  margin: 0 auto;
   display: flex;
 }
 
 .content {
-  flex-grow: 1;
-  padding: 2rem;
+  flex: 1;
+  padding: 3rem 2rem;
+}
+
+.heading {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--sub-blue);
 }
 
 /* 리워드 추가 버튼 */
@@ -43,6 +51,7 @@
   border-radius: 6px;
   font-size: 0.95rem;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btnOutline:hover {

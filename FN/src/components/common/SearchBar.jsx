@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import "../../assets/styles/reset.css";
-import "./css/SearchBar.css";
-import { FiSearch } from "react-icons/fi"; // 돋보기 아이콘
+import styles from "./css/SearchBar.module.css";
+import { FiSearch } from "react-icons/fi";
 
 const SearchBar = ({ onSearch }) => {
   const [keyword, setKeyword] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleSearch = () => {
-    if (keyword.trim()) {
-      onSearch(keyword);
-    }
+    onSearch(keyword); // ✅ 무조건 호출
   };
 
   const handleKeyDown = (e) => {
@@ -20,19 +17,17 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div className="search-bar">
-      <div className="search-input-wrapper">
+    <div className={styles.searchBar}>
+      <div className={styles.searchInputWrapper}>
         <input
           type="text"
           placeholder="어떤 공연을 찾고 계신가요?"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          className={isFocused ? "focused" : ""}
+          className={styles.searchInput}
         />
-        <button className="search-icon" onClick={handleSearch}>
+        <button className={styles.searchIcon} onClick={handleSearch}>
           <FiSearch size={20} />
         </button>
       </div>

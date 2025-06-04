@@ -1,19 +1,86 @@
 .layout {
+  max-width: 1348px;
+  margin: 0 auto;
   display: flex;
 }
 
 .content {
-  flex-grow: 1;
-  padding: 2rem;
+  flex: 1;
+  padding: 3rem 2rem;
 }
 
-/* 썸네일 미리보기 */
+.heading {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--sub-blue);
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border 0.2s ease-in-out;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--main-blue);
+  box-shadow: 0 0 0 3px rgba(41, 195, 255, 0.2);
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+  resize: vertical;
+  transition: border 0.2s ease-in-out;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
 .thumbnailPreview {
   margin-top: 1rem;
-  max-width: 200px;
+  margin-bottom: 3rem;
+  max-width: 300px;
 }
 
-CTA 버튼 영역
+.uploadText {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.uploadText:hover {
+  color: var(--main-blue); 
+  text-decoration: underline;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+
 .ctaButtons {
   display: flex;
   justify-content: space-between;
@@ -22,7 +89,6 @@ CTA 버튼 영역
   gap: 1rem;
 }
 
-/* 임시 저장 버튼 */
 .btnOutline {
   background-color: transparent;
   border: 2px solid #0c7dff;
@@ -31,26 +97,9 @@ CTA 버튼 영역
   border-radius: 6px;
   font-size: 0.95rem;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btnOutline:hover {
   background-color: #e6f3ff;
-}
-
-/* 공통 버튼 (사용 시) */
-.btnRewardCreate {
-  margin-top: 2rem;
-  padding: 0.8rem 1.6rem;
-  background-color: #29c3ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btnRewardCreate:hover {
-  background-color: #0c7dff;
 }

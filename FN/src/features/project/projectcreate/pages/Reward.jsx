@@ -64,7 +64,7 @@ const ProjectCreateReward = () => {
         <Sidebar />
         <main className={styles.content}>
           <section>
-            <h2>리워드 설정</h2>
+            <h2 className={styles.heading}>리워드 설정</h2>
 
             {isAdding && currentReward && (
               <RewardForm

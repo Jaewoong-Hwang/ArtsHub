@@ -1,12 +1,3 @@
-/* :root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-  --light-bg: #f9fafb;
-  --text-dark: #333;
-  --btn-hover-bg: #29c3ff;
-  --btn-hover-stroke: #fff;
-} */
 
 .project-page {
   max-width: 1348px;
@@ -31,7 +22,7 @@
 .section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--main-blue);
   margin-bottom: 0.5rem;
 }
 

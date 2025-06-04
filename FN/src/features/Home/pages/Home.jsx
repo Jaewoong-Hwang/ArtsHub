@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import SearchBar from "../../../components/common/SearchBar";
-import RecommendedProjects, { allProjects } from "../components/RecommendedProjects";
+import RecommendedProjects, {
+  allProjects,
+} from "../components/RecommendedProjects";
 import ProjectFilterStatus from "../../project/projectparticipate/components/ProjectFilterStatus";
 import ExpertSection from "../components/ExpertSection";
 import SidebarRanking from "../components/SidebarRanking";
 import CategoryList from "../../project/projectparticipate/pages/CategoryList";
 import Header from "../../../components/layout/Header";
+import Footer from "../../../components/layout/Footer";
+
 import "../../../assets/styles/reset.css";
 import styles from "./css/home..module.css";
 
@@ -31,7 +35,10 @@ const Home = () => {
     const filtered = allProjects.filter((p) => {
       if (p.status !== "모집중") return false;
       return keywords.some((kw) =>
-        [p.title, p.description, p.category].join(" ").toLowerCase().includes(kw)
+        [p.title, p.description, p.category]
+          .join(" ")
+          .toLowerCase()
+          .includes(kw)
       );
     });
 
@@ -59,26 +66,29 @@ const Home = () => {
   const showRandom = keyword === "" && selectedCategory === null;
 
   return (
-    <div className={styles.container}>
-      <Header />
-      <SearchBar onSearch={handleSearch} />
-      <CategoryList
-        onCategorySelect={handleCategorySelect}
-        selectedCategory={selectedCategory}
-      />
-      <div className={styles.sectionWrap}>
-        <div className={styles.leftColumn}>
-          {!showRandom && filteredProjects.length === 0 && (
-            <ProjectFilterStatus totalCount={0} />
-          )}
-          <RecommendedProjects
-            projects={showRandom ? undefined : filteredProjects}
-          />
-          <ExpertSection />
+    <>
+      <div className={styles.container}>
+        <Header />
+        <SearchBar onSearch={handleSearch} />
+        <CategoryList
+          onCategorySelect={handleCategorySelect}
+          selectedCategory={selectedCategory}
+        />
+        <div className={styles.sectionWrap}>
+          <div className={styles.leftColumn}>
+            {!showRandom && filteredProjects.length === 0 && (
+              <ProjectFilterStatus totalCount={0} />
+            )}
+            <RecommendedProjects
+              projects={showRandom ? undefined : filteredProjects}
+            />
+            <ExpertSection />
+          </div>
+          <SidebarRanking />
         </div>
-        <SidebarRanking />
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

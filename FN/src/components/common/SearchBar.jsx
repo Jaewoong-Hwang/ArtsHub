@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import '../../assets/styles/reset.css'
+import "../../assets/styles/reset.css";
 import "./css/SearchBar.css";
 import { FiSearch } from "react-icons/fi"; // 돋보기 아이콘
 
 const SearchBar = ({ onSearch }) => {
   const [keyword, setKeyword] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSearch = () => {
     if (keyword.trim()) {
-      onSearch(keyword); // 상위에서 넘긴 검색 처리 함수 실행
+      onSearch(keyword);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") handleSearch();
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -25,6 +28,9 @@ const SearchBar = ({ onSearch }) => {
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={handleKeyDown}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={isFocused ? "focused" : ""}
         />
         <button className="search-icon" onClick={handleSearch}>
           <FiSearch size={20} />

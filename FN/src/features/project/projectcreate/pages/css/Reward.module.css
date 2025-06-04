@@ -1,5 +1,14 @@
-/* 공통 버튼 스타일 */
-.btn-reward-create {
+.layout {
+  display: flex;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+/* 리워드 추가 버튼 */
+.btnRewardCreate {
   margin-top: 2rem;
   padding: 0.8rem 1.6rem;
   background-color: #29c3ff;
@@ -12,12 +21,12 @@
   transition: background-color 0.3s ease;
 }
 
-.btn-reward-create:hover {
+.btnRewardCreate:hover {
   background-color: #0c7dff;
 }
 
-/* CTA 버튼 영역 (임시 저장 + 다음단계) */
-.cta-buttons {
+/* CTA 버튼 영역 */
+.ctaButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,7 +35,7 @@
 }
 
 /* 임시 저장 버튼 */
-.btn.outline {
+.btnOutline {
   background-color: transparent;
   border: 2px solid #0c7dff;
   color: #0c7dff;
@@ -36,7 +45,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-.btn.outline:hover {
+.btnOutline:hover {
   background-color: #e6f3ff;
 }
-

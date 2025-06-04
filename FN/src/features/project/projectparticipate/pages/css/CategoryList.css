@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --main-blue: #29c3ff;
   --sub-blue: #0c7dff;
   --gray: #bcbcbc;
@@ -6,7 +6,7 @@
   --text-dark: #333;
   --btn-hover-bg: #29c3ff;
   --btn-hover-stroke: #fff;
-}
+} */
 
 /* 전체 래퍼: 중앙 정렬 + 버튼 표시 */
 .category-wrapper {

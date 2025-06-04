@@ -1,153 +1,56 @@
-:root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-  --light-bg: #f9fafb;
-  --text-dark: #333;
-}
-
-body {
-  margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: var(--light-bg);
-  color: var(--text-dark);
-}
-
 .layout {
-  max-width: 1348px;
-  margin: 0 auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
   display: flex;
 }
 
 .content {
-  flex: 1;
-  padding: 3rem 2rem;
+  flex-grow: 1;
+  padding: 2rem;
 }
 
-.content h2 {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: var(--sub-blue);
+/* 썸네일 미리보기 */
+.thumbnailPreview {
+  margin-top: 1rem;
+  max-width: 200px;
 }
 
-/* 폼 요소 기본 스타일 */
-form label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-/* 텍스트/셀렉트/텍스트에어리어 공통 입력 필드 */
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  background-color: #fff;
-  transition: border 0.2s ease-in-out;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--main-blue);
-  box-shadow: 0 0 0 3px rgba(41, 195, 255, 0.2);
-}
-
-/* 썸네일 이미지 미리보기 */
-.thumbnail-preview {
-  margin-bottom: 2rem;
-}
-
-.thumbnail-preview img {
-  width: 200px;
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
-  display: block;
-}
-
-/* 파일 업로드 필드용 라벨 강조 */
-form label[for="thumbnail"],
-input[type="file"] {
-  font-weight: 600;
-  color: var(--sub-blue);
-}
-
-input[type="file"] {
-  padding: 0.5rem 0;
-  border: none;
-  background-color: transparent;
-}
-
-/* CTA 버튼 영역 */
-.cta-buttons {
+CTA 버튼 영역
+.ctaButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 3rem;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
-
-/* 테두리만 있는 버튼 (보조 강조) */
-.btn.outline {
+/* 임시 저장 버튼 */
+.btnOutline {
   background-color: transparent;
-  color: var(--main-blue);
-  border: 2px solid var(--main-blue);
+  border: 2px solid #0c7dff;
+  color: #0c7dff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.btn.outline:hover {
-  background-color: var(--main-blue);
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(12, 125, 255, 0.3);
+.btnOutline:hover {
+  background-color: #e6f3ff;
 }
 
-/* 모달 (임시 저장) */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+/* 공통 버튼 (사용 시) */
+.btnRewardCreate {
+  margin-top: 2rem;
+  padding: 0.8rem 1.6rem;
+  background-color: #29c3ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-/* 반응형 처리 */
-@media screen and (max-width: 768px) {
-  .layout {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .content {
-    padding: 1.5rem 1rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
+.btnRewardCreate:hover {
+  background-color: #0c7dff;
 }

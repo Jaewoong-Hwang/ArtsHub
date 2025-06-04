@@ -1,15 +1,15 @@
-:root {
+/* :root {
   --main-blue: rgb(41, 195, 255);
   --sub-blue: rgb(12, 125, 255);
   --gray: rgb(188, 188, 188);
-}
+} */
 
-body {
+/* body {
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.6;
   margin: 0;
   background: #fff;
-}
+} */
 
 .hero {
   background: url('') no-repeat center center/cover;

@@ -1,3 +1,8 @@
+body{
+  background-color: var(--light-bg);
+}
+
+
 .container {
   max-width: 1348px;
   margin: 0 auto;

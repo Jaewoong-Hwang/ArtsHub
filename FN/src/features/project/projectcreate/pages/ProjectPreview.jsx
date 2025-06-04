@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextWithBreaks from "../components/TextWithBreaks";
-import Modal from "../components/Modal"; // 모달 컴포넌트
+import Modal from "../components/Modal";
 import "../../../../assets/styles/reset.css";
-import "./css/ProjectPreview.css";
+import styles from "./css/ProjectPreview.module.css";
 
 const ProjectPreview = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const ProjectPreview = () => {
     rewards: [],
   });
 
-  const [showModal, setShowModal] = useState(false); // 모달 상태
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     try {
@@ -35,20 +35,20 @@ const ProjectPreview = () => {
   const { info, description, rewards } = previewData;
 
   return (
-    <div className="preview-wrapper">
+    <div className={styles.previewWrapper}>
       <h1>프로젝트 미리보기</h1>
 
-      <section className="preview-section">
+      <section className={styles.previewSection}>
         <h2>{info.title || "제목 없음"}</h2>
         <p>장르: {info.genre || "장르 없음"}</p>
         <p>모집 인원: {info.capacity || "0"}명</p>
         <p>모집 마감일: {info.deadline || "없음"}</p>
       </section>
 
-      <section className="preview-section">
+      <section className={styles.previewSection}>
         <h3>프로젝트 상세 설명</h3>
         {description.previewUrl && (
-          <div className="preview-thumbnail">
+          <div className={styles.previewThumbnail}>
             <img src={description.previewUrl} alt="썸네일" />
           </div>
         )}
@@ -59,11 +59,11 @@ const ProjectPreview = () => {
         <TextWithBreaks label="보상" text={description.compensation} />
       </section>
 
-      <section className="preview-section">
+      <section className={styles.previewSection}>
         <h3>리워드</h3>
         {Array.isArray(rewards) && rewards.length > 0 ? (
           rewards.map((reward) => (
-            <div key={reward.id} className="preview-reward">
+            <div key={reward.id} className={styles.previewReward}>
               <h4>
                 {reward.title} - {reward.amount}원
               </h4>
@@ -86,16 +86,21 @@ const ProjectPreview = () => {
         )}
       </section>
 
-      <div className="cta-buttons">
-        <button className="btn outline" onClick={() => window.history.back()}>
+      <div className={styles.ctaButtons}>
+        <button
+          className={`${styles.btn} ${styles.btnOutline}`}
+          onClick={() => window.history.back()}
+        >
           수정하러 가기
         </button>
-        <button className="btn primary" onClick={() => setShowModal(true)}>
+        <button
+          className={`${styles.btn} ${styles.btnPrimary}`}
+          onClick={() => setShowModal(true)}
+        >
           등록하기
         </button>
       </div>
 
-      {/* 모달 렌더링 */}
       {showModal && <Modal type="submit" onClose={() => setShowModal(false)} />}
     </div>
   );

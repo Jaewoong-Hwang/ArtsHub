@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --main-blue: #29c3ff;
   --sub-blue: #0c7dff;
   --gray: #bcbcbc;
@@ -6,7 +6,7 @@
   --text-dark: #333;
   --btn-hover-bg: #29c3ff;
   --btn-hover-stroke: #fff;
-}
+} */
 
 .project-page {
   max-width: 1348px;
@@ -41,17 +41,17 @@
   margin-bottom: 1.5rem;
 }
 
-/* 검색바 */
-.search-bar {
+검색바
+/* .search-bar {
   display: flex;
   justify-content: center;
   align-items: center;
   max-width: 420px;
   margin: 0 auto 1.5rem auto;
   position: relative;
-}
+} */
 
-.search-bar input {
+/* .search-bar input {
   width: 100%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
   border: 1px solid var(--gray);
@@ -73,7 +73,7 @@
   cursor: pointer;
   color: var(--main-blue);
   font-size: 1.2rem;
-}
+} */
 
 /* 카테고리 영역 */
 .category-header {

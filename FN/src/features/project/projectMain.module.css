@@ -1,16 +1,3 @@
-/* :root {
-  --main-blue: rgb(41, 195, 255);
-  --sub-blue: rgb(12, 125, 255);
-  --gray: rgb(188, 188, 188);
-} */
-
-/* body {
-  font-family: 'Noto Sans KR', sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  background: #fff;
-} */
-
 .hero {
   background: url('') no-repeat center center/cover;
   color: #666;
@@ -21,12 +8,12 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.hero h1 {
+.heroText h1 {
   font-size: 3.5rem;
   font-weight: 700;
 }
 
-.intro-section {
+.introSection {
   text-align: center;
   padding: 4rem 2rem;
   background-color: #eaf6ff;
@@ -35,7 +22,7 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.feature-cards {
+.featureCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -43,7 +30,7 @@
   margin-top: 2.5rem;
 }
 
-.feature-card {
+.featureCard {
   width: 420px;
   background-color: #fff;
   border-radius: 16px;
@@ -52,31 +39,31 @@
   transition: transform 0.3s ease;
 }
 
-.feature-card:hover {
+.featureCard:hover {
   transform: translateY(-6px);
 }
 
-.feature-image {
+.featureImage {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
-.feature-image img {
+.featureImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.feature-card p {
+.featureCard p {
   margin: 1rem 1.2rem;
   font-size: 1rem;
   color: #333;
   line-height: 1.5;
 }
 
-.howto-section {
+.howtoSection {
   background-color: #111;
   color: #fff;
   padding: 3rem 2rem;
@@ -86,11 +73,10 @@
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.how-box {
+.howBox {
   margin-bottom: 2rem;
 }
 
-/* 공통 등장 애니메이션 클래스 */
 .visible {
   opacity: 1;
   transform: translateY(0);

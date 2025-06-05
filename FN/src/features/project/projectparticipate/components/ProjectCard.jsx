@@ -1,21 +1,21 @@
 import React from 'react';
 import useScrollFadeIn from '../hooks/useScrollFadeIn';
-import './css/ProjectCard.css';
+import styles from './css/projectCard.module.css'; // ✅ 모듈 CSS import
 
 const ProjectCard = ({ project, index }) => {
-  const [ref, visible, style] = useScrollFadeIn(index * 0.1); // 0.1s 간격으로 딜레이
+  const [ref, visible, style] = useScrollFadeIn(index * 0.1); // 0.1초 간격 딜레이
 
   return (
     <div
       ref={ref}
-      className={`project-card ${visible ? 'visible' : ''}`}
+      className={`${styles.projectCard} ${visible ? styles.visible : ''}`}
       style={style}
     >
       <img src={project.image} alt={project.title} />
-      <div className="project-content">
+      <div className={styles.projectContent}>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
-        <div className="project-views">조회수: {project.views}</div>
+        <div className={styles.projectViews}>조회수: {project.views}</div>
       </div>
     </div>
   );

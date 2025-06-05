@@ -1,10 +1,6 @@
-
-
 .sidebar {
   width: 220px;
-  /* background-color: #f2f4f8; */
   border-right: 1px solid #e2e2e2;
-  /* border-left: 1px solid var(--gray); */
   padding: 2rem 1rem;
 }
 
@@ -33,7 +29,7 @@
   color: white;
 }
 
-.sidebar li.active a {
+.active a {
   background-color: var(--sub-blue);
   color: white;
 }

@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import styles from "./css/heroCarousel.module.css"; // ✅ 모듈 CSS import
 import "../../../../assets/styles/reset.css";
-import "./css/HeroCarousel.css";
 
 const HeroCarousel = ({ slides }) => {
-  const [current, setCurrent] = useState(0); // 현재 인덱스
-  const [hoveredIndex, setHoveredIndex] = useState(null); // Hover 상태
+  const [current, setCurrent] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const intervalRef = useRef(null);
   const isHoveredRef = useRef(false);
-
   const visibleCount = 3;
 
   const handleNext = () => {
@@ -41,22 +40,20 @@ const HeroCarousel = ({ slides }) => {
   }, []);
 
   return (
-    <div className="carousel-wrapper">
-      {/* ← 왼쪽 버튼 */}
-      <button className="carousel-arrow left" onClick={handlePrev}>
+    <div className={styles.carouselWrapper}>
+      <button className={`${styles.carouselArrow} ${styles.left}`} onClick={handlePrev}>
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="2">
           <polyline points="15,18 9,12 15,6" stroke="currentColor" />
         </svg>
       </button>
 
-      {/* ▶ 캐러셀 영역 */}
       <div
-        className="carousel-container"
+        className={styles.carouselContainer}
         onMouseEnter={pause}
         onMouseLeave={resume}
       >
         <div
-          className="carousel-track"
+          className={styles.carouselTrack}
           style={{
             transform: `translateX(-${current * (100 / visibleCount)}%)`,
           }}
@@ -66,22 +63,11 @@ const HeroCarousel = ({ slides }) => {
             const isHovered = hoveredIndex !== null;
             const isThisHovered = hoveredIndex === index;
 
-            let slideClass = "carousel-slide";
-
+            let slideClass = styles.carouselSlide;
             if (isHovered) {
-              // ➤ Hover 중일 때: 해당 슬라이드만 확대
-              if (isThisHovered) {
-                slideClass += " hovered";
-              } else {
-                slideClass += " compressed";
-              }
+              slideClass += ` ${isThisHovered ? styles.hovered : styles.compressed}`;
             } else {
-              // ➤ Hover 아니고 기본 상태일 때
-              if (index === centerIndex) {
-                slideClass += " center";
-              } else {
-                slideClass += " compressed";
-              }
+              slideClass += ` ${index === centerIndex ? styles.center : styles.compressed}`;
             }
 
             return (
@@ -92,10 +78,10 @@ const HeroCarousel = ({ slides }) => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img src={slide.image} alt={slide.title} />
-                <div className="overlay">
+                <div className={styles.overlay}>
                   <h3>{slide.title}</h3>
                   <p>{slide.description}</p>
-                  {slide.subtext && <p className="subtext">{slide.subtext}</p>}
+                  {slide.subtext && <p className={styles.subtext}>{slide.subtext}</p>}
                 </div>
               </div>
             );
@@ -103,8 +89,7 @@ const HeroCarousel = ({ slides }) => {
         </div>
       </div>
 
-      {/* → 오른쪽 버튼 */}
-      <button className="carousel-arrow right" onClick={handleNext}>
+      <button className={`${styles.carouselArrow} ${styles.right}`} onClick={handleNext}>
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="2">
           <polyline points="9,18 15,12 9,6" stroke="currentColor" />
         </svg>

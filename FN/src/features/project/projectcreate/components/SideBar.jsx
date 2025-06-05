@@ -1,10 +1,7 @@
-// src/features/project/projectcreate/components/Sidebar.jsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-// CSS
+import styles from '../components/css/sidebar.module.css'; // ✅ CSS 모듈 import
 import '../../../../assets/styles/reset.css';
-import '../components/css/sidebar.css';
 
 const Sidebar = () => {
   const location = useLocation();
@@ -15,16 +12,15 @@ const Sidebar = () => {
     { path: '/project/create/info', step: 'info', label: '프로젝트 정보' },
     { path: '/project/create/description', step: 'description', label: '상세 내용' },
     { path: '/project/create/reward', step: 'reward', label: '리워드' },
-    
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={styles.sidebar}>
       <ul>
         {menuItems.map((item) => (
           <li
             key={item.step}
-            className={currentStep === item.step ? 'active' : ''}
+            className={currentStep === item.step ? styles.active : ''}
           >
             <Link to={item.path}>{item.label}</Link>
           </li>

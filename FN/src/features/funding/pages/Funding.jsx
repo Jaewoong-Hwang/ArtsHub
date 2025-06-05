@@ -6,9 +6,9 @@ import Header from "../../../../components/layout/Header";
 import SearchBar from "../../../../components/common/SearchBar";
 import ProjectFilterStatus from "../components/ProjectFilterStatus";
 
-// CSS Module 적용
-import styles from "./css/projectParticipateMain.module.css";
+// css
 import "../../../../assets/styles/reset.css";
+import "./css/ProjectParticipateMain.css";
 
 const ProjectParticipateMain = () => {
   const [slides, setSlides] = useState([]);
@@ -42,6 +42,7 @@ const ProjectParticipateMain = () => {
       } catch (err) {
         console.error("API 오류:", err);
 
+        // 더미 슬라이드 데이터
         setSlides([
           {
             id: 1,
@@ -72,6 +73,7 @@ const ProjectParticipateMain = () => {
           },
         ]);
 
+        // 더미 프로젝트 카드 데이터
         setProjects([
           {
             id: 1,
@@ -92,8 +94,10 @@ const ProjectParticipateMain = () => {
       ? project.category === selectedCategory
       : true;
 
+    // 소문자로 통일한 키워드 배열 생성
     const keywordList = searchKeyword.toLowerCase().split(" ").filter(Boolean);
 
+    // keyword가 모두 포함되는지 확인
     const matchSearch = keywordList.every(
       (kw) =>
         project.title.toLowerCase().includes(kw) ||
@@ -105,26 +109,26 @@ const ProjectParticipateMain = () => {
   });
 
   return (
-    <main className={styles.projectPage}>
+    <main className="project-page">
       <Header />
       <HeroCarousel slides={slides} />
-      <section className={styles.content}>
-        <div className={styles.title}>
-          <h2 className={styles.sectionTitle}>Project Recruitment</h2>
-          <p className={styles.sectionSubtitle}>
+      <section className="content">
+        <div className="title">
+          <h2 className="section-title">Project Recruitment</h2>
+          <p className="section-subtitle">
             함께하길 기다리는 팀원에 합류하세요 !!
           </p>
           <SearchBar onSearch={handleSearch} />
-          <div className={styles.categoryHeader}>
+          <div className="category-header">
             <CategoryList
               onCategorySelect={handleCategorySelect}
               selectedCategory={selectedCategory}
             />
           </div>
           {selectedCategory && (
-            <div className={styles.categoryResetContainer}>
+            <div className="category-reset-container">
               <p
-                className={styles.resetText}
+                className="reset-text"
                 onClick={() => setSelectedCategory(null)}
               >
                 전체 보기

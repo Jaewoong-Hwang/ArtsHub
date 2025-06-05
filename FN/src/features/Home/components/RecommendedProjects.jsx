@@ -1,4 +1,3 @@
-// src/features/home/components/RecommendedProjects.jsx
 import React, { useEffect, useState } from "react";
 import styles from "./css/recommend.module.css";
 
@@ -47,16 +46,33 @@ export const allProjects = [
   },
 ];
 
+// ✅ Skeleton 카드 컴포넌트
+const SkeletonCard = () => (
+  <div className={styles.card}>
+    <div className={`${styles.cardInner} ${styles.skeletonCard}`}>
+      <div className={styles.skeletonImage}></div>
+      <div className={styles.skeletonText}></div>
+    </div>
+  </div>
+);
+
 const RecommendedProjects = ({ projects }) => {
   const [displayProjects, setDisplayProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (projects !== undefined) {
-      setDisplayProjects(projects);
-    } else {
-      const shuffled = [...allProjects].sort(() => 0.5 - Math.random());
-      setDisplayProjects(shuffled.slice(0, 6));
-    }
+    // 💡 실제 API처럼 로딩 효과 구현
+    const timeout = setTimeout(() => {
+      if (projects && projects.length > 0) {
+        setDisplayProjects(projects);
+      } else {
+        const shuffled = [...allProjects].sort(() => 0.5 - Math.random());
+        setDisplayProjects(shuffled.slice(0, 6));
+      }
+      setLoading(false);
+    }, 1000); // 1초 로딩 시간
+
+    return () => clearTimeout(timeout);
   }, [projects]);
 
   if (projects && projects.length === 0) return null;
@@ -69,31 +85,30 @@ const RecommendedProjects = ({ projects }) => {
       </p>
 
       <div className={styles.grid}>
-        {displayProjects.map((project, index) => (
-          <div className={styles.card} key={index}>
-            <div className={styles.cardInner}>
-              {/* 앞면 */}
-              <div className={styles.cardFront}>
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className={styles.image}
-                />
-                <div className={styles.content}>
-                  <div className={styles.name}>{project.title}</div>
+        {loading
+          ? Array.from({ length: 6 }).map((_, idx) => <SkeletonCard key={idx} />)
+          : displayProjects.map((project, index) => (
+              <div className={styles.card} key={index}>
+                <div className={styles.cardInner}>
+                  <div className={styles.cardFront}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className={styles.image}
+                    />
+                    <div className={styles.content}>
+                      <div className={styles.name}>{project.title}</div>
+                    </div>
+                  </div>
+                  <div className={styles.cardBack}>
+                    <div className={styles.backContent}>
+                      <div className={styles.desc}>{project.description}</div>
+                      <p className={styles.status}>{project.status}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* 뒷면 */}
-              <div className={styles.cardBack}>
-                <div className={styles.backContent}>
-                  <div className={styles.desc}>{project.description}</div>
-                  <p className={styles.status}>{project.status}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+            ))}
       </div>
     </section>
   );

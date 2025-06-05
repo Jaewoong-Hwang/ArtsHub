@@ -6,7 +6,7 @@ body{
 .container {
   max-width: 1348px;
   margin: 0 auto;
-  /* padding: 20px; */
+  padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
   /* gap: 30px; */

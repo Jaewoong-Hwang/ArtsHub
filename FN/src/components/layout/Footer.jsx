@@ -1,4 +1,5 @@
 import React from "react";
+import "../../assets/styles/reset.css"
 import styles from "./css/Footer.module.css";
 import { MdHelpOutline, MdKeyboardArrowRight, MdAndroid } from "react-icons/md";
 import { FaApple } from "react-icons/fa";

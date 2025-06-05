@@ -1,3 +1,5 @@
+package com.example.demo.user.restcontroller;
+
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -5,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -23,11 +23,14 @@ public class RestUserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // 로그인 상태 확인 API
+    // 로그인 상태 확인
     @GetMapping("/api/user/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
-            return ResponseEntity.ok(authentication.getName());
+            return ResponseEntity.ok(Map.of(
+                    "username", authentication.getName(),
+                    "authorities", authentication.getAuthorities()
+            ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 필요");
         }
@@ -38,33 +41,30 @@ public class RestUserController {
     public ResponseEntity<?> join(@RequestBody UserDto dto) {
         log.info("회원가입 요청: {}", dto);
 
-        // 비밀번호 암호화
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(dto.toEntity());
 
-        return ResponseEntity.ok().body(Map.of("message", "회원가입 완료"));
+        return ResponseEntity.ok(Map.of("message", "회원가입 완료"));
     }
 
-    // 관리자 페이지 접근 테스트용
-    @GetMapping("/api/admin")
-    public ResponseEntity<String> admin() {
-        return ResponseEntity.ok("관리자 접근 성공");
-    }
-
-    // 매니저 페이지 접근 테스트용
-    @GetMapping("/api/manager")
-    public ResponseEntity<String> manager() {
-        return ResponseEntity.ok("매니저 접근 성공");
-    }
-
-    // 일반 유저 페이지 접근 테스트용
+    // 권한 테스트용 API
     @GetMapping("/api/user")
     public ResponseEntity<?> user(Authentication authentication) {
-        log.info("사용자 접근: {}", authentication);
+        log.info("USER 접근: {}", authentication);
         return ResponseEntity.ok(Map.of(
                 "username", authentication.getName(),
                 "authorities", authentication.getAuthorities()
         ));
+    }
+
+    @GetMapping("/api/manager")
+    public ResponseEntity<String> manager() {
+        return ResponseEntity.ok("MANAGER 접근 성공");
+    }
+
+    @GetMapping("/api/admin")
+    public ResponseEntity<String> admin() {
+        return ResponseEntity.ok("ADMIN 접근 성공");
     }
 }
 
@@ -165,6 +165,6 @@ public class RestUserController {
 //    }
 //
 //}
-//
-//
-//
+
+
+

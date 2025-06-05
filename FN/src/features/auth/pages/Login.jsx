@@ -12,7 +12,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       // 서버에 로그인 요청 (쿠키 포함)
-      const response = await axios.post('/api/login', {
+      const response = await axios.post('/login', {
         username,
         password
       }, { withCredentials: true });

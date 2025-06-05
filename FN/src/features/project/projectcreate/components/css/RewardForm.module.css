@@ -1,0 +1,118 @@
+.rewardForm {
+  /* 기존 그대로 유지 */
+}
+
+.labelInput,
+.labelTextarea,
+.labelSelect {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #0c7dff;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.rewardOptions {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.optionInput {
+  flex: 1;
+}
+
+.removeBtn {
+  background-color: #ff6b6b;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  background-color: #e55353;
+}
+
+.addOptionBtn {
+  background-color: #29c3ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.addOptionBtn:hover {
+  background-color: #0c7dff;
+}
+
+.rewardButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.cancelBtn {
+  background-color: transparent;
+  border: 1px solid #0c7dff;
+  color: #0c7dff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background-color: #eaf4ff;
+}
+
+.saveBtn {
+  background-color: #0c7dff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.saveBtn:hover {
+  background-color: #006ae1;
+}

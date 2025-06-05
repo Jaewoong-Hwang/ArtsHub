@@ -1,7 +1,7 @@
-package com.example.demo.common.config.auth;
+package com.example.demo.common.config.auth.principal;
 
 
-import com.example.demo.user.auth.PrincipalDetails;
+
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;

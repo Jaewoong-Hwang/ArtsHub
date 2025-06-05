@@ -2,6 +2,7 @@ package com.example.demo.common.config.auth.jwt;
 
 
 import com.example.demo.common.config.auth.redis.RedisUtil;
+import com.example.demo.user.entity.JwtToken;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.JwtTokenRepository;
 import com.example.demo.user.repository.UserRepository;
@@ -77,46 +78,46 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             {
 
                 //엑세스 토큰 만료시 리프레시토큰 확인
-//                JwtToken jwtToken = jwtTokenRepository.findByAccessToken(token);
-//                if (jwtToken != null) {
-//                    String refreshToken = jwtToken.getRefreshToken();
-//
-//                    try {
-//                        if (jwtTokenProvider.validateToken(refreshToken)) {
-//                            //accessToken 만료 o, refreshToken 만료 x -> accesstToken 갱신
-//                            long now = (new Date()).getTime();
-//                            User user = userRepository.findByUsername(jwtToken.getUsername());
-//                            // Access Token 생성
-//                            Date accessTokenExpiresIn = new Date(now + JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME); // 60초후 만료
-//                            String accessToken = Jwts.builder()
-//                                    .setSubject(jwtToken.getUsername())
-//                                    .claim("username", jwtToken.getUsername()) //정보저장
-//                                    .claim("auth", user.getRole())//정보저장
-//                                    .setExpiration(accessTokenExpiresIn)
-//                                    .signWith(jwtTokenProvider.getKey(), SignatureAlgorithm.HS256)
-//                                    .compact();
-//                            //클라이언트 전달
-//                            Cookie cookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, accessToken);
-//                            cookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
-//                            cookie.setPath("/");
-//                            response.addCookie(cookie);
-//                            //DB 갱신된 accessToken 저장
-//                            jwtToken.setAccessToken(accessToken);
-//                            jwtTokenRepository.save(jwtToken);
-//                        }
-//
-//                    } catch (ExpiredJwtException refreshTokenExpiredException) {
-//                        //에세스토큰 만료o , 리프레시 토큰 만료 o
-//                        //클라이언트 만료된 AccessToken 삭제
-//                        Cookie cookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME,null);
-//                        cookie.setMaxAge(0);
-//                        cookie.setPath("/");
-//                        response.addCookie(cookie);
-//                        //DB 에 해당 token 제거
-//                        jwtTokenRepository.deleteById(jwtToken.getId());
-//
-//                    }
-//                }
+                JwtToken jwtToken = jwtTokenRepository.findByAccessToken(token);
+                if (jwtToken != null) {
+                    String refreshToken = jwtToken.getRefreshToken();
+
+                    try {
+                        if (jwtTokenProvider.validateToken(refreshToken)) {
+                            //accessToken 만료 o, refreshToken 만료 x -> accesstToken 갱신
+                            long now = (new Date()).getTime();
+                            User user = userRepository.findByUsername(jwtToken.getUsername());
+                            // Access Token 생성
+                            Date accessTokenExpiresIn = new Date(now + JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME); // 60초후 만료
+                            String accessToken = Jwts.builder()
+                                    .setSubject(jwtToken.getUsername())
+                                    .claim("username", jwtToken.getUsername()) //정보저장
+                                    .claim("auth", user.getRole())//정보저장
+                                    .setExpiration(accessTokenExpiresIn)
+                                    .signWith(jwtTokenProvider.getKey(), SignatureAlgorithm.HS256)
+                                    .compact();
+                            //클라이언트 전달
+                            Cookie cookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, accessToken);
+                            cookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
+                            cookie.setPath("/");
+                            response.addCookie(cookie);
+                            //DB 갱신된 accessToken 저장
+                            jwtToken.setAccessToken(accessToken);
+                            jwtTokenRepository.save(jwtToken);
+                        }
+
+                    } catch (ExpiredJwtException refreshTokenExpiredException) {
+                        //에세스토큰 만료o , 리프레시 토큰 만료 o
+                        //클라이언트 만료된 AccessToken 삭제
+                        Cookie cookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME,null);
+                        cookie.setMaxAge(0);
+                        cookie.setPath("/");
+                        response.addCookie(cookie);
+                        //DB 에 해당 token 제거
+                        jwtTokenRepository.deleteById(jwtToken.getId());
+
+                    }
+                }
 
 
                     String refreshToken = redisUtil.getRefreshToken("RT:"+username);

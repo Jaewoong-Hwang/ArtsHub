@@ -1,4 +1,5 @@
-package com.example.demo.user.auth;
+package com.example.demo.common.config.auth.principal;
+
 
 
 import com.example.demo.user.dto.UserDto;

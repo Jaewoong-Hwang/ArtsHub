@@ -1,6 +1,7 @@
 package com.example.demo.common.config;
 
 
+
 import com.example.demo.common.config.auth.exceptionHandler.CustomAccessDeniedHandler;
 import com.example.demo.common.config.auth.exceptionHandler.CustomAuthenticationEntryPoint;
 import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
@@ -10,7 +11,6 @@ import com.example.demo.common.config.auth.loginHandler.CustomLoginSuccessHandle
 import com.example.demo.common.config.auth.logoutHandler.CustomLogoutHandler;
 import com.example.demo.common.config.auth.logoutHandler.CustomLogoutSuccessHandler;
 import com.example.demo.common.config.auth.redis.RedisUtil;
-
 import com.example.demo.user.repository.JwtTokenRepository;
 import com.example.demo.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,20 +52,22 @@ public class SecurityConfig {
 //		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		//권한체크
 		http.authorizeHttpRequests((auth)->{
-			auth.requestMatchers("/","/join","/login").permitAll();
-			auth.requestMatchers("/user").hasRole("USER");
-			auth.requestMatchers("/manager").hasRole("MANAGER");
-			auth.requestMatchers("/admin").hasRole("ADMIN");
+			auth.requestMatchers("/","/api/join","/api/login").permitAll();
+			auth.requestMatchers("/api/user").hasRole("USER");
+			auth.requestMatchers("/api/manager").hasRole("MANAGER");
+			auth.requestMatchers("/api/admin").hasRole("ADMIN");
 			auth.anyRequest().authenticated();
 		});
 
 		//로그인
-		http.formLogin((login)->{
-			login.permitAll();
-			login.loginPage("/login");
-			login.successHandler(customLoginSuccessHandler);
-			login.failureHandler(new CustomLoginFailureHandler());
-		});
+//		http.formLogin((login)->{
+//			login.permitAll();
+//			login.loginPage("/login");
+//			login.successHandler(customLoginSuccessHandler);
+//			login.failureHandler(new CustomLoginFailureHandler());
+//		});
+		http.formLogin(login -> login.disable());
+
 		//로그아웃
 		http.logout((logout)->{
 			logout.permitAll();
@@ -73,7 +75,6 @@ public class SecurityConfig {
 			logout.logoutSuccessHandler(customLogoutSuccessHandler);
 		});
 		//예외처리
-
 		http.exceptionHandling((ex)->{
 			ex.authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 			ex.accessDeniedHandler(new CustomAccessDeniedHandler());

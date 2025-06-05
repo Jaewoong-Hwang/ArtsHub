@@ -1,7 +1,8 @@
 package com.example.demo.common.config.auth.logoutHandler;
 
 
-import com.example.demo.user.auth.PrincipalDetails;
+
+import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

@@ -1,10 +1,10 @@
-package com.example.demo.common.config.auth;
+package com.example.demo.common.config.auth.principal;
+
 
 import com.example.demo.common.config.auth.provider.GoogleUserinfo;
 import com.example.demo.common.config.auth.provider.KakaoUserInfo;
 import com.example.demo.common.config.auth.provider.NaverUserinfo;
 import com.example.demo.common.config.auth.provider.OAuth2UserInfo;
-import com.example.demo.user.auth.PrincipalDetails;
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;

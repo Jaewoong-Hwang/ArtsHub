@@ -1,7 +1,8 @@
 package com.example.demo.common.config.auth.logoutHandler;
 
-import com.example.demo.user.auth.PrincipalDetails;
+
 import com.example.demo.common.config.auth.jwt.JwtProperties;
+import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.repository.JwtTokenRepository;
 import jakarta.servlet.ServletException;

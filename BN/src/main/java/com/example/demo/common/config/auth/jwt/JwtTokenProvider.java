@@ -1,7 +1,8 @@
 package com.example.demo.common.config.auth.jwt;
 
 
-import com.example.demo.user.auth.PrincipalDetails;
+
+import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.entity.Signature;
 import com.example.demo.user.entity.User;

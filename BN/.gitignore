@@ -37,4 +37,9 @@ out/
 .DS_Store
 Thumbs.db
 
+# 무시할 Gradle 잠금 파일들
+BN/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+BN/.gradle/buildOutputCleanup/cache.properties
 
+"BN/.gradle/buildOutputCleanup/buildOutputCleanup.lock" 
+"BN/.gradle/buildOutputCleanup/cache.properties" 

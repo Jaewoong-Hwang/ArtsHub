@@ -6,6 +6,7 @@ import com.example.demo.common.config.auth.jwt.TokenInfo;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.entity.JwtToken;
 import com.example.demo.user.repository.JwtTokenRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -31,38 +36,56 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Autowired
 	private RedisUtil redisUtil;
-	
+
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+										Authentication authentication) throws IOException, ServletException {
 
 		log.info("CustomLoginSuccessHandler's onAuthenticationSuccess invoke..");
 
-//		String username = authentication.getName();
-		//TOKEN 쿠키로 전달
+		// 토큰 생성
 		TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-		Cookie cookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, tokenInfo.getAccessToken());
-		cookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
-		cookie.setPath("/");
-		response.addCookie(cookie);
 
+		// accessToken을 쿠키로 전달
+		Cookie accessTokenCookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, tokenInfo.getAccessToken());
+		accessTokenCookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
+		accessTokenCookie.setPath("/");
+		response.addCookie(accessTokenCookie);
 
-		//JWTTOKEN DB 저장
-		JwtToken jwtToken = new JwtToken();
-		jwtToken.setAccessToken(tokenInfo.getAccessToken());
-		jwtToken.setRefreshToken(tokenInfo.getRefreshToken());
-		jwtToken.setUsername(authentication.getName());
-		jwtToken.setCreateAt(LocalDateTime.now());
-		jwtTokenRepository.save(jwtToken);
-		
-		//REDIS 서버에 REFRESH토큰 저장
-		Cookie usernameCookie = new Cookie("username", authentication.getName());
+		// username 인코딩 (쿠키용 + Redis 키용)
+		String rawUsername = authentication.getName();
+		String encodedUsername = URLEncoder.encode(rawUsername, StandardCharsets.UTF_8);
+
+		// username 쿠키에 저장
+		Cookie usernameCookie = new Cookie("username", encodedUsername);
 		usernameCookie.setMaxAge(JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME);
 		usernameCookie.setPath("/");
 		response.addCookie(usernameCookie);
-		redisUtil.setDataExpire("RT:"+authentication.getName(),tokenInfo.getRefreshToken(), JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME);
 
+		// JWT 토큰 DB 저장
+		JwtToken jwtToken = new JwtToken();
+		jwtToken.setAccessToken(tokenInfo.getAccessToken());
+		jwtToken.setRefreshToken(tokenInfo.getRefreshToken());
+		jwtToken.setUsername(rawUsername);
+		jwtToken.setCreateAt(LocalDateTime.now());
+		jwtTokenRepository.save(jwtToken);
+
+		// Redis 저장 (키에 인코딩된 username 사용)
+		redisUtil.setDataExpire("RT:" + encodedUsername, tokenInfo.getRefreshToken(),
+				JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME);
+
+		// JSON 응답 설정
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("accessToken", tokenInfo.getAccessToken());
+		result.put("refreshToken", tokenInfo.getRefreshToken());
+		result.put("username", rawUsername);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		response.getWriter().write(objectMapper.writeValueAsString(result));
 
 		//---------------------------------
 		//최초로그인(Client's AT x , DB x)
@@ -88,7 +111,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 
 
-		response.sendRedirect(request.getContextPath()+"/");
+//		response.sendRedirect(request.getContextPath()+"/");
 
 	}
 

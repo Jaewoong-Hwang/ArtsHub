@@ -1,13 +1,11 @@
-import { Route } from 'react-router-dom';
+// authRoutes.jsx
+import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
-import UserInfo from './UserInfo';
-
-
-
+import Join from './pages/Join';
 
 export const AuthRoutes = () => (
   <>
-    <Route key="login" path="login" element={<Login />} />
-    <Route path="/mypage" element={<UserInfo />} />
+    <Route path="login" element={<Login />} />
+    <Route path="join" element={<Join />} />
   </>
 );

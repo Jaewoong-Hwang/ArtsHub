@@ -13,9 +13,12 @@ import com.example.demo.common.config.auth.logoutHandler.CustomLogoutSuccessHand
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.repository.JwtTokenRepository;
 import com.example.demo.user.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,6 +26,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -60,13 +67,12 @@ public class SecurityConfig {
 		});
 
 		//로그인
-//		http.formLogin((login)->{
-//			login.permitAll();
-//			login.loginPage("/login");
-//			login.successHandler(customLoginSuccessHandler);
-//			login.failureHandler(new CustomLoginFailureHandler());
-//		});
-		http.formLogin(login -> login.disable());
+		http.formLogin((login)->{
+			login.permitAll();
+			login.loginPage("/login");
+			login.successHandler(customLoginSuccessHandler);
+			login.failureHandler(new CustomLoginFailureHandler());
+		});
 
 		//로그아웃
 		http.logout((logout)->{
@@ -94,14 +100,49 @@ public class SecurityConfig {
 		//JWT FILTER ADD 로그인 이후에 인증하기 위한코드
 		http.addFilterBefore(new JwtAuthorizationFilter(userRepository,jwtTokenProvider,jwtTokenRepository, redisUtil), LogoutFilter.class);
 
+		//-----------------------------------------------
+		//[추가] CORS
+		//-----------------------------------------------
+		http.cors((config)->{
+			config.configurationSource(corsConfigurationSource());
+		});
+
 		return http.build();
 
 
 	}
 
+
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	//-----------------------------------------------------
+	//[추가] CORS
+	//-----------------------------------------------------
+	@Bean
+	CorsConfigurationSource corsConfigurationSource(){
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowedHeaders(Collections.singletonList("*")); //허용헤더
+		config.setAllowedMethods(Collections.singletonList("*")); //허용메서드
+		config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));  //허용도메인
+		config.setAllowCredentials(true); // COOKIE TOKEN OPTION
+		return new CorsConfigurationSource(){
+			@Override
+			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+				return config;
+			}
+		};
+	}
+	//-----------------------------------------------------
+	//[추가] ATHENTICATION MANAGER 설정 - 로그인 직접처리를 위한 BEAN
+	//-----------------------------------------------------
+	@Bean
+	public AuthenticationManager authenticationManager(
+			AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
 	}
 
 }

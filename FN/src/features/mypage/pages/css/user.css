@@ -1,0 +1,476 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* margin-top: 10px; */
+    box-sizing: border-box;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    align-items: center;
+    list-style: none;
+}
+
+/* 마이페이지 전체 세션 너비(사이드메뉴,콘텐트포함) */
+.mypage_section{ 
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  display: flex;
+  background-color: none;
+  
+}
+
+.mypage_section>.content{
+  width: 100%;
+  margin-left: 33px;
+}
+
+/* #region 마이페이지 */
+.mypage_section>.content>.title{
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.mypage_section>.content>.content_item{
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 50px;
+
+}
+
+.mypage_section>.content>.content_item>form{
+  display: flex;
+  gap: 60px;
+}
+.mypage_section>.content>.content_item .profile_img{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mypage_section>.content>.content_item .profile_img_show{
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 17px;
+}
+.mypage_section>.content>.content_item .profile_img_show>img{
+  width: 100%;
+  height: 100%;
+}
+
+/* 버튼 */
+.mypage_section>.content>.content_item .profile_img>button,
+.mypage_section>.content>.content_item .info_list button{
+  width: 100px;
+  height: 35px;
+  font-size: 0.875rem;
+  border: 1px solid #bcbcbc;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+.mypage_section>.content>.content_item .info_list>.okbutton{
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: right;
+}
+
+
+/* 유저정보 리스트 */
+.mypage_section>.content>.content_item .info_list{
+  width: 410px;
+}
+.mypage_section>.content>.content_item .info_list label{
+  font-size: 1rem;
+}
+
+.mypage_section>.content>.content_item .info_list>input{
+  font-size: 0.875rem;
+  width: 100%;
+  height: 35px;
+  background-color: #fafafc;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  
+}
+
+.mypage_section>.content>.content_item .info_list>.interast{
+  display: flex;
+  justify-content: space-between;
+}
+.mypage_section>.content>.content_item .info_list>.interast>select{
+  font-size: 0.875rem;
+  width: 20%;
+  height: 35px;
+  background-color: #fafafc;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: #3d3d3d;
+  cursor: pointer;
+}
+
+.mypage_section>.content>.content_item .info_list>.interast>.read{
+  cursor: auto;
+}
+
+/* #endregion */
+
+
+
+/* #region order-list */
+.funding-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.funding-list>.funding-card {
+  display: flex;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.funding-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.funding-info {
+  display: flex;
+  flex-direction: column;
+
+  font-weight: 500;
+}
+
+.funding-info .date {
+  font-size: 0.75rem;
+  color: #999999;
+  margin-bottom: 1px;
+}
+
+.funding-info .title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.funding-info .artist {
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  color: #999999;
+}
+
+.funding-info .price {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+/* #endregion */
+
+/* #region order-detail-update */
+/* #region 주문 상세 보기 */
+.order-detail-content {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 60px;
+  margin-bottom: 140px;
+}
+
+.order-detail-card {
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.order-detail-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.order-detail-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-sellerinfo{
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.order-project-title {
+  font-size: 0.95rem;
+  font-weight: 5000;
+  margin-bottom: 10px;
+}
+
+.order-status {
+  font-size: 0.85rem;
+  color: #999999;
+  font-weight: 500;
+}
+
+.order-small-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 35px;
+  font-size: 0.875rem;
+  border: 1px solid #bcbcbc;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* 정보 섹션 공통 */
+.order-detail-box {
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.order-section-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 18px;
+}
+
+.order-detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-detail-list li {
+  display: flex;
+  font-size: 0.875rem;
+  padding-bottom: 10px;
+}
+.order-detail-list li:last-child{
+  padding-bottom:0;
+}
+
+.order-detail-list li > span:first-child {
+  width: 130px;
+  font-weight: 500;
+  color: #6D6D6D;
+}
+
+.order-detail-list li > span:last-child {
+  color: #3d3d3d;
+  font-weight: 500;
+}
+
+/* 목록 버튼 */
+.order-detail-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.order-detail-button button {
+  width: 240px;
+  height: 52px;
+  background-color: #0C7DFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+/* #endregion */
+
+/* #endregion */
+
+/* #region 문의 리스트 */
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.question-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 24px 60px 24px 20px;
+  background-color: transparent;
+}
+
+.question-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.question-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.question-date {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: 5000;
+}
+
+.question-status {
+  font-size: 0.875rem;
+  color: #29C3FF;
+  font-weight: 500;
+}
+
+.question-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.question-button button {
+  width: 240px;
+  padding: 17px 0;
+  background-color: #007dff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem; 
+  cursor: pointer;
+}
+
+/* #endregion */
+
+
+
+/* #region 문의 글 쓰기 */
+
+.question-write-content {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  background-color: transparent;
+}
+
+.question-write-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.question-write-form {
+  border: 1px solid #dcdcdc;
+  padding: 40px;
+  border-radius: 6px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-write-form .form-group {
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.question-write-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.question-write-form input[type="text"],
+.question-write-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #BCBCBC;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  background-color: #fafafc;
+}
+
+.question-write-form #content {
+  resize: none;
+  height: 380px;
+}
+
+.question-write-form #reply{
+  resize: none;
+  height: 120px;
+}
+
+.form-button-group {
+  width: 80%;
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+  gap: 36px;
+}
+
+.form-button-group button {
+  padding: 8px 20px;
+  border: 1px solid #BCBCBC;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.9rem;
+  width: 100px;
+  cursor: pointer;
+}
+
+
+.question-write-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.question-write-button button {
+  width: 240px;
+  padding: 17px 0;
+  background-color: #007dff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem; 
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+/* #endregion */
+

@@ -1,0 +1,91 @@
+/* 🔷 서치바 전체 영역 */
+.searchBar {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 1.2rem 1rem;
+  display: flex;
+  justify-content: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 🔷 입력창 wrapper */
+.searchInputWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* ✅ 기본 input 스타일 */
+.searchInput {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem 3rem 0.75rem 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  background-color: #fff;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* ✅ 포커스 시 그라데이션 border 효과 */
+.searchInput:focus {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(90deg, #29c3ff, #0c7dff, #29c3ff) border-box;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-size: 200% auto;
+  background-position: 0% 50%;
+  animation: gradientMove 3s linear infinite;
+  transition: all 0.4s ease;
+}
+
+/* ✅ placeholder 스타일 */
+.searchInput::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* 🔍 돋보기 아이콘 버튼 */
+.searchIcon {
+  position: absolute;
+  right: 1rem;
+  top: 55%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gray, #999);
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.searchIcon:hover {
+  color: var(--main-blue, #29c3ff);
+}
+
+/* 📱 반응형 대응 */
+@media screen and (max-width: 768px) {
+  .searchBar {
+    padding: 1rem;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+}
+
+/* 🎞️ 테두리 애니메이션 */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}

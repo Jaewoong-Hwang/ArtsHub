@@ -59,9 +59,7 @@ const RecommendedProjects = ({ projects }) => {
     }
   }, [projects]);
 
-  if (projects && projects.length === 0) {
-    return null;
-  }
+  if (projects && projects.length === 0) return null;
 
   return (
     <section className={styles.section}>
@@ -73,17 +71,26 @@ const RecommendedProjects = ({ projects }) => {
       <div className={styles.grid}>
         {displayProjects.map((project, index) => (
           <div className={styles.card} key={index}>
-            <img
-              src={project.image}
-              alt={project.title}
-              className={styles.image}
-            />
-            <div className={styles.content}>
-              <div>
-                <div className={styles.name}>{project.title}</div>
-                <div className={styles.desc}>{project.description}</div>
+            <div className={styles.cardInner}>
+              {/* 앞면 */}
+              <div className={styles.cardFront}>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={styles.image}
+                />
+                <div className={styles.content}>
+                  <div className={styles.name}>{project.title}</div>
+                </div>
               </div>
-              <p className={styles.status}>{project.status}</p>
+
+              {/* 뒷면 */}
+              <div className={styles.cardBack}>
+                <div className={styles.backContent}>
+                  <div className={styles.desc}>{project.description}</div>
+                  <p className={styles.status}>{project.status}</p>
+                </div>
+              </div>
             </div>
           </div>
         ))}

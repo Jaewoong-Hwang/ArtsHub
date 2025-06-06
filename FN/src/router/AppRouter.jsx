@@ -2,6 +2,7 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import { ProjectRoutes } from '../features/project/projectRoutes';
 import { StepModalProvider } from '../features/project/projectcreate/components/StepModalContext'; // ✅ 경로 확인
 import { HomeRoutes } from '../features/Home/homeRoutes';
+import { MypageRoutes } from '../features/mypage/mypageRoutes';
 
 
 export const AppRouter = () => (
@@ -11,6 +12,7 @@ export const AppRouter = () => (
       <Routes>
         {ProjectRoutes()}
         {HomeRoutes()}
+        {MypageRoutes()}
         {/* 나중에 필요 시 다른 Route도 추가 가능 */}
       </Routes>
       </StepModalProvider>

@@ -10,7 +10,7 @@ import ProjectFilterStatus from "../components/ProjectFilterStatus";
 import "../../../../assets/styles/reset.css";
 import "./css/ProjectParticipateMain.css";
 
-const ProjectParticipateMain = () => {
+const Funding = () => {
   const [slides, setSlides] = useState([]);
   const [projects, setProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -149,4 +149,4 @@ const ProjectParticipateMain = () => {
   );
 };
 
-export default ProjectParticipateMain;
+export default Funding;

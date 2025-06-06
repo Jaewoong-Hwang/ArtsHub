@@ -1,3 +1,5 @@
+
+
 .carouselWrapper {
   position: relative;
   overflow: hidden;
@@ -17,24 +19,44 @@
 
 .carouselSlide {
   flex: 0 0 calc(100% / 3);
-  box-sizing: border-box;
   border-radius: 10px;
   opacity: 0.6;
   transform: scale(0.95);
   transition: transform 0.4s ease, opacity 0.4s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   z-index: 1;
+  padding: 0 0.4rem;
+  cursor: pointer;
 }
 
-.carouselSlide img {
+.slideImage {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .overlay {
-  margin-top: 0.2rem;
+  margin-top: 0.4rem;
   text-align: center;
+}
+
+.overlay h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.overlay p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.subtext {
+  margin-top: 0.3rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--sub-blue);
 }
 
 .center {
@@ -95,10 +117,15 @@
   stroke: white;
 }
 
+/* ✅ 반응형 대응 */
 @media (max-width: 768px) {
   .carouselSlide {
     flex: 0 0 100%;
     padding: 0 1rem;
+  }
+
+  .slideImage {
+    height: 180px;
   }
 
   .carouselArrow {
@@ -109,5 +136,13 @@
   .carouselArrow svg {
     width: 16px;
     height: 16px;
+  }
+
+  .overlay h3 {
+    font-size: 1rem;
+  }
+
+  .overlay p {
+    font-size: 0.85rem;
   }
 }

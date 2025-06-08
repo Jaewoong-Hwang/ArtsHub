@@ -28,8 +28,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -45,8 +47,8 @@ public class SecurityConfig {
 	private UserRepository userRepository;
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
-	@Autowired
-	private JwtTokenRepository jwtTokenRepository;
+//	@Autowired
+//	private JwtTokenRepository jwtTokenRepository;
 	@Autowired
 	private RedisUtil redisUtil;
 
@@ -54,12 +56,20 @@ public class SecurityConfig {
 	@Bean
 	protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		//CSRF비활성화
+		http.httpBasic((httpBasic) -> httpBasic.disable());
 		http.csrf((config)->{config.disable();});
-		//CSRF토큰 쿠키형태로 전달
-//		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		//권한체크
 		http.authorizeHttpRequests((auth)->{
-			auth.requestMatchers("/","/api/join","/api/login").permitAll();
+			auth.requestMatchers(
+					"/api/login",
+					"/api/join",
+					"/api/check-username",
+					"/favicon.ico",
+					"/static/**",
+					"/css/**",
+					"/js/**",
+					"/img/**",
+					"/assets/**").permitAll();
 			auth.requestMatchers("/api/user").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
@@ -67,12 +77,7 @@ public class SecurityConfig {
 		});
 
 		//로그인
-		http.formLogin((login)->{
-			login.permitAll();
-			login.loginPage("/login");
-			login.successHandler(customLoginSuccessHandler);
-			login.failureHandler(new CustomLoginFailureHandler());
-		});
+		http.formLogin(form -> form.disable());
 
 		//로그아웃
 		http.logout((logout)->{
@@ -87,9 +92,9 @@ public class SecurityConfig {
 		});
 
 		//OAUTH2-CLIENT
-		http.oauth2Login((oauth2)->{
-			oauth2.loginPage("/login");
-		});
+//		http.oauth2Login((oauth2)->{
+//			oauth2.loginPage("/login");
+//		});
 
 		//SESSION INVALIDATED
 		http.sessionManagement((sessionManagerConfigure)->{
@@ -98,7 +103,7 @@ public class SecurityConfig {
 
 
 		//JWT FILTER ADD 로그인 이후에 인증하기 위한코드
-		http.addFilterBefore(new JwtAuthorizationFilter(userRepository,jwtTokenProvider,jwtTokenRepository, redisUtil), LogoutFilter.class);
+		http.addFilterBefore(new JwtAuthorizationFilter(userRepository, jwtTokenProvider, redisUtil), LogoutFilter.class);
 
 		//-----------------------------------------------
 		//[추가] CORS
@@ -123,18 +128,16 @@ public class SecurityConfig {
 	//[추가] CORS
 	//-----------------------------------------------------
 	@Bean
-	CorsConfigurationSource corsConfigurationSource(){
+	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedHeaders(Collections.singletonList("*")); //허용헤더
-		config.setAllowedMethods(Collections.singletonList("*")); //허용메서드
-		config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));  //허용도메인
-		config.setAllowCredentials(true); // COOKIE TOKEN OPTION
-		return new CorsConfigurationSource(){
-			@Override
-			public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-				return config;
-			}
-		};
+		config.setAllowedOriginPatterns(List.of("http://localhost:3000")); // React origin
+		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		config.setAllowedHeaders(List.of("*"));
+		config.setAllowCredentials(true); // 반드시 true 설정 (쿠키 허용)
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		return source;
 	}
 	//-----------------------------------------------------
 	//[추가] ATHENTICATION MANAGER 설정 - 로그인 직접처리를 위한 BEAN

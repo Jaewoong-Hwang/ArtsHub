@@ -1,16 +1,29 @@
 package com.example.demo.user.restcontroller;
 
+import com.example.demo.common.config.auth.jwt.JwtProperties;
+import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
+import com.example.demo.common.config.auth.jwt.TokenInfo;
+import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @RestController
@@ -22,6 +35,58 @@ public class RestUserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private RedisUtil redisUtil;
+
+
+    @PostMapping("/api/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData, HttpServletResponse response) {
+        String username = loginData.get("username");
+        String password = loginData.get("password");
+
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, password)
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // 토큰 발급
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+            // Redis 저장
+            redisUtil.setDataExpire("RT:" + username, tokenInfo.getRefreshToken(), JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME);
+
+            // 쿠키 생성
+            ResponseCookie accessCookie = ResponseCookie.from(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, tokenInfo.getAccessToken())
+                    .httpOnly(true)
+                    .path("/")
+                    .maxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME)
+                    .build();
+
+            ResponseCookie usernameCookie = ResponseCookie.from("username", URLEncoder.encode(username, StandardCharsets.UTF_8))
+                    .path("/")
+                    .maxAge(JwtProperties.REFRESH_TOKEN_EXPIRATION_TIME)
+                    .build();
+
+            // 실제로 브라우저가 인식하도록 직접 response에 쿠키 세팅
+            response.addHeader("Set-Cookie", accessCookie.toString());
+            response.addHeader("Set-Cookie", usernameCookie.toString());
+
+            return ResponseEntity.ok().body(Map.of("message", "로그인 성공"));
+
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("인증 실패");
+        }
+    }
+
 
     // 로그인 상태 확인
     @GetMapping("/api/user/me")
@@ -66,105 +131,64 @@ public class RestUserController {
     public ResponseEntity<String> admin() {
         return ResponseEntity.ok("ADMIN 접근 성공");
     }
+
+
+
+    @GetMapping("/api/check-username")
+    public ResponseEntity<?> checkUsername(@RequestParam String username) {
+        boolean exists = userRepository.existsById(username);
+        if (exists) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 아이디입니다");
+        } else {
+            return ResponseEntity.ok("사용 가능한 아이디입니다");
+        }
+    }
+
+    @PostMapping("/api/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        // 1. 쿠키에서 access-token / username 추출
+        String accessToken = null;
+        String username = null;
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie c : cookies) {
+                if (c.getName().equals(JwtProperties.ACCESS_TOKEN_COOKIE_NAME)) {
+                    accessToken = c.getValue();
+                }
+                if (c.getName().equals("username")) {
+                    username = c.getValue();
+                }
+            }
+        }
+
+        // 2. Redis에서 RefreshToken 제거
+        if (username != null) {
+            redisUtil.delete("RT:" + username);
+        }
+
+        // 3. 쿠키 제거
+        expireCookie(response, JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
+        expireCookie(response, "username");
+
+        // 4. SecurityContext 제거
+        SecurityContextHolder.clearContext();
+
+        return ResponseEntity.ok().body(Map.of("message", "로그아웃 완료"));
+    }
+
+    private void expireCookie(HttpServletResponse response, String name) {
+        Cookie cookie = new Cookie(name, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
+
 }
 
 
-//package com.example.demo.user.restcontroller;
-//
-//
-//import com.example.demo.user.dto.UserDto;
-//import com.example.demo.user.repository.UserRepository;
-//import lombok.extern.slf4j.Slf4j;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-//
-//@RestController
-//@Slf4j
-//public class RestUserController {
-//
-//    @Autowired
-//    private UserRepository userRepository;
-//
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
-//    @GetMapping("/login")
-//    public String login(Authentication authentication) {
-//        log.info("GET /login...");
-//
-//        if(authentication!=null&& authentication.isAuthenticated()){
-//            return "redirect:/";
-//        }
-//        return "login";
-//    }
-//
-////	@GetMapping("/user")
-////	public void user(Authentication authentication) {
-////		log.info("GET /user..." + authentication);
-////		log.info("name..." + authentication.getName());
-////		log.info("principal..." + authentication.getPrincipal());
-////		log.info("authorities..." + authentication.getAuthorities());
-////		log.info("details..." + authentication.getDetails());
-////		log.info("credential..." + authentication.getCredentials());
-////	}
-//
-////	@GetMapping("/user")
-////	public void user(@AuthenticationPrincipal Principal principal) {
-////		log.info("GET /user..." + principal);
-////	}
-//
-//    @GetMapping("/user")
-//    public void user(Model model) {
-//        log.info("GET /user...");
-//        Authentication authenticaton =
-//                SecurityContextHolder.getContext().getAuthentication();
-//        log.info("authentication : " + authenticaton);
-//
-//        model.addAttribute("auth", authenticaton);
-//
-//    }
-//
-//    @GetMapping("/manager")
-//    public void manager() {
-//        log.info("GET /manager...");
-//    }
-//
-//    @GetMapping("/admin")
-//    public void admin() {
-//        log.info("GET /admin...");
-//    }
-//
-//
-//    @GetMapping("/join")
-//    public void join() {
-//        log.info("GET /join..");
-//    }
-//
-//    @PostMapping("/join")
-//    public String join_post(UserDto dto, RedirectAttributes redirectAttributes) {
-//        log.info("POST /join.." + dto);
-//
-//        //DTO->ENTITY(DB저장) , ENTITY->DTO(뷰로전달)
-//        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-//        userRepository.save(dto.toEntity());
-//
-//        boolean isJoin = true;
-//        if (isJoin) {
-//            redirectAttributes.addFlashAttribute("message", "회원가입 완료!");
-//            return "redirect:/login";
-//        } else
-//            return "join";
-//    }
-//
-//}
+
 
 
 

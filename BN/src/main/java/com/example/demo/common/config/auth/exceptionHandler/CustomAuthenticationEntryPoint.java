@@ -14,10 +14,10 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
-
-		log.error("CustomAuthenticationEntryPoint's commence invoke....");
-		response.sendRedirect("/login?error="+authException.getMessage());
+						 AuthenticationException authException) throws IOException {
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		response.setContentType("application/json");
+		response.getWriter().write("{\"error\": \"UNAUTHORIZED\"}");
 	}
 
 }

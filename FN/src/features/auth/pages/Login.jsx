@@ -1,88 +1,49 @@
-// src/features/auth/pages/Login.jsx
+// src/pages/Login.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../../services/axiosInstance"; // axios 인스턴스 사용
-
+import axios from "axios";
 import "./css/login/login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleLogin = async () => {
     try {
-      // form-urlencoded로 서버에 로그인 요청
-      const response = await axiosInstance.post(
-        "/login",
-        new URLSearchParams({
-          username: username,
-          password: password,
-        }),
-        {
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          withCredentials: true, // 쿠키 인증 방식 사용 시 필수
-        }
+      const response = await axios.post(
+        "/api/login",
+        { username, password },
+        { withCredentials: true } // 쿠키 저장을 위해 필수
       );
 
-      axios.get("/api/user", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-
-      alert("로그인 성공");
-      navigate("/"); // 마이페이지로 이동
-    } catch (err) {
-      alert("로그인 실패: " + (err.response?.data?.message || err.message));
+      if (response.status === 200) {
+        alert("로그인 성공!");
+        window.location.href = "/main"; // 성공 시 이동할 페이지
+      }
+    } catch (error) {
+      setErrorMsg("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");
     }
   };
 
   return (
-    <form className="mt-5 p-0 m-0" onSubmit={(e) => e.preventDefault()}>
-      {/* 상단 아이콘 */}
-      <div className="row header">
-        <div className="col header-icon">
-          <a href="#">
-            <img
-              src="/assets/img/login/back.svg"
-              alt="back"
-              style={{ width: "24px" }}
-            />
-          </a>
-          <a href="#">
-            <img
-              src="/assets/img/login/home.svg"
-              alt="home"
-              style={{ width: "24px" }}
-            />
-          </a>
-        </div>
-      </div>
-
-      {/* 로고 */}
+    <div className="login-container">
       <div className="row main-logo">
         <div className="col">
           <a href="/">
-            <img
-              src="/img/mainlogo.png"
-              alt="main logo"
-              className="mainlogo img-fluid"
-            />
+            <img src="/static/img/mainlogo.png" alt="로고" className="mainlogo img-fluid" />
           </a>
         </div>
       </div>
 
-      {/* 입력 영역 */}
       <div className="box1">
         <div className="row custom-input">
           <div className="col">
             <input
               type="text"
-              className="form-control custom-input"
               placeholder="이메일 입력"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="form-control"
             />
           </div>
         </div>
@@ -91,64 +52,66 @@ function Login() {
           <div className="col">
             <input
               type="password"
-              className="form-control custom-input"
               placeholder="비밀번호 입력"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="form-control"
             />
           </div>
         </div>
 
         <div className="cb mb-3">
           <input type="checkbox" id="login" />
-          <span className="custom-chk"></span>
           <label htmlFor="login" style={{ fontSize: "14px" }}>
             로그인 유지
           </label>
         </div>
 
-        {/* 로그인 버튼 */}
+        {errorMsg && <div className="text-danger mb-2">{errorMsg}</div>}
+
         <div className="row mt-4">
           <div className="col">
-            <button
-              type="button"
-              className="btn1 btn-custom"
-              onClick={handleLogin}
-            >
+            <button className="btn1 btn-custom" onClick={handleLogin}>
               이메일로 로그인하기
             </button>
           </div>
         </div>
 
-        {/* SNS 로그인 자리 */}
         <div className="row">
           <div className="col">
+            <button className="btn2 btn-custom" onClick={() => window.location.href = "/oauth2/authorization/kakao"}>
+              <img src="/static/img/kakao.png" alt="카카오" className="kakao" /> 카카오로 시작하기
+            </button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <button className="btn3 btn-custom" onClick={() => window.location.href = "/oauth2/authorization/naver"}>
+              <img src="/static/img/naver.png" alt="네이버" className="naver" /> 네이버로 시작하기
+            </button>
+
             <div className="logos">
-              <button type="button" className="btn-social">
-                <img src="/img/google.png" alt="구글" className="img-social" />
+              <button className="btn-social">
+                <img src="/static/img/google.png" alt="구글" />
               </button>
-              <button type="button" className="btn-social">
-                <img
-                  src="/img/facebook.png"
-                  alt="페북"
-                  className="img-social"
-                />
+              <button className="btn-social">
+                <img src="/static/img/facebook.png" alt="페북" />
               </button>
-              <button type="button" className="btn-social">
-                <img src="/img/apple.png" alt="애플" className="img-social" />
+              <button className="btn-social">
+                <img src="/static/img/apple.png" alt="애플" />
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* 하단 링크 */}
-      <div className="hypertext">
-        <a href="#">아이디/비밀번호 찾기</a>
-        <a href="/join">회원가입</a>
-        <a href="/mypage">마이페이지</a>
+        <div className="hypertext">
+          <a href="/find">아이디/비밀번호 찾기</a>
+          <a href="/join">회원가입</a>
+          <a href="/mypage">마이페이지</a>
+        </div>
       </div>
-    </form>
+    </div>
   );
 }
 

@@ -48,22 +48,24 @@ public class JwtTokenProvider {
     //SIGNATURE 저장
     @PostConstruct
     public void init() {
-        List<Signature> list = signatureRepository.findAll(); //1개값만 저장되어있음
-        if(list.isEmpty()){
+        Optional<Signature> optionalSignature = signatureRepository.findAll().stream().findFirst();
+        if (optionalSignature.isEmpty()) {
             //처음 SIGNATURE발급
             byte[] keyBytes = KeyGenerator.getKeygen(); //바이트로 받아서
             this.key = Keys.hmacShaKeyFor(keyBytes);    //해쉬값으로 저장
+
             Signature signature = new Signature();
             signature.setKeyBytes(keyBytes);
             signature.setCreateAt(LocalDate.now());
+
             signatureRepository.save(signature);
-            System.out.println("JwtTokenProvider init() Key init : " + key);
+            log.info("JwtTokenProvider 초기 키 생성 완료: {}", this.key);
 
         }else{
-            //기존 SIGNATURE이용
-            Signature signature = list.get(0);
+            // 기존 Signature 로드
+            Signature signature = optionalSignature.get();
             this.key = Keys.hmacShaKeyFor(signature.getKeyBytes());
-            System.out.println("JwtTokenProvider init() 기존 Key 사용 : " + key);
+            log.info("JwtTokenProvider 기존 키 사용: {}", this.key);
             
         }
 
@@ -111,34 +113,35 @@ public class JwtTokenProvider {
 
     // JWT 토큰을 복호화하여 토큰에 들어있는 정보를 꺼내는 메서드
     public Authentication getAuthentication(String accessToken) {
-        // 토큰 복호화   Claims - 본문(Payload)
         Claims claims = parseClaims(accessToken);
 
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
-        // 클레임에서 권한 정보 가져오기
+
         Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get("auth").toString().split(","))
-                        .map(auth -> new SimpleGrantedAuthority(auth))
+                        .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        String username = claims.getSubject(); //username
+        String username = claims.getSubject();
 
-        // UserDetails 객체를 만들어서 Authentication 리턴
-        //PrincipalDetails 생성
-        PrincipalDetails principalDetails = new PrincipalDetails();
+        // DB에서 사용자 조회
         Optional<User> userOptional = userRepository.findById(username);
-        UserDto userDto = null;
-        if (userOptional.isPresent())
 
-        principalDetails.setUserDto(userDto);
+        if (userOptional.isEmpty()) {
+            throw new RuntimeException("해당 사용자가 존재하지 않습니다: " + username);
+        }
+
+        User user = userOptional.get();
+        UserDto userDto = UserDto.toDto(user);
+        PrincipalDetails principalDetails = new PrincipalDetails(userDto);
 
         System.out.println("JwtTokenProvider.getAuthentication UsernamePasswordAuthenticationToken : " + accessToken);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(principalDetails, "", authorities);
-        return usernamePasswordAuthenticationToken;
+
+        return new UsernamePasswordAuthenticationToken(principalDetails, "", authorities);
     }
+
 
     private Claims parseClaims(String accessToken) {
         try {

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/login/join.css"; // 스타일 경로 유지
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../services/axiosInstance"; // 쿠키 포함된 axios
 
 const Join = () => {
   const navigate = useNavigate();
+
+  // 중복확인 상태
+  const [dupMessage, setDupMessage] = useState("");
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +26,7 @@ const Join = () => {
       }-${document.getElementById("tel3").value}`,
     };
 
-        if (password !== repassword) {
+    if (password !== repassword) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
@@ -39,6 +43,32 @@ const Join = () => {
     } catch (err) {
       console.error(err);
       alert("회원가입 실패: " + (err.response?.data?.message || err.message));
+    }
+  };
+
+  //  아이디 중복확인 처리
+  const handleCheckUsername = async () => {
+    const username = document.getElementById("userid").value;
+
+    if (!username.trim()) {
+      setDupMessage("아이디를 입력해주세요.");
+      setIsAvailable(false);
+      return;
+    }
+
+    try {
+      const res = await axiosInstance.get("/api/check-username", {
+        params: { username },
+      });
+      setDupMessage("사용 가능한 아이디입니다.");
+      setIsAvailable(true);
+    } catch (err) {
+      if (err.response?.status === 409) {
+        setDupMessage("이미 사용 중인 아이디입니다.");
+      } else {
+        setDupMessage("서버 오류가 발생했습니다.");
+      }
+      setIsAvailable(false);
     }
   };
 
@@ -102,10 +132,20 @@ const Join = () => {
               placeholder="아이디"
               id="userid"
             />
-            <button type="button" className="btn-normal btn-small">
+            <button
+              type="button"
+              className="btn-normal btn-small"
+              onClick={handleCheckUsername}
+            >
               중복확인
             </button>
           </div>
+          {/* 중복확인 결과 메시지 */}
+          {dupMessage && (
+            <p style={{ fontSize: "13px", color: isAvailable ? "green" : "red" }}>
+              {dupMessage}
+            </p>
+          )}
 
           <input
             type="password"

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 		// username 인코딩 (쿠키용 + Redis 키용)
 		String rawUsername = authentication.getName();
-		String encodedUsername = URLEncoder.encode(rawUsername, StandardCharsets.UTF_8);
+
+		String encodedUsername = Base64.getEncoder().encodeToString(authentication.getName().getBytes(StandardCharsets.UTF_8));
 
 		// username 쿠키에 저장
 		Cookie usernameCookie = new Cookie("username", encodedUsername);
@@ -84,7 +86,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		result.put("refreshToken", tokenInfo.getRefreshToken());
 		result.put("username", rawUsername);
 
+
 		ObjectMapper objectMapper = new ObjectMapper();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(objectMapper.writeValueAsString(result));
 
 		//---------------------------------

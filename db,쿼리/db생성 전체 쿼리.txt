@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `artshubdb`.`user` (
   `email` VARCHAR(255) NOT NULL COMMENT '로그인용 이메일',
   `password` VARCHAR(255) NOT NULL COMMENT '암호화 저장',
   `name` VARCHAR(45) NOT NULL COMMENT '실명',
+  `nickname` VARCHAR(100) NOT NULL,
   `phone_number` VARCHAR(20) NOT NULL COMMENT '인증 및 연락용 번호',
   `gender` VARCHAR(10) NOT NULL COMMENT 'male / female',
   `create_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입 시각',
@@ -60,7 +61,6 @@ DROP TABLE IF EXISTS `artshubdb`.`expert_profile` ;
 
 CREATE TABLE IF NOT EXISTS `artshubdb`.`expert_profile` (
   `user_id` BIGINT UNSIGNED NOT NULL,
-  `nickname` VARCHAR(100) NOT NULL,
   `introdution` TEXT NULL DEFAULT NULL,
   `career` TEXT NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`),

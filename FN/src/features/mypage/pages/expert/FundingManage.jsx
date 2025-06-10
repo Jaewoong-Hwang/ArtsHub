@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import '../../../../assets/styles/reset.css'
 import "../css/expert.css";
 import "../css/sidemenu_expert.css";
 

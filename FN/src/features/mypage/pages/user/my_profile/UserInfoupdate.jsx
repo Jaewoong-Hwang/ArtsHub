@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../../../../../assets/styles/reset.css'
 import '../../css/user.css';
 import '../../css/sidemenu_user.css';
 

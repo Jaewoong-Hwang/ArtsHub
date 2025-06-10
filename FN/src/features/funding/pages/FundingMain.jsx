@@ -6,6 +6,7 @@ import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 import SearchBar from "../../../components/common/SearchBar";
 import ProjectFilterStatus from "../../project/projectparticipate/components/ProjectFilterStatus";
+import SortSelector from "../components/SortSelector";
 import styles from "./css/fundingMain.module.css";
 import "../../../assets/styles/reset.css";
 
@@ -44,6 +45,7 @@ const FundingMain = () => {
   const [projects, setProjects] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [sortOption, setSortOption] = useState("popular");
 
   useEffect(() => {
     try {
@@ -91,6 +93,23 @@ const FundingMain = () => {
     return matchCategory && matchSearch;
   });
 
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (sortOption === "popular") {
+      const aRate = (a.currentAmount / a.targetAmount) || 0;
+      const bRate = (b.currentAmount / b.targetAmount) || 0;
+      return bRate - aRate;
+    }
+    if (sortOption === "deadline") {
+      const aTime = new Date(a.deadline).getTime();
+      const bTime = new Date(b.deadline).getTime();
+      return aTime - bTime;
+    }
+    if (sortOption === "latest") {
+      return (b.id || "").localeCompare(a.id || "");
+    }
+    return 0;
+  });
+
   return (
     <>
       <Header />
@@ -111,6 +130,7 @@ const FundingMain = () => {
                 onCategorySelect={handleCategorySelect}
                 selectedCategory={selectedCategory}
               />
+              <SortSelector sortOption={sortOption} onChange={setSortOption} />
             </div>
 
             {selectedCategory && (
@@ -123,13 +143,13 @@ const FundingMain = () => {
           </div>
 
           <ProjectFilterStatus
-            totalCount={filteredProjects.length}
+            totalCount={sortedProjects.length}
             selectedCategory={selectedCategory}
             keyword={searchKeyword}
             onReset={handleResetFilter}
           />
 
-          <FundingCardList projects={filteredProjects} />
+          <FundingCardList projects={sortedProjects} />
         </section>
       </main>
       <Footer />

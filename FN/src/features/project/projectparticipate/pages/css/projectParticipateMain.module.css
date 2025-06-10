@@ -1,4 +1,4 @@
-.fundingPage {
+.projectPage {
   max-width: 1348px;
   background-color: var(--light-bg);
   min-height: 100vh;
@@ -12,7 +12,7 @@
   padding: 2rem 1rem;
 }
 
-.titleSection {
+.title {
   text-align: center;
   margin-bottom: 2.5rem;
 }
@@ -62,3 +62,12 @@
   margin-top: 3rem;
   color: #888;
 }
+
+
+
+
+
+
+
+
+

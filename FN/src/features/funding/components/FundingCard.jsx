@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import"../../../assets/styles/reset.css"
 import styles from "./css/FundingCard.module.css";
+import ProgressBar from "./ProgressBar";
 
 /**
  * @param {Object} props
@@ -57,6 +59,9 @@ const FundingCard = ({ project, index }) => {
         <p className={styles.summary}>
           {project.descriptionSummary || "설명이 없습니다."}
         </p>
+
+        {/* 퍼센트 진행 바 */}
+        <ProgressBar percent={getFundingPercent()} />
 
         {/* 펀딩 퍼센트 + D-day */}
         <div className={styles.meta}>

@@ -1,7 +1,5 @@
 package com.example.demo.common.config.auth.principal;
 
-
-
 import com.example.demo.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,16 +17,16 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrincipalDetails implements UserDetails, OAuth2User {
+
 	private UserDto userDto;
-	public PrincipalDetails(UserDto userDto){
+
+	public PrincipalDetails(UserDto userDto) {
 		this.userDto = userDto;
 	}
 
-	//----------------------------
-	// Oauth2User
-	//----------------------------
-	Map<String, Object > attributes;
-	String access_token;
+	// Oauth2User용
+	private Map<String, Object> attributes;
+	private String access_token;
 
 	@Override
 	public Map<String, Object> getAttributes() {
@@ -37,56 +35,46 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
 	@Override
 	public String getName() {
-		return userDto.getUsername();
+		// OAuth2에서 username 대신 email을 식별자로 사용
+		return userDto.getEmail();
 	}
 
-
-
-	//----------------------------
-	// UserDetails
-	//----------------------------
+	// UserDetails용
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Collection <GrantedAuthority> authorities = new ArrayList();
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(userDto.getRole()));
 		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return userDto.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return userDto.getUsername();
+		// 로그인 식별자: email 사용
+		return userDto.getEmail();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 }

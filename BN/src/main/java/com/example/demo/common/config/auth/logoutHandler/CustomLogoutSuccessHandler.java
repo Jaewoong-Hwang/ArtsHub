@@ -58,6 +58,8 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 		usernameCookie.setPath("/");
 		response.addCookie(usernameCookie);
 		redisUtil.delete("RT:" + authentication.getName());
+		log.info("[LOGOUT] AccessToken 삭제 대상: {}", token);
+		log.info("[LOGOUT] Redis 삭제 대상 키: RT:{}", authentication.getName());
 
 		//-----------------------
 		//발급받은 ACCESSTOKEN 쿠키제거

@@ -25,7 +25,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		System.out.println("loadUserByUsername .. " + username);
-		Optional<User> userOption  = userRepository.findById(username);
+		Optional<User> userOption  = userRepository.findByEmail(username);
 		if(userOption.isEmpty())
 			throw new UsernameNotFoundException(username + " 존재하지 않는 계정입니다.");
 

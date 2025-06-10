@@ -72,14 +72,14 @@ function Login() {
         <div className="row mt-4">
           <div className="col">
             <button className="btn1 btn-custom" onClick={handleLogin}>
-              이메일로 로그인하기
+              로그인
             </button>
           </div>
         </div>
 
         <div className="row">
           <div className="col">
-            <button className="btn2 btn-custom" onClick={() => window.location.href = "/oauth2/authorization/kakao"}>
+            <button className="btn2 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/kakao"}>
               <img src="/static/img/kakao.png" alt="카카오" className="kakao" /> 카카오로 시작하기
             </button>
           </div>
@@ -87,23 +87,20 @@ function Login() {
 
         <div className="row">
           <div className="col">
-            <button className="btn3 btn-custom" onClick={() => window.location.href = "/oauth2/authorization/naver"}>
+            <button className="btn3 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/naver"}>
               <img src="/static/img/naver.png" alt="네이버" className="naver" /> 네이버로 시작하기
             </button>
-
-            <div className="logos">
-              <button className="btn-social">
-                <img src="/static/img/google.png" alt="구글" />
-              </button>
-              <button className="btn-social">
-                <img src="/static/img/facebook.png" alt="페북" />
-              </button>
-              <button className="btn-social">
-                <img src="/static/img/apple.png" alt="애플" />
-              </button>
             </div>
           </div>
-        </div>
+
+        <div className="row">
+          <div className="col">
+            <button className="btn4 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/google"}>
+              <img src="/static/img/google.png" alt="구글" className="google" /> 구글로 시작하기
+            </button>
+            </div>
+          </div>
+
 
         <div className="hypertext">
           <a href="/find">아이디/비밀번호 찾기</a>

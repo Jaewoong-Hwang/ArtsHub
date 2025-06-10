@@ -48,33 +48,26 @@ public class JwtTokenProvider {
     //SIGNATURE 저장
     @PostConstruct
     public void init() {
+
         Optional<Signature> optionalSignature = signatureRepository.findAll().stream().findFirst();
         if (optionalSignature.isEmpty()) {
-            //처음 SIGNATURE발급
-            byte[] keyBytes = KeyGenerator.getKeygen(); //바이트로 받아서
-            this.key = Keys.hmacShaKeyFor(keyBytes);    //해쉬값으로 저장
+            // 새 키 생성
+            byte[] keyBytes = KeyGenerator.getKeygen();
+            this.key = Keys.hmacShaKeyFor(keyBytes);
 
             Signature signature = new Signature();
             signature.setKeyBytes(keyBytes);
             signature.setCreateAt(LocalDate.now());
 
             signatureRepository.save(signature);
-            log.info("JwtTokenProvider 초기 키 생성 완료: {}", this.key);
-
-        }else{
-            // 기존 Signature 로드
+            log.info("JwtTokenProvider 초기 키 생성 완료");
+        } else {
             Signature signature = optionalSignature.get();
             this.key = Keys.hmacShaKeyFor(signature.getKeyBytes());
-            log.info("JwtTokenProvider 기존 키 사용: {}", this.key);
-            
+            log.info("JwtTokenProvider 기존 키 사용");
         }
-
     }
 
-    public JwtTokenProvider() {
-
-
-    }
 
     // 유저 정보를 가지고 AccessToken, RefreshToken 을 생성하는 메서드
     public TokenInfo generateToken(Authentication authentication) {
@@ -124,13 +117,11 @@ public class JwtTokenProvider {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        String username = claims.getSubject();
-
-        // DB에서 사용자 조회
-        Optional<User> userOptional = userRepository.findById(username);
+        String email = claims.getSubject();
+        Optional<User> userOptional = userRepository.findByEmail(email);
 
         if (userOptional.isEmpty()) {
-            throw new RuntimeException("해당 사용자가 존재하지 않습니다: " + username);
+            throw new RuntimeException("해당 사용자가 존재하지 않습니다: " + email);
         }
 
         User user = userOptional.get();

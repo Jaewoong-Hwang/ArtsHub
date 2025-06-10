@@ -8,7 +8,9 @@ import com.example.demo.common.config.auth.provider.OAuth2UserInfo;
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
+import com.example.demo.user.util.RandomNicknameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -28,13 +30,14 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
     private UserRepository userRepository;
 
     @Autowired
+    @Lazy
     private PasswordEncoder passwordEncoder;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 //        System.out.println("PrincipalDetailsOAuth2Service's loadUser invoke..");
 //        System.out.println("userRequest : " + userRequest);
-        System.out.println("userRequest.getClientRegistration() :"+ userRequest.getClientRegistration());
+        System.out.println("userRequest.getClientRegistration() :" + userRequest.getClientRegistration());
 //        System.out.println("userRequest.getAccessToken() : "+ userRequest.getAccessToken());
 //        System.out.println("userRequest.getAdditionalParameters() : "+ userRequest.getAdditionalParameters());
 //        System.out.println("userRequest.getAccessToken().getTokenValue() : "+ userRequest.getAccessToken().getTokenValue());
@@ -52,31 +55,36 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
 
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
-        if(provider.startsWith("kakao")) {
+        Map<String, Object> properties = null;
+        if (provider.startsWith("kakao")) {
             //카카오 로그인시
-        Long id = (Long) attributes.get("id");
-        LocalDateTime connected_at = OffsetDateTime.parse(attributes.get("connected_at").toString()).toLocalDateTime();
-        Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
-        Map<String, Object> kakao_account = (Map<String, Object>)attributes.get("kakao_account");
-        System.out.println("id :" + id);
-        System.out.println("connected_at :" + connected_at);
-        System.out.println("properties :" + properties);
-        oAuth2UserInfo = new KakaoUserInfo(id, connected_at, properties, kakao_account);
+            Long id = (Long) attributes.get("id");
+            LocalDateTime connected_at = OffsetDateTime.parse(attributes.get("connected_at").toString()).toLocalDateTime();
+            properties = (Map<String, Object>) attributes.get("properties");
+            Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
+            System.out.println("id :" + id);
+            System.out.println("connected_at :" + connected_at);
+            System.out.println("properties :" + properties);
+            oAuth2UserInfo = new KakaoUserInfo(id, connected_at, properties, kakao_account);
 
 
-        }else if(provider.startsWith("naver")) {
+        } else if (provider.startsWith("naver")) {
             //네이버 로그인시
-            Map<String,Object> response = (Map<String,Object>)attributes.get("response");
-            String id = (String)response.get("id");
-            oAuth2UserInfo = new NaverUserinfo(id,response);
+            Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+            String id = (String) response.get("id");
+            oAuth2UserInfo = new NaverUserinfo(id, response);
 
 
-
-        }else if(provider.startsWith("google")){
+        } else if (provider.startsWith("google")) {
             //구글 로그인시
-            String id = (String)attributes.get("sub");
-            oAuth2UserInfo = new GoogleUserinfo(id,attributes);
+            String id = (String) attributes.get("sub");
+            oAuth2UserInfo = new GoogleUserinfo(id, attributes);
 
+
+            //  GoogleUserinfo 내부 값 출력
+            System.out.println(" oAuth2UserInfo.getEmail(): " + oAuth2UserInfo.getEmail());
+            System.out.println(" oAuth2UserInfo.getName(): " + oAuth2UserInfo.getName());
+            System.out.println(" oAuth2UserInfo.getProfileImage(): " + oAuth2UserInfo.getProfileImage());
 
         }
 
@@ -84,19 +92,23 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
 
 
         // 최초 로그인시 로컬계정 DB 저장 처리
-        String username = oAuth2UserInfo.getProvider()+"_"+oAuth2UserInfo.getProviderId();
+        String username = oAuth2UserInfo.getProvider() + "_" + oAuth2UserInfo.getProviderId();
         String password = passwordEncoder.encode("1234");
-        Optional<User> userOptional = userRepository.findById(username);
+        Optional<User> userOptional = userRepository.findByEmail(username);
         //UserDto 생성 (이유 : PrincipalDetails에 포함)
         //UserEntity 생성 (이유 : 최초 로그인시 DB 저장용도)
         UserDto userDto = null;
-        if(userOptional.isEmpty()){
+        if (userOptional.isEmpty()) {
             //최초 로그인(Dto , Entity)
-            userDto = UserDto   .builder()
-                                .username(username)
-                                .password(password)
-                                .role("ROLE_USER")
-                                .build();
+            userDto = UserDto.builder()
+                    .email(username)
+                    .password(password)
+                    .name(oAuth2UserInfo.getName() != null ? oAuth2UserInfo.getName() : "소셜유저") // 기본 이름
+                    .nickname(RandomNicknameGenerator.generate())
+                    .phoneNumber("010-0000-0000") // 소셜에서는 없으므로 기본값
+                    .profileImage(oAuth2UserInfo.getProfileImage() != null ? oAuth2UserInfo.getProfileImage() : "default.jpg")
+                    .role("ROLE_USER")
+                    .build();
             User user = userDto.toEntity();
             userRepository.save(user); //계정 등록
         } else {
@@ -113,10 +125,6 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
         principalDetails.setUserDto(userDto);
         principalDetails.setAttributes(oAuth2User.getAttributes());
         principalDetails.setAccess_token(userRequest.getAccessToken().getTokenValue());
-
-
-
-
 
 
         return principalDetails;

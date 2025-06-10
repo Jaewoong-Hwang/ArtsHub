@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import "./css/login/join.css"; // 스타일 경로 유지
+import styles from "./css/login/join.module.css"; // ✅ CSS Module import
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../../services/axiosInstance"; // 쿠키 포함된 axios
+import axiosInstance from "../../../services/axiosInstance";
 
 const Join = () => {
   const navigate = useNavigate();
-
-  // 중복확인 상태
   const [dupMessage, setDupMessage] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
 
@@ -17,13 +15,14 @@ const Join = () => {
     const repassword = document.getElementById("repassword").value;
 
     const userData = {
-      username: document.getElementById("userid").value,
-      password: document.getElementById("password").value,
+      email: document.getElementById("userid").value,
+      password: password,
       name: document.getElementById("username").value,
-      address: document.getElementById("addr").value,
-      phone: `${document.getElementById("tel1").value}-${
+      phoneNumber: `${document.getElementById("tel1").value}-${
         document.getElementById("tel2").value
       }-${document.getElementById("tel3").value}`,
+      gender:
+        document.querySelector('input[name="gender"]:checked')?.value || "male",
     };
 
     if (password !== repassword) {
@@ -31,7 +30,7 @@ const Join = () => {
       return;
     }
 
-    if (!userData.username || !userData.password || !userData.name) {
+    if (!userData.email || !userData.password || !userData.name) {
       alert("필수 항목을 모두 입력해주세요.");
       return;
     }
@@ -46,7 +45,6 @@ const Join = () => {
     }
   };
 
-  //  아이디 중복확인 처리
   const handleCheckUsername = async () => {
     const username = document.getElementById("userid").value;
 
@@ -57,8 +55,8 @@ const Join = () => {
     }
 
     try {
-      const res = await axiosInstance.get("/api/check-username", {
-        params: { username },
+      await axiosInstance.get("/api/check-email", {
+        params: { email: username },
       });
       setDupMessage("사용 가능한 아이디입니다.");
       setIsAvailable(true);
@@ -74,153 +72,111 @@ const Join = () => {
 
   return (
     <div>
-      <div className="header"></div>
-      <h1 className="main-title">Arts Hubs</h1>
+      <div className={styles.header}></div>
+      <h1 className={styles.mainTitle}>Arts Hubs</h1>
       <hr />
 
-      <div className="container-join-social">
-        <h2>간편 가입</h2>
-        <div>
-          <button
-            type="button"
-            className="btn-kakao btn-standard"
-            onClick={() => alert("카카오 연동 예정")}
-          >
-            <img src="/static/img/kakao.png" alt="카카오" className="kakao" />
-            카카오로 시작하기
-          </button>
-        </div>
-        <div>
-          <button type="button" className="btn-naver btn-standard">
-            <img src="/static/img/naver.png" alt="네이버" className="naver" />
-            네이버로 시작하기
-          </button>
-        </div>
-
-        <div className="logos">
-          <button type="button" className="btn-social">
-            <img
-              src="/static/img/google.png"
-              alt="구글"
-              className="img-social"
-            />
-          </button>
-          <button type="button" className="btn-social">
-            <img
-              src="/static/img/facebook.png"
-              alt="페북"
-              className="img-social"
-            />
-          </button>
-          <button type="button" className="btn-social">
-            <img
-              src="/static/img/apple.png"
-              alt="애플"
-              className="img-social"
-            />
-          </button>
-        </div>
-      </div>
-
       <form onSubmit={handleSubmit}>
-        <div className="container-join-artshub">
-          <div className="id-box">
+        <div className={styles.containerJoinArtshub}>
+          <h1>회원가입</h1>
+
+          <div className={styles.idBox}>
             <input
               type="text"
-              name="userid"
-              className="join-input"
-              placeholder="아이디"
               id="userid"
+              className={styles.joinInput}
+              placeholder="아이디"
             />
             <button
               type="button"
-              className="btn-normal btn-small"
+              className={`${styles.btnNormal} ${styles.btnSmall}`}
               onClick={handleCheckUsername}
             >
               중복확인
             </button>
           </div>
-          {/* 중복확인 결과 메시지 */}
           {dupMessage && (
-            <p style={{ fontSize: "13px", color: isAvailable ? "green" : "red" }}>
+            <p
+              style={{ fontSize: "13px", color: isAvailable ? "green" : "red" }}
+            >
               {dupMessage}
             </p>
           )}
 
           <input
             type="password"
-            name="password"
-            className="join-input"
-            placeholder="비밀번호"
             id="password"
+            className={styles.joinInput}
+            placeholder="비밀번호"
           />
           <input
             type="password"
-            name="repassword"
-            className="join-input"
-            placeholder="비밀번호 재확인"
             id="repassword"
+            className={styles.joinInput}
+            placeholder="비밀번호 재확인"
           />
           <input
             type="text"
-            name="username"
-            className="join-input"
-            placeholder="이름"
             id="username"
+            className={styles.joinInput}
+            placeholder="이름"
           />
 
-          <div className="address-box">
+          <div className={styles.addressBox}>
             <input
               type="text"
-              name="zip"
-              className="join-input"
-              placeholder="우편번호"
               id="zip"
+              className={styles.joinInput}
+              placeholder="우편번호"
             />
-            <button type="button" className="btn-normal btn-small">
+            <button
+              type="button"
+              className={`${styles.btnNormal} ${styles.btnSmall}`}
+            >
               우편번호 검색
             </button>
           </div>
 
           <input
             type="text"
-            name="addr"
-            className="join-input"
-            placeholder="상세 주소"
             id="addr"
+            className={styles.joinInput}
+            placeholder="상세 주소"
           />
 
           <h6>휴대전화</h6>
-          <div className="tel">
-            <select name="tel1" className="join-input tel1" id="tel1">
+          <div className={styles.tel}>
+            <select id="tel1" className={`${styles.joinInput} ${styles.tel1}`}>
               <option value="010">010</option>
               <option value="011">011</option>
               <option value="012">012</option>
             </select>
-            <span className="tel-hypen">-</span>
+            <span className={styles.telHypen}>-</span>
             <input
               type="text"
-              name="tel2"
-              className="join-input tel2"
               id="tel2"
+              className={`${styles.joinInput} ${styles.tel2}`}
             />
-            <span className="tel-hypen">-</span>
+            <span className={styles.telHypen}>-</span>
             <input
               type="text"
-              name="tel3"
-              className="join-input tel3"
               id="tel3"
+              className={`${styles.joinInput} ${styles.tel3}`}
             />
-            <button type="button" className="btn-normal btn-small">
+            <button
+              type="button"
+              className={`${styles.btnNormal} ${styles.btnSmall}`}
+            >
               인증번호 받기
             </button>
           </div>
-
-          <div>
-            <button type="submit" className="btn-normal btn-standard">
-              회원가입 하기
-            </button>
-          </div>
+          
+          <button
+            type="submit"
+            className={`${styles.btnNormal} ${styles.btnStandard}`}
+          >
+            회원가입 하기
+          </button>
         </div>
       </form>
     </div>

@@ -81,6 +81,7 @@ a {
     background-color: #29c3ff;
     color: white;
     border-radius: 5px;
+    border: 1px solid;
 }
 
 .btn1:hover {
@@ -105,6 +106,18 @@ a {
 
 .btn3:hover {
     background-color: #01a12c;
+}
+
+.btn4 {
+    background-color: #ffffff;
+    color: black;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+}
+
+.btn4:hover {
+    background-color: lightgray;
+    color: white;
 }
 
 .hypertext {

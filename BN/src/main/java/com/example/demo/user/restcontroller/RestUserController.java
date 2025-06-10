@@ -3,9 +3,11 @@ package com.example.demo.user.restcontroller;
 import com.example.demo.common.config.auth.jwt.JwtProperties;
 import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.common.config.auth.jwt.TokenInfo;
+import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.dto.UserDto;
 import com.example.demo.user.repository.UserRepository;
+import com.example.demo.user.util.RandomNicknameGenerator;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -92,9 +94,16 @@ public class RestUserController {
     @GetMapping("/api/user/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
+            PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+            UserDto userDto = principal.getUserDto(); // 전체 정보 꺼냄
+
             return ResponseEntity.ok(Map.of(
-                    "username", authentication.getName(),
-                    "authorities", authentication.getAuthorities()
+                    "userId", userDto.getUserId(),
+                    "email", userDto.getEmail(),
+                    "name", userDto.getName(),
+                    "nickname", userDto.getNickname(),
+                    "phoneNumber", userDto.getPhoneNumber(),
+                    "role", userDto.getRole()
             ));
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 필요");
@@ -106,6 +115,12 @@ public class RestUserController {
     public ResponseEntity<?> join(@RequestBody UserDto dto) {
         log.info("회원가입 요청: {}", dto);
 
+        // 랜덤 닉네임 지정
+        if (dto.getNickname() == null || dto.getNickname().isBlank()) {
+            dto.setNickname(RandomNicknameGenerator.generate());
+        }
+
+        // 비밀번호 암호화
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(dto.toEntity());
 
@@ -117,7 +132,7 @@ public class RestUserController {
     public ResponseEntity<?> user(Authentication authentication) {
         log.info("USER 접근: {}", authentication);
         return ResponseEntity.ok(Map.of(
-                "username", authentication.getName(),
+                "email", authentication.getName(), // email 기반 인증이라면 명시적으로 변경
                 "authorities", authentication.getAuthorities()
         ));
     }
@@ -134,15 +149,16 @@ public class RestUserController {
 
 
 
-    @GetMapping("/api/check-username")
-    public ResponseEntity<?> checkUsername(@RequestParam String username) {
-        boolean exists = userRepository.existsById(username);
+    @GetMapping("/api/check-email")
+    public ResponseEntity<?> checkEmail(@RequestParam String email) {
+        boolean exists = userRepository.existsByEmail(email);  // 이메일로 중복 확인
         if (exists) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 아이디입니다");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 이메일입니다");
         } else {
-            return ResponseEntity.ok("사용 가능한 아이디입니다");
+            return ResponseEntity.ok("사용 가능한 이메일입니다");
         }
     }
+
 
     @PostMapping("/api/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./css/CategoryList.css";
+import styles from "./css/categoryList.module.css"; // ✅ CSS 모듈 import
 
 const categories = [
   { name: "뮤지컬", emoji: "🎭" },
@@ -28,33 +28,32 @@ const CategoryList = ({ onCategorySelect, selectedCategory }) => {
   };
 
   return (
-    <div className="category-wrapper">
-      <button className="arrow-button left" onClick={scrollLeft}>
+    <div className={styles.categoryWrapper}>
+      <button className={`${styles.arrowButton} ${styles.left}`} onClick={scrollLeft}>
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="2">
           <polyline points="15,18 9,12 15,6" stroke="currentColor" />
         </svg>
       </button>
 
-      <div className="category-list" ref={scrollRef}>
-        {categories.map((cat, idx) => (
-          <div
-            key={idx}
-            className={`category-item ${
-              selectedCategory === cat.name ? "active" : ""
-            }`}
-            onClick={() =>
-              onCategorySelect(selectedCategory === cat.name ? null : cat.name)
-            }
-          >
-            <div className="emoji">{cat.emoji}</div>
-            <p>{cat.name}</p>
-          </div>
-        ))}
-
-        
+      <div className={styles.categoryList} ref={scrollRef}>
+        {categories.map((cat, idx) => {
+          const isActive = selectedCategory === cat.name;
+          return (
+            <div
+              key={idx}
+              className={`${styles.categoryItem} ${isActive ? styles.active : ""}`}
+              onClick={() =>
+                onCategorySelect(isActive ? null : cat.name)
+              }
+            >
+              <div className={styles.emoji}>{cat.emoji}</div>
+              <p>{cat.name}</p>
+            </div>
+          );
+        })}
       </div>
 
-      <button className="arrow-button right" onClick={scrollRight}>
+      <button className={`${styles.arrowButton} ${styles.right}`} onClick={scrollRight}>
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="2">
           <polyline points="9,18 15,12 9,6" stroke="currentColor" />
         </svg>

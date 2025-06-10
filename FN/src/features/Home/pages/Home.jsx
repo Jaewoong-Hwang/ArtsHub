@@ -11,7 +11,7 @@ import Header from "../../../components/layout/Header";
 import Footer from "../../../components/layout/Footer";
 
 import "../../../assets/styles/reset.css";
-import styles from "./css/home..module.css";
+import styles from "./css/home.module.css";
 
 const Home = () => {
   const [keyword, setKeyword] = useState("");

@@ -1,0 +1,83 @@
+.hero {
+  background: url('') no-repeat center center/cover;
+  color: #666;
+  padding: 6rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.heroText h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.introSection {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #eaf6ff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.featureCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.featureCard {
+  width: 420px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-6px);
+}
+
+.featureImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.featureImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featureCard p {
+  margin: 1rem 1.2rem;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.howtoSection {
+  background-color: #111;
+  color: #fff;
+  padding: 3rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.howBox {
+  margin-bottom: 2rem;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

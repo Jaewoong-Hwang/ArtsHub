@@ -53,7 +53,7 @@ const Header = ({ user }) => {
           </li>
           <ul className="depth1">
             <li>
-              <Link to="/funding">Funding</Link>
+              <Link to="/fundingmain">Funding</Link>
               <ul className="depth2">
                 <li><a href="#">인기</a></li>
                 <li><a href="#">신규</a></li>

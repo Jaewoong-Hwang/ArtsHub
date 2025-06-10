@@ -9,11 +9,13 @@ body {
 
 /* fontfamily */
 /* 글꼴 등록 */
+/*
 @font-face {
     font-family: 'custom-font-01';
     src: url("../../static/assets/font/NotoSansKR-VariableFont_wght.ttf");
     font-size: normal;
 }
+    */
 
 body{
     font-family: "custom-font-01";

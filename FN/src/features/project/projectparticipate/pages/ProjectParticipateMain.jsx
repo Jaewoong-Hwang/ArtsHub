@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "../../../../services/axiosInstance";
 import HeroCarousel from "./HeroCarousel";
 import CategoryList from "./CategoryList";
 import ProjectCardList from "./ProjectCardList";
@@ -58,32 +59,27 @@ const ProjectParticipateMain = () => {
     setSearchKeyword("");
   };
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("submittedProjects");
-      const parsed = JSON.parse(stored);
-
-      // 🔹 유효한 배열인지 확인
-      if (Array.isArray(parsed)) {
-        setProjects(
-          parsed.map((p) => ({
-            id: p.id || String(Date.now()),
-            title: p.title,
-            category: p.genre,
-            image: p.thumbnail,
-            descriptionSummary: p.description?.summary || "",
-            views: p.views || 0,
-            deadline: p.deadline || "", // ✅ 추가
-            capacity: p.capacity || "", // ✅ 추가
-          }))
-        );
-      } else {
-        setProjects([]);
-      }
-    } catch (err) {
-      console.error("🚨 로컬스토리지 파싱 오류:", err);
+ useEffect(() => {
+  axios.get("/api/projects")
+    .then((res) => {
+      const serverData = res.data;
+      setProjects(
+        serverData.map((p) => ({
+          id: p.id,
+          title: p.title,
+          category: p.genre,
+          image: p.thumbnail,
+          descriptionSummary: p.description.summary || "",
+          views: p.views || 0,
+          deadline: p.deadline || "",
+          capacity: p.capacity || "",
+        }))
+      );
+    })
+    .catch((err) => {
+      console.error("🚨 서버 프로젝트 조회 실패:", err);
       setProjects([]);
-    }
+    });
 
     setSlides(fallbackSlides);
   }, []);

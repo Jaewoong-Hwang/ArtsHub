@@ -13,7 +13,8 @@ const ProjectCard = ({ project, index }) => {
       alert("프로젝트 ID가 없습니다.");
       return;
     }
-    navigate(`/project/${project.id}`);
+    navigate(`/project/${project.slug}`);
+
   };
 
   // 🔹 D-Day 계산

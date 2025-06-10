@@ -14,5 +14,5 @@ export const ProjectRoutes = () => [
   <Route key="reward" path="project/create/reward" element={<ProjectCreateReward />} />,
   <Route key="Participate" path="project/participate" element={<ProjectParticipateMain />} />,
   <Route key="Preview" path="project/preview" element={<ProjectPreview />} />,
-  <Route key="Detail" path="project/:id" element={<ProjectDetail />} />,
+  <Route key="Detail" path="project/:slug" element={<ProjectDetail />} />,   // ✅ 수정됨!
 ];

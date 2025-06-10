@@ -39,7 +39,7 @@ const ProjectPreview = () => {
       return;
     }
 
-    submitProject({ info, description, rewards, navigate }); // ✅ 등록 실행
+    submitProject(); // ✅ 등록 실행
   };
 
   return (

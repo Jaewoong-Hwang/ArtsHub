@@ -27,7 +27,7 @@ const Modal = ({ type, onClose }) => {
           style: "primary",
           action: () => {
             onClose(); // ✅ 모달 먼저 닫고
-            submitProject(); // ✅ 프로젝트 등록
+            submitProject(navigate); // ✅ 프로젝트 등록
           },
         },
       ],

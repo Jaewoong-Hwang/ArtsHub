@@ -1,33 +1,43 @@
 // src/features/project/pages/ProjectDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "../../../../services/axiosInstance";
 
 import "../../../../assets/styles/reset.css";
 import styles from "./css/ProjectDetail.module.css";
 
 const ProjectDetail = () => {
-  const { id } = useParams(); // 📌 URL에서 id 가져오기
+  const { slug } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState(null); // null: 로딩, false: 실패, {}: 성공
 
   useEffect(() => {
-    const stored = localStorage.getItem("submittedProjects");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        const found = parsed.find((p) => String(p.id) === String(id));
-        if (found) setProject(found);
-      } catch (e) {
-        console.error("❌ 로컬스토리지 파싱 오류:", e);
-      }
-    }
-  }, [id]);
+    axios
+      .get(`/api/projects/${slug}`)
+      .then((res) => setProject(res.data))
+      .catch((err) => {
+        console.error("❌ 프로젝트 조회 실패:", err);
+        setProject(false);
+      });
+  }, [slug]);
 
-  if (!project) {
+  if (project === null) {
+    return <p className={styles.loading}>불러오는 중입니다...</p>;
+  }
+
+  if (project === false) {
     return <p className={styles.notFound}>해당 프로젝트를 찾을 수 없습니다.</p>;
   }
 
-  const { title, genre, deadline, capacity, thumbnail, description, rewards } = project;
+  const {
+    title,
+    genre,
+    deadline,
+    capacity,
+    thumbnail,
+    description,
+    rewards,
+  } = project;
 
   return (
     <div className={styles.detailWrapper}>
@@ -55,19 +65,14 @@ const ProjectDetail = () => {
       <section className={styles.detailSection}>
         <h2>🎁 리워드</h2>
         {Array.isArray(rewards) && rewards.length > 0 ? (
-          rewards.map((reward) => (
-            <div key={reward.id} className={styles.rewardCard}>
-              <h3>{reward.title} - {reward.amount}원</h3>
-              <p>{reward.description}</p>
-              {reward.type === "set" && (
-                <ul>
-                  {reward.options?.map((opt, idx) => (
-                    <li key={idx}>
-                      {opt.optionName}: {opt.optionValues}
-                    </li>
-                  ))}
-                </ul>
-              )}
+          rewards.map((reward, idx) => (
+            <div key={idx} className={styles.rewardCard}>
+              <h3>{reward.title} - {reward.price}원</h3>
+              <ul>
+                {reward.options?.map((opt, i) => (
+                  <li key={i}>{opt}</li>
+                ))}
+              </ul>
             </div>
           ))
         ) : (

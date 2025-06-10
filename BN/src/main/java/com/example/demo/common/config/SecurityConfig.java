@@ -69,7 +69,8 @@ public class SecurityConfig {
 					"/css/**",
 					"/js/**",
 					"/img/**",
-					"/assets/**").permitAll();
+					"/assets/**",
+					"/api/projects/**").permitAll();
 			auth.requestMatchers("/api/user").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");

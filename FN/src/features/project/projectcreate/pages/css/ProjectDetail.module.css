@@ -96,3 +96,25 @@
   color: var(--gray);
   font-size: 1.2rem;
 }
+
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.notFound {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.25rem;
+  color: crimson;
+}

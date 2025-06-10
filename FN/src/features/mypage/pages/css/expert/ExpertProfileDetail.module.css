@@ -1,0 +1,99 @@
+.mypage_section {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  display: flex;
+  background-color: none;
+}
+
+.expert-profile-container {
+  width: 950px;
+  padding: 0 20px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 33px;
+}
+
+.profile-name {
+  font-size: 1.563rem;
+  font-weight: 500;
+}
+
+.expert-info-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 40px 27px;
+  margin-bottom: 40px;
+}
+
+.expert-info-item {
+  margin-bottom: 70px;
+}
+
+.expert-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-title {
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.info-content {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.portfolio-box {
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  padding: 46px 64px 70px 27px;
+}
+
+.portfolio-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.view-all {
+  font-size: 0.9rem;
+  color: #999;
+  text-decoration: none;
+}
+
+.portfolio-content {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin-bottom: 18px;
+}
+
+.portfolio-list {
+  display: flex;
+  gap: 20px;
+}
+
+.portfolio-item {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  border-radius: 6px;
+}

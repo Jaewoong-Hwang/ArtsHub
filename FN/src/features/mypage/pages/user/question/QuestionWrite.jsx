@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
-import '../../../../../assets/styles/reset.css'
-import '../../css/user.css';
-import '../../css/sidemenu_user.css';
+import { Link } from 'react-router-dom';
+import '../../../../../assets/styles/reset.css';
+import styles from '../../css/user/question/QuestionWrite.module.css';
 
 const QuestionWrite = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const handleSubmit = () => {
-    // TODO: 여기에 서버로 보내는 로직 추가 (axios.post 등)
     if (!title.trim() || !content.trim()) {
       alert('제목과 내용을 모두 입력해주세요.');
       return;
@@ -28,11 +26,14 @@ const QuestionWrite = () => {
     <>
       <div id="header"></div>
 
-      <div className="question-write-content">
-        <p className="question-write-title">문의 글 쓰기</p>
+      <div className={styles["question-write-content"]}>
+        <p className={styles["question-write-title"]}>문의 글 쓰기</p>
 
-        <form className="question-write-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="form-group">
+        <form
+          className={styles["question-write-form"]}
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div className={styles["form-group"]}>
             <label htmlFor="title">제목</label>
             <input
               type="text"
@@ -44,7 +45,7 @@ const QuestionWrite = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles["form-group"]}>
             <label htmlFor="content">내용</label>
             <textarea
               id="content"
@@ -56,9 +57,13 @@ const QuestionWrite = () => {
             />
           </div>
 
-          <div className="form-button-group">
-            <button type="button" onClick={handleSubmit}>등록</button>
-            <button type="button" onClick={handleCancel}>취소</button>
+          <div className={styles["form-button-group"]}>
+            <button type="button" onClick={handleSubmit}>
+              등록
+            </button>
+            <button type="button" onClick={handleCancel}>
+              취소
+            </button>
           </div>
         </form>
       </div>

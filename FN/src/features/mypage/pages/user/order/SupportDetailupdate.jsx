@@ -1,39 +1,38 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import '../../../../../assets/styles/reset.css'
-import '../../css/user.css';
-import '../../css/sidemenu_user.css';
+import { Link } from 'react-router-dom';
+import '../../../../../assets/styles/reset.css';
+import styles from '../../css/user/order/SupportDetailupdate.module.css';
 
 const SupportDetailupdate = () => {
   return (
     <>
       <div id="header"></div>
 
-      <div className="order-detail-content">
+      <div className={styles["order-detail-content"]}>
         {/* 프로젝트 정보 카드 */}
-        <div className="order-detail-card">
+        <div className={styles["order-detail-card"]}>
           <img src="/static/img/빛과 그림자.webp" alt="썸네일" />
-          <div className="order-detail-info">
-            <p className="order-sellerinfo">연극 | 아츠대장</p>
-            <p className="order-project-title">
+          <div className={styles["order-detail-info"]}>
+            <p className={styles["order-sellerinfo"]}>연극 | 아츠대장</p>
+            <p className={styles["order-project-title"]}>
               여기가 어디인가요? &lt;기억상실&gt;
             </p>
-            <p className="order-status">펀딩 진행중</p>
+            <p className={styles["order-status"]}>펀딩 진행중</p>
           </div>
-          <button className="order-small-button">창작자 문의</button>
+          <button className={styles["order-small-button"]}>창작자 문의</button>
         </div>
 
         {/* 후원 정보 */}
-        <div className="order-detail-box">
-          <p className="order-section-title">후원 정보</p>
-          <ul className="order-detail-list">
+        <div className={styles["order-detail-box"]}>
+          <p className={styles["order-section-title"]}>후원 정보</p>
+          <ul className={styles["order-detail-list"]}>
             <li>
               <span>프로젝트 상태</span>
               <span style={{ color: '#F86453' }}>펀딩 진행중</span>
             </li>
             <li>
               <span>후원 상태</span>
-              <span>후원원 예약</span>
+              <span>후원 예약</span>
             </li>
             <li>
               <span>후원 번호</span>
@@ -48,13 +47,13 @@ const SupportDetailupdate = () => {
               <span>2025.05.15</span>
             </li>
           </ul>
-          <button className="order-small-button">후원 취소</button>
+          <button className={styles["order-small-button"]}>후원 취소</button>
         </div>
 
         {/* 선물 정보 */}
-        <div className="order-detail-box">
-          <p className="order-section-title">선물 정보</p>
-          <ul className="order-detail-list">
+        <div className={styles["order-detail-box"]}>
+          <p className={styles["order-section-title"]}>선물 정보</p>
+          <ul className={styles["order-detail-list"]}>
             <li>
               <span>선물 구성</span>
               <span>
@@ -68,25 +67,25 @@ const SupportDetailupdate = () => {
               <span>12,000원</span>
             </li>
           </ul>
-          <button className="order-small-button">변경</button>
+          <button className={styles["order-small-button"]}>변경</button>
         </div>
 
         {/* 추가 후원 정보 */}
-        <div className="order-detail-box">
-          <p className="order-section-title">추가 후원 정보</p>
-          <ul className="order-detail-list">
+        <div className={styles["order-detail-box"]}>
+          <p className={styles["order-section-title"]}>추가 후원 정보</p>
+          <ul className={styles["order-detail-list"]}>
             <li>
               <span>추가 후원금</span>
               <span>100원</span>
             </li>
           </ul>
-          <button className="order-small-button">변경</button>
+          <button className={styles["order-small-button"]}>변경</button>
         </div>
 
         {/* 결제 정보 */}
-        <div className="order-detail-box">
-          <p className="order-section-title">결제 정보</p>
-          <ul className="order-detail-list">
+        <div className={styles["order-detail-box"]}>
+          <p className={styles["order-section-title"]}>결제 정보</p>
+          <ul className={styles["order-detail-list"]}>
             <li>
               <span>결제 수단</span>
               <span>네이버페이</span>
@@ -100,11 +99,11 @@ const SupportDetailupdate = () => {
               <span>2025.05.16 결제 예정</span>
             </li>
           </ul>
-          <button className="order-small-button">변경</button>
+          <button className={styles["order-small-button"]}>변경</button>
         </div>
 
         {/* 목록 보기 버튼 */}
-        <div className="order-detail-button">
+        <div className={styles["order-detail-button"]}>
           <button onClick={() => window.location.href = './order-list.html'}>
             목록 보기
           </button>

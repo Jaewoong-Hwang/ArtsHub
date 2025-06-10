@@ -1,19 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import '../../../../../assets/styles/reset.css'
-import '../../css/user.css';
-import '../../css/sidemenu_user.css';
+import { Link } from 'react-router-dom';
+import '../../../../../assets/styles/reset.css';
+import styles from '../../css/user/question/QuestionRead.module.css';
 
 const QuestionRead = () => {
   return (
     <>
       <div id="header"></div>
 
-      <div className="question-write-content">
-        <p className="question-write-title">문의 글 정보</p>
+      <div className={styles["question-write-content"]}>
+        <p className={styles["question-write-title"]}>문의 글 정보</p>
 
-        <form className="question-write-form">
-          <div className="form-group">
+        <form className={styles["question-write-form"]}>
+          <div className={styles["form-group"]}>
             <label htmlFor="title">제목</label>
             <input
               type="text"
@@ -24,7 +23,7 @@ const QuestionRead = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles["form-group"]}>
             <label htmlFor="content">내용</label>
             <textarea
               id="content"
@@ -34,7 +33,7 @@ const QuestionRead = () => {
             ></textarea>
           </div>
 
-          <div className="form-group">
+          <div className={styles["form-group"]}>
             <label htmlFor="reply">답변</label>
             <textarea
               id="reply"
@@ -45,7 +44,7 @@ const QuestionRead = () => {
           </div>
         </form>
 
-        <div className="question-write-button">
+        <div className={styles["question-write-button"]}>
           <button type="button" onClick={() => window.history.back()}>
             목록 보기
           </button>

@@ -1,0 +1,148 @@
+.mypage_section {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  display: flex;
+  background-color: none;
+}
+
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.funding-item {
+  width: 100%;
+}
+
+.funding-card {
+  position: relative;
+  display: flex;
+  border: 1px solid #bcbcbc;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: transparent;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.funding-thumbnail img {
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+}
+
+.funding-info {
+  display: flex;
+  height: 150px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.funding-info p {
+  font-weight: 500;
+}
+
+.funding-id {
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.funding-title {
+  font-size: 1rem;
+  color: #3d3d3d;
+}
+
+.funding-goal {
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #bcbcbc;
+}
+
+.funding-supporter {
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+.status {
+  display: flex;
+  gap: 10px;
+}
+
+.status-btn {
+  width: 60px;
+  padding: 3px 0;
+  border: none;
+  color: #fff;
+  font-size: 0.688rem;
+  margin-top: 5px;
+  border-radius: 4px;
+  cursor: default;
+}
+
+.status-btn.SELLING {
+  background-color: #0C7DFF;
+}
+.status-btn.END {
+  background-color: #3d3d3d;
+}
+.status-btn.SAVE {
+  background-color: #29C3FF;
+}
+.status-btn.REJECTED {
+  background-color: #6d6d6d;
+}
+.status-btn.WAITING {
+  background-color: #9d9d9d;
+}
+
+.edit-dropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.edit-button {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.dropdown-menu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.688rem;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f3f3f3;
+}

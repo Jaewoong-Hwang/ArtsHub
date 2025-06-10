@@ -1,0 +1,108 @@
+
+.mypage_section {
+  max-width: 1348px;
+  margin: 70px auto 140px auto;
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.content_item {
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 50px;
+}
+
+.content_item > form {
+  display: flex;
+  gap: 60px;
+}
+
+.profile_img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile_img_show {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 17px;
+}
+
+.profile_img_show > img {
+  width: 100%;
+  height: 100%;
+}
+
+.profile_img > button,
+.info_list button {
+  width: 100px;
+  height: 35px;
+  font-size: 0.875rem;
+  border: 1px solid #bcbcbc;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.okbutton {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: right;
+}
+
+.info_list {
+  width: 410px;
+}
+
+.info_list label {
+  font-size: 1rem;
+}
+
+.info_list > input {
+  font-size: 0.875rem;
+  width: 100%;
+  height: 35px;
+  background-color: #fafafc;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.interast {
+  display: flex;
+  justify-content: space-between;
+}
+
+.interast > select {
+  font-size: 0.875rem;
+  width: 20%;
+  height: 35px;
+  background-color: #fafafc;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  color: #3d3d3d;
+  cursor: pointer;
+}
+
+.interast .read {
+  cursor: auto;
+}

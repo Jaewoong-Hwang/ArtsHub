@@ -1,0 +1,73 @@
+
+.mypage_section {
+  max-width: 1348px;
+  margin: 70px auto 140px auto;
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.question-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 24px 60px 24px 20px;
+  background-color: transparent;
+}
+
+.question-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.question-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.question-date {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: 500;
+}
+
+.question-status {
+  font-size: 0.875rem;
+  color: #29C3FF;
+  font-weight: 500;
+}
+
+.question-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.question-button button {
+  width: 240px;
+  padding: 17px 0;
+  background-color: #007dff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem; 
+  cursor: pointer;
+}

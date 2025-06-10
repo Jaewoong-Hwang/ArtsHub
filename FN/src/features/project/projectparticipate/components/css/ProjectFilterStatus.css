@@ -1,0 +1,43 @@
+.project-filter-status {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  /* background-color: #f3f3f3; */
+  /* border: 1px solid var(--gray); */
+  /* border-radius: 0.5rem; */
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-description {
+  color: #333;
+}
+
+.reset-button {
+  width: 10%;
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--sub-blue);
+  background: white;
+  /* color: var(--sub-blue); */
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.reset-button:hover {
+  background-color: var(--sub-blue);
+  color: white;
+}
+
+.no-result-message {
+  text-align: center;
+  color: #777;
+}

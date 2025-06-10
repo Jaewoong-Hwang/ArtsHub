@@ -1,0 +1,91 @@
+import React from 'react'; 
+import { Link } from 'react-router-dom';
+import '../../../../assets/styles/reset.css';
+import styles from '../css/expert/ProfitHistory.module.css';
+import sidebarStyles from '../css/expert/SidemenuExpert.module.css';
+
+const ProfitHistory = () => {
+  const availableProfit = 0;
+  const expectedProfit = 9950000;
+  const withdrawnAmount = 100000;
+
+  const handleWithdraw = () => {
+    alert('출금 신청이 접수되었습니다.');
+  };
+
+  return (
+    <>
+      <div id="header"></div>
+
+      <div className="mypage_section">
+        <div className={sidebarStyles.sidebar_menu}>
+          <div className={sidebarStyles.profile}>
+            <img src="/static/img/apple.png" alt="프로필 이미지" className={sidebarStyles["profile-img"]} />
+            <p className={sidebarStyles.nickname}>닉네임</p>
+          </div>
+
+          <Link to="/UserInforead" className={sidebarStyles.change}>
+            <span className="material-symbols-outlined">swap_horiz</span>
+            <span>일반으로 전환</span>
+          </Link>
+
+          <p className={sidebarStyles.My_Arts}>My Arts</p>
+          <ul className={sidebarStyles.menu}>
+            <li className={sidebarStyles["menu-item"]}>
+              <Link to="/FundingManage">펀딩관리</Link>
+            </li>
+            <li className={sidebarStyles["menu-item"]}>
+              <Link to="/ProjectManage">프로젝트 관리</Link>
+            </li>
+            <li className={sidebarStyles["menu-item"]}>
+              <Link to="/Myprojectrequest">참가신청 프로젝트 관리</Link>
+            </li>
+            <li className={`${sidebarStyles["menu-item"]} ${sidebarStyles.active}`}>
+              <Link to="/ProfitHistory">수익 관리</Link>
+            </li>
+            <li className={sidebarStyles["menu-item"]}>
+              <Link to="/ExpertProfile">프로필</Link>
+            </li>
+            <li className={sidebarStyles["menu-item"]}>
+              <Link to="/logout">로그아웃</Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className="content">
+          <p className="title">수익 관리</p>
+
+          <div className={styles.profitBox}>
+            <div className={styles.profitBlockBox}>
+              <div className={styles.profitBlock}>
+                <p className={styles.label}>출금 가능 수익금</p>
+                <p className={styles.value}>{availableProfit.toLocaleString()}원</p>
+              </div>
+              <div className={styles.profitButtonBlock}>
+                <button className={styles.withdrawButton} onClick={handleWithdraw}>출금 신청</button>
+              </div>
+            </div>
+
+            <div className={styles.divider}></div>
+
+            <div className={styles.profitBlock}>
+              <p className={styles.label}>예상 수익금</p>
+              <p className={styles.value}>{expectedProfit.toLocaleString()}원</p>
+            </div>
+
+            <div className={styles.divider}></div>
+
+            <div className={styles.profitBlock}>
+              <p className={styles.label}>출금 금액</p>
+              <p className={styles.value}>{withdrawnAmount.toLocaleString()}원</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer"></div>
+    </>
+  );
+};
+
+export default ProfitHistory;

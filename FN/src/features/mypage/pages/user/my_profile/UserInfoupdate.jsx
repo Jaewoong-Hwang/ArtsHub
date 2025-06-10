@@ -1,0 +1,108 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../../../../assets/styles/reset.css';
+import styles from '../../css/user/SidemenuUser.module.css';
+import pageStyles from '../../css/user/my_profile/UserInfoupdate.module.css';
+import Header from '../../../../../components/layout/Header';
+import Footer from '../../../../../components/layout/Footer';
+
+const UserInfoupdate = () => {
+  return (
+    <>
+      <div id="header"></div>
+
+      <div className={pageStyles.mypage_section}>
+        <div className={styles.sidebar_menu}>
+          <div className={styles.profile}>
+            <img
+              src="/static/img/apple.png"
+              alt="프로필 이미지"
+              className={styles["profile-img"]}
+            />
+            <p className={styles.nickname}>닉네임</p>
+          </div>
+
+          <Link to="/FundingManage" className={styles.change}>
+            <span className="material-symbols-outlined">swap_horiz</span>
+            <span>전문가로 전환</span>
+          </Link>
+
+          <p className={styles.My_Arts}>My Arts</p>
+          <ul className={styles.menu}>
+            <li className={`${styles["menu-item"]} ${styles.active}`} data-target="content-userinfo_Authentication">
+              <Link to="/UserInforead">내정보</Link>
+            </li>
+            <li className={styles["menu-item"]}>
+              <Link to="/MyFundingSupport">후원 관리</Link>
+              <ul className={styles.submenu} style={{ display: 'none' }}>
+                <li className="submenu-item" data-target="content-funding-history">
+                  <Link to="/MyFundingSupport">후원 진행중</Link>
+                </li>
+                <li className="submenu-item" data-target="content-funding-refund">
+                  <Link to="/MyfundingSupport">후원 취소</Link>
+                </li>
+              </ul>
+            </li>
+            <li className={styles["menu-item"]} data-target="content-inquiry">
+              <Link to="/QuestionList">문의</Link>
+            </li>
+            <li className={styles["menu-item"]} data-target="content-logout">
+              <Link to="/logout">로그아웃</Link>
+            </li>
+          </ul>
+        </div>
+
+        <div className={pageStyles.content}>
+          <p className={pageStyles.title}>내정보</p>
+
+          <div className={pageStyles.content_item}>
+            <form id="userinfo" action="./read.html" method="get">
+              <div className={pageStyles.profile_img}>
+                <div className={pageStyles.profile_img_show}>
+                  <img src="/static/img/apple.png" alt="profile-img" />
+                </div>
+                <button type="button">프로필 변경</button>
+              </div>
+
+              <div className={pageStyles.info_list}>
+                <label htmlFor="nickname">닉네임</label><br />
+                <input type="text" id="nickname" /><br />
+
+                <label htmlFor="email">이메일</label><br />
+                <input type="text" id="email" /><br />
+
+                <label htmlFor="phone">연락처</label><br />
+                <input type="text" id="phone" /><br />
+
+                <label htmlFor="address">주소</label><br />
+                <input type="text" id="address" /><br />
+
+                <label>관심분야</label><br />
+                <div className={pageStyles.interast}>
+                  {[...Array(4)].map((_, idx) => (
+                    <select key={idx}>
+                      <option value="선택">선택</option>
+                      <option value="클래식">클래식</option>
+                      <option value="연극">연극</option>
+                      <option value="국악">국악</option>
+                      <option value="밴드">밴드</option>
+                    </select>
+                  ))}
+                </div>
+
+                <div className={pageStyles.okbutton}>
+                  <button type="submit">완료</button>
+                  <button type="button" onClick={() => window.history.back()}>취소</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer"></div>
+    </>
+  );
+};
+
+export default UserInfoupdate;

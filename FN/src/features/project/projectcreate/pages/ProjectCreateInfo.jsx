@@ -13,8 +13,8 @@ const ProjectCreateInfo = () => {
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
+    headcount: "",
     deadline: "",
-    capacity: "", 
   });
 
   useEffect(() => {
@@ -84,11 +84,11 @@ const ProjectCreateInfo = () => {
               모집 인원 수
               <input
                 type="number"
-                name="capacity" // ✅ 기존 headcount → capacity로 변경
+                name="headcount"
                 placeholder="예: 5"
                 min="1"
                 required
-                value={formData.capacity}
+                value={formData.headcount}
                 onChange={handleChange}
                 className={styles.input}
               />

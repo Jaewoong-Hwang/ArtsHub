@@ -1,16 +1,15 @@
 .projectCard {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  transform: translateY(30px);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
 }
 
+/* 모듈에서는 상태 클래스도 camelCase로 작성 */
 .visible {
   opacity: 1;
   transform: translateY(0);
@@ -21,7 +20,7 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.thumbnailWrapper img {
+.projectImage {
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -31,49 +30,19 @@
   padding: 1rem;
 }
 
-.projectBadge {
-  display: inline-block;
-  background-color: var(--main-blue);
-  color: white;
-  padding: 2px 10px;
-  font-size: 0.8rem;
-  border-radius: 8px;
+.projectContent h3 {
   margin-bottom: 0.5rem;
-}
-
-.projectTitle {
   font-size: 1.1rem;
-  font-weight: bold;
-  margin: 0.4rem 0;
+  color: var(--text-dark);
 }
 
-.projectSummary {
+.projectContent p {
   font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 0.6rem;
-}
-
-.projectMeta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: #666;
   margin-bottom: 0.4rem;
+  color: #555;
 }
 
-.deadline {
-  font-weight: bold;
-}
-
-.dday {
-  background-color: #ffe3e3;
-  padding: 2px 8px;
-  border-radius: 10px;
-  color: #d60000;
-  font-weight: bold;
-}
-
-.capacity {
+.projectViews {
   font-size: 0.85rem;
-  color: #444;
+  color: #888;
 }

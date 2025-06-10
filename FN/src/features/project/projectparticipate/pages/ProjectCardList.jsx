@@ -1,16 +1,12 @@
 import React from 'react';
 import ProjectCard from '../components/ProjectCard';
-import styles from './css/projectCardList.module.css'; // ✅ CSS Module 적용
+import './css/ProjectCardList.css';
 
 const ProjectCardList = ({ projects }) => {
-  if (!projects || projects.length === 0) {
-    return <p className={styles.emptyMessage}>등록된 프로젝트가 없습니다.</p>;
-  }
-
   return (
-    <div className={styles.projectList}>
+    <div className="project-list">
       {projects.map((proj, idx) => (
-        <ProjectCard key={proj.id || idx} project={proj} index={idx} />
+        <ProjectCard key={proj.id} project={proj} index={idx} />
       ))}
     </div>
   );

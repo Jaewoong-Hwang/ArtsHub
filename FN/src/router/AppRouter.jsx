@@ -3,7 +3,7 @@ import { ProjectRoutes } from '../features/project/projectRoutes';
 import { StepModalProvider } from '../features/project/projectcreate/components/StepModalContext'; // ✅ 경로 확인
 import { AuthRoutes } from '../features/auth/authRoutes';
 import { HomeRoutes } from '../features/Home/homeRoutes';
-import { FundingRoutes } from '../features/funding/fundingRoutes';
+import { MypageRoutes } from '../features/mypage/MypageRoutes';
 
 export const AppRouter = () => (
   
@@ -12,9 +12,9 @@ export const AppRouter = () => (
       <Routes>
         {ProjectRoutes()}
         {HomeRoutes()}
-        {FundingRoutes()}
         {/* 나중에 필요 시 다른 Route도 추가 가능 */}
         {AuthRoutes()}
+        {MypageRoutes()}
       </Routes>
       </StepModalProvider>
     </BrowserRouter>

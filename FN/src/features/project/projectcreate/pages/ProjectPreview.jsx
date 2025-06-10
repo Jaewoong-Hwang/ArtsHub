@@ -1,10 +1,7 @@
-// src/features/project/pages/ProjectPreview.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextWithBreaks from "../components/TextWithBreaks";
 import Modal from "../components/Modal";
-import useSubmitProject from "../hooks/useSubmitProject";
-
 import "../../../../assets/styles/reset.css";
 import styles from "./css/ProjectPreview.module.css";
 
@@ -15,32 +12,27 @@ const ProjectPreview = () => {
     description: {},
     rewards: [],
   });
+
   const [showModal, setShowModal] = useState(false);
 
-  const { info, description, rewards } = previewData;
-  const { submitProject } = useSubmitProject(); // ✅ 등록 훅 호출
-
-  // 📦 로컬스토리지에서 데이터 불러오기
   useEffect(() => {
     try {
       const info = JSON.parse(localStorage.getItem("projectInfo")) || {};
-      const description = JSON.parse(localStorage.getItem("project_description")) || {};
+      const description =
+        JSON.parse(localStorage.getItem("project_description")) || {};
       const rewards = JSON.parse(localStorage.getItem("projectRewards")) || [];
+
+      console.log("✅ 프로젝트 정보:", info);
+      console.log("✅ 상세 설명:", description);
+      console.log("✅ 리워드 목록:", rewards);
+
       setPreviewData({ info, description, rewards });
     } catch (e) {
-      console.error("❌ 로컬스토리지 파싱 오류:", e);
+      console.error("로컬스토리지 데이터 파싱 중 오류 발생:", e);
     }
   }, []);
 
-  // 🔘 등록 버튼 클릭 시
-  const handleSubmit = () => {
-    if (!info.title || !description.summary) {
-      alert("프로젝트 제목과 개요는 필수입니다.");
-      return;
-    }
-
-    submitProject({ info, description, rewards, navigate }); // ✅ 등록 실행
-  };
+  const { info, description, rewards } = previewData;
 
   return (
     <div className={styles.previewWrapper}>
@@ -103,15 +95,13 @@ const ProjectPreview = () => {
         </button>
         <button
           className={`${styles.btn} ${styles.btnPrimary}`}
-          onClick={handleSubmit}
+          onClick={() => setShowModal(true)}
         >
           등록하기
         </button>
       </div>
 
-      {showModal && (
-        <Modal type="submit" onClose={() => setShowModal(false)} />
-      )}
+      {showModal && <Modal type="submit" onClose={() => setShowModal(false)} />}
     </div>
   );
 };

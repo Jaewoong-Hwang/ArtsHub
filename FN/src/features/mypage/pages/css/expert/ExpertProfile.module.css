@@ -1,17 +1,24 @@
-
-.mypage_section {
+.mypageSection {
   max-width: 1348px;
-  margin: 70px auto 140px auto;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
   display: flex;
+  background-color: none;
 }
 
-.content > .title {
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 40px;
 }
 
-.expert-box {
+.expertBox {
   border: 1px solid #bcbcbc;
   border-radius: 12px;
   padding: 30px;
@@ -22,33 +29,33 @@
   align-items: flex-start;
 }
 
-.expert-box .expert-grade {
+.expertGrade {
   text-align: start;
 }
 
-.expert-box .expert-grade .label {
+.label {
   font-size: 1rem;
   color: #6d6d6d;
   margin-bottom: 16px;
   font-weight: 500;
 }
 
-.expert-box .expert-grade .value {
+.value {
   font-size: 1.25rem;
   font-weight: 400;
   margin-bottom: 40px;
 }
 
-.expert-box .expert-grade .value .grade-name {
+.gradeName {
   font-weight: 600;
 }
 
-.expert-box .edit-profile {
+.editProfile {
   color: #29C3FF;
   font-size: 1rem;
 }
 
-.expert-box .profile_hr {
+.profileHr {
   width: 100%;
   height: 1px;
   margin-top: 40px;
@@ -56,7 +63,7 @@
   background-color: #bcbcbc;
 }
 
-.expert-info-row {
+.expertInfoRow {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -66,13 +73,13 @@
   align-items: flex-start;
 }
 
-.expert-info-label {
+.expertInfoLabel {
   font-size: 1rem;
   color: #6d6d6d;
   font-weight: 500;
 }
 
-.expert-info-data {
+.expertInfoData {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,7 +87,7 @@
   gap: 10px;
 }
 
-.expert-edit-input {
+.expertEditInput {
   flex: 1;
   padding: 8px 16px;
   border: 1px solid #E4E5ED;
@@ -90,19 +97,19 @@
   font-weight: 400;
 }
 
-.expert-edit-input:disabled {
+.expertEditInput:disabled {
   color: #555;
   background-color: #FAFAFC;
   border-color: #E4E5ED;
 }
 
-.expert-edit-input:focus {
+.expertEditInput:focus {
   outline: none;
   box-shadow: none;
   border-color: #bcbcbc;
 }
 
-.edit-buttons {
+.editButtons {
   position: absolute;
   width: 90px;
   top: 0;
@@ -110,14 +117,14 @@
   transform: translateX(-100%);
 }
 
-.edit-buttons a {
+.editButtons a {
   color: #29C3FF;
   font-size: 1rem;
   cursor: pointer;
   text-decoration: none;
 }
 
-.edit-actions {
+.editActions {
   display: flex;
   gap: 10px;
 }

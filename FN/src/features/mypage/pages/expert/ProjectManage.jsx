@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css"; 
 import styles from '../css/expert/ProjectManage.module.css'; // 모듈 스타일 import
 
 const projects = [
@@ -37,35 +38,35 @@ const ProjectManage = () => {
       <div id="header"></div>
 
       <div className={styles.mypage_section}>
-        <div className={styles.sidebar_menu}>
-          <div className={styles.profile}>
-            <img src="/static/img/apple.png" alt="프로필 이미지" className={styles.profileImg} />
-            <p className={styles.nickname}>닉네임</p>
+        <div className={sidemenuStyles.sidebar_menu}>
+          <div className={sidemenuStyles.profile}>
+            <img src="/static/img/apple.png" alt="프로필 이미지" className={sidemenuStyles["profile-img"]} />
+            <p className={sidemenuStyles.nickname}>닉네임</p>
           </div>
 
-          <Link to="/UserInforead" className={styles.change}>
+          <Link to="/UserInforead" className={sidemenuStyles.change}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>일반으로 전환</span>
           </Link>
 
-          <p className={styles.My_Arts}>My Arts</p>
-          <ul className={styles.menu}>
-            <li className={styles.menuItem}>
+          <p className={sidemenuStyles.My_Arts}>My Arts</p>
+          <ul className={sidemenuStyles.menu}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/FundingManage">펀딩관리</Link>
             </li>
-            <li className={`${styles.menuItem} ${styles.active}`}>
+            <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
               <Link to="/ProjectManage">프로젝트 관리</Link>
-              <ul className={styles.submenu}>
-                <li className={styles.submenuItem}><Link to="/ProjectManage">전체</Link></li>
-                <li className={styles.submenuItem}><Link to="/ProjectManage">모집중</Link></li>
-                <li className={styles.submenuItem}><Link to="/ProjectManage">모집 종료</Link></li>
-                <li className={styles.submenuItem}><Link to="/ProjectApplicationManage">참여요청</Link></li>
+              <ul className={sidemenuStyles.submenu}>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">전체</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집중</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집 종료</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectApplicationManage">참여요청</Link></li>
               </ul>
             </li>
-            <li className={styles.menuItem}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
-            <li className={styles.menuItem}><Link to="/ProfitHistory">수익 관리</Link></li>
-            <li className={styles.menuItem}><Link to="/ExpertProfile">프로필</Link></li>
-            <li className={styles.menuItem}><Link to="/logout">로그아웃</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/ProfitHistory">수익 관리</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/ExpertProfile">프로필</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/logout">로그아웃</Link></li>
           </ul>
         </div>
 

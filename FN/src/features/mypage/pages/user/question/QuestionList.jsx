@@ -3,55 +3,57 @@ import { Link } from 'react-router-dom';
 import '../../../../../assets/styles/reset.css';
 import styles from '../../css/user/question/QuestionList.module.css';
 import sidebarStyles from '../../css/user/SidemenuUser.module.css';
+import Header from '../../../../../components/layout/Header';
+import Footer from '../../../../../components/layout/Footer';
 
 const QuestionList = () => {
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
-      <div className={styles.mypage_section}>
-        <div className={sidebarStyles.sidebar_menu}>
-          <div className={sidebarStyles.profile}>
+      <div className={styles["mypage_section"]}>
+        <div className={sidebarStyles["sidebarMenu"]}>
+          <div className={sidebarStyles["profile"]}>
             <img
               src="/static/img/apple.png"
               alt="프로필 이미지"
-              className={sidebarStyles["profile-img"]}
+              className={sidebarStyles["profileImg"]}
             />
-            <p className={sidebarStyles.nickname}>닉네임</p>
+            <p className={sidebarStyles["nickname"]}>닉네임</p>
           </div>
 
-          <Link to="/FundingManage" className={sidebarStyles.change}>
+          <Link to="/FundingManage" className={sidebarStyles["change"]}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>전문가로 전환</span>
           </Link>
 
-          <p className={sidebarStyles.My_Arts}>My Arts</p>
-          <ul className={sidebarStyles.menu}>
-            <li className={sidebarStyles["menu-item"]} data-target="content-userinfo_Authentication">
+          <p className={sidebarStyles["myArts"]}>My Arts</p>
+          <ul className={sidebarStyles["menu"]}>
+            <li className={sidebarStyles["menuItem"]} data-target="content-userinfo_Authentication">
               <Link to="/UserInforead">내정보</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]}>
+            <li className={sidebarStyles["menuItem"]}>
               <Link to="/MyFundingSupport">후원 관리</Link>
-              <ul className={sidebarStyles.submenu} style={{ display: 'none' }}>
-                <li className="submenu-item" data-target="content-funding-history">
+              <ul className={sidebarStyles["submenu"]} style={{ display: 'none' }}>
+                <li className={sidebarStyles["submenuItem"]} data-target="content-funding-history">
                   <Link to="/MyFundingSupport">후원 진행중</Link>
                 </li>
-                <li className="submenu-item" data-target="content-funding-refund">
+                <li className={sidebarStyles["submenuItem"]} data-target="content-funding-refund">
                   <Link to="/MyFundingSupport">후원 취소</Link>
                 </li>
               </ul>
             </li>
-            <li className={`${sidebarStyles["menu-item"]} ${sidebarStyles.active}`} data-target="content-inquiry">
+            <li className={`${sidebarStyles["menuItem"]} ${sidebarStyles["menuItemActive"]}`} data-target="content-inquiry">
               <Link to="/QuestionList">문의</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]} data-target="content-logout">
+            <li className={sidebarStyles["menuItem"]} data-target="content-logout">
               <Link to="/logout">로그아웃</Link>
             </li>
           </ul>
         </div>
 
-        <div className={styles.content}>
-          <p className={styles.title}>문의</p>
+        <div className={styles["content"]}>
+          <p className={styles["title"]}>문의</p>
 
           <div className={styles["question-list"]}>
             {/* 문의 항목 1 */}
@@ -85,7 +87,7 @@ const QuestionList = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

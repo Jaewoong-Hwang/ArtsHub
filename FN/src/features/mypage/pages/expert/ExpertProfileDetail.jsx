@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../../../assets/styles/reset.css';
 import styles from '../css/expert/ExpertProfileDetail.module.css';
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  
 
 const ExpertProfileDetail = () => {
   const expert = {

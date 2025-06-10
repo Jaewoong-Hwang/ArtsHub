@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../../../../assets/styles/reset.css";
-import pageStyles from "../../css/user/my_profile/UserInforead.module.css";
-import styles from "../../css/user/SidemenuUser.module.css";
+import Styles from "../../css/user/my_profile/UserInforead.module.css";
+import sidemenuStyles from "../../css/user/SidemenuUser.module.css";
 import Header from "../../../../../components/layout/Header";
 import Footer from "../../../../../components/layout/Footer";
 
@@ -11,57 +11,57 @@ function UserInforead() {
     <>
       <Header />
 
-      <div className={pageStyles.mypage_section}>
-        <div className={styles.sidebar_menu}>
-          <div className={styles.profile}>
+      <div className={Styles["mypage_section"]}>
+        <div className={sidemenuStyles["sidebarMenu"]}>
+          <div className={sidemenuStyles["profile"]}>
             <img
               src="/static/img/apple.png"
               alt="프로필 이미지"
-              className={styles["profile-img"]}
+              className={sidemenuStyles["profileImg"]}
             />
-            <p className={styles.nickname}>닉네임</p>
+            <p className={sidemenuStyles["nickname"]}>닉네임</p>
           </div>
 
-          <Link to="/FundingManage" className={styles.change}>
+          <Link to="/FundingManage" className={sidemenuStyles["change"]}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>전문가로 전환</span>
           </Link>
 
-          <p className={styles.My_Arts}>My Arts</p>
-          <ul className={styles.menu}>
+          <p className={sidemenuStyles["myArts"]}>My Arts</p>
+          <ul className={sidemenuStyles["menu"]}>
             <li
-              className={`${styles["menu-item"]} ${styles.active}`}
+              className={`${sidemenuStyles["menuItem"]} ${sidemenuStyles["menuItemActive"]}`}
               data-target="content-userinfo_Authentication"
             >
               <Link to="/UserInforead">내정보</Link>
             </li>
-            <li className={styles["menu-item"]}>
+            <li className={sidemenuStyles["menuItem"]}>
               <Link to="/MyFundingSupport">후원 관리</Link>
-              <ul className={styles.submenu} style={{ display: "none" }}>
-                <li className="submenu-item" data-target="content-funding-history">
+              <ul className={sidemenuStyles["submenu"]} style={{ display: "none" }}>
+                <li className={sidemenuStyles["submenuItem"]} data-target="content-funding-history">
                   <Link to="/MyFundingSupport">후원 진행중</Link>
                 </li>
-                <li className="submenu-item" data-target="content-funding-refund">
+                <li className={sidemenuStyles["submenuItem"]} data-target="content-funding-refund">
                   <Link to="/MyfundingSupport">후원 취소</Link>
                 </li>
               </ul>
             </li>
-            <li className={styles["menu-item"]} data-target="content-inquiry">
+            <li className={sidemenuStyles["menuItem"]} data-target="content-inquiry">
               <Link to="/QuestionList">문의</Link>
             </li>
-            <li className={styles["menu-item"]} data-target="content-logout">
+            <li className={sidemenuStyles["menuItem"]} data-target="content-logout">
               <Link to="/logout">로그아웃</Link>
             </li>
           </ul>
         </div>
 
-        <div className={pageStyles.content}>
-          <p className={pageStyles.title}>내정보</p>
+        <div className={Styles["content"]}>
+          <p className={Styles["title"]}>내정보</p>
 
-          <div className={pageStyles.content_item}>
+          <div className={Styles["content_item"]}>
             <form id="userinfo" action="./UserInfoupdate.jsx" method="get">
-              <div className={pageStyles.profile_img}>
-                <div className={pageStyles.profile_img_show}>
+              <div className={Styles["profile_img"]}>
+                <div className={Styles["profile_img_show"]}>
                   <img src="/static/img/apple.png" alt="profile-img" />
                 </div>
                 <button type="submit" hidden>
@@ -69,7 +69,7 @@ function UserInforead() {
                 </button>
               </div>
 
-              <div className={pageStyles.info_list}>
+              <div className={Styles["info_list"]}>
                 <label htmlFor="nickname">닉네임</label>
                 <br />
                 <input type="text" id="nickname" disabled />
@@ -92,9 +92,9 @@ function UserInforead() {
 
                 <label>관심분야</label>
                 <br />
-                <div className={pageStyles.interast}>
+                <div className={Styles["interast"]}>
                   {[...Array(4)].map((_, i) => (
-                    <select className={pageStyles.read} key={i} disabled>
+                    <select className={Styles["read"]} key={i} disabled>
                       <option value="선택">선택</option>
                       <option value="클래식">클래식</option>
                       <option value="연극">연극</option>
@@ -104,7 +104,7 @@ function UserInforead() {
                   ))}
                 </div>
 
-                <div className={pageStyles.okbutton}>
+                <div className={Styles["okbutton"]}>
                   <button type="button">수정</button>
                 </div>
               </div>

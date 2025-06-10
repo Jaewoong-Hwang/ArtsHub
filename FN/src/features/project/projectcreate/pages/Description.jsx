@@ -5,10 +5,10 @@ import StepNavigation from "../components/StepNav";
 import { useStepModal } from "../components/StepModalContext";
 
 import "../../../../assets/styles/reset.css";
-import "./css/Description.css";
+import styles from "./css/Description.module.css"; // ✅ 모듈 적용
 
 const ProjectCreateDescription = () => {
-  const { open } = useStepModal(); // ✅ useStepModal로 변경
+  const { open } = useStepModal();
   const [previewUrl, setPreviewUrl] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -60,38 +60,39 @@ const ProjectCreateDescription = () => {
 
   const handleTempSaveWithModal = () => {
     handleTempSave();
-    open("saved"); // ✅ 모달 열기
+    open("saved");
   };
 
   return (
     <>
       <ProjectCreateHeader />
-      <div className="layout">
+      <div className={styles.layout}>
         <Sidebar />
-        <main className="content">
+        <main className={styles.content}>
           <section>
-            <h2>프로젝트 상세 내용</h2>
+            <h2 className={styles.heading}>프로젝트 상세 내용</h2>
             <form>
-              <label>
+              <label className={styles.uploadText}>
                 썸네일 이미지 업로드 (선택)
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleThumbnailChange}
+                  className={styles.hiddenInput}
                 />
               </label>
 
               {previewUrl && (
-                <div className="thumbnail-preview">
+                <div className={styles.thumbnailPreview}>
                   <img
                     src={previewUrl}
                     alt="썸네일 미리보기"
-                    style={{ maxWidth: "200px", marginTop: "1rem" }}
+                    style={{ maxWidth: "100%" }}
                   />
                 </div>
               )}
 
-              <label>
+              <label className={styles.label}>
                 프로젝트 개요
                 <textarea
                   name="summary"
@@ -100,10 +101,11 @@ const ProjectCreateDescription = () => {
                   rows="2"
                   placeholder="예: 2030 세대를 위한 재즈 콘서트 프로젝트입니다."
                   required
+                  className={styles.input}
                 />
               </label>
 
-              <label>
+              <label className={styles.label}>
                 기획 배경
                 <textarea
                   name="background"
@@ -111,64 +113,56 @@ const ProjectCreateDescription = () => {
                   onChange={handleChange}
                   rows="4"
                   placeholder="예: MZ세대를 위한 공연 콘텐츠의 부재를 느껴 본 프로젝트를 기획하게 되었습니다. 이번 프로젝트는 지역 아티스트들과 협업하여 새로운 창작 경험을 제공합니다."
+                  className={styles.input}
                 />
               </label>
 
-              <label>
+              <label className={styles.label}>
                 모집 역할
                 <textarea
                   name="roles"
                   value={formData.roles}
                   onChange={handleChange}
                   rows="4"
-                  placeholder={`예: 
-                  - 피아니스트 1명 (즉흥 연주 가능자 우대)
-                  - 무대 연출 담당 1명
-                  - 영상 촬영/편집 인력 1명 (촬영 장비 보유자 우대)
-                  `}
+                  placeholder={`예: \n- 피아니스트 1명 (즉흥 연주 가능자 우대)\n- 무대 연출 담당 1명\n- 영상 촬영/편집 인력 1명 (촬영 장비 보유자 우대)`}
+                  className={styles.input}
                 />
               </label>
 
-              <label>
+              <label className={styles.label}>
                 일정
                 <textarea
                   name="schedule"
                   value={formData.schedule}
                   onChange={handleChange}
                   rows="3"
-                   placeholder={`예: 
-                    - 리허설: 2025년 6월 15일
-                    - 공연: 2025년 6월 29일
-                    - 회의 및 준비: 주 1회 온라인 회의
-                    `}
+                  placeholder={`예: \n- 리허설: 2025년 6월 15일\n- 공연: 2025년 6월 29일\n- 회의 및 준비: 주 1회 온라인 회의`}
+                  className={styles.input}
                 />
               </label>
 
-              <label>
+              <label className={styles.label}>
                 보상
                 <textarea
                   name="compensation"
                   value={formData.compensation}
                   onChange={handleChange}
                   rows="3"
-                   placeholder={`예: 
-                  - 공연 수익 분배: 출연자 1/N 배분
-                  - 교통비 실비 지원
-                  - 영상 촬영본 제공
-                  `}
+                  placeholder={`예: \n- 공연 수익 분배: 출연자 1/N 배분\n- 교통비 실비 지원\n- 영상 촬영본 제공`}
+                  className={styles.input}
                 />
               </label>
 
-              <div className="cta-buttons">
+              <div className={styles.ctaButtons}>
                 <button
                   type="button"
-                  className="btn outline"
+                  className={styles.btnOutline}
                   onClick={handleTempSaveWithModal}
                 >
                   임시 저장
                 </button>
                 <div>
-                <StepNavigation onBeforeNext={handleTempSave} />
+                  <StepNavigation onBeforeNext={handleTempSave} />
                 </div>
               </div>
             </form>

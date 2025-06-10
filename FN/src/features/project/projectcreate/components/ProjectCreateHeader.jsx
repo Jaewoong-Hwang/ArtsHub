@@ -6,7 +6,7 @@ const ProjectCreateHeader = () => {
   return (
     <div className={styles.projectHeader}>
       <div className={styles.container}>
-        <h1 className={styles.logo}>ArtsHub</h1>
+        <a href="/" className={styles.logo}>ArtsHub</a>
         <div className={styles.topActions}>
           <a href="/mypage/project" className={`${styles.btn} ${styles.small}`}>
             내 프로젝트 보기

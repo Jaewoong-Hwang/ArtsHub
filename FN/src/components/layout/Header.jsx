@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./css/Header.css";
+import logo from "../../assets/images/logo.svg"
 
 /**
  * @param {Object} props
@@ -46,7 +47,7 @@ const Header = ({ user }) => {
         <ul className="leftside">
           <li className="logo">
             <Link to="/">
-              <img className="img-logo" src="/static/assets/img/mainlogo.png" alt="아츠 허브 로고" />
+              <img className="img-logo" src={logo} alt="아츠 허브 로고" />
               {/* <span className="artshub">Arts hub</span> */}
             </Link>
           </li>

@@ -1,5 +1,4 @@
-/* 전체 레이아웃 */
-.preview-wrapper {
+.previewWrapper {
   padding: 2rem;
   max-width: 960px;
   margin: 2rem auto;
@@ -10,8 +9,7 @@
   color: #333;
 }
 
-/* 페이지 제목 */
-.preview-wrapper h1 {
+.previewWrapper h1 {
   font-size: 2rem;
   color: #0c7dff;
   border-bottom: 2px solid #29c3ff;
@@ -19,31 +17,29 @@
   margin-bottom: 2rem;
 }
 
-/* 각 섹션 구간 */
-.preview-section {
+.previewSection {
   margin-bottom: 3rem;
 }
 
-.preview-section h2,
-.preview-section h3 {
+.previewSection h2,
+.previewSection h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: #0c7dff;
 }
 
-/* 텍스트 라벨 + 멀티라인 */
-.preview-text-block {
+.previewTextBlock {
   margin-bottom: 1.25rem;
 }
 
-.preview-text-block strong {
+.previewTextBlock strong {
   display: inline-block;
   margin-bottom: 0.4rem;
   font-weight: 600;
   color: #222;
 }
 
-.preview-text-block p {
+.previewTextBlock p {
   white-space: pre-line;
   font-size: 1rem;
   line-height: 1.7;
@@ -54,13 +50,12 @@
   border-radius: 0.75rem;
 }
 
-/* 썸네일 미리보기 */
-.preview-thumbnail {
+.previewThumbnail {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.preview-thumbnail img {
+.previewThumbnail img {
   max-width: 100%;
   max-height: 360px;
   object-fit: contain;
@@ -68,8 +63,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* 리워드 카드 */
-.preview-reward {
+.previewReward {
   background-color: #f5faff;
   border: 1px solid #d3e9ff;
   border-radius: 1rem;
@@ -77,30 +71,29 @@
   margin-bottom: 1.5rem;
 }
 
-.preview-reward h4 {
+.previewReward h4 {
   font-size: 1.1rem;
   color: #0c7dff;
   margin-bottom: 0.5rem;
 }
 
-.preview-reward p {
+.previewReward p {
   font-size: 0.95rem;
   color: #444;
   margin-bottom: 0.5rem;
 }
 
-.preview-reward ul {
+.previewReward ul {
   padding-left: 1.5rem;
   list-style: disc;
 }
 
-.preview-reward li {
+.previewReward li {
   font-size: 0.9rem;
   color: #555;
 }
 
-/* 버튼 영역 */
-.cta-buttons {
+.ctaButtons {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -116,24 +109,24 @@
   transition: background-color 0.3s ease;
 }
 
-.btn.outline {
+.btnOutline {
   background-color: transparent;
   color: var(--main-blue);
   border: 2px solid var(--main-blue);
 }
 
-.btn.outline:hover {
+.btnOutline:hover {
   background-color: var(--main-blue);
   color: #fff;
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(12, 125, 255, 0.3);
 }
 
-.btn.primary {
+.btnPrimary {
   background-color: #29c3ff;
   color: #fff;
 }
 
-.btn.primary:hover {
+.btnPrimary:hover {
   background-color: #0c7dff;
 }

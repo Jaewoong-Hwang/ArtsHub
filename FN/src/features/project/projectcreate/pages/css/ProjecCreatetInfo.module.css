@@ -1,52 +1,27 @@
-:root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-  --light-bg: #f9fafb;
-  --text-dark: #333;
-}
-
-body {
-  margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  background-color: var(--light-bg);
-  color: var(--text-dark);
-}
-
-
 .layout {
   max-width: 1348px;
   margin: 0 auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
   display: flex;
-  /* background-color: none; */
 }
 
-
-/* 콘텐츠 영역 */
 .content {
   flex: 1;
   padding: 3rem 2rem;
-  /* background-color: #fff; */
 }
 
-.content h2 {
+.heading {
   font-size: 1.8rem;
   margin-bottom: 2rem;
   color: var(--sub-blue);
 }
 
-/* 폼 요소 */
-form label {
+.label {
   display: block;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
-input,
-select,
-textarea {
+.input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #ccc;
@@ -58,13 +33,31 @@ textarea {
   margin-bottom: 1.5rem;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+.input:focus {
   outline: none;
   border-color: var(--main-blue);
   box-shadow: 0 0 0 3px rgba(41, 195, 255, 0.2);
 }
 
+.ctaButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 1rem;
+}
 
+.btnOutline {
+  background-color: transparent;
+  border: 2px solid #0c7dff;
+  color: #0c7dff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
 
+.btnOutline:hover {
+  background-color: #e6f3ff;
+}

@@ -5,7 +5,7 @@ import ProjectCreateHeader from "../components/ProjectCreateHeader";
 import Sidebar from "../components/SideBar";
 
 import "../../../../assets/styles/reset.css";
-import "../pages/css/ProjecCreatetInfo.css"; // 공통 CSS 있으면 추가
+import "../pages/css/ProjecCreatetInfo.module.css"; // 공통 CSS 있으면 추가
 
 const ProjectCreateLayout = ({ children }) => (
   <StepModalProvider>

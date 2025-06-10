@@ -1,8 +1,4 @@
-:root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-}
+
 
 /* ✅ 헤더 기본 설정 */
 .navi {
@@ -10,10 +6,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background-color: white;
-  /* border-bottom: 1px solid var(--gray); */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--light-bg);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -71,7 +64,7 @@
 /* ✅ 2차 드롭다운 메뉴 */
 .depth2 {
   position: absolute;
-  top: 2rem;
+  top: 1.7rem;
   left: 0;
   background: white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);

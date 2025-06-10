@@ -9,12 +9,11 @@ import RewardForm from "../components/RewardForm";
 import RewardCard from "../components/RewardCard";
 
 import "../../../../assets/styles/reset.css";
-import "./css/ProjecCreatetInfo.css";
-import "./css/Reward.css";
+import styles from "./css/Reward.module.css";
 
 const ProjectCreateReward = () => {
   const [rewards, setRewards] = useState([]);
-  const { open } = useStepModal(); // ✅ 모달 훅 변경
+  const { open } = useStepModal();
 
   const {
     currentReward,
@@ -28,7 +27,6 @@ const ProjectCreateReward = () => {
     removeOption,
   } = useRewardForm();
 
-  // ✅ 저장된 리워드 불러오기
   useEffect(() => {
     const saved = localStorage.getItem("projectRewards");
     if (saved) {
@@ -38,7 +36,6 @@ const ProjectCreateReward = () => {
     }
   }, []);
 
-  // ✅ 리워드 저장
   const handleSave = () => {
     const updated = rewards.filter((r) => r.id !== currentReward.id);
     const newRewards = [...updated, currentReward];
@@ -48,14 +45,12 @@ const ProjectCreateReward = () => {
     cancelEditing();
   };
 
-  // ✅ 임시 저장
   const handleTempSave = () => {
     localStorage.setItem("projectRewards", JSON.stringify(rewards));
     console.log("✅ 임시 저장된 리워드:", rewards);
-    open("saved"); // ✅ 모달 호출
+    open("saved");
   };
 
-  // ✅ 리워드 삭제
   const handleDelete = (id) => {
     const updated = rewards.filter((reward) => reward.id !== id);
     setRewards(updated);
@@ -65,11 +60,11 @@ const ProjectCreateReward = () => {
   return (
     <>
       <ProjectCreateHeader />
-      <div className="layout">
+      <div className={styles.layout}>
         <Sidebar />
-        <main className="content">
+        <main className={styles.content}>
           <section>
-            <h2>리워드 설정</h2>
+            <h2 className={styles.heading}>리워드 설정</h2>
 
             {isAdding && currentReward && (
               <RewardForm
@@ -93,21 +88,24 @@ const ProjectCreateReward = () => {
             ))}
 
             {!isAdding && (
-              <button className="btn-reward-create" onClick={startNewReward}>
+              <button
+                className={styles.btnRewardCreate}
+                onClick={startNewReward}
+              >
                 + 리워드 추가하기
               </button>
             )}
 
-            <div className="cta-buttons">
+            <div className={styles.ctaButtons}>
               <button
                 type="button"
-                className="btn outline"
+                className={styles.btnOutline}
                 onClick={handleTempSave}
               >
                 임시 저장
               </button>
               <div>
-              <StepNavigation />
+                <StepNavigation />
               </div>
             </div>
           </section>

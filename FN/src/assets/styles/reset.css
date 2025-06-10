@@ -40,10 +40,11 @@ a {
 }
 
 :root {
-    --main-blue: rgb(41, 195, 255);
-    --sub-blue: rgb(12, 125, 255);
-    --gray: rgb(188, 188, 188);
-  }
+  --main-blue: rgb(41, 195, 255);
+  --sub-blue: rgb(12, 125, 255);
+  --gray: rgb(188, 188, 188);
+  --light-bg: #f9fafb;
+}
 
 /* 기본 폰트 설정 */
 body {

@@ -1,0 +1,110 @@
+
+
+.footer {
+  background-color: var(--light-bg);
+  /* font-family: 'Noto Sans KR', sans-serif; */
+  font-size: 13px;
+  color: #868e96;
+  border-top: 1px solid #e9ecef;
+}
+
+.container {
+  max-width: 1348px;
+  margin: 0 auto;
+  padding: 2rem 0rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.leftSection {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.serviceLinks {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.serviceLinks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.serviceLinks .title {
+  font-weight: 600;
+  color: #212529;
+}
+
+.timeBox {
+  border-top: 1px solid #dee2e6;
+  margin-top: 16px;
+  padding-top: 12px;
+  max-width: 300px;
+}
+
+.timeLabel {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.rightSection {
+  flex: 2 1 600px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 2rem;
+}
+
+.companyInfo {
+  line-height: 1.6;
+}
+
+.disclaimer {
+  line-height: 1.6;
+}
+
+.disclaimer a {
+  color: #495057;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.appLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.appLinks a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #212529;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 30px 16px;
+    gap: 32px;
+  }
+
+  .appLinks {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .serviceLinks li,
+  .companyInfo div,
+  .disclaimer p {
+    font-size: 12px;
+  }
+}

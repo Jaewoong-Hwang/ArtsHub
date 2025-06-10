@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../../../assets/styles/reset.css";
 import styles from "../css/expert/FundingManage.module.css";
-import sidemenuStyles from "../css/expert/SidemenuExpert.module.css"; // 모듈화한 사이드메뉴
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  // 모듈화한 사이드메뉴
 
 const fundingList = [
   {

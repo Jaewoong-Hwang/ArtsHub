@@ -1,3 +1,24 @@
+.mypage_section {
+  max-width: 1348px;
+  margin: 0 auto;
+  margin-top: 70px;
+  margin-bottom: 140px;
+  display: flex;
+  background-color: none;
+}
+
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+
 .projectapplicationList {
   display: flex;
   flex-direction: column;

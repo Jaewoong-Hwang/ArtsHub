@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useSubmitProject from "../hooks/useSubmitProject";
 import styles from "./css/modal.module.css";
 
 const Modal = ({ type, onClose }) => {
   const navigate = useNavigate();
+  const { submitProject } = useSubmitProject();
 
   const handleNavigate = (path) => {
     onClose();       // 모달 닫기

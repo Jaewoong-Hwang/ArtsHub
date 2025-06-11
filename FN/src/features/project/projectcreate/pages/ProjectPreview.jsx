@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextWithBreaks from "../components/TextWithBreaks";
 import Modal from "../components/Modal";
+import useSubmitProject from "../hooks/useSubmitProject"
 import "../../../../assets/styles/reset.css";
 import styles from "./css/ProjectPreview.module.css";
 

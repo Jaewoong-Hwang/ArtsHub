@@ -1,3 +1,4 @@
+// ProjectParticipateMain.jsx
 import React, { useEffect, useState } from "react";
 import axios from "../../../../services/axiosInstance";
 import HeroCarousel from "./HeroCarousel";
@@ -9,8 +10,9 @@ import ProjectFilterStatus from "../components/ProjectFilterStatus";
 
 // css
 import "../../../../assets/styles/reset.css";
+import styles from "./css/ProjectParticipateMain.module.css"; // ✅ module.css 방식으로 변경
 
-// 🔸 대체 슬라이드 데이터
+
 const fallbackSlides = [
   {
     id: 1,
@@ -40,7 +42,6 @@ const fallbackSlides = [
     image: "https://picsum.photos/600/200?random=4",
   },
 ];
-
 const ProjectParticipateMain = () => {
   const [slides, setSlides] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -60,27 +61,27 @@ const ProjectParticipateMain = () => {
     setSearchKeyword("");
   };
 
- useEffect(() => {
-  axios.get("/api/projects")
-    .then((res) => {
-      const serverData = res.data;
-      setProjects(
-        serverData.map((p) => ({
-          id: p.id,
-          title: p.title,
-          category: p.genre,
-          image: p.thumbnail,
-          descriptionSummary: p.description.summary || "",
-          views: p.views || 0,
-          deadline: p.deadline || "",
-          capacity: p.capacity || "",
-        }))
-      );
-    })
-    .catch((err) => {
-      console.error("🚨 서버 프로젝트 조회 실패:", err);
-      setProjects([]);
-    });
+  useEffect(() => {
+    axios.get("/api/projects")
+      .then((res) => {
+        const serverData = res.data;
+        setProjects(
+          serverData.map((p) => ({
+            id: p.id,
+            title: p.title,
+            category: p.genre,
+            image: p.thumbnail,
+            description: p.description?.summary || "",
+            views: p.views || 0,
+            deadline: p.deadline || "",
+            capacity: p.capacity || "",
+          }))
+        );
+      })
+      .catch((err) => {
+        console.error("🚨 서버 프로젝트 조회 실패:", err);
+        setProjects([]);
+      });
 
     setSlides(fallbackSlides);
   }, []);
@@ -90,10 +91,8 @@ const ProjectParticipateMain = () => {
       ? project.category === selectedCategory
       : true;
 
-    // 소문자로 통일한 키워드 배열 생성
     const keywordList = searchKeyword.toLowerCase().split(" ").filter(Boolean);
 
-    // keyword가 모두 포함되는지 확인
     const matchSearch = keywordList.every(
       (kw) =>
         project.title.toLowerCase().includes(kw) ||
@@ -105,26 +104,26 @@ const ProjectParticipateMain = () => {
   });
 
   return (
-    <main className="project-page">
+    <main className={styles.projectPage}>
       <Header />
       <HeroCarousel slides={slides} />
-      <section className="content">
-        <div className="title">
-          <h2 className="section-title">Project Recruitment</h2>
-          <p className="section-subtitle">
+      <section className={styles.content}>
+        <div className={styles.title}>
+          <h2 className={styles.sectionTitle}>Project Recruitment</h2>
+          <p className={styles.sectionSubtitle}>
             함께하길 기다리는 팀원에 합류하세요 !!
           </p>
           <SearchBar onSearch={handleSearch} />
-          <div className="category-header">
+          <div className={styles.categoryHeader}>
             <CategoryList
               onCategorySelect={handleCategorySelect}
               selectedCategory={selectedCategory}
             />
           </div>
           {selectedCategory && (
-            <div className="category-reset-container">
+            <div className={styles.categoryResetContainer}>
               <p
-                className="reset-text"
+                className={styles.resetText}
                 onClick={() => setSelectedCategory(null)}
               >
                 전체 보기

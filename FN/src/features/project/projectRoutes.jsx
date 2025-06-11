@@ -5,6 +5,7 @@ import ProjectCreateDescription from './projectcreate/pages/Description';
 import ProjectCreateReward from './projectcreate/pages/Reward';
 import ProjectParticipateMain from './projectparticipate/pages/ProjectParticipateMain';
 import ProjectPreview from './projectcreate/pages/ProjectPreview';
+import ProjectDetail from './projectcreate/pages/ProjectDetail';
 
 
 

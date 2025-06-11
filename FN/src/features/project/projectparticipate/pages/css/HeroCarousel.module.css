@@ -1,36 +1,22 @@
-/* :root {
-  --main-blue: rgb(41, 195, 255);
-  --sub-blue: rgb(12, 125, 255);
-  --gray: rgb(188, 188, 188);
-} */
-
-/* 전체 캐러셀 영역 */
-.carousel-wrapper {
+.carouselWrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
-
   padding: 2rem 0;
 }
 
-/* 캐러셀 컨테이너 */
-.carousel-container {
+.carouselContainer {
   overflow: hidden;
   width: 100%;
 }
 
-/* 슬라이드들을 묶는 트랙 */
-.carousel-track {
+.carouselTrack {
   display: flex;
   transition: transform 0.6s ease-in-out;
- 
 }
 
-/* 슬라이드 기본 스타일 */
-.carousel-slide {
+.carouselSlide {
   flex: 0 0 calc(100% / 3);
-  /* padding: 0 2rem; */
-  box-sizing: border-box;
   border-radius: 10px;
   opacity: 0.6;
   transform: scale(0.95);
@@ -39,43 +25,36 @@
   z-index: 1;
 }
 
-/* 슬라이드 이미지 */
-.carousel-slide img {
+.carouselSlide img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  /* border-radius: 10px; */
 }
 
-/* 텍스트 영역 */
 .overlay {
   margin-top: 0.2rem;
   text-align: center;
 }
 
-/* 기본 상태에서 가운데 슬라이드 강조 */
-.carousel-slide.center {
+.center {
   transform: scale(0.8);
   opacity: 1;
   z-index: 2;
 }
 
-/* 마우스 hover 된 슬라이드 */
-.carousel-slide.hovered {
+.hovered {
   transform: scale(0.9);
   opacity: 1;
   z-index: 3;
 }
 
-/* 축소된 슬라이드 (기본 좌우 또는 hover 외 슬라이드) */
-.carousel-slide.compressed {
+.compressed {
   transform: scale(0.5);
   opacity: 0.4;
   z-index: 0;
 }
 
-/* 좌우 화살표 버튼 공통 */
-.carousel-arrow {
+.carouselArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -84,7 +63,6 @@
   height: 26px;
   border-radius: 50%;
   background-color: white;
-  /* border: 0.5px solid var(--gray); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,45 +71,41 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 화살표 아이콘 */
-.carousel-arrow svg {
+.carouselArrow svg {
   width: 20px;
   height: 20px;
   stroke: var(--main-blue);
 }
 
-/* 방향별 위치 지정 */
-.carousel-arrow.left {
+.left {
   left: 2rem;
 }
 
-.carousel-arrow.right {
+.right {
   right: 2rem;
 }
 
-/* 화살표 hover 효과 */
-.carousel-arrow:hover {
+.carouselArrow:hover {
   background-color: var(--main-gray);
   transform: translateY(-50%) scale(1.05);
 }
 
-.carousel-arrow:hover svg {
+.carouselArrow:hover svg {
   stroke: white;
 }
 
-/* 반응형 처리 (모바일 대응) */
 @media (max-width: 768px) {
-  .carousel-slide {
+  .carouselSlide {
     flex: 0 0 100%;
     padding: 0 1rem;
   }
 
-  .carousel-arrow {
+  .carouselArrow {
     width: 32px;
     height: 32px;
   }
 
-  .carousel-arrow svg {
+  .carouselArrow svg {
     width: 16px;
     height: 16px;
   }

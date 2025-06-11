@@ -20,7 +20,7 @@ function Login() {
 
       if (response.status === 200) {
         alert("로그인 성공!");
-        window.location.href = "/main";
+        window.location.href = "/";
       }
     } catch (error) {
       setErrorMsg("로그인 실패. 아이디 또는 비밀번호를 확인하세요.");
@@ -109,7 +109,6 @@ function Login() {
         <div className={styles.hypertext}>
           <a href="/find" className={styles.link}>아이디/비밀번호 찾기</a>
           <a href="/join" className={styles.link}>회원가입</a>
-          <a href="/mypage" className={styles.link}>마이페이지</a>
         </div>
       </div>
     </div>

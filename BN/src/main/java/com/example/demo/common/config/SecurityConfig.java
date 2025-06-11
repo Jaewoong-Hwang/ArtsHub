@@ -73,7 +73,9 @@ public class SecurityConfig {
 					"/api/join",
 					"/api/user/me",
 					"/api/check-email",
-					"/api/projects/**").permitAll();
+					"/api/projects/**",
+					"/api/verify-code", "/api/send-verification",
+					"/api/send-email-code", "/api/verify-email-code").permitAll();
 			auth.requestMatchers("/api/user").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");

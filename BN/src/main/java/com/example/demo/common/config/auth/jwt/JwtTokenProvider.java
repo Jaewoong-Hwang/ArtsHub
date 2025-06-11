@@ -55,9 +55,10 @@ public class JwtTokenProvider {
             byte[] keyBytes = KeyGenerator.getKeygen();
             this.key = Keys.hmacShaKeyFor(keyBytes);
 
-            Signature signature = new Signature();
-            signature.setKeyBytes(keyBytes);
-            signature.setCreateAt(LocalDate.now());
+            Signature signature = new Signature("jwt-key", keyBytes, LocalDate.now());
+//            Signature signature = new Signature();
+//            signature.setKeyBytes(keyBytes);
+//            signature.setCreateAt(LocalDate.now());
 
             signatureRepository.save(signature);
             log.info("JwtTokenProvider 초기 키 생성 완료");

@@ -51,6 +51,13 @@
   font-size: 0.95rem;
   color: #555;
   margin-bottom: 0.6rem;
+
+  /* ✅ 말줄임 처리 추가 (선택적 UX 향상) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2줄 */
+  -webkit-box-orient: vertical;
 }
 
 .projectMeta {

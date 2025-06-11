@@ -13,7 +13,7 @@ const ProjectCreateInfo = () => {
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
-    headcount: "",
+    capacity: "",
     deadline: "",
   });
 
@@ -84,7 +84,7 @@ const ProjectCreateInfo = () => {
               모집 인원 수
               <input
                 type="number"
-                name="headcount"
+                name="capacity"
                 placeholder="예: 5"
                 min="1"
                 required

@@ -24,49 +24,8 @@ const Modal = ({ type, onClose }) => {
           label: "최종 등록하기",
           style: "primary",
           action: () => {
-            try {
-              // 1. 로컬스토리지에서 데이터 불러오기
-              const info = JSON.parse(localStorage.getItem("projectInfo"));
-              const description = JSON.parse(localStorage.getItem("project_description"));
-              const rewards = JSON.parse(localStorage.getItem("projectRewards"));
-
-              const requestBody = { info, description, rewards };
-
-              console.log("📦 백엔드 전송 데이터 준비:", requestBody);
-
-              // 2. 백엔드 API 호출 (지금은 주석 처리)
-              /*
-              fetch("/api/projects", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestBody),
-              })
-                .then((res) => {
-                  if (!res.ok) throw new Error("등록 실패");
-                  return res.json();
-                })
-                .then((data) => {
-                  console.log("✅ 등록 성공:", data);
-                })
-                .catch((err) => {
-                  console.error("🚨 등록 오류:", err);
-                  alert("등록 중 문제가 발생했습니다.");
-                });
-              */
-
-              // 3. 로컬스토리지 초기화
-              localStorage.removeItem("projectInfo");
-              localStorage.removeItem("project_description");
-              localStorage.removeItem("projectRewards");
-
-              // 4. 참여 프로젝트 페이지로 이동
-              handleNavigate("/project/participate");
-            } catch (error) {
-              console.error("🚨 처리 중 오류 발생:", error);
-              alert("프로젝트 등록 중 문제가 발생했습니다.");
-            }
+            onClose(); // ✅ 모달 먼저 닫고
+            submitProject(navigate); // ✅ 프로젝트 등록
           },
         },
       ],

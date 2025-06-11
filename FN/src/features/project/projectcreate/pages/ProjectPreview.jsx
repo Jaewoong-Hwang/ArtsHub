@@ -32,7 +32,15 @@ const ProjectPreview = () => {
     }
   }, []);
 
-  const { info, description, rewards } = previewData;
+  // 🔘 등록 버튼 클릭 시
+  const handleSubmit = () => {
+    if (!info.title || !description.summary) {
+      alert("프로젝트 제목과 개요는 필수입니다.");
+      return;
+    }
+
+    submitProject(); // ✅ 등록 실행
+  };
 
   return (
     <div className={styles.previewWrapper}>

@@ -1,0 +1,120 @@
+.detailWrapper {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 20px rgba(12, 125, 255, 0.05);
+  color: #333;
+}
+
+.detailWrapper h1 {
+  font-size: 2rem;
+  color: var(--sub-blue);
+  margin-bottom: 1rem;
+}
+
+.detailImage {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: 1rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.detailInfo {
+  margin-bottom: 2rem;
+}
+
+.detailSection {
+  margin: 2rem 0;
+}
+
+.detailSection h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--sub-blue);
+}
+
+.detailSection p {
+  white-space: pre-line;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rewardCard {
+  background-color: #f5faff;
+  border: 1px solid #d3e9ff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.rewardCard h3 {
+  font-size: 1.1rem;
+  color: var(--sub-blue);
+  margin-bottom: 0.5rem;
+}
+
+.rewardCard p {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.rewardCard ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.rewardCard li {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.backButton {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: var(--main-blue);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.backButton:hover {
+  background-color: var(--sub-blue);
+  transform: translateY(-2px);
+}
+
+.notFound {
+  text-align: center;
+  padding: 4rem;
+  color: var(--gray);
+  font-size: 1.2rem;
+}
+
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.notFound {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.25rem;
+  color: crimson;
+}

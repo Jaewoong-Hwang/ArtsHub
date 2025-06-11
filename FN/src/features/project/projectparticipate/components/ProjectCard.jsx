@@ -3,7 +3,27 @@ import useScrollFadeIn from '../hooks/useScrollFadeIn';
 import './css/ProjectCard.css';
 
 const ProjectCard = ({ project, index }) => {
-  const [ref, visible, style] = useScrollFadeIn(index * 0.1); // 0.1s 간격으로 딜레이
+  console.log("💡 전달된 프로젝트 데이터:", project); 
+  const [ref, visible, style] = useScrollFadeIn(index * 0.1);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (!project?.id) {
+      alert("프로젝트 ID가 없습니다.");
+      return;
+    }
+    navigate(`/project/${project.slug}`);
+
+  };
+
+  // 🔹 D-Day 계산
+  const calcDday = (deadline) => {
+    if (!deadline) return null;
+    const today = new Date();
+    const end = new Date(deadline);
+    const diff = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+    return diff >= 0 ? `D-${diff}` : "마감";
+  };
 
   return (
     <div

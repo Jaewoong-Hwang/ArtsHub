@@ -1,0 +1,179 @@
+/* 구글 아이콘 세팅 */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 200,
+  'GRAD' 0,
+  'opsz' 40
+}
+
+/* --------------------기본 세팅-------------------- */
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+footer{
+    box-sizing: border-box;
+    max-width: 1280px;
+    left: 0;
+    top: 0;
+    margin: auto;
+    height: 400px;
+}
+.material-symbols-outlined {
+    cursor: pointer;
+}
+/* ------------------푸터 위-------------- */
+.footer-top{
+    height: 42px;
+    border: 1px solid gainsboro;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px 0 16px;
+}
+
+.footer-top ul{
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+}
+.footer-top ul li{
+    display: flex;
+    gap: 5px;
+    margin: 0;
+}
+.footer-top ul:first-child{
+    margin: 0;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+}
+.footer-top ul:first-child li a{
+    align-items: center;
+}
+.footer-top ul:nth-child(2){
+    height: 100%;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.footer-top ul:nth-child(2) li{
+    margin: 0 12px 0 16px;
+}
+
+.footer-contents{
+    height: calc(100% - 42px);
+    display: flex;
+    gap: 100px;
+    margin: 0;
+}
+
+/* -------------- 왼쪽 --------------*/
+
+.footer-contents>.footer-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0 80px;
+}
+.footer-contents>.footer-left ul{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: 0;
+    margin: 4px;
+}
+.footer-contents>.footer-left ul:first-child li:nth-child(1){
+    font-size: 18px;
+    color: #212529;
+    font-weight: 600;
+}
+.footer-contents>.footer-left ul:first-child li:not(:nth-child(1)){
+    font-size: 16px;
+    color: #495057;
+}
+.footer-contents>.footer-left ul:first-child li{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    margin-top: 4px;
+}
+.footer-left>ul:nth-child(1) li{
+    height: 27px;
+}
+.footer-left>ul:nth-child(2) li{
+    height: 24px;
+    margin-top: 4px;
+}
+.footer-left>ul:nth-child(2) li:nth-child(1){
+    font-size: 14px;
+    color: #868e96;
+    font-weight: bold;
+}
+.footer-left>ul:nth-child(2) li:nth-child(2){
+    font-size: 14px;
+    color: #495057;
+}
+
+/* ------------오른쪽------------ */
+
+.footer-contents>.footer-right{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 40px 0 80px;
+    font-size: 14px;
+}
+.footer-contents>.footer-right ul{
+    padding: 0;
+}
+.footer-contents>.footer-right ul>ul{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.footer-contents>.footer-right>ul>li{
+
+}
+.footer-contents>.footer-right>ul>ul>li:not(:last-child):after{
+    content: "|";
+    margin: 10px;
+}
+.footer-contents>.footer-right>ul:nth-child(2) li{
+    font-size: 14px;
+    color: #495057;
+    margin-top: 8px;
+}
+.footer-contents>.footer-right>ul:nth-child(3){
+    display: flex;
+    gap: 20px;
+}
+.footer-contents>.footer-right>ul:nth-child(3) a{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 5px;
+}
+.footer-contents>.footer-right>ul:nth-child(3) .material-symbols-outlined{
+    font-size: 40px;
+    width: 30px;
+}
+.footer-contents>.footer-right>ul:nth-child(3)>a>img{
+    width: 30px;
+}
+@media(max-width : 1100px){
+    footer{
+        display: none;
+    }
+}

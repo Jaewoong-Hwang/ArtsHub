@@ -9,7 +9,7 @@ function Main() {
   return (
     <RequireAuth>
       <div>
-        <h2>환영합니다, {user?.username}님!</h2>
+        <h2>환영합니다, {user?.nickname}님!</h2>
         <LogoutButton />
       </div>
     </RequireAuth>

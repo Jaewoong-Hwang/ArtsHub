@@ -63,6 +63,42 @@ function Login() {
 
         {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>}
 
+<<<<<<< HEAD
+        <div className="row mt-4">
+          <div className="col">
+            <button className="btn1 btn-custom" onClick={handleLogin}>
+              로그인
+            </button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <button className="btn2 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/kakao"}>
+              <img src="/static/img/kakao.png" alt="카카오" className="kakao" /> 카카오로 시작하기
+            </button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <button className="btn3 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/naver"}>
+              <img src="/static/img/naver.png" alt="네이버" className="naver" /> 네이버로 시작하기
+            </button>
+            </div>
+          </div>
+
+        <div className="row">
+          <div className="col">
+            <button className="btn4 btn-custom" onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/google"}>
+              <img src="/static/img/google.png" alt="구글" className="google" /> 구글로 시작하기
+            </button>
+            </div>
+          </div>
+
+
+        <div className="hypertext">
+=======
         <button className={`${styles.btn1} ${styles.btnCustom}`} onClick={handleLogin}>
           이메일로 로그인하기
         </button>
@@ -96,6 +132,7 @@ function Login() {
         </div>
 
         <div className={styles.hypertext}>
+>>>>>>> origin/May-dev
           <a href="/find">아이디/비밀번호 찾기</a>
           <a href="/join">회원가입</a>
           <a href="/mypage">마이페이지</a>

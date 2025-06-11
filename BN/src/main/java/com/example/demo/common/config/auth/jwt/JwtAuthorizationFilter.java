@@ -1,7 +1,5 @@
 package com.example.demo.common.config.auth.jwt;
 
-import com.example.demo.common.config.auth.jwt.JwtProperties;
-import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
@@ -26,6 +24,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * JWT 인증 및 AccessToken 재발급을 처리하는 필터
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
@@ -42,10 +43,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         log.debug("[JWT FILTER] 요청 URI: {}", request.getRequestURI());
 
-        // 인증 제외 경로
+        // 로그인, 회원가입, 정적 자원 등은 필터를 통과시킴
         String uri = request.getRequestURI();
         if (uri.startsWith("/api/login") || uri.startsWith("/api/join") ||
-                uri.startsWith("/api/check-username") ||
+                uri.startsWith("/api/check-email") ||
                 uri.startsWith("/favicon.ico") ||
                 uri.startsWith("/static") || uri.startsWith("/css") ||
                 uri.startsWith("/js") || uri.startsWith("/img") ||
@@ -54,14 +55,15 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 1. 쿠키에서 accessToken 추출
+        // 쿠키에서 accessToken 추출
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            log.warn("[JWT FILTER] 쿠키가 없습니다 (request.getCookies() == null)");
+            log.warn("[JWT FILTER] 쿠키가 없습니다");
             chain.doFilter(request, response);
             return;
         }
 
+        // 디버깅용 쿠키 로그 출력
         for (Cookie c : cookies) {
             log.info("[JWT FILTER] Cookie: {} = {}", c.getName(), c.getValue());
         }
@@ -78,8 +80,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String username = null;
+        String email = null;
 
+        // 토큰 파싱 시도
         try {
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(jwtTokenProvider.getKey())
@@ -87,10 +90,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     .parseClaimsJws(token)
                     .getBody();
 
-            username = claims.getSubject();
+            email = claims.getSubject();
         } catch (ExpiredJwtException ex) {
-            username = ex.getClaims().getSubject();
-            log.warn("[JWT FILTER] AccessToken 만료됨 - 사용자: {}", username);
+            email = ex.getClaims().getSubject(); // 만료된 토큰에서도 subject 추출 가능
+            log.warn("[JWT FILTER] AccessToken 만료됨 - 사용자: {}", email);
         } catch (Exception ex) {
             log.warn("[JWT FILTER] 토큰 파싱 실패: {}", ex.getMessage());
             chain.doFilter(request, response);
@@ -98,6 +101,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         }
 
         try {
+            // AccessToken이 유효하면 인증 설정
             if (jwtTokenProvider.validateToken(token)) {
                 Authentication authentication = getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -106,74 +110,93 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException ex) {
             log.info("[JWT FILTER] AccessToken 만료됨, RefreshToken 검증 시도");
 
-            if (username != null) {
-                String redisKey = "RT:" + username;
+            if (email != null) {
+                String redisKey = "RT:" + email;
                 String refreshToken = redisUtil.getRefreshToken(redisKey);
 
                 if (refreshToken != null) {
                     try {
+                        // RefreshToken도 유효하면 AccessToken 재발급
                         if (jwtTokenProvider.validateToken(refreshToken)) {
-                            User user = userRepository.findByUsername(username);
+                            Optional<User> optionalUser = userRepository.findByEmail(email);
+                            if (optionalUser.isEmpty()) {
+                                throw new RuntimeException("사용자를 찾을 수 없습니다: " + email);
+                            }
+                            User user = optionalUser.get();
+
+                            // AccessToken 새로 생성
                             long now = System.currentTimeMillis();
                             Date accessTokenExpiresIn = new Date(now + JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
 
                             String newAccessToken = Jwts.builder()
-                                    .setSubject(username)
-                                    .claim("username", username)
+                                    .setSubject(email)
+                                    .claim("email", email)
                                     .claim("auth", user.getRole())
                                     .setExpiration(accessTokenExpiresIn)
                                     .signWith(jwtTokenProvider.getKey(), SignatureAlgorithm.HS256)
                                     .compact();
 
+                            // 새 AccessToken 쿠키에 저장
                             Cookie newTokenCookie = new Cookie(JwtProperties.ACCESS_TOKEN_COOKIE_NAME, newAccessToken);
                             newTokenCookie.setMaxAge(JwtProperties.ACCESS_TOKEN_EXPIRATION_TIME);
                             newTokenCookie.setPath("/");
                             response.addCookie(newTokenCookie);
 
+                            // SecurityContext에 인증 설정
                             Authentication authentication = jwtTokenProvider.getAuthentication(newAccessToken);
                             SecurityContextHolder.getContext().setAuthentication(authentication);
                             log.info("[JWT FILTER] AccessToken 재발급 및 인증 완료");
 
                         } else {
+                            // RefreshToken이 유효하지 않을 때
                             log.warn("[JWT FILTER] RefreshToken 유효하지 않음");
                             redisUtil.delete(redisKey);
-                            expireCookies(response, "username", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
+                            expireCookies(response, "email", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.getWriter().write("UNAUTHORIZED");
                             return;
                         }
                     } catch (ExpiredJwtException refreshEx) {
-                        log.warn("[JWT FILTER] RefreshToken 만료됨: {}", ex.getMessage());
+
+                        // RefreshToken도 만료된 경우
+                        log.warn("[JWT FILTER] RefreshToken 만료됨: {}", refreshEx.getMessage());
                         redisUtil.delete(redisKey);
-                        expireCookies(response, "username", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
+                        expireCookies(response, "email", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         response.getWriter().write("UNAUTHORIZED");
                         return;
                     }
                 } else {
+                    // Redis에 저장된 RefreshToken이 없는 경우
                     log.warn("[JWT FILTER] Redis에 RefreshToken 없음");
-                    expireCookies(response, "username", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
+                    expireCookies(response, "email", JwtProperties.ACCESS_TOKEN_COOKIE_NAME);
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.getWriter().write("UNAUTHORIZED");
                     return;
                 }
-
             }
         }
 
+        // 필터 체인 계속 진행
         chain.doFilter(request, response);
     }
 
+    /**
+     * JWT 토큰을 통해 인증 객체를 생성하는 메서드
+     */
     private Authentication getAuthentication(String token) {
         Authentication authentication = jwtTokenProvider.getAuthentication(token);
-        Optional<User> user = userRepository.findById(authentication.getName());
+        Optional<User> user = userRepository.findByEmail(authentication.getName());
         return user.map(u -> authentication).orElse(null);
     }
 
+    /**
+     * 쿠키를 만료시키기 위한 유틸 메서드
+     */
     private void expireCookies(HttpServletResponse response, String... names) {
         for (String name : names) {
             Cookie cookie = new Cookie(name, null);
-            cookie.setMaxAge(0);
+            cookie.setMaxAge(0); // 즉시 만료
             cookie.setPath("/");
             response.addCookie(cookie);
         }

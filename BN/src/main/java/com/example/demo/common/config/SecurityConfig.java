@@ -8,8 +8,10 @@ import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
 import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginFailureHandler;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginSuccessHandler;
+import com.example.demo.common.config.auth.loginHandler.OAuth2LoginSuccessHandler;
 import com.example.demo.common.config.auth.logoutHandler.CustomLogoutHandler;
 import com.example.demo.common.config.auth.logoutHandler.CustomLogoutSuccessHandler;
+import com.example.demo.common.config.auth.principal.PrincipalDetailsOAuth2Service;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.repository.JwtTokenRepository;
 import com.example.demo.user.repository.UserRepository;
@@ -51,6 +53,10 @@ public class SecurityConfig {
 //	private JwtTokenRepository jwtTokenRepository;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private PrincipalDetailsOAuth2Service principalDetailsOAuth2Service;
+	@Autowired
+	private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
 
 	@Bean
@@ -63,7 +69,8 @@ public class SecurityConfig {
 			auth.requestMatchers(
 					"/api/login",
 					"/api/join",
-					"/api/check-username",
+					"/api/user/me",
+					"/api/check-email",
 					"/favicon.ico",
 					"/static/**",
 					"/css/**",
@@ -91,10 +98,14 @@ public class SecurityConfig {
 			ex.accessDeniedHandler(new CustomAccessDeniedHandler());
 		});
 
-		//OAUTH2-CLIENT
-//		http.oauth2Login((oauth2)->{
-//			oauth2.loginPage("/login");
-//		});
+		// OAUTH2 로그인 설정 - 커스텀 서비스로 사용자 정보 매핑
+		http.oauth2Login(oauth2 -> oauth2
+				.loginPage("/login") // 프론트엔드 커스텀 로그인 페이지
+				.userInfoEndpoint(userInfo -> userInfo
+						.userService(principalDetailsOAuth2Service)) // 사용자 정보 가져올 때 사용할 서비스 등록
+		);
+
+		http.oauth2Login().successHandler(oAuth2LoginSuccessHandler);
 
 		//SESSION INVALIDATED
 		http.sessionManagement((sessionManagerConfigure)->{
@@ -118,11 +129,6 @@ public class SecurityConfig {
 	}
 
 
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 
 	//-----------------------------------------------------
 	//[추가] CORS

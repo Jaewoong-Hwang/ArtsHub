@@ -4,7 +4,7 @@ import axiosInstance from "../../../services/axiosInstance";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);      // 로그인 사용자
+  const [user, setUser] = useState(null); // 로그인 사용자
   const [loading, setLoading] = useState(true); // 로딩 상태
 
   useEffect(() => {
@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setUser(res.data);
         setLoading(false);
+        console.log("user context 값:", res.data);
       })
       .catch(() => {
         setUser(null);

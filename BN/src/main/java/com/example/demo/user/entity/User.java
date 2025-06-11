@@ -1,20 +1,59 @@
 package com.example.demo.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "user")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
 public class User {
+
 	@Id
-	private String username;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long userId;
+
+	@Column(nullable = false, unique = true, length = 255)
+	private String email;
+
+	@Column(nullable = false)
 	private String password;
+
+	@Column(nullable = false, length = 45)
+	private String name;
+
+	@Column(nullable = false, length = 100)
+	private String nickname;
+
+	@Column(name = "phone_number", nullable = false, length = 20)
+	private String phoneNumber;
+
+
+	@Column(name = "create_at", nullable = false)
+	private LocalDateTime createAt;
+
+	@Column(name = "update_at", nullable = false)
+	private LocalDateTime updateAt;
+
+	@Column(nullable = false, length = 50)
 	private String role;
+
+	@Column(name = "profile_image", nullable = false, length = 300)
+	private String profileImage;
+
+	@PrePersist
+	public void onCreate() {
+		this.createAt = LocalDateTime.now();
+		this.updateAt = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	public void onUpdate() {
+		this.updateAt = LocalDateTime.now();
+	}
 }

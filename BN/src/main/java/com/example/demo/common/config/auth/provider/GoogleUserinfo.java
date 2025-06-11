@@ -35,6 +35,13 @@ public class GoogleUserinfo implements OAuth2UserInfo {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return Map.of();
+        return this.attributes;
     }
+
+    @Override
+    public String getProfileImage() {
+        return (String) attributes.get("picture");
+    }
+
+
 }

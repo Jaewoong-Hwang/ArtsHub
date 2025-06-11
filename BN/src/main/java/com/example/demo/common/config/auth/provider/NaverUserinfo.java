@@ -32,4 +32,9 @@ public class NaverUserinfo implements OAuth2UserInfo {
     public String getProviderId() {
         return id;
     }
+
+    @Override
+    public String getProfileImage() {
+        return (String) attributes.get("profile_image");
+    }
 }

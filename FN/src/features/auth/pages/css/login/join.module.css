@@ -1,3 +1,11 @@
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .mainTitle {
   text-align: center;
   color: #0c7dff;

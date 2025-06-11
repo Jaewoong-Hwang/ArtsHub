@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../../assets/styles/reset.css";
 import styles from "./css/login/join.module.css"; // ✅ CSS Module import
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../services/axiosInstance";
@@ -71,7 +72,7 @@ const Join = () => {
   };
 
   return (
-    <div>
+    <div className={styles.pageWrapper}>
       <div className={styles.header}></div>
       <h1 className={styles.mainTitle}>Arts Hubs</h1>
       <hr />

@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     height: auto;
     display: flex;
@@ -6,16 +6,6 @@ body {
     align-items: center;
     margin-top: 40px;
 }
-
-/* fontfamily */
-/* 글꼴 등록 */
-/*
-@font-face {
-    font-family: 'custom-font-01';
-    src: url("../../static/assets/font/NotoSansKR-VariableFont_wght.ttf");
-    font-size: normal;
-}
-    */
 
 body{
     font-family: "custom-font-01";
@@ -191,4 +181,4 @@ a {
     display: flex;
     justify-content: space-between;
     transition: 0.3s ease;
-}
+} */

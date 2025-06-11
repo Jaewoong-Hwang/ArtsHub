@@ -103,6 +103,7 @@ public class RestUserController {
                     "name", userDto.getName(),
                     "nickname", userDto.getNickname(),
                     "phoneNumber", userDto.getPhoneNumber(),
+                    "profile_image", userDto.getProfileImage(),
                     "role", userDto.getRole()
             ));
         } else {

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../../../../assets/styles/reset.css";
 import styles from "../css/expert/FundingManage.module.css";
 import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  // 모듈화한 사이드메뉴
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const fundingList = [
   {
@@ -73,6 +75,8 @@ const FundingManage = () => {
   }, []);
 
   return (
+        <>
+          <Header />
     <div className={styles.mypage_section}>
       {/* Sidebar */}
       <div className={sidemenuStyles.sidebar_menu}>
@@ -149,6 +153,9 @@ const FundingManage = () => {
         </div>
       </div>
     </div>
+
+    <Footer />
+    </>
   );
 };
 

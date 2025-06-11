@@ -7,5 +7,5 @@ import org.springframework.security.web.webauthn.api.Bytes;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SignatureRepository extends JpaRepository<Signature, Bytes> {
+public interface SignatureRepository extends JpaRepository<Signature, String> {
 }

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
 import styles from '../css/expert/ProfitHistory.module.css';
 import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const ProfitHistory = () => {
   const availableProfit = 0;
@@ -15,7 +17,7 @@ const ProfitHistory = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles.mypage_section}>
         <div className={sidemenuStyles.sidebar_menu}>
@@ -83,7 +85,7 @@ const ProfitHistory = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

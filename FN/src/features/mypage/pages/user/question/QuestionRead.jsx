@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../../assets/styles/reset.css';
 import styles from '../../css/user/question/QuestionRead.module.css';
+import Header from "../../../../../components/layout/Header";
+import Footer from "../../../../../components/layout/Footer";
 
 const QuestionRead = () => {
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles["question-write-content"]}>
         <p className={styles["question-write-title"]}>문의 글 정보</p>
@@ -51,7 +53,7 @@ const QuestionRead = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

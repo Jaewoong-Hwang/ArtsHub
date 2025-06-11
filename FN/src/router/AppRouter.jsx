@@ -2,6 +2,7 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import { ProjectRoutes } from '../features/project/projectRoutes';
 import { StepModalProvider } from '../features/project/projectcreate/components/StepModalContext'; // ✅ 경로 확인
 import { MypageRoutes } from '../features/mypage/MypageRoutes';
+import { AuthRoutes } from '../features/auth/authRoutes';
 
 export const AppRouter = () => (
   
@@ -11,6 +12,7 @@ export const AppRouter = () => (
         {ProjectRoutes()}
         {/* 나중에 필요 시 다른 Route도 추가 가능 */}
         {MypageRoutes()}
+        {AuthRoutes() }
       </Routes>
       </StepModalProvider>
     </BrowserRouter>

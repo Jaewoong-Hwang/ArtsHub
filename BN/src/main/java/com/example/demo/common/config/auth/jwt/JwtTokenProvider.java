@@ -48,24 +48,25 @@ public class JwtTokenProvider {
     //SIGNATURE 저장
     @PostConstruct
     public void init() {
+        Optional<Signature> optionalSignature = signatureRepository.findById("jwt-key");
 
-        Optional<Signature> optionalSignature = signatureRepository.findAll().stream().findFirst();
-        if (optionalSignature.isEmpty()) {
-            // 새 키 생성
-            byte[] keyBytes = KeyGenerator.getKeygen();
-            this.key = Keys.hmacShaKeyFor(keyBytes);
-
-            Signature signature = new Signature("jwt-key", keyBytes, LocalDate.now());
-//            Signature signature = new Signature();
-//            signature.setKeyBytes(keyBytes);
-//            signature.setCreateAt(LocalDate.now());
-
-            signatureRepository.save(signature);
-            log.info("JwtTokenProvider 초기 키 생성 완료");
-        } else {
+        if (optionalSignature.isPresent()) {
             Signature signature = optionalSignature.get();
             this.key = Keys.hmacShaKeyFor(signature.getKeyBytes());
             log.info("JwtTokenProvider 기존 키 사용");
+        } else {
+            byte[] keyBytes = KeyGenerator.getKeygen();
+            this.key = Keys.hmacShaKeyFor(keyBytes);
+
+            // ✅ 이 부분이 핵심!
+            Signature signature = Signature.builder()
+                    .id("jwt-key") // 반드시 수동으로 id 지정해야 함!
+                    .keyBytes(keyBytes)
+                    .createAt(LocalDate.now())
+                    .build();
+
+            signatureRepository.save(signature);
+            log.info("JwtTokenProvider 초기 키 생성 완료");
         }
     }
 

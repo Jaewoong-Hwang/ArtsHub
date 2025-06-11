@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
 import styles from '../css/expert/ExpertProfile.module.css';
 import sidemenuStyles from '../css/expert/SidemenuExpert.module.css';
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const ExpertProfile = () => {
   const [phone, setPhone] = useState('010-0000-0000');
@@ -28,15 +30,15 @@ const ExpertProfile = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles.mypageSection}>
         <div className={sidemenuStyles.sidebar_menu}>
-          <div className={sidemenuStyles["profile-img"]}>
+          <div className={sidemenuStyles.profile}>
             <img
               src="/static/img/apple.png"
               alt="프로필 이미지"
-              className={sidemenuStyles.profileImg}
+              className={sidemenuStyles["profile-img"]}
             />
             <p className={sidemenuStyles.nickname}>닉네임</p>
           </div>
@@ -122,7 +124,7 @@ const ExpertProfile = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

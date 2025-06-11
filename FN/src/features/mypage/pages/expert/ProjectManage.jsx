@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
 import sidemenuStyles from "../css/expert/SidemenuExpert.module.css"; 
 import styles from '../css/expert/ProjectManage.module.css'; // 모듈 스타일 import
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const projects = [
   {
@@ -35,7 +37,7 @@ const ProjectManage = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles.mypage_section}>
         <div className={sidemenuStyles.sidebar_menu}>
@@ -117,7 +119,7 @@ const ProjectManage = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

@@ -1,4 +1,3 @@
-// src/features/project/pages/ProjectDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../../../services/axiosInstance";
@@ -9,7 +8,7 @@ import styles from "./css/ProjectDetail.module.css";
 const ProjectDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null); // null: 로딩, false: 실패, {}: 성공
+  const [project, setProject] = useState(null);
 
   useEffect(() => {
     axios
@@ -32,47 +31,62 @@ const ProjectDetail = () => {
   const {
     title,
     genre,
-    deadline,
     capacity,
+    deadline,
     thumbnail,
     description,
     rewards,
   } = project;
 
   return (
-    <div className={styles.detailWrapper}>
-      <h1>{title}</h1>
+    <div className={styles.previewWrapper}>
+      <h1>프로젝트 상세 보기</h1>
 
-      {thumbnail && (
-        <img src={thumbnail} alt="썸네일" className={styles.detailImage} />
-      )}
+      <section className={styles.previewSection}>
+        <h2>{title || "제목 없음"}</h2>
+        <p>장르: {genre || "장르 없음"}</p>
+        <p>모집 인원: {capacity?.toLocaleString() || 0}명</p>
+        <p>모집 마감일: {deadline || "없음"}</p>
+      </section>
 
-      <div className={styles.detailInfo}>
-        <p>장르: {genre}</p>
-        <p>모집 인원: {capacity}명</p>
-        <p>모집 마감일: {deadline}</p>
-      </div>
-
-      <section className={styles.detailSection}>
-        <h2>📖 상세 설명</h2>
+      <section className={styles.previewSection}>
+        <h3>프로젝트 상세 설명</h3>
+        {description?.previewUrl && (
+          <div className={styles.previewThumbnail}>
+            <img src={description.previewUrl} alt="썸네일" />
+          </div>
+        )}
         <p><strong>개요:</strong> {description?.summary || "없음"}</p>
+        <p><strong>본문 내용:</strong> {description?.content || "없음"}</p>
         <p><strong>기획 배경:</strong> {description?.background || "없음"}</p>
         <p><strong>모집 역할:</strong> {description?.roles || "없음"}</p>
         <p><strong>일정:</strong> {description?.schedule || "없음"}</p>
         <p><strong>보상:</strong> {description?.compensation || "없음"}</p>
       </section>
 
-      <section className={styles.detailSection}>
-        <h2>🎁 리워드</h2>
+      <section className={styles.previewSection}>
+        <h3>리워드</h3>
         {Array.isArray(rewards) && rewards.length > 0 ? (
-          rewards.map((reward, idx) => (
-            <div key={idx} className={styles.rewardCard}>
-              <h3>{reward.title} - {reward.price}원</h3>
-              <ul>
-                {reward.options?.map((opt, i) => (
-                  <li key={i}>{opt}</li>
-                ))}
-              </ul>
+          rewards.map((reward, index) => (
+            <div key={index} className={styles.previewReward}>
+              <h4>
+                {reward.title || "제목 없음"} -{" "}
+                {reward.price?.toLocaleString() || 0}원
+              </h4>
+              <p>{reward.description || "설명이 없습니다."}</p>
+
+              {Array.isArray(reward.options) && reward.options.length > 0 && (
+                <ul>
+                  {reward.options.map((opt, idx) => (
+                    <li key={idx}>
+                      <strong>{opt.optionName}</strong>:{" "}
+                      {Array.isArray(opt.optionValues)
+                        ? opt.optionValues.join(", ")
+                        : opt.optionValues || "없음"}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))
         ) : (
@@ -80,9 +94,14 @@ const ProjectDetail = () => {
         )}
       </section>
 
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
-        ← 돌아가기
-      </button>
+      <div className={styles.ctaButtons}>
+        <button
+          className={`${styles.btn} ${styles.btnPrimary}`}
+          onClick={() => navigate(-1)}
+        >
+          ← 돌아가기
+        </button>
+      </div>
     </div>
   );
 };

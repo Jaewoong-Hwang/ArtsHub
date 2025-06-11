@@ -1,0 +1,31 @@
+프로젝트 상태별
+SELECT 
+  COUNT(*) AS totalProjects,
+  SUM(CASE WHEN status = 'WAITING' THEN 1 ELSE 0 END) AS waitingForApproval,
+  SUM(CASE WHEN status = 'PROGRESS' THEN 1 ELSE 0 END) AS inProgress,
+  SUM(CASE WHEN status = 'COMPLETED' THEN 1 ELSE 0 END) AS completed,
+  SUM(CASE WHEN status = 'REJECTED' THEN 1 ELSE 0 END) AS rejected
+FROM project;
+
+정산 상태
+SELECT 
+  SUM(CASE WHEN settlement_status = 'WAITING' THEN 1 ELSE 0 END) AS settlementWaiting,
+  SUM(CASE WHEN settlement_status = 'COMPLETED' THEN 1 ELSE 0 END) AS settlementCompleted
+FROM project;
+
+장르별 프로젝트 수
+SELECT category AS genre, COUNT(*) AS count
+FROM project
+GROUP BY category;
+
+성공률별 (funding_percent 기준)
+SELECT 
+  CASE 
+    WHEN funding_percent >= 100 THEN '100% 이상'
+    WHEN funding_percent >= 80 THEN '80~99%'
+    WHEN funding_percent >= 50 THEN '50~79%'
+    ELSE '50% 미만'
+  END AS label,
+  COUNT(*) AS count
+FROM project
+GROUP BY label;

@@ -1,0 +1,98 @@
+// 대시보드 dto
+public class AdminDashboardDto {
+    private int totalMembers;
+    private int newMembers;
+    private int reportedMembers;
+
+    private long totalFunding;
+    private long thisMonthFunding;
+
+    private int totalProjects;
+    private int activeProjects;
+    private int pendingSettlementProjects;
+}
+
+// 프로젝트 dto
+public class AdminProjectStatsDto {
+    // 프로젝트 상태별 수
+    private int totalProjects;
+    private int waitingForApproval;
+    private int inProgress;
+    private int completed;
+    private int rejected;
+
+    // 정산 상태
+    private int settlementWaiting;
+    private int settlementCompleted;
+
+    // 전문가 요청
+    private int modifyRequestCount;
+    private int inquiryCount;
+
+    // 카테고리 분석
+    private List<CategoryProjectCount> genreProjectCounts;
+    private List<SuccessRateGroupCount> successRateGroupCounts;
+}
+// 차트에 사용할 dto
+public class CategoryProjectCount {
+    private String genre;
+    private int count;
+}
+// 차트 2
+public class SuccessRateGroupCount {
+    private String label; // 예: "100% 이상", "80~99%", "50~79%", "미만"
+    private int count;
+}
+
+// 펀딩페이지
+public class AdminFundingStatsDto {
+    // 펀딩 현황
+    private long totalFundingAmount;         // 누적 펀딩 금액
+    private long thisMonthFundingAmount;     // 이번 달 펀딩 금액
+    private double fundingSuccessRate;       // 전체 펀딩 성공률 (성공 프로젝트 수 / 전체)
+
+    // 통계 분석
+    private List<MonthlyFundingTrend> monthlyTrends;         // 월별 펀딩 추이
+    private List<CategoryFundingShare> categoryFundingShares; // 장르별 펀딩 비중
+    private List<FundingAchievementGroup> fundingAchievementGroups; // 목표 달성률 구간별 분포
+
+    // 정산 관리
+    private int settlementWaitingCount;
+    private int settlementCompletedCount;
+    private int settlementRejectedCount;
+}
+// 펀딩페이지 차트용
+public class MonthlyFundingTrend {
+    private String month;  // 예: "2025-03"
+    private long amount;   // 해당 월 펀딩 금액
+}
+
+public class CategoryFundingShare {
+    private String category; // 예: "뮤지컬"
+    private long amount;     // 카테고리별 총 펀딩 금액
+}
+
+public class FundingAchievementGroup {
+    private String label; // 예: "100% 이상", "70~99%", ...
+    private int count;    // 해당 구간의 프로젝트 수
+}
+
+// 유저 dto
+public class AdminUserListDto {
+    private Long userId;
+    private String name;
+    private String email;
+    private String role;         // 일반 / 전문가 / 관리자
+    private String status;       // 활동 중 / 승인 대기 / 정지 / 탈퇴 / 휴면
+    private LocalDate joinDate;
+}
+// 유저 차트 dto
+AdminUserStatusStatsDto (회원 상태 통계)
+public class AdminUserStatusStatsDto {
+    private int activeCount;
+    private int pendingCount;
+    private int suspendedCount;
+    private int withdrawnCount;
+    private int dormantCount;
+}
+

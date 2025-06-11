@@ -1,0 +1,57 @@
+.projectHeader {
+  max-width: 1348px;
+  margin: 0 auto;
+  /* display: flex; */
+  background-color: #f9f9f9;
+  padding: 1rem 2rem;
+  /* border: 1px solid var(--gray); */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.4rem;
+  color: var(--main-blue);
+  font-weight: 700;
+  margin: 0;
+}
+
+.topActions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.small {
+  background-color: var(--main-blue);
+  color: white;
+  border: none;
+}
+
+.outline {
+  background: none;
+  border: 1.5px solid var(--main-blue);
+  color: var(--main-blue);
+}
+
+.small:hover {
+  background-color: var(--sub-blue);
+  color: #fff;
+}
+
+.outline:hover {
+  background-color: var(--main-blue);
+  color: white;
+}

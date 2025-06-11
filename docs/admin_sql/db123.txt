@@ -1,0 +1,121 @@
+유저Dto
+public class UserDto {
+    private String userid;           // 아이디 (PK)
+    private String username;         // 이름
+    private String password;         // 비밀번호
+    private String phone;            // 전화번호
+    private String grade;            // 등급
+    private int totalPurchaseAmount; // 누적 구매 금액
+    private Long defaultAddressId;  // 기본 배송지 id (AddressDto의 AddressId 참조FK)
+}
+
+주소Dto
+public class AddressDto {
+    private Long AddressId;      // 배송지 ID (PK, AUTO_INCREMENT)
+    private String userid;        // 이 배송지를 가진 회원의 ID (UserDto의 userid FK)
+    private String postcode;      // 우편번호
+    private String roadAddress;   // 도로명 주소
+    private String detailAddress; // 상세 주소
+    private String recipient;     // 받는 사람 이름
+    private String phone;         // 받는 사람 전화번호
+    private Boolean isDefault;    // 기본 배송지 여부 (true/false)
+}
+
+상품Dto
+Products (
+    product_id INT PRIMARY KEY,                   -- 상품 ID
+    name VARCHAR(100),                            -- 상품명
+    description VARCHAR(255),                     -- 상품 설명
+    price INT,                                    -- 가격
+    amount INT,                                   -- 재고 수량
+    image_url VARCHAR(255)                        -- 상품 이미지 경로
+    detail_iamge_url VARCHAR(255),                -- 상품 상세 이미지 경로
+    catagory VARCHAR(100)                         -- 카테고리
+)
+
+영양성분 Dto
+public class Product_nutrient {
+    private String Product_nutrient (PK) 
+    private String protein;       // 단백질
+    private String iron;          // 철분
+    private String vitaminD;      // 비타민 D
+    private String calcium;       // 칼슘
+    private String dietaryFiber;  // 식이섬유
+    private String magnesium;     // 마그네슘
+    private String potassium;     // 칼륨
+    private String biotin;        // 비오틴
+    private String zinc;          // 아연
+    private String arginine;      // 아르기닌
+    private String product_id (FK) 
+}
+
+
+NoticeDto 공지사항 
+public class NoticeDto {
+    private Long noticeId;           // 공지사항 ID (PK)
+    private String title;            // 제목
+    private String content;          // 내용
+    private LocalDateTime createdAt; // 작성일시(최초등록시간)
+    private LocalDateTime updatedAt; // 수정일시 (nullable)
+    private boolean isPinned;        // 상단 고정 여부 (true/false)
+}
+
+1대1문의 (ProductQuestion)
+public class ProductQuestionDto {
+    private Long questionId;              // 문의 ID (PK)
+    private String userid;                // 작성자 ID (FK to User.userid)
+    private Long productId;               // 상품 ID (FK to Product.productId)
+    private String answerAdminId;         // 답변 관리자 ID (nullable, FK to User.userid)
+    private String title;                 // 문의 제목
+    private String question;              // 문의 내용
+    private Boolean isPrivate;            // 비공개 여부 (true: 비공개)
+    private LocalDateTime createdAt;      // 작성 일시
+    private String answer;                // 관리자 답변 (nullable)
+    private LocalDateTime answeredAt;     // 답변 작성 일시 (nullable)
+    private String status;                // 처리 상태 (예: "대기중", "답변완료")
+}
+
+설문지 Dto
+public class ServeyDto{
+    private String surveyid(PK)
+    private String userid(FK);
+    private String nutrient_name; unique
+    private String nutrient_value;
+}
+결과지 Dto
+public class ResultDto{
+    private String resultid(PK)
+    private String surveyId(FK);
+    private String nutrient_name;(FK)
+    private String nutrient_result_value;
+}
+
+1. OrderDto – 주문 전체 테이블
+public class OrderDto {
+    private Long orderId;             // 주문 ID (PK)
+    private String userid;            // 주문자 ID (FK to UserDto)
+    private LocalDateTime orderDate;  // 주문 일시
+    private String status;            // 주문 상태 (예: 결제완료, 배송중, 배송완료)
+    private Long addressId;           // 배송지 ID (FK to AddressDto)
+    private int totalPrice;           // 전체 결제 금액 (전체 상품 합계)
+}
+2. OrderItemDto – 주문 상세 테이블
+public class OrderItemDto {
+    private Long orderItemId;   // 주문 상세 항목 ID (PK)
+    private Long orderId;       // 주문 ID (FK to OrderDto)
+    private Long productId;     // 상품 ID (FK to ProductDto)
+    private int quantity;       // 수량
+    private int unitPrice;      // 단가
+    private int itemTotal;      // 수량 × 단가 (항목별 총액)
+}
+CartItems (
+    cart_item_id INT PRIMARY KEY,
+    user_id INT,
+    product_id INT,
+    quantity INT,
+    is_checked	BOOLEAN
+)
+==========
+자주하는 질문 (하드코딩) - front
+상세페이지 문의 후기(타이핑 후 등록할수있게 ) 위로 올리기 , 접기 기능 
+

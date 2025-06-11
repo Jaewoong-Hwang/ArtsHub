@@ -1,0 +1,45 @@
+# 🔧 빌드 & IDE 설정
+.gradle/
+build/
+bin/
+out/
+
+# 🔥 캐시, 설정
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# 🧠 IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# 🧰 VS Code
+.vscode/
+
+# 📁 NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# 🧪 로그, 시스템 파일
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# 무시할 Gradle 잠금 파일들
+BN/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+BN/.gradle/buildOutputCleanup/cache.properties
+
+"BN/.gradle/buildOutputCleanup/buildOutputCleanup.lock" 
+"BN/.gradle/buildOutputCleanup/cache.properties" 

@@ -1,15 +1,23 @@
+// ✅ HeroCarousel.jsx (캐러셀 컴포넌트)
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./css/heroCarousel.module.css";
 import "../../../../assets/styles/reset.css";
 
-const HeroCarousel = ({ slides }) => {
+const HeroCarousel = () => {
+  const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const intervalRef = useRef(null);
   const isHoveredRef = useRef(false);
   const visibleCount = 3;
   const navigate = useNavigate();
+
+  // ✅ 프로젝트 불러오기
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("submittedProjects")) || [];
+    setSlides(stored);
+  }, []);
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % slides.length);
@@ -39,9 +47,17 @@ const HeroCarousel = ({ slides }) => {
   useEffect(() => {
     startAutoSlide();
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [slides]);
 
-  if (!Array.isArray(slides) || slides.length === 0) return null;
+  if (!Array.isArray(slides) || slides.length === 0) {
+    return (
+      <div className={styles.carouselWrapper}>
+        <p style={{ textAlign: "center", color: "gray" }}>
+          등록된 프로젝트가 없습니다.
+        </p>
+      </div>
+    );
+  }
 
   const fallbackSlides = [
     {
@@ -112,16 +128,14 @@ const HeroCarousel = ({ slides }) => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  src={slide.image}
-                  alt={slide.title || "프로젝트 썸네일"}
+                  src={slide.thumbnail || slide.image}
+                  alt={slide.title || "썸네일"}
                   className={styles.slideImage}
                 />
                 <div className={styles.overlay}>
                   <h3>{slide.title || "제목 없음"}</h3>
-                  <p>{slide.description || "설명이 없습니다"}</p>
-                  {slide.subtext && (
-                    <p className={styles.subtext}>{slide.subtext}</p>
-                  )}
+                  <p>{slide.descriptionSummary || slide.description}</p>
+                  {slide.genre && <p className={styles.subtext}>{slide.genre}</p>}
                 </div>
               </div>
             );

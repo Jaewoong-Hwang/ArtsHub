@@ -75,17 +75,17 @@ const ProjectMain = () => {
         <div className="feature-cards">
           {[
             {
-              src: "/static/img/몽환의 숲.webp",
+              src: "/static/img/-",
               alt: "기획",
               text: "기획부터 전문가 팀 구성까지!",
             },
             {
-              src: "/static/img/fund.jpg",
+              src: "/static/img/-",
               alt: "펀딩",
               text: "펀딩을 통해 시장 반응 확인!",
             },
             {
-              src: "/static/img/perform.jpg",
+              src: "/static/img/-",
               alt: "공연",
               text: "공연까지 함께 연결!",
             },

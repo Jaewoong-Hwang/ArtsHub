@@ -1,10 +1,8 @@
 package com.example.demo.common.config;
 
-
-
 import com.example.demo.common.config.auth.exceptionHandler.CustomAccessDeniedHandler;
 import com.example.demo.common.config.auth.exceptionHandler.CustomAuthenticationEntryPoint;
-import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
+// import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
 import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginFailureHandler;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginSuccessHandler;
@@ -13,7 +11,6 @@ import com.example.demo.common.config.auth.logoutHandler.CustomLogoutHandler;
 import com.example.demo.common.config.auth.logoutHandler.CustomLogoutSuccessHandler;
 import com.example.demo.common.config.auth.principal.PrincipalDetailsOAuth2Service;
 import com.example.demo.common.config.auth.redis.RedisUtil;
-import com.example.demo.user.repository.JwtTokenRepository;
 import com.example.demo.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +32,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -75,7 +71,8 @@ public class SecurityConfig {
 					"/api/login",
 					"/api/join",
 					"/api/user/me",
-					"/api/check-email" ).permitAll();
+					"/api/check-email",
+					"/api/projects/**").permitAll();
 			auth.requestMatchers("/api/user").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
@@ -91,8 +88,9 @@ public class SecurityConfig {
 			logout.addLogoutHandler(customLogoutHandler);
 			logout.logoutSuccessHandler(customLogoutSuccessHandler);
 		});
-		//예외처리
-		http.exceptionHandling((ex)->{
+
+		// ✅ 예외 처리 설정
+		http.exceptionHandling(ex -> {
 			ex.authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 			ex.accessDeniedHandler(new CustomAccessDeniedHandler());
 		});
@@ -118,42 +116,30 @@ public class SecurityConfig {
 						UsernamePasswordAuthenticationFilter.class);
 
 
-		//-----------------------------------------------
-		//[추가] CORS
-		//-----------------------------------------------
-		http.cors((config)->{
-			config.configurationSource(corsConfigurationSource());
-		});
+		// ✅ CORS 설정
+		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
 		return http.build();
-
-
 	}
 
 
 
-	//-----------------------------------------------------
-	//[추가] CORS
-	//-----------------------------------------------------
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
+	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOriginPatterns(List.of("http://localhost:3000")); // React origin
+		config.setAllowedOriginPatterns(List.of("http://localhost:3000"));
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowedHeaders(List.of("*"));
-		config.setAllowCredentials(true); // 반드시 true 설정 (쿠키 허용)
+		config.setAllowCredentials(true);
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
-	//-----------------------------------------------------
-	//[추가] ATHENTICATION MANAGER 설정 - 로그인 직접처리를 위한 BEAN
-	//-----------------------------------------------------
+
 	@Bean
-	public AuthenticationManager authenticationManager(
-			AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+		return configuration.getAuthenticationManager();
 	}
 
 

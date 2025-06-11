@@ -1,15 +1,6 @@
-/* :root {
-  --main-blue: #29c3ff;
-  --sub-blue: #0c7dff;
-  --gray: #bcbcbc;
-  --light-bg: #f9fafb;
-  --text-dark: #333;
-  --btn-hover-bg: #29c3ff;
-  --btn-hover-stroke: #fff;
-} */
 
-/* 전체 래퍼: 중앙 정렬 + 버튼 표시 */
-.category-wrapper {
+
+.categoryWrapper {
   position: relative;
   max-width: 1080px;
   margin: 0 auto;
@@ -19,8 +10,7 @@
   overflow: visible;
 }
 
-/* 카테고리 리스트: 스크롤 가능한 줄형 구조 */
-.category-list {
+.categoryList {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -30,12 +20,11 @@
   scrollbar-width: none;
 }
 
-.category-list::-webkit-scrollbar {
+.categoryList::-webkit-scrollbar {
   display: none;
 }
 
-/* 개별 항목 */
-.category-item {
+.categoryItem {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,20 +34,14 @@
   flex-shrink: 0;
 }
 
-.category-item:hover {
+.categoryItem:hover {
   transform: translateY(-4px);
 }
 
-.category-item.active .emoji {
+.active .emoji {
   background-color: var(--main-blue);
   color: white;
 }
-
-.category-item.reset {
-  border: 1px dashed var(--gray);
-  background-color: #f5f5f5;
-}
-
 
 .emoji {
   font-size: 2.2rem;
@@ -73,15 +56,14 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.category-item p {
+.categoryItemText {
   margin-top: 0.4rem;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-dark);
 }
 
-/* 스크롤 화살표 버튼 */
-.arrow-button {
+.arrowButton {
   position: absolute;
   top: 40%;
   transform: translateY(-50%);
@@ -98,40 +80,40 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.arrow-button.left {
+.left {
   left: 0;
 }
 
-.arrow-button.right {
+.right {
   right: 0;
 }
 
-.arrow-button svg {
+.arrowButton svg {
   width: 18px;
   height: 18px;
   stroke: var(--main-blue);
 }
 
-.arrow-button:hover {
+.arrowButton:hover {
   background-color: var(--main-blue);
   transform: translateY(-50%) scale(1.05);
 }
 
-.arrow-button:hover svg {
+.arrowButton:hover svg {
   stroke: var(--btn-hover-stroke);
 }
 
 @media (max-width: 768px) {
-  .category-wrapper {
+  .categoryWrapper {
     padding: 0 1rem;
   }
 
-  .arrow-button {
+  .arrowButton {
     width: 28px;
     height: 28px;
   }
 
-  .arrow-button svg {
+  .arrowButton svg {
     width: 16px;
     height: 16px;
   }

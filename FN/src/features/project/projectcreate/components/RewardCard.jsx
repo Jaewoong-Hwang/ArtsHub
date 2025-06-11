@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./css/RewardCard.module.css"; // ✅ CSS Module
+import styles from "./css/RewardCard.module.css";
 
 const RewardCard = ({ reward, onEdit, onDelete }) => {
   return (
     <div className={styles.rewardCard}>
       <h4>
-        {reward.title} ({Number(reward.amount).toLocaleString()}원)
+        {reward.title} ({Number(reward.price).toLocaleString()}원)
       </h4>
       <p>{reward.description}</p>
 
@@ -15,8 +15,11 @@ const RewardCard = ({ reward, onEdit, onDelete }) => {
           {reward.options.length > 0 ? (
             <ul>
               {reward.options.map((opt, i) => (
-                <li key={i}>
-                  {opt.optionName}: {opt.optionValues}
+                <li key={`${opt.optionName}-${i}`}>
+                  {opt.optionName}:{" "}
+                  {Array.isArray(opt.optionValues)
+                    ? opt.optionValues.join(", ")
+                    : opt.optionValues}
                 </li>
               ))}
             </ul>
@@ -28,12 +31,14 @@ const RewardCard = ({ reward, onEdit, onDelete }) => {
 
       <div className={styles.rewardActions}>
         <button
+          type="button"
           className={`${styles.btn} ${styles.outline}`}
           onClick={() => onEdit(reward)}
         >
           수정
         </button>
         <button
+          type="button"
           className={`${styles.btn} ${styles.remove}`}
           onClick={() => onDelete(reward.id)}
         >

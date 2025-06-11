@@ -16,11 +16,14 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-@EntityScan(basePackages = {"com.example.demo.user.entity"})
-@EnableJpaRepositories
-(
-                basePackages ="com.example.demo.user.repository",
-                transactionManagerRef = "jpaTransactionManager"
+@EntityScan(basePackages = {"com.example.demo.user.entity",
+        "com.example.demo.project.entity"})
+@EnableJpaRepositories(
+        basePackages = {
+                "com.example.demo.user.repository",
+                "com.example.demo.project.repository"
+        },
+        transactionManagerRef = "jpaTransactionManager"
 )
 public class JpaConfig {
     @Autowired
@@ -31,7 +34,10 @@ public class JpaConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("com.example.demo.user.entity");
+        entityManagerFactoryBean.setPackagesToScan(
+                "com.example.demo.user.entity",
+                "com.example.demo.project.entity"
+        );
 
         Properties jpaProperties = new Properties();
 

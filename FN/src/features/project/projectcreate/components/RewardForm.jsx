@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './css/RewardForm.module.css';
+import React from "react";
+import styles from "./css/RewardForm.module.css";
 
 const RewardForm = ({
   reward,
@@ -17,17 +17,19 @@ const RewardForm = ({
 
   return (
     <div className={styles.rewardForm}>
+      {/* 금액 */}
       <label className={styles.labelInput}>
         금액 (원)
         <input
           type="number"
-          name="amount"
-          value={reward.amount}
+          name="price" // ✅ 수정됨
+          value={reward.price}
           onChange={handleChange}
           className={styles.input}
         />
       </label>
 
+      {/* 제목 */}
       <label className={styles.labelInput}>
         리워드 제목
         <input
@@ -39,6 +41,7 @@ const RewardForm = ({
         />
       </label>
 
+      {/* 설명 */}
       <label className={styles.labelTextarea}>
         설명
         <textarea
@@ -49,6 +52,7 @@ const RewardForm = ({
         />
       </label>
 
+      {/* 유형 선택 */}
       <label className={styles.labelSelect}>
         리워드 유형
         <select
@@ -62,7 +66,8 @@ const RewardForm = ({
         </select>
       </label>
 
-      {reward.type === 'set' && (
+      {/* 옵션 구성 */}
+      {reward.type === "set" && (
         <div className={styles.rewardOptions}>
           <h4>옵션 구성</h4>
           {reward.options.map((opt, index) => (
@@ -71,14 +76,22 @@ const RewardForm = ({
                 type="text"
                 placeholder="옵션 이름"
                 value={opt.optionName}
-                onChange={(e) => updateOption(index, 'optionName', e.target.value)}
+                onChange={(e) =>
+                  updateOption(index, "optionName", e.target.value)
+                }
                 className={styles.optionInput}
               />
               <input
                 type="text"
                 placeholder="옵션 값 (쉼표로 구분)"
-                value={opt.optionValues}
-                onChange={(e) => updateOption(index, 'optionValues', e.target.value)}
+                value={
+                  Array.isArray(opt.optionValues)
+                    ? opt.optionValues.join(", ")
+                    : opt.optionValues
+                }
+                onChange={(e) =>
+                  updateOption(index, "optionValues", e.target.value)
+                }
                 className={styles.optionInput}
               />
               <button
@@ -97,27 +110,22 @@ const RewardForm = ({
           >
             + 옵션 추가
           </button>
-
-           <div className={styles.rewardButtons}>
-        <button
-          type="button"
-          className={styles.cancelBtn}
-          onClick={onCancel}
-        >
-          취소
-        </button>
-        <button
-          type="button"
-          className={styles.saveBtn}
-          onClick={onSave}
-        >
-          저장
-        </button>
-      </div>
         </div>
       )}
 
-      {/* <label className={styles.labelInput}>
+      {/* 저장/취소 버튼 */}
+      <div className={styles.rewardButtons}>
+        <button type="button" className={styles.cancelBtn} onClick={onCancel}>
+          취소
+        </button>
+        <button type="button" className={styles.saveBtn} onClick={onSave}>
+          저장
+        </button>
+      </div>
+
+      {/* 배송비는 추후 활성화 */}
+      {/* 
+      <label className={styles.labelInput}>
         배송비 (원)
         <input
           type="number"
@@ -126,9 +134,8 @@ const RewardForm = ({
           onChange={handleChange}
           className={styles.input}
         />
-      </label> */}
-
-     
+      </label> 
+      */}
     </div>
   );
 };

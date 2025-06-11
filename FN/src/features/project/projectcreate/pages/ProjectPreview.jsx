@@ -14,7 +14,12 @@ const ProjectPreview = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ 로딩 상태
 
+  const { info, description, rewards } = previewData;
+  const { submitProject } = useSubmitProject();
+
+  // 📦 로컬스토리지에서 데이터 불러오기
   useEffect(() => {
     try {
       const info = JSON.parse(localStorage.getItem("projectInfo")) || {};
@@ -33,13 +38,21 @@ const ProjectPreview = () => {
   }, []);
 
   // 🔘 등록 버튼 클릭 시
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!info.title || !description.summary) {
       alert("프로젝트 제목과 개요는 필수입니다.");
       return;
     }
 
-    submitProject(); // ✅ 등록 실행
+    try {
+      setIsSubmitting(true);
+      await submitProject(); // ✅ 등록 실행
+      setShowModal(true); // ✅ 모달 오픈
+    } catch (error) {
+      alert("등록 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,23 +83,23 @@ const ProjectPreview = () => {
       <section className={styles.previewSection}>
         <h3>리워드</h3>
         {Array.isArray(rewards) && rewards.length > 0 ? (
-          rewards.map((reward) => (
-            <div key={reward.id} className={styles.previewReward}>
+          rewards.map((reward, index) => (
+            <div key={index} className={styles.previewReward}>
               <h4>
-                {reward.title} - {reward.amount}원
+                {reward.title || "제목 없음"} - {reward.price || 0}원
               </h4>
-              <p>{reward.description}</p>
-              {reward.type === "set" &&
-                Array.isArray(reward.options) &&
-                reward.options.length > 0 && (
-                  <ul>
-                    {reward.options.map((opt, idx) => (
-                      <li key={idx}>
-                        {opt.optionName}: {opt.optionValues}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              {Array.isArray(reward.options) && reward.options.length > 0 && (
+                <ul>
+                  {reward.options.map((opt, idx) => (
+                    <li key={idx}>
+                      {opt.optionName || "이름 없음"}:{" "}
+                      {Array.isArray(opt.optionValues)
+                        ? opt.optionValues.join(", ")
+                        : opt.optionValues || "없음"}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))
         ) : (
@@ -98,20 +111,31 @@ const ProjectPreview = () => {
         <button
           className={`${styles.btn} ${styles.btnOutline}`}
           onClick={() => window.history.back()}
+          disabled={isSubmitting}
         >
           수정하러 가기
         </button>
         <button
           className={`${styles.btn} ${styles.btnPrimary}`}
-          onClick={() => setShowModal(true)}
+          onClick={handleSubmit}
+          disabled={isSubmitting}
         >
-          등록하기
+          {isSubmitting ? "등록 중..." : "등록하기"}
         </button>
       </div>
 
-      {showModal && <Modal type="submit" onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <Modal
+          type="submit"
+          onClose={() => {
+            setShowModal(false);
+            navigate("/projectmain"); // 예시: 등록 후 이동
+          }}
+        />
+      )}
     </div>
   );
 };
 
 export default ProjectPreview;
+

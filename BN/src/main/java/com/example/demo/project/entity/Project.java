@@ -1,5 +1,6 @@
 package com.example.demo.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,20 +30,20 @@ public class Project {
     @Embedded
     private ProjectDescription description;
 
+    // ✅ 리워드와 양방향 관계 + 순환 참조 방지
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Reward> rewards;
-
 
     private int views;
 
     private LocalDateTime createdAt;
 
     @PrePersist
-    public void generateSlug() {
+    public void prePersist() {
         if (this.slug == null || this.slug.trim().isEmpty()) {
             this.slug = createSlug(this.title);
         }
-
         if (this.createdAt == null) {
             this.createdAt = LocalDateTime.now();
         }

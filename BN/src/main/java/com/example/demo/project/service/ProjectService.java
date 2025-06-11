@@ -1,9 +1,7 @@
 package com.example.demo.project.service;
 
 import com.example.demo.project.dto.*;
-import com.example.demo.project.entity.Project;
-import com.example.demo.project.entity.ProjectDescription;
-import com.example.demo.project.entity.Reward;
+import com.example.demo.project.entity.*;
 import com.example.demo.project.repository.ProjectRepository;
 import com.example.demo.project.util.SlugGenerator;
 import jakarta.transaction.Transactional;
@@ -73,24 +71,35 @@ public class ProjectService {
         dto.setThumbnail(project.getThumbnail());
         dto.setDescriptionSummary(project.getDescriptionSummary());
 
-        // ⬇️ description
         ProjectDescriptionDto descDto = new ProjectDescriptionDto();
         descDto.setSummary(project.getDescription().getSummary());
         descDto.setContent(project.getDescription().getContent());
         descDto.setPreviewUrl(project.getDescription().getPreviewUrl());
-        dto.setDescription(descDto);
+        descDto.setBackground(project.getDescription().getBackground());
+        descDto.setRoles(project.getDescription().getRoles());
+        descDto.setSchedule(project.getDescription().getSchedule());
+        descDto.setCompensation(project.getDescription().getCompensation());
+        dto.setDescription(descDto); // ✅ 누락된 필드까지 포함
 
-        // ⬇️ rewards
+
         List<RewardDto> rewardDtos = project.getRewards().stream().map(r -> {
             RewardDto rd = new RewardDto();
             rd.setTitle(r.getTitle());
             rd.setPrice(r.getPrice());
-            rd.setOptions(r.getOptions());
+            rd.setDescription(r.getDescription());
+
+            List<RewardOptionDto> optionDtos = r.getOptions().stream().map(opt -> {
+                RewardOptionDto ro = new RewardOptionDto();
+                ro.setOptionName(opt.getOptionName());
+                ro.setOptionValues(opt.getOptionValues());
+                return ro;
+            }).collect(Collectors.toList());
+
+            rd.setOptions(optionDtos);
             return rd;
         }).collect(Collectors.toList());
 
         dto.setRewards(rewardDtos);
-
         return dto;
     }
 
@@ -107,26 +116,37 @@ public class ProjectService {
         project.setThumbnail(dto.getThumbnail());
         project.setDescriptionSummary(dto.getDescriptionSummary());
 
-        // ⬇️ description
         ProjectDescriptionDto descDto = dto.getDescription();
         ProjectDescription desc = new ProjectDescription();
         desc.setSummary(descDto.getSummary());
         desc.setContent(descDto.getContent());
         desc.setPreviewUrl(descDto.getPreviewUrl());
+        desc.setBackground(descDto.getBackground());
+        desc.setRoles(descDto.getRoles());
+        desc.setSchedule(descDto.getSchedule());
+        desc.setCompensation(descDto.getCompensation());
         project.setDescription(desc);
 
-        // ⬇️ rewards
         List<Reward> rewards = dto.getRewards().stream().map(r -> {
             Reward reward = new Reward();
             reward.setTitle(r.getTitle());
             reward.setPrice(r.getPrice());
-            reward.setOptions(r.getOptions());
-            reward.setProject(project); // ★ 순환 연결
+            reward.setDescription(r.getDescription());
+            reward.setProject(project);
+
+            List<RewardOption> optionEntities = r.getOptions().stream().map(opt -> {
+                RewardOption option = new RewardOption();
+                option.setOptionName(opt.getOptionName());
+                option.setOptionValues(opt.getOptionValues());
+                option.setReward(reward);
+                return option;
+            }).collect(Collectors.toList());
+
+            reward.setOptions(optionEntities);
             return reward;
         }).collect(Collectors.toList());
 
         project.setRewards(rewards);
-
         return project;
     }
 }

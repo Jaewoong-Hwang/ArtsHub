@@ -1,0 +1,70 @@
+
+.mypage_section {
+  max-width: 1348px;
+  margin: 70px auto 140px auto;
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  margin-left: 33px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.funding-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.funding-card {
+  display: flex;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.funding-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.funding-info {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.funding-info .date {
+  font-size: 0.75rem;
+  color: #999999;
+  margin-bottom: 1px;
+}
+
+.funding-info .title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+}
+
+.funding-info .artist {
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+  color: #999999;
+}
+
+.funding-info .price {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #1a1a1a;
+}

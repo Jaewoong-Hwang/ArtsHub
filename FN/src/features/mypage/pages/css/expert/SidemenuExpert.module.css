@@ -1,0 +1,100 @@
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  text-decoration: none;
+}
+
+/* 사이드메뉴 너비 */
+.sidebar_menu {
+  width: 300px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.sidebar_menu .profile {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar_menu .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.sidebar_menu .nickname {
+  font-size: 1.25rem;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+.sidebar_menu > .change {
+  display: flex;
+  width: 240px;
+  justify-content: center;
+  padding: 17px;
+  border: 1px solid #BCBCBC;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 400;
+  gap: 0.375rem;
+}
+
+.sidebar_menu .My_Arts {
+  width: 100%;
+  border-bottom: 2px solid #333333;
+  padding: 15px 0 20px 0;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.menu {
+  width: 240px;
+}
+
+.menu-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875;
+  font-weight: 400;
+}
+
+.menu-item.active {
+  font-weight: 600;
+}
+
+/* 서브메뉴 */
+.submenu {
+  display: none;
+  list-style: none;
+}
+
+.menu-item > .submenu {
+  display: block;
+  position: center;
+  background-color: #F3F4F8;
+  padding: 6px 20px;
+  margin-top: 8px;
+}
+
+.submenu-item a {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+  text-align: left;
+  padding: 5px 0;
+}
+
+.submenu-item.active a {
+  color: #000000;
+}

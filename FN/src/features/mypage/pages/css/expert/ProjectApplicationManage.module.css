@@ -1,0 +1,82 @@
+.projectapplicationList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.projectapplicationCard {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 24px 60px 24px 20px;
+  background-color: transparent;
+}
+
+.projectapplicationInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.projectapplicationTitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.projectapplicationDate {
+  font-size: 0.75rem;
+  color: #999999;
+  font-weight: 500;
+}
+
+.projectapplicationStatus {
+  font-size: 0.875rem;
+  color: #29C3FF;
+  font-weight: 500;
+}
+
+.editDropdown {
+  position: absolute;
+  left: 100%;
+  transform: translateX(-120%);
+}
+
+.editButton {
+  position: relative;
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: block; /* 동적 제어는 React에서 */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+}
+
+.dropdownMenu li {
+  width: 75px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.688rem;
+}
+
+.dropdownMenu li:hover {
+  background-color: #f3f3f3;
+}

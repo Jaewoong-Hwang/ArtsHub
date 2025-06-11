@@ -1,0 +1,60 @@
+.profitBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 30px;
+  background-color: #fff;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.profitBlockBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 2;
+}
+
+.profitBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.value {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.profitButtonBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.withdrawButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #ddd;
+}

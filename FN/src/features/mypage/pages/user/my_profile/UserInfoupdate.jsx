@@ -1,34 +1,40 @@
-
 import React from 'react';
-import {Link} from 'react-router-dom';
-import '../../css/user.css';
-import '../../css/sidemenu_user.css';
+import { Link } from 'react-router-dom';
+import '../../../../../assets/styles/reset.css';
+import styles from '../../css/user/SidemenuUser.module.css';
+import pageStyles from '../../css/user/my_profile/UserInfoupdate.module.css';
+import Header from '../../../../../components/layout/Header';
+import Footer from '../../../../../components/layout/Footer';
 
 const UserInfoupdate = () => {
   return (
     <>
       <div id="header"></div>
 
-      <div className="mypage_section">
-        <div className="sidebar_menu">
-          <div className="profile">
-            <img src="/static/img/apple.png" alt="프로필 이미지" className="profile-img" />
-            <p className="nickname">닉네임</p>
+      <div className={pageStyles.mypage_section}>
+        <div className={styles.sidebar_menu}>
+          <div className={styles.profile}>
+            <img
+              src="/static/img/apple.png"
+              alt="프로필 이미지"
+              className={styles["profile-img"]}
+            />
+            <p className={styles.nickname}>닉네임</p>
           </div>
 
-          <Link to="/FundingManage" className="change" >
+          <Link to="/FundingManage" className={styles.change}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>전문가로 전환</span>
           </Link>
 
-          <p className="My_Arts">My Arts</p>
-          <ul className="menu">
-            <li className="menu-item active" data-target="content-userinfo_Authentication">
+          <p className={styles.My_Arts}>My Arts</p>
+          <ul className={styles.menu}>
+            <li className={`${styles["menu-item"]} ${styles.active}`} data-target="content-userinfo_Authentication">
               <Link to="/UserInforead">내정보</Link>
             </li>
-            <li className="menu-item">
+            <li className={styles["menu-item"]}>
               <Link to="/MyFundingSupport">후원 관리</Link>
-              <ul className="submenu" style={{ display: 'none' }}>
+              <ul className={styles.submenu} style={{ display: 'none' }}>
                 <li className="submenu-item" data-target="content-funding-history">
                   <Link to="/MyFundingSupport">후원 진행중</Link>
                 </li>
@@ -37,26 +43,28 @@ const UserInfoupdate = () => {
                 </li>
               </ul>
             </li>
-            <li className="menu-item" data-target="content-inquiry">
+            <li className={styles["menu-item"]} data-target="content-inquiry">
               <Link to="/QuestionList">문의</Link>
             </li>
-            <li className="menu-item" data-target="content-logout">로그아웃</li>
+            <li className={styles["menu-item"]} data-target="content-logout">
+              <Link to="/logout">로그아웃</Link>
+            </li>
           </ul>
         </div>
 
-        <div className="content">
-          <p className="title">내정보</p>
+        <div className={pageStyles.content}>
+          <p className={pageStyles.title}>내정보</p>
 
-          <div className="content_item">
+          <div className={pageStyles.content_item}>
             <form id="userinfo" action="./read.html" method="get">
-              <div className="profile_img">
-                <div className="profile_img_show">
+              <div className={pageStyles.profile_img}>
+                <div className={pageStyles.profile_img_show}>
                   <img src="/static/img/apple.png" alt="profile-img" />
                 </div>
                 <button type="button">프로필 변경</button>
               </div>
 
-              <div className="info_list">
+              <div className={pageStyles.info_list}>
                 <label htmlFor="nickname">닉네임</label><br />
                 <input type="text" id="nickname" /><br />
 
@@ -70,7 +78,7 @@ const UserInfoupdate = () => {
                 <input type="text" id="address" /><br />
 
                 <label>관심분야</label><br />
-                <div className="interast">
+                <div className={pageStyles.interast}>
                   {[...Array(4)].map((_, idx) => (
                     <select key={idx}>
                       <option value="선택">선택</option>
@@ -82,7 +90,7 @@ const UserInfoupdate = () => {
                   ))}
                 </div>
 
-                <div className="okbutton">
+                <div className={pageStyles.okbutton}>
                   <button type="submit">완료</button>
                   <button type="button" onClick={() => window.history.back()}>취소</button>
                 </div>

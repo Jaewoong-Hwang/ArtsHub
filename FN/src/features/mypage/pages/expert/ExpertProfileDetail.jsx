@@ -1,62 +1,60 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import '../css/expert.css';
-import '../css/sidemenu_expert.css';
+import '../../../../assets/styles/reset.css';
+import styles from '../css/expert/ExpertProfileDetail.module.css';
 
 const ExpertProfileDetail = () => {
-  // 추후 서버에서 받아오는 데이터로 대체 가능
   const expert = {
     name: '김지성',
     introduction: '안녕하세요. 그냥 김지성입니다.',
     career: '경력없어요이에요.',
     field: '연기',
-    portfolioItems: [1, 2, 3, 4], // 포트폴리오 개수만 예시로
+    portfolioItems: [1, 2, 3, 4],
   };
 
   return (
     <>
       <div id="header"></div>
 
-      <div className="mypage_section">
-        <div className="expert-profile-container">
+      <div className={styles.mypage_section}>
+        <div className={styles["expert-profile-container"]}>
           {/* 프로필 상단 */}
-          <div className="profile-box">
+          <div className={styles["profile-box"]}>
             <img
               src="/static/img/거리의_선율.webp"
-              className="profile-img"
+              className={styles["profile-img"]}
               alt="프로필 이미지"
             />
-            <p className="profile-name">{expert.name}</p>
+            <p className={styles["profile-name"]}>{expert.name}</p>
           </div>
 
           {/* 전문가 상세 정보 */}
-          <div className="expert-info-box">
-            <div className="expert-info-item">
-              <p className="info-title">전문가 정보</p>
-              <p className="info-content">{expert.introduction}</p>
+          <div className={styles["expert-info-box"]}>
+            <div className={styles["expert-info-item"]}>
+              <p className={styles["info-title"]}>전문가 정보</p>
+              <p className={styles["info-content"]}>{expert.introduction}</p>
             </div>
-            <div className="expert-info-item">
-              <p className="info-title">경력 사항</p>
-              <p className="info-content">{expert.career}</p>
+            <div className={styles["expert-info-item"]}>
+              <p className={styles["info-title"]}>경력 사항</p>
+              <p className={styles["info-content"]}>{expert.career}</p>
             </div>
-            <div className="expert-info-item">
-              <p className="info-title">전문 분야</p>
-              <p className="info-content">{expert.field}</p>
+            <div className={styles["expert-info-item"]}>
+              <p className={styles["info-title"]}>전문 분야</p>
+              <p className={styles["info-content"]}>{expert.field}</p>
             </div>
           </div>
 
           {/* 포트폴리오 영역 */}
-          <div className="portfolio-box">
-            <div className="portfolio-header">
+          <div className={styles["portfolio-box"]}>
+            <div className={styles["portfolio-header"]}>
               <p>포트폴리오</p>
-              <a href="#" className="view-all">전체보기</a>
+              <a href="#" className={styles["view-all"]}>전체보기</a>
             </div>
-            <div className="portfolio-content">
+            <div className={styles["portfolio-content"]}>
               <p>참여한 프로젝트</p>
             </div>
-            <div className="portfolio-list">
+            <div className={styles["portfolio-list"]}>
               {expert.portfolioItems.map((_, index) => (
-                <div key={index} className="portfolio-item"></div>
+                <div key={index} className={styles["portfolio-item"]}></div>
               ))}
             </div>
           </div>

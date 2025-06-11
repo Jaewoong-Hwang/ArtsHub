@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../css/expert.css";
-import "../css/sidemenu_expert.css";
+import "../../../../assets/styles/reset.css";
+import styles from "../css/expert/FundingManage.module.css";
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css"; // 모듈화한 사이드메뉴
 
 const fundingList = [
   {
@@ -36,7 +37,6 @@ const fundingList = [
 
 const FundingManage = () => {
   const [openIndex, setOpenIndex] = useState(null);
-  const dropdownRef = useRef(null);
 
   const toggleDropdown = (index) => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -56,145 +56,99 @@ const FundingManage = () => {
       REJECTED: "비승인",
     };
     return statusArray.map((status) => (
-      <button key={status} className={`status-btn ${status}`}>
+      <button key={status} className={`${styles["status-btn"]} ${styles[status]}`}>
         {statusMap[status]}
       </button>
     ));
   };
 
-  // 외부 클릭 시 드롭다운 닫기
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest(".edit-dropdown")) {
+      if (!e.target.closest(`.${styles["edit-dropdown"]}`)) {
         setOpenIndex(null);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <>
-      <div className="mypage_section">
-        <div className="sidebar_menu">
-          <div className="profile">
-            <img
-              src="/static/img/apple.png"
-              alt="프로필 이미지"
-              className="profile-img"
-            />
-            <p className="nickname">닉네임</p>
-          </div>
-
-          <Link to="/UserInforead" className="change">
-            <span className="material-symbols-outlined">swap_horiz</span>
-            <span>일반으로 전환</span>
-          </Link>
-
-          <p className="My_Arts">My Arts</p>
-          <ul className="menu">
-            <li className="menu-item active">
-              <Link to="/FundingManage">펀딩관리</Link>
-              <ul className="submenu">
-                <li className="submenu-item active">
-                  <Link to="/FundingManage">전체</Link>
-                </li>
-                <li className="submenu-item">
-                  <Link to="#">진행중</Link>
-                </li>
-                <li className="submenu-item">
-                  <Link to="#">승인 대기중</Link>
-                </li>
-                <li className="submenu-item">
-                  <Link to="#">펀딩 종료</Link>
-                </li>
-                <li className="submenu-item">
-                  <Link to="#">비승인</Link>
-                </li>
-              </ul>
-            </li>
-            <li className="menu-item">
-              <Link to="/ProjectManage">프로젝트 관리</Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/Myprojectrequest">내가 신청한 프로젝트</Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/ProfitHistory">수익 관리</Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/ExpertProfile">프로필</Link>
-            </li>
-            <li className="menu-item">로그아웃</li>
-          </ul>
+    <div className={styles.mypage_section}>
+      {/* Sidebar */}
+      <div className={sidemenuStyles.sidebar_menu}>
+        <div className={sidemenuStyles.profile}>
+          <img src="/static/img/apple.png" alt="프로필 이미지" className={sidemenuStyles["profile-img"]} />
+          <p className={sidemenuStyles.nickname}>닉네임</p>
         </div>
 
-        <div className="content">
-          <p className="title">펀딩 관리</p>
+        <Link to="/UserInforead" className={sidemenuStyles.change}>
+          <span className="material-symbols-outlined">swap_horiz</span>
+          <span>일반으로 전환</span>
+        </Link>
 
-          <div className="funding-item">
-            {fundingList.map((funding, index) => (
-              <div className="funding-card" key={funding.id}>
-                <div className="funding-thumbnail">
-                  <a href="#">
-                    <img src="/static/img/마임의 세계.webp" alt="썸네일" />
-                  </a>
-                </div>
+        <p className={sidemenuStyles.My_Arts}>My Arts</p>
+        <ul className={sidemenuStyles.menu}>
+          <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
+            <Link to="/FundingManage">펀딩관리</Link>
+            <ul className={sidemenuStyles.submenu}>
+              <li className={sidemenuStyles["submenu-item"]}><Link to="#">전체</Link></li>
+              <li className={sidemenuStyles["submenu-item"]}><Link to="#">진행중</Link></li>
+              <li className={sidemenuStyles["submenu-item"]}><Link to="#">승인 대기중</Link></li>
+              <li className={sidemenuStyles["submenu-item"]}><Link to="#">펀딩 종료</Link></li>
+              <li className={sidemenuStyles["submenu-item"]}><Link to="#">비승인</Link></li>
+            </ul>
+          </li>
+          <li className={sidemenuStyles["menu-item"]}><Link to="/ProjectManage">프로젝트 관리</Link></li>
+          <li className={sidemenuStyles["menu-item"]}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
+          <li className={sidemenuStyles["menu-item"]}><Link to="/ProfitHistory">수익 관리</Link></li>
+          <li className={sidemenuStyles["menu-item"]}><Link to="/ExpertProfile">프로필</Link></li>
+          <li className={sidemenuStyles["menu-item"]}><Link to="/logout">로그아웃</Link></li>
+        </ul>
+      </div>
 
-                <div className="funding-info">
-                  <p className="funding-id">#{funding.id}</p>
-                  <p className="funding-title">{funding.title}</p>
-                  <p className="funding-goal">
-                    목표 : {funding.goal.toLocaleString()}
-                  </p>
-                  <p className="funding-supporter">
-                    후원자수 : {funding.supporters}명
-                  </p>
-                  <div className="status">
-                    {renderStatusButtons(funding.status)}
-                  </div>
-                </div>
-                <div className="edit-dropdown">
-                  <button
-                    className="edit-button"
-                    onClick={() => toggleDropdown(index)}
-                  >
-                    서비스 편집
-                  </button>
-                  {openIndex === index && (
-                    <ul className="dropdown-menu">
-                      {funding.status.includes("SELLING") && (
-                        <li
-                          onClick={() => handleSelect("펀딩 종료", funding.id)}
-                        >
-                          펀딩 종료
-                        </li>
-                      )}
-                      {funding.status.includes("SAVE") && (
-                        <li
-                          onClick={() => handleSelect("펀딩 진행", funding.id)}
-                        >
-                          펀딩 진행
-                        </li>
-                      )}
-                      <li onClick={() => handleSelect("편집", funding.id)}>
-                        편집
-                      </li>
-                      <li onClick={() => handleSelect("삭제", funding.id)}>
-                        삭제
-                      </li>
-                    </ul>
-                  )}
-                </div>
+      {/* Content */}
+      <div className={styles.content}>
+        <p className={styles.title}>펀딩 관리</p>
+
+        <div className={styles["funding-item"]}>
+          {fundingList.map((funding, index) => (
+            <div className={styles["funding-card"]} key={funding.id}>
+              <div className={styles["funding-thumbnail"]}>
+                <a href="#">
+                  <img src="/static/img/마임의 세계.webp" alt="썸네일" />
+                </a>
               </div>
-            ))}
-          </div>
+
+              <div className={styles["funding-info"]}>
+                <p className={styles["funding-id"]}>#{funding.id}</p>
+                <p className={styles["funding-title"]}>{funding.title}</p>
+                <p className={styles["funding-goal"]}>목표 : {funding.goal.toLocaleString()}</p>
+                <p className={styles["funding-supporter"]}>후원자수 : {funding.supporters}명</p>
+                <div className={styles.status}>{renderStatusButtons(funding.status)}</div>
+              </div>
+
+              <div className={styles["edit-dropdown"]}>
+                <button className={styles["edit-button"]} onClick={() => toggleDropdown(index)}>
+                  서비스 편집
+                </button>
+                {openIndex === index && (
+                  <ul className={styles["dropdown-menu"]}>
+                    {funding.status.includes("SELLING") && (
+                      <li onClick={() => handleSelect("펀딩 종료", funding.id)}>펀딩 종료</li>
+                    )}
+                    {funding.status.includes("SAVE") && (
+                      <li onClick={() => handleSelect("펀딩 진행", funding.id)}>펀딩 진행</li>
+                    )}
+                    <li onClick={() => handleSelect("편집", funding.id)}>편집</li>
+                    <li onClick={() => handleSelect("삭제", funding.id)}>삭제</li>
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

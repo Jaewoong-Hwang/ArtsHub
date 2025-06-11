@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<!-- css -->
+	<link rel="stylesheet" href="/static/css/manager/manager.css">
+	<link rel="stylesheet" href="/static/css/manager/manager_user.css">
+
+	<!-- js -->
+	<script src="/static/js/user_chart.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+	<!-- 전체 div -->
+	<div class="container">
+		<div class="side-nav">
+			<div class="nav-logo">ADMIN</div>
+			<div class="side-menu">
+				<button class="menu-button"
+					onclick="location.href='/pages/manager/dashboard/dashboard.html'">대시보드</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/project/project.html'">프로젝트
+					관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/funding/funding.html'">펀딩 관리</button>
+				<button class="menu-button" onclick="location.href='/pages/manager/user/user.html'">회원 관리</button>
+
+			</div>
+		</div>
+		<section>
+			<div class="top-nav">
+				<p>ArtsHub</p>
+				<div class="admin-logout">
+					<button><span>로그아웃</span></button>
+				</div>
+			</div>
+			<div class="main-content">
+
+				<h2>회원 관리</h2>
+				<div class="user-manage">
+
+					<div class="filter-bar">
+						<input type="text" placeholder="이름 또는 이메일 검색" />
+						<select>
+							<option>전체 상태</option>
+							<option>승인 대기</option>
+							<option>휴면</option>
+							<option>활동 중</option>
+							<option>탈퇴</option>
+						</select>
+						<select>
+							<option>전체 권한</option>
+							<option>회원</option>
+							<option>전문가</option>
+							<option>관리자</option>
+						</select>
+						<button class="action-btn search">검색</button>
+					</div>
+					<table class="user-table">
+						<colgroup>
+							<col style="width: 5%">
+							<col style="width: 15%">
+							<col style="width: 20%">
+							<col style="width: 10%">
+							<col style="width: 15%">
+							<col style="width: 15%">
+							<col style="width: 20%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox" /></th>
+								<th>이름</th>
+								<th>이메일</th>
+								<th>권한</th>
+								<th>상태</th>
+								<th>가입일</th>
+								<th>관리</th>
+							</tr>
+						</thead>
+					</table>
+					<div class="user-all-information">
+						<table class="user-table">
+							<colgroup>
+								<col style="width: 5%">
+								<col style="width: 15%">
+								<col style="width: 20%">
+								<col style="width: 10%">
+								<col style="width: 15%">
+								<col style="width: 15%">
+								<col style="width: 20%">
+							</colgroup>
+							<tbody>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>김철수</td>
+									<td>cs.kim@example.com</td>
+									<td>전문가</td>
+									<td>승인 대기</td>
+									<td>2025-05-02</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>이영희</td>
+									<td>lee@test.com</td>
+									<td>일반</td>
+									<td>활동 중</td>
+									<td>2025-04-20</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>홍길동</td>
+									<td>hong@test.com</td>
+									<td>관리자</td>
+									<td>탈퇴</td>
+									<td>2024-12-01</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>박지은</td>
+									<td>j.park@example.com</td>
+									<td>회원</td>
+									<td>휴면</td>
+									<td>2025-01-15</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>정민호</td>
+									<td>mh.jung@example.com</td>
+									<td>전문가</td>
+									<td>활동 중</td>
+									<td>2025-03-10</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>오세훈</td>
+									<td>sehun.oh@example.com</td>
+									<td>회원</td>
+									<td>승인 대기</td>
+									<td>2025-05-05</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>윤가영</td>
+									<td>gy.yoon@example.com</td>
+									<td>전문가</td>
+									<td>활동 중</td>
+									<td>2025-02-11</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>백도현</td>
+									<td>dh.baek@example.com</td>
+									<td>관리자</td>
+									<td>정지</td>
+									<td>2025-01-30</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>장미희</td>
+									<td>mh.jang@example.com</td>
+									<td>회원</td>
+									<td>활동 중</td>
+									<td>2025-03-22</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+								<tr class="user-information">
+									<td><input type="checkbox" /></td>
+									<td>한지성</td>
+									<td>js.han@example.com</td>
+									<td>전문가</td>
+									<td>탈퇴</td>
+									<td>2024-11-15</td>
+									<td class="table-btn">
+										<button class="action-btn approve">승인</button>
+										<button class="action-btn suspend">정지</button>
+										<button class="action-btn delete">삭제</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</table>
+				</div>
+
+				<h2>회원 통계</h2>
+				<div class="content-chart">
+					<canvas id="user-stats" width="400" height="400"></canvas>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+
+</html>

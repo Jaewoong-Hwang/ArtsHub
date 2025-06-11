@@ -1,0 +1,49 @@
+/* 섹션 / 오른쪽 */
+.dashboard-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+}
+.dashboard-content canvas {
+    margin-top: 40px;
+}
+.dashboard-content > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.funding{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+}
+.dashboard-card-box{
+    width: 1000px;
+}
+.dashboard-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 500px;
+    height: 100px;
+    text-align: center;
+}
+.content-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    gap: 100px;
+}
+.dashboard-content h2{
+    color: #29c3ff;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}

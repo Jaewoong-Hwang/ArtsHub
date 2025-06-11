@@ -2,8 +2,11 @@ package com.example.demo.project.service;
 
 import com.example.demo.project.dto.*;
 import com.example.demo.project.entity.*;
+import com.example.demo.project.repository.ProjectParticipantRepository;
 import com.example.demo.project.repository.ProjectRepository;
 import com.example.demo.project.util.SlugGenerator;
+import com.example.demo.user.entity.User;
+import com.example.demo.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectParticipantRepository participantRepository;
+    private final UserRepository userRepository;
     private final SlugGenerator slugGenerator;
 
     /**
@@ -37,6 +42,7 @@ public class ProjectService {
 
         project.setViews(0);
         project.setCreatedAt(LocalDateTime.now());
+        project.setStatus("모집중"); // ✅ 상태 초기화
 
         return projectRepository.save(project);
     }
@@ -57,6 +63,39 @@ public class ProjectService {
     }
 
     /**
+     * 프로젝트 참여 처리
+     */
+    @Transactional
+    public String joinProject(String slug, String email) {
+        Project project = projectRepository.findBySlug(slug)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 프로젝트입니다."));
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        if (participantRepository.existsByUserAndProject(user, project)) {
+            return "이미 참여한 프로젝트입니다.";
+        }
+
+        long currentCount = participantRepository.countByProject(project);
+        if (currentCount >= project.getCapacity()) {
+            return "정원이 모두 찼습니다.";
+        }
+
+        ProjectParticipant participant = ProjectParticipant.builder()
+                .user(user)
+                .project(project)
+                .build();
+        participantRepository.save(participant);
+
+        if (currentCount + 1 == project.getCapacity()) {
+            project.setStatus("마감");
+        }
+
+        return "참여가 완료되었습니다.";
+    }
+
+    /**
      * Project → DTO 변환
      */
     public ProjectResponseDto toDto(Project project) {
@@ -70,6 +109,7 @@ public class ProjectService {
         dto.setDeadline(project.getDeadline());
         dto.setThumbnail(project.getThumbnail());
         dto.setDescriptionSummary(project.getDescriptionSummary());
+        dto.setStatus(project.getStatus());
 
         ProjectDescriptionDto descDto = new ProjectDescriptionDto();
         descDto.setSummary(project.getDescription().getSummary());
@@ -79,8 +119,7 @@ public class ProjectService {
         descDto.setRoles(project.getDescription().getRoles());
         descDto.setSchedule(project.getDescription().getSchedule());
         descDto.setCompensation(project.getDescription().getCompensation());
-        dto.setDescription(descDto); // ✅ 누락된 필드까지 포함
-
+        dto.setDescription(descDto);
 
         List<RewardDto> rewardDtos = project.getRewards().stream().map(r -> {
             RewardDto rd = new RewardDto();

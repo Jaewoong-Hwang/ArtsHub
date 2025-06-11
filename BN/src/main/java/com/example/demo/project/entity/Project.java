@@ -30,6 +30,9 @@ public class Project {
     @Embedded
     private ProjectDescription description;
 
+    @Column(nullable = false)
+    private String status = "모집중"; // 모집중, 마감
+
     // ✅ 리워드와 양방향 관계 + 순환 참조 방지
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
@@ -60,4 +63,8 @@ public class Project {
 
         return slug + "-" + now;
     }
+
+    // Project.java 내부에 추가
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectParticipant> participants;
 }

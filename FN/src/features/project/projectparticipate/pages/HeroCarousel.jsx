@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ 추가
 import "../../../../assets/styles/reset.css";
-import styles from "./css/HeroCarousel.module.css"; // ✅ CSS Module import
+import styles from "./css/HeroCarousel.module.css";
 
 const HeroCarousel = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -8,6 +9,8 @@ const HeroCarousel = ({ slides }) => {
   const intervalRef = useRef(null);
   const isHoveredRef = useRef(false);
   const visibleCount = 3;
+
+  const navigate = useNavigate(); // ✅ 추가
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % slides.length);
@@ -71,6 +74,10 @@ const HeroCarousel = ({ slides }) => {
                 className={slideClass}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() => {
+                  if (slide.slug) navigate(`/project/${slide.slug}`);
+                }} // ✅ 클릭 시 이동
+                style={{ cursor: slide.slug ? "pointer" : "default" }} // ✅ 시각 피드백
               >
                 <img src={slide.image} alt={slide.title} />
                 <div className={styles.overlay}>

@@ -1,0 +1,25 @@
+.sortSelector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.select {
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  transition: border 0.2s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--main-blue);
+}

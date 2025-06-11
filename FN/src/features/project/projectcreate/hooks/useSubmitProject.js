@@ -12,16 +12,30 @@ const useSubmitProject = () => {
       );
       const rewards = JSON.parse(localStorage.getItem("projectRewards"));
 
+      // ✅ 기본 정보 유효성 검사
       if (!info || !description) {
         alert("저장된 프로젝트 정보가 없습니다.");
         return;
       }
 
+      // ✅ 제목 유효성 검사
+      if (!info?.title?.trim()) {
+        alert("프로젝트 제목이 없습니다. 기본 정보부터 작성해주세요.");
+        return;
+      }
+
+      // ✅ 정원(capacity) 유효성 검사
+      const parsedCapacity = parseInt(info.capacity, 10);
+      if (isNaN(parsedCapacity) || parsedCapacity < 1) {
+        alert("프로젝트 정원은 1명 이상이어야 합니다.");
+        return;
+      }
+
       // ✅ 서버 DTO에 맞춘 구조로 requestBody 생성
       const requestBody = {
-        title: info.title ?? "",
+        title: info.title.trim(),
         genre: info.genre ?? "",
-        capacity: parseInt(info.capacity, 10) || 0,
+        capacity: parsedCapacity,
         deadline: info.deadline ?? "",
         thumbnail:
           typeof info.thumbnail === "string"
@@ -36,7 +50,6 @@ const useSubmitProject = () => {
           previewUrl:
             description?.previewUrl || "https://example.com/preview.jpg",
 
-          // 🔽 아래 4개는 추가 필요
           background: description?.background ?? "",
           roles: description?.roles ?? "",
           schedule: description?.schedule ?? "",
@@ -74,7 +87,6 @@ const useSubmitProject = () => {
       localStorage.removeItem("project_description");
       localStorage.removeItem("projectRewards");
     } catch (error) {
-      // ✅ 에러 로그 자세히 출력
       console.error(
         "❌ 서버 응답 오류:",
         error.response?.data || error.message

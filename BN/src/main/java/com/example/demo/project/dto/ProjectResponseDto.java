@@ -20,4 +20,5 @@ public class ProjectResponseDto {
     private String descriptionSummary;
     private ProjectDescriptionDto description;
     private List<RewardDto> rewards;
+    private String status;
 }

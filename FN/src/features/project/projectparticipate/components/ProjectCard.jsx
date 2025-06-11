@@ -30,19 +30,26 @@ const ProjectCard = ({ project, index }) => {
     return "마감";
   };
 
+  const dday = calcDday(project.deadline);
+  const isClosed = dday === "마감" || Number(project.capacity) <= 0; // ✅ 마감 여부 판단
+
   return (
     <div
       ref={ref}
       role="button"
       tabIndex={0}
-      className={`${styles.projectCard} ${visible ? styles.visible : ""}`}
+      className={`${styles.projectCard} ${visible ? styles.visible : ""} ${
+        isClosed ? styles.closed : ""
+      }`}
       style={style}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >
       {/* 🔹 이미지 썸네일 */}
       <figure className={styles.thumbnailWrapper}>
+        {isClosed && <div className={styles.closedBadge}>모집 마감</div>} {/* ✅ 마감 배지 */}
         <img
+          className={styles.projectImage}
           src={
             project.thumbnail ||
             project.image ||
@@ -80,11 +87,12 @@ const ProjectCard = ({ project, index }) => {
           <span className={styles.deadline}>
             마감일: {project.deadline || "미정"}
           </span>
-          <span className={styles.dday}>{calcDday(project.deadline)}</span>
+          <span className={styles.dday}>{dday}</span>
         </div>
 
         <div className={styles.capacity}>
-          모집 인원: {Number(project.capacity) > 0 ? `${project.capacity}명` : "미정"}
+          모집 인원:{" "}
+          {Number(project.capacity) > 0 ? `${project.capacity}명` : "마감"}
         </div>
       </div>
     </div>

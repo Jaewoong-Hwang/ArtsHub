@@ -37,6 +37,7 @@ public class UserDto {
     private String phoneNumber;
     private String role;
     private String profileImage;
+    private String address;
     //OAUTH2 CLIENT INFO
     private String provider;
     private String providerId;
@@ -52,6 +53,7 @@ public class UserDto {
                 .phoneNumber(this.phoneNumber)
                 .role(this.role != null ? this.role : "ROLE_USER")
                 .profileImage(this.profileImage != null ? this.profileImage : "default.png")
+                .address(this.address)
                 .build();
     }
 
@@ -66,6 +68,7 @@ public class UserDto {
                 .phoneNumber(user.getPhoneNumber())
                 .role(user.getRole())
                 .profileImage(user.getProfileImage())
+                .address(user.getAddress())
                 .build();
     }
 }

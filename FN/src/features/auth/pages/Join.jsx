@@ -92,6 +92,7 @@ const Join = () => {
     const zip = document.getElementById("zip").value.trim();
     const baseAddress = document.getElementById("addr").value.trim();
     const detailAddress = document.getElementById("addrDetail").value.trim();
+    const fullAddress = `${baseAddress} ${detailAddress}`.trim(); // 전체 주소
 
     const userData = {
       email: document.getElementById("userid").value,
@@ -100,8 +101,7 @@ const Join = () => {
       phoneNumber: `${document.getElementById("tel1").value}-${
         document.getElementById("tel2").value
       }-${document.getElementById("tel3").value}`,
-      gender:
-        document.querySelector('input[name="gender"]:checked')?.value || "male",
+      address: fullAddress,
     };
 
     if (password !== repassword) {
@@ -142,6 +142,7 @@ const Join = () => {
     }
 
     try {
+      console.log("보낼 userData:", userData);
       await axiosInstance.post("/api/join", userData);
       alert("회원가입 성공! 로그인 페이지로 이동합니다.");
       navigate("/login");
@@ -150,6 +151,8 @@ const Join = () => {
       const message = err.response?.data?.message || err.message;
       alert("회원가입 실패: " + message);
     }
+
+    
   };
 
   // 이메일 중복 확인 함수

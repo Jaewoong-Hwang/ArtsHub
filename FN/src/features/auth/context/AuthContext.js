@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     axiosInstance
-      .get("http://localhost:8090/api/user/me", { withCredentials: true })
+      .get("http://localhost:8090/api/mypage/me", { withCredentials: true })
       .then((res) => {
         setUser(res.data);
         setLoading(false);

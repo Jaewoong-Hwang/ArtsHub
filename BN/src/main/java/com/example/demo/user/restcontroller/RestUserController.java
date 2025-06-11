@@ -6,6 +6,7 @@ import com.example.demo.common.config.auth.jwt.TokenInfo;
 import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.dto.UserDto;
+import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.user.util.RandomNicknameGenerator;
 import jakarta.servlet.http.Cookie;
@@ -105,6 +106,7 @@ public class RestUserController {
                     "name", userDto.getName(),
                     "nickname", userDto.getNickname(),
                     "phoneNumber", userDto.getPhoneNumber(),
+                    "address", userDto.getAddress(),
                     "profile_image", userDto.getProfileImage(),
                     "role", userDto.getRole()
             ));
@@ -142,6 +144,10 @@ public class RestUserController {
         // 비밀번호 암호화
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(dto.toEntity());
+
+        //엔티티로 변환 db에 저장될 객체 내용 출력
+        User user = dto.toEntity();
+        log.info("저장될 User 엔티티: {}", user);
 
         return ResponseEntity.ok(Map.of("message", "회원가입 완료"));
     }

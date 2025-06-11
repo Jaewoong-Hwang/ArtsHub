@@ -1,25 +1,73 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// UserInfoupdate.jsx
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../../../assets/styles/reset.css';
 import styles from '../../css/user/SidemenuUser.module.css';
 import pageStyles from '../../css/user/my_profile/UserInfoupdate.module.css';
 import Header from '../../../../../components/layout/Header';
 import Footer from '../../../../../components/layout/Footer';
+import axiosInstance from '../../../../../services/axiosInstance';
+import InterestSelect from '../../../components/InterestSelect'; // ✅ 관심분야 컴포넌트 import
 
 const UserInfoupdate = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    nickname: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    interests: ['', '', '', ''],
+  });
+
+  useEffect(() => {
+    axiosInstance.get('/api/user/me', { withCredentials: true })
+      .then((res) => {
+        const data = res.data;
+        setFormData({
+          nickname: data.nickname || '',
+          email: data.email || '',
+          phoneNumber: data.phoneNumber || '',
+          address: data.address || '',
+          interests: data.interests || ['', '', '', ''],
+        });
+      })
+      .catch((err) => {
+        console.error("유저 정보 불러오기 실패", err);
+      });
+  }, []);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleInterestChange = (newInterests) => {
+    setFormData((prev) => ({ ...prev, interests: newInterests }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.put('/api/mypage/update', formData, {
+        withCredentials: true
+      });
+      alert('수정 완료!');
+      navigate('/UserInforead');
+    } catch (err) {
+      console.error("수정 실패", err);
+      alert("수정 실패: " + (err.response?.data?.message || err.message));
+    }
+  };
+
   return (
     <>
       <Header />
-
       <div className={pageStyles["mypage_section"]}>
         <div className={styles["sidebarMenu"]}>
           <div className={styles["profile"]}>
-            <img
-              src="/static/img/apple.png"
-              alt="프로필 이미지"
-              className={styles["profileImg"]}
-            />
-            <p className={styles["nickname"]}>닉네임</p>
+            <img src="/static/img/apple.png" alt="프로필 이미지" className={styles["profileImg"]} />
+            <p className={styles["nickname"]}>{formData.nickname}</p>
           </div>
 
           <Link to="/FundingManage" className={styles["change"]}>
@@ -29,27 +77,16 @@ const UserInfoupdate = () => {
 
           <p className={styles["myArts"]}>My Arts</p>
           <ul className={styles["menu"]}>
-            <li
-              className={`${styles["menuItem"]} ${styles["menuItemActive"]}`}
-              data-target="content-userinfo_Authentication"
-            >
+            <li className={`${styles["menuItem"]} ${styles["menuItemActive"]}`}>
               <Link to="/UserInforead">내정보</Link>
             </li>
             <li className={styles["menuItem"]}>
               <Link to="/MyFundingSupport">후원 관리</Link>
-              <ul className={styles["submenu"]} style={{ display: 'none' }}>
-                <li className={styles["submenuItem"]} data-target="content-funding-history">
-                  <Link to="/MyFundingSupport">후원 진행중</Link>
-                </li>
-                <li className={styles["submenuItem"]} data-target="content-funding-refund">
-                  <Link to="/MyfundingSupport">후원 취소</Link>
-                </li>
-              </ul>
             </li>
-            <li className={styles["menuItem"]} data-target="content-inquiry">
+            <li className={styles["menuItem"]}>
               <Link to="/QuestionList">문의</Link>
             </li>
-            <li className={styles["menuItem"]} data-target="content-logout">
+            <li className={styles["menuItem"]}>
               <Link to="/logout">로그아웃</Link>
             </li>
           </ul>
@@ -59,7 +96,7 @@ const UserInfoupdate = () => {
           <p className={pageStyles["title"]}>내정보</p>
 
           <div className={pageStyles["content_item"]}>
-            <form id="userinfo" action="./read.html" method="get">
+            <form onSubmit={handleSubmit}>
               <div className={pageStyles["profile_img"]}>
                 <div className={pageStyles["profile_img_show"]}>
                   <img src="/static/img/apple.png" alt="profile-img" />
@@ -69,28 +106,23 @@ const UserInfoupdate = () => {
 
               <div className={pageStyles["info_list"]}>
                 <label htmlFor="nickname">닉네임</label><br />
-                <input type="text" id="nickname" /><br />
+                <input type="text" id="nickname" value={formData.nickname} onChange={handleChange} /><br />
 
                 <label htmlFor="email">이메일</label><br />
-                <input type="text" id="email" /><br />
+                <input type="text" id="email" value={formData.email} onChange={handleChange} /><br />
 
-                <label htmlFor="phone">연락처</label><br />
-                <input type="text" id="phone" /><br />
+                <label htmlFor="phoneNumber">연락처</label><br />
+                <input type="text" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} /><br />
 
                 <label htmlFor="address">주소</label><br />
-                <input type="text" id="address" /><br />
+                <input type="text" id="address" value={formData.address} onChange={handleChange} /><br />
 
                 <label>관심분야</label><br />
                 <div className={pageStyles["interast"]}>
-                  {[...Array(4)].map((_, idx) => (
-                    <select key={idx}>
-                      <option value="선택">선택</option>
-                      <option value="클래식">클래식</option>
-                      <option value="연극">연극</option>
-                      <option value="국악">국악</option>
-                      <option value="밴드">밴드</option>
-                    </select>
-                  ))}
+                  <InterestSelect
+                    selectedInterests={formData.interests}
+                    onChange={handleInterestChange}
+                  />
                 </div>
 
                 <div className={pageStyles["okbutton"]}>
@@ -102,7 +134,6 @@ const UserInfoupdate = () => {
           </div>
         </div>
       </div>
-
       <Footer />
     </>
   );

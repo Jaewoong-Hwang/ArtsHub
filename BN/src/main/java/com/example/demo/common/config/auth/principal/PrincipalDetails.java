@@ -1,6 +1,7 @@
 package com.example.demo.common.config.auth.principal;
 
 import com.example.demo.user.dto.UserDto;
+import com.example.demo.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,23 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
 	private UserDto userDto;
+	private User user;
 
-	public PrincipalDetails(UserDto userDto) {
-		this.userDto = userDto;
+	// 일반 로그인용 생성자
+	public PrincipalDetails(User user) {
+		this.user = user;
+		this.userDto = UserDto.toDto(user); //  UserDto 자동 생성
 	}
 
 	// Oauth2User용
 	private Map<String, Object> attributes;
 	private String access_token;
+
+	public PrincipalDetails(User user, Map<String, Object> attributes) {
+		this.user = user;
+		this.userDto = UserDto.toDto(user);
+		this.attributes = attributes;
+	}
 
 	@Override
 	public Map<String, Object> getAttributes() {
@@ -77,4 +87,5 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	public boolean isEnabled() {
 		return true;
 	}
+
 }

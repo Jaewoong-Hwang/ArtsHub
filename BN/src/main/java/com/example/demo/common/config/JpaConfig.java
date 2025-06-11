@@ -17,11 +17,13 @@ import java.util.Properties;
 
 @Configuration
 @EntityScan(basePackages = {"com.example.demo.user.entity",
-        "com.example.demo.project.entity"})
+        "com.example.demo.project.entity",
+        "com.example.demo.interest.entity"})
 @EnableJpaRepositories(
         basePackages = {
                 "com.example.demo.user.repository",
-                "com.example.demo.project.repository"
+                "com.example.demo.project.repository",
+                "com.example.demo.interest.repository"
         },
         transactionManagerRef = "jpaTransactionManager"
 )
@@ -36,7 +38,8 @@ public class JpaConfig {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setPackagesToScan(
                 "com.example.demo.user.entity",
-                "com.example.demo.project.entity"
+                "com.example.demo.project.entity",
+                "com.example.demo.interest.entity"
         );
 
         Properties jpaProperties = new Properties();

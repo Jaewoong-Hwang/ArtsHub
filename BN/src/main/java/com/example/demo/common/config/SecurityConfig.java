@@ -75,8 +75,10 @@ public class SecurityConfig {
 					"/api/check-email",
 					"/api/projects/**",
 					"/api/verify-code", "/api/send-verification",
-					"/api/send-email-code", "/api/verify-email-code").permitAll();
-			auth.requestMatchers("/api/user").hasRole("USER");
+					"/api/send-email-code", "/api/verify-email-code",
+					"/api/interests/**").permitAll();
+			auth.requestMatchers("/api/user",
+					"/api/mypage/**").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
 			auth.anyRequest().authenticated();

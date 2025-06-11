@@ -1,9 +1,12 @@
 package com.example.demo.user.entity;
 
+import com.example.demo.interest.entity.Interest;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -45,6 +48,17 @@ public class User {
 
 	@Column(name = "profile_image", nullable = false, length = 300)
 	private String profileImage;
+
+	@Column(name = "address", length = 255)
+	private String address;
+
+	@ManyToMany
+	@JoinTable(
+			name = "user_interest",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "interest_id")
+	)
+	private Set<Interest> interests = new HashSet<>();
 
 	@PrePersist
 	public void onCreate() {

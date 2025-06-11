@@ -128,7 +128,8 @@ public class JwtTokenProvider {
 
         User user = userOptional.get();
         UserDto userDto = UserDto.toDto(user);
-        PrincipalDetails principalDetails = new PrincipalDetails(userDto);
+//        PrincipalDetails principalDetails = new PrincipalDetails(userDto);
+        PrincipalDetails principalDetails = new PrincipalDetails(user);
 
         System.out.println("JwtTokenProvider.getAuthentication UsernamePasswordAuthenticationToken : " + accessToken);
 

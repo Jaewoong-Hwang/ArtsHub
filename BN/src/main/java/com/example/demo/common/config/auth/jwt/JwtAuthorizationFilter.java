@@ -218,6 +218,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 uri.startsWith("/api/send-verification") ||
                 uri.startsWith("/api/send-email-code") ||
                 uri.startsWith("/api/verify-email-code") ||
+                uri.startsWith("/api/interests/**") ||
                 uri.startsWith("/error");
         log.debug("[JWT FILTER] shouldNotFilter: {} - {}", excluded, uri);
         return excluded;

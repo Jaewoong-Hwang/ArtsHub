@@ -14,8 +14,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -45,12 +47,13 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         // 로그인, 회원가입, 정적 자원 등은 필터를 통과시킴
         String uri = request.getRequestURI();
-        if (uri.startsWith("/api/login") || uri.startsWith("/api/join") ||
+        if (uri.matches("(?i)^/(img|css|js|static|assets)/.*") ||
+                uri.equalsIgnoreCase("/favicon.ico") ||
+                uri.startsWith("/api/login") ||
+                uri.startsWith("/api/join") ||
                 uri.startsWith("/api/check-email") ||
-                uri.startsWith("/favicon.ico") ||
-                uri.startsWith("/static") || uri.startsWith("/css") ||
-                uri.startsWith("/js") || uri.startsWith("/img") ||
-                uri.startsWith("/assets") || uri.startsWith("/error")) {
+                uri.startsWith("/error")) {
+
             chain.doFilter(request, response);
             return;
         }
@@ -201,4 +204,20 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             response.addCookie(cookie);
         }
     }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String uri = request.getRequestURI();
+        boolean excluded = uri.startsWith("/img/") ||
+                uri.matches("(?i)^/(css|js|static|assets)/.*") ||
+                uri.equalsIgnoreCase("/favicon.ico") ||
+                uri.startsWith("/api/login") ||
+                uri.startsWith("/api/join") ||
+                uri.startsWith("/api/check-email") ||
+                uri.startsWith("/error");
+        log.debug("[JWT FILTER] shouldNotFilter: {} - {}", excluded, uri);
+        return excluded;
+    }
+
+
 }

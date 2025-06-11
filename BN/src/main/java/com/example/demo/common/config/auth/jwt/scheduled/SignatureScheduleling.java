@@ -23,7 +23,7 @@ public class SignatureScheduleling {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    @Scheduled(cron = "0 */3 * * * *") //초 분 시 일 월 요일(0-6)
+    @Scheduled(cron = "0 0 0 * * *") //초 분 시 일 월 요일(0-6)
     public void signatureScheduled(){
         List<Signature> list = signatureRepository.findAll(); //1개 값만 저장되어있음
         if(!list.isEmpty()){
@@ -33,6 +33,7 @@ public class SignatureScheduleling {
         byte[] keyBytes = KeyGenerator.getKeygen();
         //새로운 서명키 발급  + DB 저장
         Signature newSignature = new Signature();
+        newSignature.setId("jwt-key");
         newSignature.setKeyBytes(keyBytes);
         newSignature.setCreateAt(LocalDate.now());
         signatureRepository.save(newSignature);

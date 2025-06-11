@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../../assets/styles/reset.css';
 import styles from '../../css/user/question/QuestionWrite.module.css';
+import Header from "../../../../../components/layout/Header";
+import Footer from "../../../../../components/layout/Footer";
 
 const QuestionWrite = () => {
   const [title, setTitle] = useState('');
@@ -24,7 +26,7 @@ const QuestionWrite = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles["question-write-content"]}>
         <p className={styles["question-write-title"]}>문의 글 쓰기</p>
@@ -68,7 +70,7 @@ const QuestionWrite = () => {
         </form>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

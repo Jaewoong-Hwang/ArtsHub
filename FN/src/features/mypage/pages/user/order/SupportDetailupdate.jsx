@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../../assets/styles/reset.css';
 import styles from '../../css/user/order/SupportDetailupdate.module.css';
+import Header from "../../../../../components/layout/Header";
+import Footer from "../../../../../components/layout/Footer";
 
 const SupportDetailupdate = () => {
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles["order-detail-content"]}>
         {/* 프로젝트 정보 카드 */}
@@ -110,7 +112,7 @@ const SupportDetailupdate = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

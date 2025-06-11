@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
 import styles from '../css/expert/ProjectApplicationManage.module.css';
-import side from '../css/expert/SidemenuExpert.module.css';
+import sidemenuStyles from '../css/expert/SidemenuExpert.module.css';
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const ProjectApplicationManage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -22,69 +24,75 @@ const ProjectApplicationManage = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
       <div className={styles.mypage_section}>
-        <div className={side.sidebar_menu}>
-          <div className={side.profile}>
-            <img src="/static/img/apple.png" alt="프로필 이미지" className={side['profile-img']} />
-            <p className={side.nickname}>닉네임</p>
+        <div className={sidemenuStyles.sidebar_menu}>
+          <div className={sidemenuStyles.profile}>
+            <img
+              src="/static/img/apple.png"
+              alt="프로필 이미지"
+              className={sidemenuStyles["profile-img"]}
+            />
+            <p className={sidemenuStyles.nickname}>닉네임</p>
           </div>
 
-          <Link to="/UserInforead" className={side.change}>
+          <Link to="/UserInforead" className={sidemenuStyles.change}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>일반으로 전환</span>
           </Link>
 
-          <p className={side.My_Arts}>My Arts</p>
-          <ul className={side.menu}>
-            <li className={side.menu_item}>
+          <p className={sidemenuStyles.My_Arts}>My Arts</p>
+          <ul className={sidemenuStyles.menu}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/FundingManage">펀딩관리</Link>
-              <ul className={side.submenu} style={{ display: 'none' }}>
-                <li className={side.submenu_item}><Link to="/FundingManage">전체</Link></li>
-                <li className={side.submenu_item}><Link to="/FundingManage">진행중</Link></li>
-                <li className={side.submenu_item}><Link to="/FundingManage">승인 대기중</Link></li>
-                <li className={side.submenu_item}><Link to="/FundingManage">펀딩 종료</Link></li>
-                <li className={side.submenu_item}><Link to="/FundingManage">비승인</Link></li>
+              <ul className={sidemenuStyles.submenu} style={{ display: 'none' }}>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/FundingManage">전체</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/FundingManage">진행중</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/FundingManage">승인 대기중</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/FundingManage">펀딩 종료</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/FundingManage">비승인</Link></li>
               </ul>
             </li>
 
-            <li className={`${side.menu_item} ${side.active}`}>
+            <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
               <Link to="/ProjectManage">프로젝트 관리</Link>
-              <ul className={side.submenu}>
-                <li className={side.submenu_item}><Link to="/ProjectManage">전체</Link></li>
-                <li className={side.submenu_item}><Link to="/ProjectManage">모집중</Link></li>
-                <li className={side.submenu_item}><Link to="/ProjectManage">모집 종료</Link></li>
-                <li className={`${side.submenu_item} ${side.active}`}><Link to="/ProjectApplicationManage">참여요청</Link></li>
+              <ul className={sidemenuStyles.submenu}>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">전체</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집중</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집 종료</Link></li>
+                <li className={`${sidemenuStyles["submenu-item"]} ${sidemenuStyles.active}`}>
+                  <Link to="/ProjectApplicationManage">참여요청</Link>
+                </li>
               </ul>
             </li>
 
-            <li className={side.menu_item}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
-            <li className={side.menu_item}><Link to="/ProfitHistory">수익 관리</Link></li>
-            <li className={side.menu_item}><Link to="/ExpertProfile">프로필</Link></li>
-            <li className={side.menu_item}><Link to="/logout">로그아웃</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/ProfitHistory">수익 관리</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/ExpertProfile">프로필</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><Link to="/logout">로그아웃</Link></li>
           </ul>
         </div>
 
         <div className={styles.content}>
           <p className={styles.title}>프로젝트 관리</p>
 
-          <div className={styles['projectapplication-list']}>
-            <div className={styles['projectapplication-card']}>
-              <div className={styles['projectapplication-info']}>
+          <div className={styles.projectapplicationList}>
+            <div className={styles.projectapplicationCard}>
+              <div className={styles.projectapplicationInfo}>
                 <a href="/pages/seller/seller-profile-detail.html">
-                  <p className={styles['projectapplication-title']}>김지성</p>
+                  <p className={styles.projectapplicationTitle}>김지성</p>
                 </a>
-                <p className={styles['projectapplication-date']}>신청 날짜 : 2025.05.05</p>
+                <p className={styles.projectapplicationDate}>신청 날짜 : 2025.05.05</p>
               </div>
 
-              <div className={styles['edit-dropdown']}>
-                <button className={styles['edit-button']} onClick={toggleDropdown}>
+              <div className={styles.editDropdown}>
+                <button className={styles.editButton} onClick={toggleDropdown}>
                   승인/거절
                 </button>
 
                 {dropdownOpen && (
-                  <ul className={styles['dropdown-menu']}>
+                  <ul className={styles.dropdownMenu}>
                     <li onClick={() => handleSelect('approve')}>승인</li>
                     <li onClick={() => handleSelect('reject')}>거절</li>
                   </ul>
@@ -95,7 +103,7 @@ const ProjectApplicationManage = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

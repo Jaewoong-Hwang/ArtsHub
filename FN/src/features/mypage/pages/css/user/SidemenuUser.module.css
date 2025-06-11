@@ -1,4 +1,3 @@
-
 a {
   text-decoration: none;
 }
@@ -8,7 +7,7 @@ ul li {
 }
 
 /* 사이드메뉴 너비 */
-.sidebar_menu {
+.sidebarMenu {
   width: 300px;
   padding: 0;
   display: flex;
@@ -17,24 +16,24 @@ ul li {
   box-sizing: border-box;
 }
 
-.sidebar_menu .profile {
+.profile {
   text-align: center;
   margin-bottom: 30px;
 }
 
-.sidebar_menu .profile-img {
+.profileImg {
   width: 150px;
   height: 150px;
   border-radius: 50%;
 }
 
-.sidebar_menu .nickname {
+.nickname {
   font-size: 1.25rem;
   margin: 20px 0;
   font-weight: 500;
 }
 
-.sidebar_menu > .change {
+.change {
   display: flex;
   width: 240px;
   justify-content: center;
@@ -46,7 +45,7 @@ ul li {
   gap: 0.375rem;
 }
 
-.sidebar_menu .My_Arts {
+.myArts {
   width: 100%;
   border-bottom: 2px solid #333333;
   padding: 15px 0 20px 0;
@@ -59,7 +58,7 @@ ul li {
   width: 240px;
 }
 
-.menu-item {
+.menuItem {
   padding: 8px 0;
   border-bottom: 1px solid #ddd;
   text-align: left;
@@ -68,7 +67,7 @@ ul li {
   font-weight: 400;
 }
 
-.menu-item.active {
+.menuItemActive {
   font-weight: 600;
 }
 
@@ -78,14 +77,15 @@ ul li {
   list-style: none;
 }
 
-.menu-item > .submenu {
+.menuItem > .submenu {
   display: block;
+  position: center;
   background-color: #F3F4F8;
   padding: 6px 20px;
   margin-top: 8px;
 }
 
-.submenu-item a {
+.submenuItem a {
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;
@@ -94,6 +94,6 @@ ul li {
   padding: 5px 0;
 }
 
-.submenu-item.active a {
+.submenuItemActive a {
   color: #000000;
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../../../assets/styles/reset.css';
 import styles from '../css/expert/ProfitHistory.module.css';
-import sidebarStyles from '../css/expert/SidemenuExpert.module.css';
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  
+import Header from "../../../../components/layout/Header";
+import Footer from "../../../../components/layout/Footer";
 
 const ProfitHistory = () => {
   const availableProfit = 0;
@@ -15,45 +17,45 @@ const ProfitHistory = () => {
 
   return (
     <>
-      <div id="header"></div>
+      <Header />
 
-      <div className="mypage_section">
-        <div className={sidebarStyles.sidebar_menu}>
-          <div className={sidebarStyles.profile}>
-            <img src="/static/img/apple.png" alt="프로필 이미지" className={sidebarStyles["profile-img"]} />
-            <p className={sidebarStyles.nickname}>닉네임</p>
+      <div className={styles.mypage_section}>
+        <div className={sidemenuStyles.sidebar_menu}>
+          <div className={sidemenuStyles.profile}>
+            <img src="/static/img/apple.png" alt="프로필 이미지" className={sidemenuStyles["profile-img"]} />
+            <p className={sidemenuStyles.nickname}>닉네임</p>
           </div>
 
-          <Link to="/UserInforead" className={sidebarStyles.change}>
+          <Link to="/UserInforead" className={sidemenuStyles.change}>
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>일반으로 전환</span>
           </Link>
 
-          <p className={sidebarStyles.My_Arts}>My Arts</p>
-          <ul className={sidebarStyles.menu}>
-            <li className={sidebarStyles["menu-item"]}>
+          <p className={sidemenuStyles.My_Arts}>My Arts</p>
+          <ul className={sidemenuStyles.menu}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/FundingManage">펀딩관리</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/ProjectManage">프로젝트 관리</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/Myprojectrequest">참가신청 프로젝트 관리</Link>
             </li>
-            <li className={`${sidebarStyles["menu-item"]} ${sidebarStyles.active}`}>
+            <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
               <Link to="/ProfitHistory">수익 관리</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/ExpertProfile">프로필</Link>
             </li>
-            <li className={sidebarStyles["menu-item"]}>
+            <li className={sidemenuStyles["menu-item"]}>
               <Link to="/logout">로그아웃</Link>
             </li>
           </ul>
         </div>
 
-        <div className="content">
-          <p className="title">수익 관리</p>
+        <div className={styles.content}>
+          <p className={styles.title}>수익 관리</p>
 
           <div className={styles.profitBox}>
             <div className={styles.profitBlockBox}>
@@ -83,7 +85,7 @@ const ProfitHistory = () => {
         </div>
       </div>
 
-      <div id="footer"></div>
+      <Footer />
     </>
   );
 };

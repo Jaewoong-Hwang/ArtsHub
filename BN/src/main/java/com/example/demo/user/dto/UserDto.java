@@ -35,7 +35,7 @@ public class UserDto {
                 .nickname(this.nickname != null ? this.nickname : RandomNicknameGenerator.generate())
                 .phoneNumber(this.phoneNumber)
                 .role(this.role != null ? this.role : "ROLE_USER")
-                .profileImage(this.profileImage != null ? this.profileImage : "default.jpg")
+                .profileImage(this.profileImage != null ? this.profileImage : "default.png")
                 .build();
     }
 

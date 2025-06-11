@@ -13,6 +13,7 @@ import com.example.demo.common.config.auth.principal.PrincipalDetailsOAuth2Servi
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -31,6 +34,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+@Slf4j
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -63,16 +67,11 @@ public class SecurityConfig {
 		//권한체크
 		http.authorizeHttpRequests((auth)->{
 			auth.requestMatchers(
+					"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico",
 					"/api/login",
 					"/api/join",
 					"/api/user/me",
 					"/api/check-email",
-					"/favicon.ico",
-					"/static/**",
-					"/css/**",
-					"/js/**",
-					"/img/**",
-					"/assets/**",
 					"/api/projects/**").permitAll();
 			auth.requestMatchers("/api/user").hasRole("USER");
 			auth.requestMatchers("/api/manager").hasRole("MANAGER");
@@ -111,8 +110,11 @@ public class SecurityConfig {
 		});
 
 
-		// ✅ JWT 인증 필터 주석 처리 (로그인 미사용 상태)
-		// http.addFilterBefore(new JwtAuthorizationFilter(userRepository, jwtTokenProvider, redisUtil), LogoutFilter.class);
+		//JWT FILTER ADD 로그인 이후에 인증하기 위한코드
+		http
+				.addFilterBefore(new JwtAuthorizationFilter(userRepository, jwtTokenProvider, redisUtil),
+						UsernamePasswordAuthenticationFilter.class);
+
 
 		// ✅ CORS 설정
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
@@ -139,4 +141,14 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
 	}
+
+
+//	@Bean
+//	public WebSecurityCustomizer webSecurityCustomizer() {
+//		return (web) -> web.ignoring().requestMatchers(
+//				"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico"
+//		);
+//	}
+
+
 }

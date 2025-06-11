@@ -3,6 +3,7 @@ package com.example.demo.common.config;
 import com.example.demo.common.config.auth.exceptionHandler.CustomAccessDeniedHandler;
 import com.example.demo.common.config.auth.exceptionHandler.CustomAuthenticationEntryPoint;
 // import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
+import com.example.demo.common.config.auth.jwt.JwtAuthorizationFilter;
 import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginFailureHandler;
 import com.example.demo.common.config.auth.loginHandler.CustomLoginSuccessHandler;

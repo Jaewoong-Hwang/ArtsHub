@@ -9,7 +9,6 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 모듈에서는 상태 클래스도 camelCase로 작성 */
 .visible {
   opacity: 1;
   transform: translateY(0);
@@ -20,10 +19,34 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+.thumbnailWrapper {
+  position: relative; /* ✅ 모집 마감 배지 위치를 위해 필요 */
+}
+
 .projectImage {
   width: 100%;
   height: 180px;
   object-fit: cover;
+}
+
+/* ✅ 마감된 카드에 적용될 스타일 */
+.closed img {
+  filter: grayscale(80%);
+  opacity: 0.6;
+}
+
+/* ✅ 마감 배지 스타일 */
+.closedBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 0, 0, 0.85);
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
 }
 
 .projectContent {
@@ -41,16 +64,46 @@
   margin-bottom: 0.4rem;
   color: #555;
   margin-bottom: 0.6rem;
-
-  /* ✅ 말줄임 처리 추가 (선택적 UX 향상) */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 2줄 */
+  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
 }
 
-.projectViews {
+.projectBadge {
+  display: inline-block;
+  background-color: var(--main-blue);
+  color: white;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.projectTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.projectSummary {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.projectMeta {
+  display: flex;
+  justify-content: space-between;
   font-size: 0.85rem;
+  margin-top: 0.4rem;
   color: #888;
+}
+
+.capacity {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.3rem;
 }

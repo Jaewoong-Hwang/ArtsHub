@@ -7,11 +7,11 @@ import ProjectCardList from "./ProjectCardList";
 import Header from "../../../../components/layout/Header";
 import SearchBar from "../../../../components/common/SearchBar";
 import ProjectFilterStatus from "../components/ProjectFilterStatus";
+import Footer from "../../../../components/layout/Footer";
 
 // css
 import "../../../../assets/styles/reset.css";
-import styles from "./css/ProjectParticipateMain.module.css"; // ✅ module.css 방식으로 변경
-
+import styles from "./css/ProjectParticipateMain.module.css"; // ✅ module.css 방식
 
 const fallbackSlides = [
   {
@@ -35,13 +35,8 @@ const fallbackSlides = [
     subtext: "오페라 / 클래식",
     image: "https://picsum.photos/600/180?random=3",
   },
-  {
-    id: 4,
-    title: "마임의 세계",
-    description: "말 없이 전하는 감정",
-    image: "https://picsum.photos/600/200?random=4",
-  },
 ];
+
 const ProjectParticipateMain = () => {
   const [slides, setSlides] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -62,28 +57,52 @@ const ProjectParticipateMain = () => {
   };
 
   useEffect(() => {
-    axios.get("/api/projects")
+    axios
+      .get("/api/projects")
       .then((res) => {
         const serverData = res.data;
-        setProjects(
-          serverData.map((p) => ({
-            id: p.id,
-            title: p.title,
-            category: p.genre,
-            image: p.thumbnail,
-            description: p.description?.summary || "",
-            views: p.views || 0,
-            deadline: p.deadline || "",
-            capacity: p.capacity || "",
-          }))
-        );
+
+        const mappedProjects = serverData.map((p) => ({
+          id: p.id,
+          title: p.title,
+          category: p.genre,
+          image: p.thumbnail,
+          descriptionSummary: p.descriptionSummary,
+          description: p.description,
+          views: p.views || 0,
+          deadline: p.deadline || "",
+          capacity: p.capacity || "",
+          slug: p.slug,
+        }));
+
+        setProjects(mappedProjects);
+
+        // ✅ 이미지 있는 프로젝트 중 랜덤 3개 뽑기
+        const validProjects = mappedProjects.filter((p) => p.image);
+        const shuffled = [...validProjects].sort(() => 0.5 - Math.random());
+        const selectedSlides = shuffled.slice(0, 3).map((p) => ({
+          id: p.id,
+          title: p.title,
+          description: p.descriptionSummary || "설명이 없습니다.",
+          subtext: p.category || "기타",
+          image: p.image,
+          previewUrl: p.description?.previewUrl,
+          slug: p.slug,
+        }));
+
+        // ✅ 부족한 경우 fallbackSlides로 채우기
+        const mergedSlides = [
+          ...selectedSlides,
+          ...fallbackSlides.slice(0, 6 - selectedSlides.length),
+        ];
+
+        setSlides(mergedSlides);
       })
       .catch((err) => {
         console.error("🚨 서버 프로젝트 조회 실패:", err);
         setProjects([]);
+        setSlides(fallbackSlides);
       });
-
-    setSlides(fallbackSlides);
   }, []);
 
   const filteredProjects = projects.filter((project) => {
@@ -104,43 +123,46 @@ const ProjectParticipateMain = () => {
   });
 
   return (
-    <main className={styles.projectPage}>
-      <Header />
-      <HeroCarousel slides={slides} />
-      <section className={styles.content}>
-        <div className={styles.title}>
-          <h2 className={styles.sectionTitle}>Project Recruitment</h2>
-          <p className={styles.sectionSubtitle}>
-            함께하길 기다리는 팀원에 합류하세요 !!
-          </p>
-          <SearchBar onSearch={handleSearch} />
-          <div className={styles.categoryHeader}>
-            <CategoryList
-              onCategorySelect={handleCategorySelect}
-              selectedCategory={selectedCategory}
-            />
-          </div>
-          {selectedCategory && (
-            <div className={styles.categoryResetContainer}>
-              <p
-                className={styles.resetText}
-                onClick={() => setSelectedCategory(null)}
-              >
-                전체 보기
-              </p>
+    <>
+      <main className={styles.projectPage}>
+        <Header />
+        <HeroCarousel slides={slides} />
+        <section className={styles.content}>
+          <div className={styles.title}>
+            <h2 className={styles.sectionTitle}>Project Recruitment</h2>
+            <p className={styles.sectionSubtitle}>
+              함께하길 기다리는 팀원에 합류하세요 !!
+            </p>
+            <SearchBar onSearch={handleSearch} />
+            <div className={styles.categoryHeader}>
+              <CategoryList
+                onCategorySelect={handleCategorySelect}
+                selectedCategory={selectedCategory}
+              />
             </div>
-          )}
-        </div>
+            {selectedCategory && (
+              <div className={styles.categoryResetContainer}>
+                <p
+                  className={styles.resetText}
+                  onClick={() => setSelectedCategory(null)}
+                >
+                  전체 보기
+                </p>
+              </div>
+            )}
+          </div>
 
-        <ProjectFilterStatus
-          totalCount={filteredProjects.length}
-          selectedCategory={selectedCategory}
-          keyword={searchKeyword}
-          onReset={handleResetFilter}
-        />
-        <ProjectCardList projects={filteredProjects} />
-      </section>
-    </main>
+          <ProjectFilterStatus
+            totalCount={filteredProjects.length}
+            selectedCategory={selectedCategory}
+            keyword={searchKeyword}
+            onReset={handleResetFilter}
+          />
+          <ProjectCardList projects={filteredProjects} />
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 };
 

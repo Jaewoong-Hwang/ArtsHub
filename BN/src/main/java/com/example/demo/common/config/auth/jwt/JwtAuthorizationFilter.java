@@ -188,9 +188,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
      * JWT 토큰을 통해 인증 객체를 생성하는 메서드
      */
     private Authentication getAuthentication(String token) {
-        Authentication authentication = jwtTokenProvider.getAuthentication(token);
-        Optional<User> user = userRepository.findByEmail(authentication.getName());
-        return user.map(u -> authentication).orElse(null);
+//        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+//        Optional<User> user = userRepository.findByEmail(authentication.getName());
+//        return user.map(u -> authentication).orElse(null);
+
+        // 🔥 이제 여기서 userRepository로 다시 조회할 필요 없음!
+        return jwtTokenProvider.getAuthentication(token);
     }
 
     /**

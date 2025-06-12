@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -24,4 +25,8 @@ public class Reward {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    public List<RewardOption> getRewardOptions() {
+        return options;
+    }
 }

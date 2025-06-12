@@ -1,6 +1,7 @@
 package com.example.demo.grant.service;
 
 import com.example.demo.grant.dto.GrantDto;
+import com.example.demo.grant.entity.GrantBadgeEntity;
 import com.example.demo.grant.entity.GrantEntity;
 import com.example.demo.grant.repository.GrantRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,32 +25,34 @@ public class GrantCrawlerService {
 
     private final GrantRepository grantRepository;
 
-    /**
-     * 🔍 크롤링된 공모사업 미리보기 (저장 X)
-     */
     public List<GrantDto> previewGrants() throws IOException {
         trustAllCertificates();
         return fetchGrants(false);
     }
 
-    /**
-     * 💾 크롤링 후 DB 저장
-     */
     public List<GrantDto> crawlAndSaveGrants() throws IOException {
         trustAllCertificates();
         return fetchGrants(true);
     }
 
-    // ✅ 3. DB에서 전체 조회
     public List<GrantDto> findAllGrants() {
         return grantRepository.findAll().stream()
                 .map(this::toDto)
                 .toList();
     }
 
-    /**
-     * 📌 공모사업 크롤링 수행 (DB 저장 여부 선택)
-     */
+    public List<GrantDto> findByBadgeName(String badge) {
+        return grantRepository.findByBadgeName(badge).stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    public List<GrantDto> findByAnyBadge(List<String> badges) {
+        return grantRepository.findByBadgeNames(badges).stream()
+                .map(this::toDto)
+                .toList();
+    }
+
     private List<GrantDto> fetchGrants(boolean saveToDb) throws IOException {
         List<GrantDto> grantList = new ArrayList<>();
         int page = 1;
@@ -68,29 +72,48 @@ public class GrantCrawlerService {
                 String title = link.selectFirst("h2.title") != null ? link.selectFirst("h2.title").text() : "제목 없음";
                 String date = link.selectFirst("p.date") != null ? link.selectFirst("p.date").text() : "기간 없음";
 
+                // ✅ 배지 정보 수집
+                Element badgeContainer = link.selectFirst("div.badges");
+                List<String> badges = new ArrayList<>();
+                if (badgeContainer != null) {
+                    for (Element badge : badgeContainer.select("span.badge")) {
+                        badges.add(badge.text());
+                    }
+                }
+
                 // 중복 방지
                 if (grantRepository.findByDetailUrl(href).isPresent()) continue;
 
                 if (saveToDb) {
-                    // DB 저장
-                    GrantEntity saved = grantRepository.save(
-                            GrantEntity.builder()
-                                    .title(title)
-                                    .period(date)
-                                    .detailUrl(href)
-                                    .build()
-                    );
+                    // ✅ 안전한 방식으로 직접 생성
+                    GrantEntity grant = new GrantEntity();
+                    grant.setTitle(title);
+                    grant.setPeriod(date);
+                    grant.setDetailUrl(href);
 
-                    // 반환용 DTO 생성
+                    List<GrantBadgeEntity> badgeEntities = new ArrayList<>();
+                    for (String badgeName : badges) {
+                        GrantBadgeEntity badge = new GrantBadgeEntity();
+                        badge.setName(badgeName);
+                        badge.setGrant(grant);
+                        badgeEntities.add(badge);
+                    }
+
+                    // ✅ 디버깅 로그 추가 위치
+                    System.out.println("✅ 저장 직전 배지 리스트: " + badges);
+                    System.out.println("👉 badgeEntities size: " + badgeEntities.size());
+
+                    grant.setBadges(badgeEntities);
+
+                    GrantEntity saved = grantRepository.save(grant);
                     grantList.add(toDto(saved));
                 } else {
-                    // 미리보기용 DTO만 생성
                     grantList.add(GrantDto.builder()
                             .title(title)
                             .period(date)
                             .detailUrl(href)
-                            .build()
-                    );
+                            .badges(badges)
+                            .build());
                 }
             }
 
@@ -100,9 +123,6 @@ public class GrantCrawlerService {
         return grantList;
     }
 
-    /**
-     * 🔒 HTTPS 인증 무시 설정 (크롤링용)
-     */
     private void trustAllCertificates() {
         try {
             javax.net.ssl.TrustManager[] trustAllCerts = new javax.net.ssl.TrustManager[]{
@@ -124,14 +144,16 @@ public class GrantCrawlerService {
         }
     }
 
-    /**
-     * ✅ Entity → DTO 변환
-     */
     private GrantDto toDto(GrantEntity entity) {
+        List<String> badgeNames = entity.getBadges().stream()
+                .map(GrantBadgeEntity::getName)
+                .collect(Collectors.toList());
+
         return GrantDto.builder()
                 .title(entity.getTitle())
                 .period(entity.getPeriod())
                 .detailUrl(entity.getDetailUrl())
+                .badges(badgeNames)
                 .build();
     }
 }

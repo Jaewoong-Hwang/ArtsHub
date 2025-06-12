@@ -4,10 +4,7 @@ import com.example.demo.grant.dto.GrantDto;
 import com.example.demo.grant.service.GrantCrawlerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api/grants")
 public class GrantRestController {
 
-    private final GrantCrawlerService crawlerService;
+    private final GrantCrawlerService grantService;
 
     /**
      * 🔍 크롤링된 공모사업 미리보기 (DB 저장 없음)
@@ -25,7 +22,7 @@ public class GrantRestController {
      */
     @GetMapping("/preview")
     public ResponseEntity<List<GrantDto>> previewGrants() throws IOException {
-        List<GrantDto> preview = crawlerService.previewGrants();
+        List<GrantDto> preview = grantService.previewGrants();
         return ResponseEntity.ok(preview);
     }
 
@@ -36,19 +33,40 @@ public class GrantRestController {
     @PostMapping("/crawl")
     public ResponseEntity<String> crawlAndSave() {
         try {
-            crawlerService.crawlAndSaveGrants();
+            grantService.crawlAndSaveGrants();
             return ResponseEntity.ok("크롤링 및 저장 완료");
         } catch (IOException e) {
             return ResponseEntity.status(500).body("❌ 크롤링 중 오류 발생: " + e.getMessage());
         }
     }
 
+    /**
+     * 전체 공모사업 조회
+     * GET /api/grants
+     */
     @GetMapping
     public ResponseEntity<List<GrantDto>> getAllGrants() {
-        List<GrantDto> grants = crawlerService.findAllGrants();
+        List<GrantDto> grants = grantService.findAllGrants();
         return ResponseEntity.ok(grants);
     }
 
+    /**
+     * 특정 배지로 검색
+     * GET /api/grants/badge?badge=시각
+     */
+    @GetMapping("/badge")
+    public ResponseEntity<List<GrantDto>> searchByBadge(@RequestParam String badge) {
+        List<GrantDto> result = grantService.findByBadgeName(badge);
+        return ResponseEntity.ok(result);
+    }
 
-
+    /**
+     * 여러 배지 중 하나라도 포함된 공모사업 검색
+     * GET /api/grants/badges?badges=시각&badges=아트누리
+     */
+    @GetMapping("/badges")
+    public ResponseEntity<List<GrantDto>> searchByBadges(@RequestParam List<String> badges) {
+        List<GrantDto> result = grantService.findByAnyBadge(badges);
+        return ResponseEntity.ok(result);
+    }
 }

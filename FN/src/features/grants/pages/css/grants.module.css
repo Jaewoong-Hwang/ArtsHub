@@ -1,53 +1,169 @@
-
+/* ✅ src/pages/grants/css/grants.module.css */
 
 .grantsPage {
   padding: 2rem;
   background-color: var(--light-bg);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .grantsTitle {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: var(--sub-blue);
 }
 
 .grantList {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .grantCard {
-  background-color: white;
-  border-radius: 1rem;
+  background-color: #fff;
+  border-radius: 1.25rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  padding: 1.25rem;
-  transition: transform 0.2s ease;
-  cursor: pointer;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
 }
 
 .grantCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cardLinkWrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .grantTitle {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #333;
+  color: #222;
+  margin-bottom: 0.5rem;
 }
 
 .grantPeriod {
   font-size: 0.9rem;
   color: var(--gray);
-  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .grantLink {
   text-decoration: none;
   color: var(--main-blue);
   font-size: 0.95rem;
-  margin-top: 0.5rem;
+  font-weight: 500;
+  margin-top: auto;
   display: inline-block;
+  transition: color 0.2s;
 }
+
+.grantLink:hover {
+  color: var(--sub-blue);
+}
+
+.emptyText {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: var(--gray);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 8px;
+}
+
+.pageButton {
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.pageButton:hover {
+  background-color: #dcdcdc;
+}
+
+.activePage {
+  background-color: var(--main-blue);
+  color: white;
+}
+
+
+
+
+/* ✅ 배지 스타일 */
+.badgeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.badgePurple     { background-color: #9c27b0; color: white; }   /* 아트누리 */
+.badgeDeepPurple { background-color: #673ab7; color: white; }   /* 추가로 사용 가능 */
+
+.badgeBlue       { background-color: #1976d2; color: white; }   /* 경상권 등 */
+.badgeLightBlue  { background-color: #64b5f6; color: black; }   /* 시각 등 장르용 */
+
+.badgeTeal       { background-color: #00897b; color: white; }   /* 전라권 */
+.badgeMint       { background-color: #4db6ac; color: white; }   /* 공연예술센터 등 중앙기관 */
+
+.badgeIndigo     { background-color: #303f9f; color: white; }   /* 강원권 */
+.badgeDeepIndigo { background-color: #283593; color: white; }   /* 창작 등 장르용 */
+
+.badgePink       { background-color: #ec407a; color: white; }   /* 무용 */
+.badgeRose       { background-color: #f06292; color: white; }   /* 문학 */
+
+.badgeCyan       { background-color: #00bcd4; color: white; }   /* 문화일반 */
+
+.badgeOrange     { background-color: #ff9800; color: white; }   /* 충청권 */
+.badgeAmber      { background-color: #ffb300; color: black; }   /* 연극 */
+
+.badgeGreen      { background-color: #4caf50; color: white; }   /* 음악 */
+.badgeEmerald    { background-color: #2ecc71; color: white; }   /* 다른 녹색 계열용 */
+
+.badgeDarkGreen  { background-color: #2e7d32; color: white; }   /* 수도권 문화재단 */
+
+.badgeYellow     { background-color: #ffeb3b; color: black; }   /* 뮤지컬 */
+.badgeLime       { background-color: #cddc39; color: black; }   /* 사용 여분 있음 */
+
+.badgeBrown      { background-color: #795548; color: white; }   /* 전통 */
+.badgeSky        { background-color: #81d4fa; color: black; }   /* 시 */
+
+.badgeGray       { background-color: #757575; color: white; }   /* 한국문화예술위원회 */
+.badgeLightGray  { background-color: #bdbdbd; color: black; }   /* 기타 기관 */
+
+.badgeDarkGray   { background-color: #424242; color: white; }   /* 전체 */
+
+.badgeRed        { background-color: #f44336; color: white; }   /* 여분 */
+.badgeDefault    { background-color: var(--main-blue); color: white; }
+

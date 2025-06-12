@@ -5,6 +5,7 @@ import { MypageRoutes } from '../features/mypage/MypageRoutes';
 import { AuthRoutes } from '../features/auth/authRoutes';
 import { HomeRoutes } from '../features/Home/homeRoutes';
 import { FundingRoutes } from '../features/funding/fundingRoutes';
+import { GrantsRoutes } from '../features/grants/grantsRoutes';
 
 export const AppRouter = () => (
   
@@ -17,6 +18,7 @@ export const AppRouter = () => (
         {AuthRoutes() }
         {HomeRoutes() }
         {FundingRoutes()}
+        {GrantsRoutes()}
       </Routes>
       </StepModalProvider>
     </BrowserRouter>

@@ -43,4 +43,12 @@ public class GrantRestController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<List<GrantDto>> getAllGrants() {
+        List<GrantDto> grants = crawlerService.findAllGrants();
+        return ResponseEntity.ok(grants);
+    }
+
+
+
 }

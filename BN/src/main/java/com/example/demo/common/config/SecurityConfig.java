@@ -74,7 +74,10 @@ public class SecurityConfig {
 					"/api/user/me",
 					"/api/check-email",
 					"/api/projects/**",
-					"/api/grants/crawl-preview"  // ✅ 추가된 부분
+					"/api/grants",
+					"/api/grants/",
+					"/api/grants/preview",
+					"/api/grants/**"  // ✅ 추가된 부분
 			).permitAll();
 
 			auth.requestMatchers("/api/user").hasRole("USER");

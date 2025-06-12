@@ -1,0 +1,53 @@
+
+
+.grantsPage {
+  padding: 2rem;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+}
+
+.grantsTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: var(--sub-blue);
+}
+
+.grantList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grantCard {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  padding: 1.25rem;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.grantCard:hover {
+  transform: translateY(-5px);
+}
+
+.grantTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.grantPeriod {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin-top: 0.5rem;
+}
+
+.grantLink {
+  text-decoration: none;
+  color: var(--main-blue);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  display: inline-block;
+}

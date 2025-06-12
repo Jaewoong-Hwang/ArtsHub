@@ -39,6 +39,13 @@ public class GrantCrawlerService {
         return fetchGrants(true);
     }
 
+    // ✅ 3. DB에서 전체 조회
+    public List<GrantDto> findAllGrants() {
+        return grantRepository.findAll().stream()
+                .map(this::toDto)
+                .toList();
+    }
+
     /**
      * 📌 공모사업 크롤링 수행 (DB 저장 여부 선택)
      */

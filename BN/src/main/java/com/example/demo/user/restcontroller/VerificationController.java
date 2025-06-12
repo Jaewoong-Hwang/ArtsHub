@@ -91,21 +91,36 @@ public class VerificationController {
         String code = String.valueOf((int)(Math.random() * 900000) + 100000);
         redisUtil.setDataExpire("EMAIL_CODE:" + email, code, 180); // 3분
 
-        // 이메일 전송
-        emailService.sendEmail(email, "[ArtsHub] 이메일 인증", "인증번호: " + code);
-
-
-        if (isDevMode) {
-            return ResponseEntity.ok(Map.of(
-                    "message", "인증메일이 발송되었습니다.",
-                    "code", code,
-                    "devMode", true
-            ));
-        } else {
-            return ResponseEntity.ok(Map.of(
-                    "message", "인증메일이 발송되었습니다."
-            ));
+//        // 이메일 전송
+//        emailService.sendEmail(email, "[ArtsHub] 이메일 인증", "인증번호: " + code);
+//
+//
+//        if (isDevMode) {
+//            return ResponseEntity.ok(Map.of(
+//                    "message", "인증메일이 발송되었습니다.",
+//                    "code", code,
+//                    "devMode", true
+//            ));
+//        } else {
+//            return ResponseEntity.ok(Map.of(
+//                    "message", "인증메일이 발송되었습니다."
+//            ));
+//        }
+        // ✅ 개발 모드가 아닐 때만 이메일 전송
+        if (!isDevMode) {
+            emailService.sendEmail(email, "[ArtsHub] 이메일 인증", "인증번호: " + code);
         }
+
+        // ✅ 개발 모드일 경우 인증번호도 함께 응답
+        return isDevMode
+                ? ResponseEntity.ok(Map.of(
+                "message", "인증메일이 발송되었습니다.",
+                "code", code,
+                "devMode", true
+        ))
+                : ResponseEntity.ok(Map.of(
+                "message", "인증메일이 발송되었습니다."
+        ));
     }
 
 

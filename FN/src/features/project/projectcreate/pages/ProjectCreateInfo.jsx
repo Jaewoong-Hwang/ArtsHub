@@ -77,6 +77,15 @@ const ProjectCreateInfo = () => {
                 <option>클래식</option>
                 <option>재즈</option>
                 <option>연극</option>
+                <option>무용</option>
+                <option>퓨전</option>
+                <option>인디</option>
+                <option>오페라</option>
+                <option>퍼포먼스</option>
+                <option>어린이</option>
+                <option>국악</option>
+                <option>밴드</option>
+                <option>어린이</option>
               </select>
             </label>
 

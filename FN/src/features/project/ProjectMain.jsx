@@ -5,6 +5,11 @@ import "../../../src/assets/styles/reset.css";
 import "./projectmain.css";
 import ProjectCTA from "./components/ProjectCTA"; // ✅ CTA 컴포넌트 import
 
+// ✅ 이미지 import (src 내부 기준)
+import plannerImg from "../../assets/images/project/concert_planner.png";
+import fundingImg from "../../assets/images/project/funding.png";
+import performanceImg from "../../assets/images/project/concert.png";
+
 const ProjectMain = () => {
   const navigate = useNavigate();
 
@@ -75,19 +80,19 @@ const ProjectMain = () => {
         <div className="feature-cards">
           {[
             {
-              src: "/static/img/-",
+              src: plannerImg,
               alt: "기획",
-              text: "기획부터 전문가 팀 구성까지!",
+              text: "부터 전문가 팀 구성까지!",
             },
             {
-              src: "/static/img/-",
+              src: fundingImg,
               alt: "펀딩",
-              text: "펀딩을 통해 시장 반응 확인!",
+              text: "을 통해 시장 반응 확인!",
             },
             {
-              src: "/static/img/-",
+              src: performanceImg,
               alt: "공연",
-              text: "공연까지 함께 연결!",
+              text: "까지 함께 연결!",
             },
           ].map((card, idx) => (
             <div className="feature-card" key={idx}>

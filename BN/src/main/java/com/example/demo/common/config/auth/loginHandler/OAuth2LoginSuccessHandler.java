@@ -60,6 +60,6 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         response.addCookie(usernameCookie);
 
         // 소셜 로그인 성공 후 리디렉션할 URL
-        response.sendRedirect("http://localhost:3000/main");
+        response.sendRedirect("http://localhost:3000/");
     }
 }

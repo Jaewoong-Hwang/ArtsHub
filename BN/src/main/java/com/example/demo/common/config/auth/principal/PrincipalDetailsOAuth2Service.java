@@ -95,14 +95,15 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
         // 최초 로그인시 로컬계정 DB 저장 처리
         String username = oAuth2UserInfo.getProvider() + "_" + oAuth2UserInfo.getProviderId();
         String password = passwordEncoder.encode("1234");
-        Optional<User> userOptional = userRepository.findByEmail(username);
+        String email = oAuth2UserInfo.getEmail();
+        Optional<User> userOptional = userRepository.findByEmail(email);
         //UserDto 생성 (이유 : PrincipalDetails에 포함)
         //UserEntity 생성 (이유 : 최초 로그인시 DB 저장용도)
         UserDto userDto = null;
         if (userOptional.isEmpty()) {
             //최초 로그인(Dto , Entity)
             userDto = UserDto.builder()
-                    .email(username)
+                    .email(email)
                     .password(password)
                     .name(oAuth2UserInfo.getName() != null ? oAuth2UserInfo.getName() : "소셜유저") // 기본 이름
                     .nickname(RandomNicknameGenerator.generate())

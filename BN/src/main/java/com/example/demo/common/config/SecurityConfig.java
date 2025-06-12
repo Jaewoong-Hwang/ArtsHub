@@ -77,7 +77,7 @@ public class SecurityConfig {
 					"/api/grants",
 					"/api/grants/",
 					"/api/grants/preview",
-					"/api/grants/**"  // ✅ 추가된 부분
+					"/api/grants/**",
 					"/api/verify-code", "/api/send-verification",
 					"/api/send-email-code", "/api/verify-email-code",
 					"/api/mypage/convert-to-expert",

@@ -1,7 +1,9 @@
 package com.example.demo.user.dto;
 
+import com.example.demo.user.entity.Role;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.util.RandomNicknameGenerator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -35,8 +37,10 @@ public class UserDto {
 
     private String nickname;         // 랜덤 생성 or 수정용
     private String phoneNumber;
-    private String role;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Role role;
     private String profileImage;
+    private String address;
     //OAUTH2 CLIENT INFO
     private String provider;
     private String providerId;
@@ -50,8 +54,9 @@ public class UserDto {
                 .name(this.name)
                 .nickname(this.nickname != null ? this.nickname : RandomNicknameGenerator.generate())
                 .phoneNumber(this.phoneNumber)
-                .role(this.role != null ? this.role : "ROLE_USER")
+                .role(this.role != null ? this.role : Role.ROLE_USER)
                 .profileImage(this.profileImage != null ? this.profileImage : "default.png")
+                .address(this.address)
                 .build();
     }
 
@@ -66,6 +71,7 @@ public class UserDto {
                 .phoneNumber(user.getPhoneNumber())
                 .role(user.getRole())
                 .profileImage(user.getProfileImage())
+                .address(user.getAddress())
                 .build();
     }
 }

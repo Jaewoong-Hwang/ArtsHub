@@ -40,18 +40,23 @@ public class VerificationController {
         redisUtil.setDataExpire("VERIFICATION:" + phone, code, 180);
 
         // 실제 문자 전송( 개발 모드 아닐때 )
-        if (!isDevMode) {
-            boolean success = smsService.sendSms(phone, code);
-            if (!success) {
-                return ResponseEntity.status(500).body(Map.of("message", "문자 전송에 실패했습니다."));
-            }
-        }
+//        if (!isDevMode) {
+//            boolean success = smsService.sendSms(phone, code);
+//            if (!success) {
+//                return ResponseEntity.status(500).body(Map.of("message", "문자 전송에 실패했습니다."));
+//            }
+//        }
 
 
 
-        return isDevMode
-                ? ResponseEntity.ok(Map.of("message", "인증번호가 전송되었습니다.", "code", code)) // 자동입력용
-                : ResponseEntity.ok(Map.of("message", "인증번호가 전송되었습니다."));
+//        return isDevMode
+//                ? ResponseEntity.ok(Map.of("message", "인증번호가 전송되었습니다.", "code", code)) // 자동입력용
+//                : ResponseEntity.ok(Map.of("message", "인증번호가 전송되었습니다."));
+
+        return ResponseEntity.ok(Map.of(
+                "message", "인증번호가 전송되었습니다.",
+                "code", code  // 항상 응답에 포함
+        ));
     }
 
 
@@ -86,10 +91,21 @@ public class VerificationController {
         String code = String.valueOf((int)(Math.random() * 900000) + 100000);
         redisUtil.setDataExpire("EMAIL_CODE:" + email, code, 180); // 3분
 
-        // 이메일 전송 (추후 구현)
+        // 이메일 전송
         emailService.sendEmail(email, "[ArtsHub] 이메일 인증", "인증번호: " + code);
 
-        return ResponseEntity.ok(Map.of("message", "인증메일이 발송되었습니다.", "code", code)); // code는 dev용
+
+        if (isDevMode) {
+            return ResponseEntity.ok(Map.of(
+                    "message", "인증메일이 발송되었습니다.",
+                    "code", code,
+                    "devMode", true
+            ));
+        } else {
+            return ResponseEntity.ok(Map.of(
+                    "message", "인증메일이 발송되었습니다."
+            ));
+        }
     }
 
 

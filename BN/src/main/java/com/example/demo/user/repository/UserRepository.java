@@ -2,6 +2,7 @@ package com.example.demo.user.repository;
 
 
 import com.example.demo.user.entity.User;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
     // 로그인, 사용자 조회 등에 사용
+    @EntityGraph(attributePaths = "interests")
     Optional<User> findByEmail(String email);
 
     // PK로 조회 시 사용

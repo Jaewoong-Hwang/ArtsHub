@@ -5,8 +5,22 @@ import styles from '../css/expert/ProfitHistory.module.css';
 import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";  
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
+import { useAuth } from "../../../auth/context/AuthContext"; // ✅ 추가
 
 const ProfitHistory = () => {
+  const { user } = useAuth(); // ✅ 사용자 정보 가져오기
+
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const profileImage = user?.profileImage;
+  const isHttp = profileImage?.startsWith("http");
+  const isDefault = !profileImage || profileImage === "default.png";
+
+  const profileImageSrc = isHttp
+    ? profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${profileImage}`;
+
   const availableProfit = 0;
   const expectedProfit = 9950000;
   const withdrawnAmount = 100000;
@@ -22,8 +36,12 @@ const ProfitHistory = () => {
       <div className={styles.mypage_section}>
         <div className={sidemenuStyles.sidebar_menu}>
           <div className={sidemenuStyles.profile}>
-            <img src="/static/img/apple.png" alt="프로필 이미지" className={sidemenuStyles["profile-img"]} />
-            <p className={sidemenuStyles.nickname}>닉네임</p>
+            <img
+              src={profileImageSrc}
+              alt="프로필 이미지"
+              className={sidemenuStyles["profile-img"]}
+            />
+            <p className={sidemenuStyles.nickname}>{user?.nickname || "닉네임"}</p>
           </div>
 
           <Link to="/UserInforead" className={sidemenuStyles.change}>

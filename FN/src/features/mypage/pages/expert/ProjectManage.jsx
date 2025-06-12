@@ -57,7 +57,7 @@ const ProjectManage = () => {
         {},
         { withCredentials: true }
       );
-      alert(res.data);
+      
       navigate("/UserInforead");
     } catch (err) {
       const message =

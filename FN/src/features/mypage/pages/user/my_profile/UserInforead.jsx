@@ -6,11 +6,13 @@ import Styles from "../../css/user/my_profile/UserInforead.module.css";
 import sidemenuStyles from "../../css/user/SidemenuUser.module.css";
 import Header from "../../../../../components/layout/Header";
 import Footer from "../../../../../components/layout/Footer";
+import { useAuth } from "../../../../auth/context/AuthContext";
 
 function UserInforead() {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
 
   const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
   const profileImage = userInfo?.profileImage;
@@ -51,13 +53,16 @@ function UserInforead() {
         { withCredentials: true }
       );
 
+      await refreshUser(); // 전역 user 상태도 갱신
+      await fetchUserInfo(); // 로컬 userInfo도 갱신
+
       // role 업데이트
       setUserInfo((prev) => ({
         ...prev,
         role: "ROLE_EXPERT",
       }));
 
-      alert("전문가로 전환되었습니다!");
+
       navigate("/ProjectManage");
     } catch (err) {
       const message =

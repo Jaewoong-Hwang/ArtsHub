@@ -7,14 +7,17 @@ import ProjectParticipateMain from './projectparticipate/pages/ProjectParticipat
 import ProjectPreview from './projectcreate/pages/ProjectPreview';
 import ProjectDetail from './projectcreate/pages/ProjectDetail';
 
+// 전문가 권한 보호 컴포넌트
+import ExpertRoute from '../../components/rootes/ExpertRoute';
+
 
 
 export const ProjectRoutes = () => [
   <Route key="main" path="projectmain" element={<ProjectMain />} />,
-  <Route key="info" path="project/create/info" element={<ProjectCreateInfo />} />,
-  <Route key="description" path="project/create/description" element={<ProjectCreateDescription />} />,
-  <Route key="reward" path="project/create/reward" element={<ProjectCreateReward />} />,
+  <Route key="info" path="project/create/info" element={<ExpertRoute><ProjectCreateInfo /></ExpertRoute>} />,
+  <Route key="description" path="project/create/description" element={<ExpertRoute><ProjectCreateDescription /></ExpertRoute>} />,
+  <Route key="reward" path="project/create/reward" element={<ExpertRoute><ProjectCreateReward /></ExpertRoute>} />,
   <Route key="Participate" path="project/participate" element={<ProjectParticipateMain />} />,
-  <Route key="Preview" path="project/preview" element={<ProjectPreview />} />,
+  <Route key="Preview" path="project/preview" element={<ExpertRoute><ProjectPreview /></ExpertRoute>} />,
   <Route key="Detail" path="project/:slug" element={<ProjectDetail />} />,   // ✅ 수정됨!
 ];

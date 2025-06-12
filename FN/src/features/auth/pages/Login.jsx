@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../../assets/styles/reset.css";
 import styles from "./css/login/login.module.css";
+import LogoImg from "../../../assets/images/logo.svg"
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -31,7 +32,7 @@ function Login() {
     <div className={styles.loginContainer}>
       <div className={styles.mainLogoRow}>
         <a href="/">
-          <img src="/static/img/mainlogo.png" alt="로고" className={styles.mainlogo} />
+          <img src={LogoImg} alt="로고" className={styles.mainlogo} />
         </a>
       </div>
 
@@ -79,7 +80,7 @@ function Login() {
               className={styles.btn2}
               onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/kakao"}
             >
-              <img src="/static/img/kakao.png" alt="카카오" className={styles.kakao} /> 카카오로 시작하기
+              카카오로 시작하기
             </button>
           </div>
         </div>
@@ -90,7 +91,7 @@ function Login() {
               className={styles.btn3}
               onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/naver"}
             >
-              <img src="/static/img/naver.png" alt="네이버" className={styles.naver} /> 네이버로 시작하기
+              네이버로 시작하기
             </button>
           </div>
         </div>
@@ -101,7 +102,7 @@ function Login() {
               className={styles.btn4}
               onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/google"}
             >
-              <img src="/static/img/google.png" alt="구글" className={styles.google} /> 구글로 시작하기
+              구글로 시작하기
             </button>
           </div>
         </div>

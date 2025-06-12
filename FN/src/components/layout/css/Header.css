@@ -196,3 +196,15 @@
 }
 
 
+.header-link-btn {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-link-btn:hover{
+    color: var(--sub-blue);
+}

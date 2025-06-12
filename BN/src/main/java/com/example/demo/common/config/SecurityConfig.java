@@ -73,18 +73,26 @@ public class SecurityConfig {
 					"/api/join",
 					"/api/user/me",
 					"/api/check-email",
-					"/api/projects/**",
 					"/api/grants",
 					"/api/grants/",
 					"/api/grants/preview",
 					"/api/grants/**",
 					"/api/verify-code", "/api/send-verification",
 					"/api/send-email-code", "/api/verify-email-code",
-					"/api/mypage/convert-to-expert",
 					"/api/interests/**").permitAll();
+			//  전문가 권한만 접근 가능한 프로젝트 관련 API
+			auth.requestMatchers("/api/projects", "/api/projects/**").hasRole("EXPERT");
+
+			//  전문가 권한 전환은 누구나 가능해야 하므로 permitAll 유지
+			auth.requestMatchers("/api/mypage/convert-to-expert").permitAll();
+
+			//  일반 유저 or 전문가 접근 가능
 			auth.requestMatchers("/api/mypage/**").hasAnyRole("USER", "EXPERT");
+
+			//  관리자 전용
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
 
+			//  그 외 모든 요청은 인증 필요
 			auth.anyRequest().authenticated();
 		});
 

@@ -96,7 +96,7 @@ const Header = () => {
             </li>
 
             <li>
-              <a href="#">Community</a>
+              <Link to="/grants">Grants</Link>
               <ul className="depth2">
                 <li><a href="#">공연 후기</a></li>
                 <li><a href="#">작품 이야기</a></li>

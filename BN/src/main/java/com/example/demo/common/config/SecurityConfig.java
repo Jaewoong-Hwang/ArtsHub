@@ -66,7 +66,7 @@ public class SecurityConfig {
 		http.httpBasic((httpBasic) -> httpBasic.disable());
 		http.csrf((config)->{config.disable();});
 		//권한체크
-		http.authorizeHttpRequests((auth)->{
+		http.authorizeHttpRequests((auth) -> {
 			auth.requestMatchers(
 //					"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico",
 					"/api/login",
@@ -74,15 +74,20 @@ public class SecurityConfig {
 					"/api/user/me",
 					"/api/check-email",
 					"/api/projects/**",
+					"/api/grants",
+					"/api/grants/",
+					"/api/grants/preview",
+					"/api/grants/**"  // ✅ 추가된 부분
 					"/api/verify-code", "/api/send-verification",
 					"/api/send-email-code", "/api/verify-email-code",
 					"/api/mypage/convert-to-expert",
 					"/api/interests/**").permitAll();
 			auth.requestMatchers("/api/mypage/**").hasAnyRole("USER", "EXPERT");
-
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
+
 			auth.anyRequest().authenticated();
 		});
+
 
 		//로그인
 		http.formLogin(form -> form.disable());

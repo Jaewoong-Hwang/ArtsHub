@@ -1,35 +1,51 @@
-// UserInfoupdate.jsx
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../../../../../assets/styles/reset.css';
-import styles from '../../css/user/SidemenuUser.module.css';
-import pageStyles from '../../css/user/my_profile/UserInfoupdate.module.css';
-import Header from '../../../../../components/layout/Header';
-import Footer from '../../../../../components/layout/Footer';
-import axiosInstance from '../../../../../services/axiosInstance';
-import InterestSelect from '../../../components/InterestSelect'; // ✅ 관심분야 컴포넌트 import
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../../../../../assets/styles/reset.css";
+import styles from "../../css/user/SidemenuUser.module.css";
+import pageStyles from "../../css/user/my_profile/UserInfoupdate.module.css";
+import Header from "../../../../../components/layout/Header";
+import Footer from "../../../../../components/layout/Footer";
+import axiosInstance from "../../../../../services/axiosInstance";
+import InterestSelect from "../../../components/InterestSelect";
+import { useAuth } from "../../../../auth/context/AuthContext";
 
 const UserInfoupdate = () => {
   const navigate = useNavigate();
+  const { user, setUser, refreshUser } = useAuth();
 
   const [formData, setFormData] = useState({
-    nickname: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    interests: ['', '', '', ''],
+    nickname: "",
+    email: "",
+    phoneNumber: "",
+    address: "",
+    interests: ["", "", "", ""],
+    profileImage: "",
   });
 
+  const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const fileInputRef = useRef(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   useEffect(() => {
-    axiosInstance.get('/api/user/me', { withCredentials: true })
+    axiosInstance
+      .get("/api/mypage/me", { withCredentials: true })
       .then((res) => {
         const data = res.data;
         setFormData({
-          nickname: data.nickname || '',
-          email: data.email || '',
-          phoneNumber: data.phoneNumber || '',
-          address: data.address || '',
-          interests: data.interests || ['', '', '', ''],
+          nickname: data.nickname || "",
+          email: data.email || "",
+          phoneNumber: data.phoneNumber || "",
+          address: data.address || "",
+          interests: data.interests || ["", "", "", ""],
+          profileImage: data.profileImage || "",
         });
       })
       .catch((err) => {
@@ -49,16 +65,63 @@ const UserInfoupdate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.put('/api/mypage/update', formData, {
-        withCredentials: true
+      let uploadedFileName = formData.profileImage;
+
+      if (imageFile) {
+        const uploadData = new FormData();
+        uploadData.append("file", imageFile);
+
+        const res = await axiosInstance.post(
+          "/api/mypage/upload-profile",
+          uploadData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+          }
+        );
+        uploadedFileName = res.data.profileImage;
+        await refreshUser();
+      }
+
+      await axiosInstance.put("/api/mypage/update", {
+        nickname: formData.nickname,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        profileImage: uploadedFileName,
       });
-      alert('수정 완료!');
-      navigate('/UserInforead');
+
+      await axiosInstance.put(
+        "/api/mypage/update-interests",
+        formData.interests
+      );
+
+      alert("수정 완료!");
+      navigate("/UserInforead");
     } catch (err) {
       console.error("수정 실패", err);
       alert("수정 실패: " + (err.response?.data?.message || err.message));
     }
   };
+
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+
+  const isHttpUrl = formData.profileImage?.startsWith("http");
+  const isDefault =
+    !formData.profileImage || formData.profileImage === "default.png";
+
+  const sideProfileImageSrc = isHttpUrl
+    ? formData.profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${formData.profileImage}`;
+
+const mainProfileImageSrc = previewUrl
+  ? previewUrl
+  : isHttpUrl
+  ? formData.profileImage
+  : isDefault
+  ? "/img/default.png"
+  : `${SPRING_IMAGE_BASE_URL}/${formData.profileImage}`;
 
   return (
     <>
@@ -66,7 +129,7 @@ const UserInfoupdate = () => {
       <div className={pageStyles["mypage_section"]}>
         <div className={styles["sidebarMenu"]}>
           <div className={styles["profile"]}>
-            <img src="/static/img/apple.png" alt="프로필 이미지" className={styles["profileImg"]} />
+            <img src={sideProfileImageSrc} alt="프로필" />
             <p className={styles["nickname"]}>{formData.nickname}</p>
           </div>
 
@@ -94,30 +157,56 @@ const UserInfoupdate = () => {
 
         <div className={pageStyles["content"]}>
           <p className={pageStyles["title"]}>내정보</p>
-
           <div className={pageStyles["content_item"]}>
             <form onSubmit={handleSubmit}>
               <div className={pageStyles["profile_img"]}>
                 <div className={pageStyles["profile_img_show"]}>
-                  <img src="/static/img/apple.png" alt="profile-img" />
+                  <img src={mainProfileImageSrc} alt="프로필" />
                 </div>
-                <button type="button">프로필 변경</button>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleImageChange}
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                >
+                  프로필 변경
+                </button>
               </div>
 
               <div className={pageStyles["info_list"]}>
-                <label htmlFor="nickname">닉네임</label><br />
-                <input type="text" id="nickname" value={formData.nickname} onChange={handleChange} /><br />
+                <label htmlFor="nickname">닉네임</label>
+                <input
+                  type="text"
+                  id="nickname"
+                  value={formData.nickname}
+                  onChange={handleChange}
+                />
 
-                <label htmlFor="email">이메일</label><br />
-                <input type="text" id="email" value={formData.email} onChange={handleChange} /><br />
+                <label htmlFor="email">이메일</label>
+                <input type="text" id="email" value={formData.email} disabled />
 
-                <label htmlFor="phoneNumber">연락처</label><br />
-                <input type="text" id="phoneNumber" value={formData.phoneNumber} onChange={handleChange} /><br />
+                <label htmlFor="phoneNumber">연락처</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                />
 
-                <label htmlFor="address">주소</label><br />
-                <input type="text" id="address" value={formData.address} onChange={handleChange} /><br />
+                <label htmlFor="address">주소</label>
+                <input
+                  type="text"
+                  id="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
 
-                <label>관심분야</label><br />
+                <label>관심분야</label>
                 <div className={pageStyles["interast"]}>
                   <InterestSelect
                     selectedInterests={formData.interests}
@@ -127,7 +216,9 @@ const UserInfoupdate = () => {
 
                 <div className={pageStyles["okbutton"]}>
                   <button type="submit">완료</button>
-                  <button type="button" onClick={() => window.history.back()}>취소</button>
+                  <button type="button" onClick={() => window.history.back()}>
+                    취소
+                  </button>
                 </div>
               </div>
             </form>

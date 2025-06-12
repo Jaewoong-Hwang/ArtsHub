@@ -16,8 +16,6 @@ const Join = () => {
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
   const [isEmailVerified, setIsEmailVerified] = useState(false);
 
-
-
   // 전화번호 입력 검증
   const handleSendVerificationCode = async () => {
     const phoneNumber = `${document.getElementById("tel1").value}-${
@@ -44,7 +42,6 @@ const Join = () => {
       );
     }
   };
-
 
   //휴대폰 인증번호 확인 함수
   const handleVerifyCode = async () => {
@@ -151,8 +148,6 @@ const Join = () => {
       const message = err.response?.data?.message || err.message;
       alert("회원가입 실패: " + message);
     }
-
-    
   };
 
   // 이메일 중복 확인 함수
@@ -181,7 +176,7 @@ const Join = () => {
     }
   };
 
-      // 이메일 인증 요청
+  // 이메일 인증 요청
   const handleSendEmailCode = async () => {
     const email = document.getElementById("userid").value;
     if (!email.includes("@")) {
@@ -191,8 +186,15 @@ const Join = () => {
 
     try {
       const res = await axiosInstance.post("/api/send-email-code", { email });
+
+      //개발자 모드일 경우 code 응답 옴 -> 자동 입력
       const code = res.data.code;
-      setEmailVerificationCode(code);
+
+      if (code) {
+        setEmailVerificationCode(code);
+        setEmailCode(code); // <- 자동 입력
+      }
+
       alert("이메일로 인증코드가 발송되었습니다.");
     } catch (err) {
       alert(
@@ -201,7 +203,7 @@ const Join = () => {
     }
   };
 
-    //  이메일 인증 확인
+  //  이메일 인증 확인
   const handleVerifyEmailCode = () => {
     if (emailCode === emailVerificationCode) {
       setIsEmailVerified(true);
@@ -238,14 +240,27 @@ const Join = () => {
           </div>
           {dupMessage && (
             <p
-              style={{ fontSize: "13px", color: isAvailable ? "green" : "red" , display:"flex", position : "relative", top:"-30px"}}
+              style={{
+                fontSize: "13px",
+                color: isAvailable ? "green" : "red",
+                display: "flex",
+                position: "relative",
+                top: "-30px",
+              }}
             >
               {dupMessage}
             </p>
           )}
 
-                    {/* 이메일 인증 코드 전송/입력 */}
-          <div style={{ display: "flex", gap: "8px", marginTop: "-10px", marginBottom: "10px" }}>
+          {/* 이메일 인증 코드 전송/입력 */}
+          <div
+            style={{
+              display: "flex",
+              gap: "8px",
+              marginTop: "-10px",
+              marginBottom: "10px",
+            }}
+          >
             <input
               type="text"
               placeholder="이메일 인증코드 입력"
@@ -271,8 +286,19 @@ const Join = () => {
               확인
             </button>
           </div>
-          {isEmailVerified && <p style={{ color: "green", fontSize: "13px" , display:"flex", position : "relative", top:"-30px" }}>이메일 인증 완료</p>}
-
+          {isEmailVerified && (
+            <p
+              style={{
+                color: "green",
+                fontSize: "13px",
+                display: "flex",
+                position: "relative",
+                top: "-30px",
+              }}
+            >
+              이메일 인증 완료
+            </p>
+          )}
 
           <input
             type="password"

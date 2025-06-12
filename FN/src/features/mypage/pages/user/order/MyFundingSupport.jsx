@@ -5,8 +5,22 @@ import styles from '../../css/user/SidemenuUser.module.css';
 import pageStyles from '../../css/user/order/MyFundingSupport.module.css';
 import Header from '../../../../../components/layout/Header';
 import Footer from '../../../../../components/layout/Footer';
+import { useAuth } from '../../../../auth/context/AuthContext';
 
 const MyFundingSupport = () => {
+  const { user } = useAuth();
+
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const profileImage = user?.profileImage;
+  const isHttp = profileImage?.startsWith("http");
+  const isDefault = !profileImage || profileImage === "default.png";
+
+  const profileImageSrc = isHttp
+    ? profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${profileImage}`;
+
   return (
     <>
       <Header />
@@ -15,11 +29,11 @@ const MyFundingSupport = () => {
         <div className={styles["sidebarMenu"]}>
           <div className={styles["profile"]}>
             <img
-              src="/static/img/apple.png"
+              src={profileImageSrc}
               alt="프로필 이미지"
               className={styles["profileImg"]}
             />
-            <p className={styles["nickname"]}>닉네임</p>
+            <p className={styles["nickname"]}>{user?.nickname || "닉네임"}</p>
           </div>
 
           <Link to="/FundingManage" className={styles["change"]}>
@@ -57,7 +71,7 @@ const MyFundingSupport = () => {
 
           <div className={pageStyles["funding-list"]}>
             <div className={pageStyles["funding-card"]}>
-              <a href="/SupportDetailupdate">
+              <a href="/SupportDetailread">
                 <img
                   src="/static/img/극단 공연 어둠속의 빛.webp"
                   alt="프로젝트 이미지"

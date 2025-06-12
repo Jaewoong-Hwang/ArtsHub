@@ -4,29 +4,31 @@ import axiosInstance from "../../../services/axiosInstance";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // 로그인 사용자
-  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchUser = async () => {
+    try {
+      const res = await axiosInstance.get("/api/mypage/me", {
+        withCredentials: true,
+      });
+      setUser(res.data);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    axiosInstance
-      .get("http://localhost:8090/api/mypage/me", { withCredentials: true })
-      .then((res) => {
-        setUser(res.data);
-        setLoading(false);
-        console.log("user context 값:", res.data);
-      })
-      .catch(() => {
-        setUser(null);
-        setLoading(false);
-      });
+    fetchUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading, refreshUser: fetchUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// 편하게 쓰기 위한 custom hook
 export const useAuth = () => useContext(AuthContext);

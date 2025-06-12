@@ -26,7 +26,7 @@ public class ProjectService {
     public Project create(ProjectCreateRequestDto dto) {
         Project project = toEntity(dto);
 
-        // ✅ 슬러그 중복 방지 처리
+        //  슬러그 중복 방지 처리
         String baseSlug = slugGenerator.generate(dto.getTitle());
         String uniqueSlug = baseSlug;
         int counter = 1;

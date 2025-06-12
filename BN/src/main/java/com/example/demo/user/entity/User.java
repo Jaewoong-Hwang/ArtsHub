@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,14 +43,17 @@ public class User {
 	@Column(name = "update_at", nullable = false)
 	private LocalDateTime updateAt;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 50)
-	private String role;
+	private Role role;
 
-	@Column(name = "profile_image", nullable = false, length = 300)
+	@Column(name = "profile_image", length = 300)
 	private String profileImage;
 
 	@Column(name = "address", length = 255)
 	private String address;
+
+
 
 	@ManyToMany
 	@JoinTable(

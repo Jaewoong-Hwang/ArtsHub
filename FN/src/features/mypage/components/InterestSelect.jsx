@@ -5,17 +5,29 @@ import axiosInstance from '../../../services/axiosInstance';
 const InterestSelect = ({ selectedInterests, onChange }) => {
   const [allInterests, setAllInterests] = useState([]);
 
-  useEffect(() => {
-    const fetchInterests = async () => {
-      try {
-        const res = await axiosInstance.get('/api/interests');
-        setAllInterests(res.data);
-      } catch (err) {
-        console.error('관심분야 목록 불러오기 실패:', err);
+useEffect(() => {
+  const fetchInterests = async () => {
+    try {
+      const res = await axiosInstance.get('/api/interests');
+      console.log("관심분야 API 응답:", res.data);
+      const data = res.data;
+
+      //  배열인지 확인 후 세팅
+      if (Array.isArray(data)) {
+        setAllInterests(data);
+      } else if (Array.isArray(data.interests)) {
+        setAllInterests(data.interests); // {"interests": [...]}
+      } else {
+        console.error('올바르지 않은 응답 형식:', data);
+        setAllInterests([]);
       }
-    };
-    fetchInterests();
-  }, []);
+    } catch (err) {
+      console.error('관심분야 목록 불러오기 실패:', err);
+      setAllInterests([]);
+    }
+  };
+  fetchInterests();
+}, []);
 
   const handleSelect = (e, index) => {
     const updated = [...selectedInterests];

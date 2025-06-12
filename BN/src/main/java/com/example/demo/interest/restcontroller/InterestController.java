@@ -6,7 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/interests")
@@ -17,8 +20,19 @@ public class InterestController {
 
     // 관심분야 전체 조회 API
     @GetMapping
-    public ResponseEntity<List<Interest>> getAllInterests() {
+    public ResponseEntity<?> getAllInterests() {
         List<Interest> interests = interestRepository.findAll();
-        return ResponseEntity.ok(interests);
+
+        List<Map<String, Object>> result = interests.stream()
+                .map(interest -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("interestId", interest.getInterestId());
+                    map.put("name", interest.getName());
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(result);
     }
+
 }

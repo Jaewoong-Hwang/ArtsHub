@@ -6,6 +6,10 @@ import com.example.demo.interest.entity.Interest;
 import com.example.demo.interest.repository.InterestRepository;
 import com.example.demo.mypage.Service.MypageService;
 import com.example.demo.mypage.dto.MypageDto;
+import com.example.demo.project.dto.MyProjectDto;
+import com.example.demo.project.entity.Project;
+import com.example.demo.project.repository.ProjectRepository;
+import com.example.demo.project.service.ProjectService;
 import com.example.demo.user.entity.Role;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
@@ -39,6 +43,7 @@ public class MypageController {
     private final FileService fileService;
     private final String uploadDir = "upload/profile/";
     private final MypageService mypageService;
+    private final ProjectService projectService;
 
     @PutMapping("/upgrade-role")
     public ResponseEntity<?> upgradeToExpert(Authentication authentication) {
@@ -97,12 +102,13 @@ public class MypageController {
         user.setNickname(dto.getNickname());
         user.setPhoneNumber(dto.getPhoneNumber());
         user.setAddress(dto.getAddress());
-        // TODO: 관심분야 저장 추가 가능
+        user.setProfileImage(dto.getProfileImage()); //
 
         userRepository.save(user);
 
         return ResponseEntity.ok("수정 완료");
     }
+
 
     // 관심분야 수정 (이름 리스트로 받아 연관 설정)
     @PutMapping("/update-interests")
@@ -124,22 +130,31 @@ public class MypageController {
     }
 
     //프로필 이미지 변경
-    @Transactional
-    @PostMapping("/upload-profile")
-    public ResponseEntity<String> uploadProfileImage(
-            @RequestParam("file") MultipartFile file,
-            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+ //   @Transactional
+//    @PostMapping("/upload-profile")
+//    public ResponseEntity<String> uploadProfileImage(
+ //           @RequestParam("file") MultipartFile file,
+ //           @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//
+  //       // 1. 파일 저장
+ //       String savedFilename = fileService.save(file); // 예: "uuid_filename.jpg"
+//
+  //       // 2. DB에 저장
+  //     User user = principalDetails.getUser();
+  //      user.setProfileImage(savedFilename);
+   //     userRepository.save(user);
+//
+   //      // 3. 프론트로 반환 (파일명만 전달)
+     //   return ResponseEntity.ok(savedFilename);
+   // }
 
-        // 1. 파일 저장
-        String savedFilename = fileService.save(file); // 예: "uuid_filename.jpg"
-
-        // 2. DB에 저장
-        User user = principalDetails.getUser();
-        user.setProfileImage(savedFilename);
+    @PutMapping("/update-profile-image")
+    public ResponseEntity<?> updateProfileImage(@RequestParam("fileName") String fileName,
+                                                @AuthenticationPrincipal PrincipalDetails principal) {
+        User user = principal.getUser();
+        user.setProfileImage(fileName);
         userRepository.save(user);
-
-        // 3. 프론트로 반환 (파일명만 전달)
-        return ResponseEntity.ok(savedFilename);
+        return ResponseEntity.ok("프로필 이미지가 저장되었습니다.");
     }
 
     //전문가전환
@@ -168,5 +183,12 @@ public class MypageController {
 
 
 
+    //내가 만든 프로젝트 조회
+    @GetMapping("/my-projects")
+    public ResponseEntity<?> getMyProjects(@AuthenticationPrincipal PrincipalDetails principal) {
+        Long userId = principal.getUser().getUserId();
+        List<MyProjectDto> result = projectService.findProjectsByCreator(userId);
+        return ResponseEntity.ok(result);
+    }
 
 }

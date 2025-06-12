@@ -1,5 +1,6 @@
 package com.example.demo.project.restcontroller;
 
+import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.project.dto.ProjectCreateRequestDto;
 import com.example.demo.project.dto.ProjectResponseDto;
 import com.example.demo.project.entity.Project;
@@ -24,11 +25,15 @@ public class ProjectController {
 
     // ✅ 프로젝트 생성
     @PostMapping
-    public ResponseEntity<ProjectResponseDto> create(@RequestBody ProjectCreateRequestDto dto) {
-        System.out.println("📦 받은 데이터: " + dto); // 디버깅 로그
-        Project created = projectService.create(dto);
+    public ResponseEntity<ProjectResponseDto> create(
+            @RequestBody ProjectCreateRequestDto dto,
+            @AuthenticationPrincipal PrincipalDetails principal
+    ) {
+        Long userId = principal.getUser().getUserId(); // 로그인한 유저 ID 가져오기
+        Project created = projectService.create(dto, userId);
         return ResponseEntity.ok(projectService.toDto(created));
     }
+
 
     // ✅ 전체 프로젝트 목록 조회
     @GetMapping

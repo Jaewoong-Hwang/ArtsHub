@@ -20,9 +20,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**")
+        registry.addResourceHandler("/img/profile/**")
                 .addResourceLocations("file:///C:/upload/profile/")
-                .setCacheControl(CacheControl.noStore());// 캐시 완전 방지
+                .setCacheControl(CacheControl.noStore());
 
+        registry.addResourceHandler("/img/thumbnail/**")
+                .addResourceLocations("file:///C:/upload/thumbnail/")
+                .setCacheControl(CacheControl.noStore());
     }
 }

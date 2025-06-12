@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const { user } = useAuth();
   const isLogin = !!user;
-  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img/profile";
 
   const profileImage = user?.profileImage;
   const isHttpUrl = profileImage?.startsWith("http");
@@ -25,6 +25,18 @@ const Header = () => {
   const menuRef = useRef(null);
 
   const navigate = useNavigate();
+
+    // 역할 따라 경로 이동
+  const handleMyPageClick = () => {
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else if (user.role === "ROLE_EXPERT") {
+      navigate("/ProjectManage");
+    } else {
+      navigate("/UserInforead");
+    }
+  };
 
   const handleProjectCreateClick = () => {
     if (!user) {
@@ -104,7 +116,7 @@ const Header = () => {
             />
             {menuOpen && (
               <div className="dropdown-menu">
-                <Link to="/UserInforead">내 정보</Link>
+                <button onClick={handleMyPageClick}>내 정보</button>
                 <LogoutButton />
               </div>
             )}

@@ -72,15 +72,19 @@ const UserInfoupdate = () => {
         uploadData.append("file", imageFile);
 
         const res = await axiosInstance.post(
-          "/api/mypage/upload-profile",
+          "/api/file/upload/profile",
           uploadData,
           {
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
           }
         );
-        uploadedFileName = res.data.profileImage;
-        await refreshUser();
+        uploadedFileName = res.data.fileName;
+        await refreshUser(); // 백엔드에서 새로 가져오기
+        setUser((prev) => ({
+          ...prev,
+          profileImage: uploadedFileName, 
+        }));
       }
 
       await axiosInstance.put("/api/mypage/update", {
@@ -95,7 +99,7 @@ const UserInfoupdate = () => {
         formData.interests
       );
 
-      alert("수정 완료!");
+
       navigate("/UserInforead");
     } catch (err) {
       console.error("수정 실패", err);
@@ -103,7 +107,7 @@ const UserInfoupdate = () => {
     }
   };
 
-  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img/profile";
 
   const isHttpUrl = formData.profileImage?.startsWith("http");
   const isDefault =
@@ -115,13 +119,13 @@ const UserInfoupdate = () => {
     ? "/img/default.png"
     : `${SPRING_IMAGE_BASE_URL}/${formData.profileImage}`;
 
-const mainProfileImageSrc = previewUrl
-  ? previewUrl
-  : isHttpUrl
-  ? formData.profileImage
-  : isDefault
-  ? "/img/default.png"
-  : `${SPRING_IMAGE_BASE_URL}/${formData.profileImage}`;
+  const mainProfileImageSrc = previewUrl
+    ? previewUrl
+    : isHttpUrl
+    ? formData.profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${formData.profileImage}`;
 
   return (
     <>

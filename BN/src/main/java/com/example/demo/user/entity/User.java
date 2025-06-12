@@ -1,11 +1,15 @@
 package com.example.demo.user.entity;
 
 import com.example.demo.interest.entity.Interest;
+import com.example.demo.project.entity.Project;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -53,6 +57,11 @@ public class User {
 	@Column(name = "address", length = 255)
 	private String address;
 
+	@OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	private List<Project> createdProjects = new ArrayList<>();
+
+
 
 
 	@ManyToMany
@@ -73,4 +82,6 @@ public class User {
 	public void onUpdate() {
 		this.updateAt = LocalDateTime.now();
 	}
+
+
 }

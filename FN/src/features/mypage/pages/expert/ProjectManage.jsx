@@ -1,36 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../../../../assets/styles/reset.css';
-import sidemenuStyles from "../css/expert/SidemenuExpert.module.css"; 
-import styles from '../css/expert/ProjectManage.module.css';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "../../../../assets/styles/reset.css";
+import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";
+import styles from "../css/expert/ProjectManage.module.css";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
-import { useAuth } from '../../../auth/context/AuthContext'; // ✅ 추가
-
-const projects = [
-  {
-    id: '0000001',
-    title: '여기가 어딘가요<기억상실>',
-    goal: 20,
-    current: 5,
-    status: 'RECRUITING',
-  },
-  {
-    id: '0000002',
-    title: '나는 누구인가<기억삭제>',
-    goal: 10,
-    current: 10,
-    status: 'RECRUIT_PENDING',
-  },
-];
+import { useAuth } from "../../../auth/context/AuthContext"; // ✅ 추가
 
 const ProjectManage = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { user } = useAuth(); // ✅ 사용자 정보 가져오기
+  const { user, refreshUser } = useAuth();
+  const [projects, setProjects] = useState([]);
 
-  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img/profile";
   const profileImage = user?.profileImage;
   const isHttp = profileImage?.startsWith("http");
   const isDefault = !profileImage || profileImage === "default.png";
@@ -40,6 +25,19 @@ const ProjectManage = () => {
     : isDefault
     ? "/img/default.png"
     : `${SPRING_IMAGE_BASE_URL}/${profileImage}`;
+
+  const fetchUserInfo = async () => {
+    try {
+      const res = await axios.get("/api/mypage/me", {
+        withCredentials: true,
+      });
+      setOpenDropdown(res.data);
+      console.log("현재 role:", res.data.role);
+    } catch (err) {
+      console.error("유저 정보 불러오기 실패:", err);
+      setError("로그인이 필요합니다.");
+    }
+  };
 
   const toggleDropdown = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
@@ -57,14 +55,29 @@ const ProjectManage = () => {
         {},
         { withCredentials: true }
       );
-      
+      await refreshUser();
+      await fetchUserInfo();
       navigate("/UserInforead");
     } catch (err) {
-      const message =
-        err.response?.data?.message || err.response?.data || "서버 오류";
+      const message = err.response?.data?.message || err.response?.data || "서버 오류";
       alert("전환 실패: " + message);
     }
   };
+
+  useEffect(() => {
+    const fetchMyProjects = async () => {
+      try {
+        const res = await axios.get("/api/mypage/my-projects", {
+          withCredentials: true,
+        });
+        setProjects(res.data);
+      } catch (err) {
+        console.error("프로젝트 목록 불러오기 실패:", err);
+      }
+    };
+
+    fetchMyProjects();
+  }, []);
 
   return (
     <>
@@ -94,16 +107,32 @@ const ProjectManage = () => {
             <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
               <Link to="/ProjectManage">프로젝트 관리</Link>
               <ul className={sidemenuStyles.submenu}>
-                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">전체</Link></li>
-                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집중</Link></li>
-                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectManage">모집 종료</Link></li>
-                <li className={sidemenuStyles["submenu-item"]}><Link to="/ProjectApplicationManage">참여요청</Link></li>
+                <li className={sidemenuStyles["submenu-item"]}>
+                  <Link to="/ProjectManage">전체</Link>
+                </li>
+                <li className={sidemenuStyles["submenu-item"]}>
+                  <Link to="/ProjectManage">모집중</Link>
+                </li>
+                <li className={sidemenuStyles["submenu-item"]}>
+                  <Link to="/ProjectManage">모집 종료</Link>
+                </li>
+                <li className={sidemenuStyles["submenu-item"]}>
+                  <Link to="/ProjectApplicationManage">참여요청</Link>
+                </li>
               </ul>
             </li>
-            <li className={sidemenuStyles["menu-item"]}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
-            <li className={sidemenuStyles["menu-item"]}><Link to="/ProfitHistory">수익 관리</Link></li>
-            <li className={sidemenuStyles["menu-item"]}><Link to="/ExpertProfile">프로필</Link></li>
-            <li className={sidemenuStyles["menu-item"]}><Link to="/logout">로그아웃</Link></li>
+            <li className={sidemenuStyles["menu-item"]}>
+              <Link to="/Myprojectrequest">내가 신청한 프로젝트</Link>
+            </li>
+            <li className={sidemenuStyles["menu-item"]}>
+              <Link to="/ProfitHistory">수익 관리</Link>
+            </li>
+            <li className={sidemenuStyles["menu-item"]}>
+              <Link to="/ExpertProfile">프로필</Link>
+            </li>
+            <li className={sidemenuStyles["menu-item"]}>
+              <Link to="/logout">로그아웃</Link>
+            </li>
           </ul>
         </div>
 
@@ -115,36 +144,48 @@ const ProjectManage = () => {
               <div className={styles.projectCard} key={project.id}>
                 <div className={styles.projectThumbnail}>
                   <a href="#">
-                    <img src="/static/img/마임의 세계.webp" alt="썸네일" />
+                    <img
+                      src={`http://localhost:8090/img/thumbnail/${project.thumbnail}`}
+                      alt="썸네일"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "/static/assets/img/default-thumbnail.png";
+                      }}
+                    />
                   </a>
                 </div>
 
                 <div className={styles.projectInfo}>
                   <p className={styles.projectId}>#{project.id}</p>
                   <p className={styles.projectTitle}>{project.title}</p>
-                  <p className={styles.projectGoal}>모집인원 : {project.goal}명</p>
-                  <p className={styles.projectSupporter}>현재 멤버 : {project.current}명</p>
+                  <p className={styles.projectGoal}>모집인원 : {project.capacity}명</p>
+                  <p className={styles.projectSupporter}>현재 멤버 : {project.currentMembers}명</p>
                   <div className={styles.status}>
-                    <button className={`${styles.statusBtn} ${styles[project.status]}`}>
-                      {project.status === 'RECRUITING' ? '모집중' : '모집종료'}
+                    <button
+                      className={`${styles.statusBtn} ${styles[project.status]}`}
+                    >
+                      {project.status === "RECRUITING" ? "모집중" : "모집종료"}
                     </button>
                   </div>
                 </div>
 
                 <div className={styles.editDropdown}>
-                  <button className={styles.editButton} onClick={() => toggleDropdown(index)}>
+                  <button
+                    className={styles.editButton}
+                    onClick={() => toggleDropdown(index)}
+                  >
                     서비스 편집
                   </button>
 
                   {openDropdown === index && (
                     <ul className={styles.dropdownMenu}>
-                      {project.status === 'RECRUITING' ? (
-                        <li onClick={() => handleSelect('end', project.id)}>모집 종료</li>
+                      {project.status === "RECRUITING" ? (
+                        <li onClick={() => handleSelect("end", project.id)}>모집 종료</li>
                       ) : (
-                        <li onClick={() => handleSelect('start', project.id)}>모집 진행</li>
+                        <li onClick={() => handleSelect("start", project.id)}>모집 진행</li>
                       )}
-                      <li onClick={() => handleSelect('edit', project.id)}>편집</li>
-                      <li onClick={() => handleSelect('delete', project.id)}>삭제</li>
+                      <li onClick={() => handleSelect("edit", project.id)}>편집</li>
+                      <li onClick={() => handleSelect("delete", project.id)}>삭제</li>
                     </ul>
                   )}
                 </div>

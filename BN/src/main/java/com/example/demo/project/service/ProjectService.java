@@ -28,7 +28,7 @@ public class ProjectService {
      * 프로젝트 생성
      */
     @Transactional
-    public Project create(ProjectCreateRequestDto dto) {
+    public Project create(ProjectCreateRequestDto dto, Long userId) {
         Project project = toEntity(dto);
 
         //  슬러그 중복 방지 처리
@@ -43,6 +43,10 @@ public class ProjectService {
         project.setViews(0);
         project.setCreatedAt(LocalDateTime.now());
         project.setStatus("모집중"); // ✅ 상태 초기화
+
+        User creator = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자 없음"));
+        project.setCreator(creator);
 
         return projectRepository.save(project);
     }
@@ -302,5 +306,16 @@ public class ProjectService {
     private ProjectResponseDto convertToDto(Project project) {
         return convertToDto(project, false);
     }
+
+
+    public List<MyProjectDto> findProjectsByCreator(Long userId) {
+        List<Project> projects = projectRepository.findByCreatorUserId(userId);
+
+        return projects.stream()
+                .map(MyProjectDto::from)
+                .collect(Collectors.toList());
+    }
+
+
 
 }

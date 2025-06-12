@@ -87,7 +87,7 @@ public class SecurityConfig {
 			auth.requestMatchers("/api/mypage/convert-to-expert").permitAll();
 
 			//  일반 유저 or 전문가 접근 가능
-			auth.requestMatchers("/api/mypage/**").hasAnyRole("USER", "EXPERT");
+			auth.requestMatchers("/api/mypage/**", "/api/file/**").hasAnyRole("USER", "EXPERT");
 
 			//  관리자 전용
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
@@ -164,7 +164,7 @@ public class SecurityConfig {
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().requestMatchers(
-				"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico"
+				"/img/**", "/img/thumbnail/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico"
 		);
 	}
 

@@ -4,7 +4,9 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../../features/auth/context/AuthContext"; // 사용자 정보 가져오는 훅
 
 const ExpertRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+    if (loading) return <div>로딩 중...</div>;
 
   if (!user) {
     alert("로그인이 필요합니다.");

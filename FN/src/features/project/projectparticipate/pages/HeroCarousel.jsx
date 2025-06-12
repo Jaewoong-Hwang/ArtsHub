@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 import "../../../../assets/styles/reset.css";
 import styles from "./css/HeroCarousel.module.css";
 
@@ -10,7 +10,7 @@ const HeroCarousel = ({ slides }) => {
   const isHoveredRef = useRef(false);
   const visibleCount = 3;
 
-  const navigate = useNavigate(); // ✅ 추가
+  const navigate = useNavigate();
 
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % slides.length);
@@ -56,6 +56,8 @@ const HeroCarousel = ({ slides }) => {
           style={{ transform: `translateX(-${current * (100 / visibleCount)}%)` }}
         >
           {slides.map((slide, index) => {
+
+             console.log("🔍 slide 구조:", slide);
             const centerIndex = (current + 1) % slides.length;
             const isHovered = hoveredIndex !== null;
             const isThisHovered = hoveredIndex === index;
@@ -68,6 +70,16 @@ const HeroCarousel = ({ slides }) => {
               slideClass += ` ${index === centerIndex ? styles.center : styles.compressed}`;
             }
 
+            // ✅ 이미지 우선순위 결정
+            const imageSrc =
+              slide.previewUrl?.startsWith("data:image") // slide에 직접 있는 경우
+                ? slide.previewUrl
+                : slide.description?.previewUrl?.startsWith("data:image") // description 안에 있는 경우
+                  ? slide.description.previewUrl
+                  : slide.image || "/static/assets/img/default-thumbnail.png";
+
+            console.log("🔍 최종 이미지 src:", imageSrc);
+
             return (
               <div
                 key={slide.id}
@@ -76,13 +88,20 @@ const HeroCarousel = ({ slides }) => {
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => {
                   if (slide.slug) navigate(`/project/${slide.slug}`);
-                }} // ✅ 클릭 시 이동
-                style={{ cursor: slide.slug ? "pointer" : "default" }} // ✅ 시각 피드백
+                }}
+                style={{ cursor: slide.slug ? "pointer" : "default" }}
               >
-                <img src={slide.image} alt={slide.title} />
+                <img
+                  src={imageSrc}
+                  alt={slide.title}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/static/assets/img/default-thumbnail.png";
+                  }}
+                />
                 <div className={styles.overlay}>
                   <h3>{slide.title}</h3>
-                  <p>{slide.description}</p>
+                  <p>{slide.descriptionSummary ?? "프로젝트 소개"}</p>
                   {slide.subtext && <p className={styles.subtext}>{slide.subtext}</p>}
                 </div>
               </div>

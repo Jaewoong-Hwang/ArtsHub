@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useScrollFadeIn from "../hooks/useScrollFadeIn";
 import styles from "./css/ProjectCard.module.css";
@@ -6,6 +6,19 @@ import styles from "./css/ProjectCard.module.css";
 const ProjectCard = ({ project, index }) => {
   const [ref, visible, style] = useScrollFadeIn(index * 0.1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("🧾 project 데이터 확인:", project);
+  }, [project]);
+
+  // 🔍 콘솔로 이미지 경로 확인
+  const imgSrc =
+    project.thumbnail ||
+    project.image ||
+    project.description?.previewUrl ||
+    "/static/assets/img/default-thumbnail.png";
+
+  console.log(`[${project.title}] imgSrc:`, imgSrc?.substring(0, 100));
 
   const handleClick = () => {
     if (!project?.slug) {
@@ -47,18 +60,21 @@ const ProjectCard = ({ project, index }) => {
     >
       {/* 🔹 이미지 썸네일 */}
       <figure className={styles.thumbnailWrapper}>
-        {isClosed && <div className={styles.closedBadge}>모집 마감</div>} {/* ✅ 마감 배지 */}
+        {isClosed && <div className={styles.closedBadge}>모집 마감</div>}{" "}
+        {/* ✅ 마감 배지 */}
         <img
           className={styles.projectImage}
           src={
-            project.thumbnail ||
-            project.image ||
-            project.description?.previewUrl ||
-            "/static/assets/img/default-thumbnail.jpg"
+            project.description?.previewUrl?.startsWith("data:image")
+              ? project.description.previewUrl
+              : project.thumbnail ||
+                project.image ||
+                "/static/assets/img/default-thumbnail.png"
           }
           alt={project.title || "프로젝트 이미지"}
           onError={(e) => {
-            e.target.src = "/static/assets/img/default-thumbnail.jpg";
+            e.target.onerror = null;
+            e.target.src = "/static/assets/img/default-thumbnail.png";
           }}
         />
       </figure>
@@ -73,9 +89,7 @@ const ProjectCard = ({ project, index }) => {
           {project.genre || project.category || "기타"}
         </div>
 
-        <h3 className={styles.projectTitle}>
-          {project.title ?? "제목 없음"}
-        </h3>
+        <h3 className={styles.projectTitle}>{project.title ?? "제목 없음"}</h3>
 
         <p className={styles.projectSummary}>
           {project.descriptionSummary ??

@@ -67,4 +67,9 @@ public class Project {
     // Project.java 내부에 추가
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectParticipant> participants;
+
+
+    public int getCurrentMembers() {
+        return participants != null ? participants.size() : 0;
+    }
 }

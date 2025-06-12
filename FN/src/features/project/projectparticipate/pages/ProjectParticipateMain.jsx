@@ -86,13 +86,14 @@ const ProjectParticipateMain = () => {
           description: p.descriptionSummary || "설명이 없습니다.",
           subtext: p.category || "기타",
           image: p.image,
+          previewUrl: p.description?.previewUrl,
           slug: p.slug,
         }));
 
         // ✅ 부족한 경우 fallbackSlides로 채우기
         const mergedSlides = [
           ...selectedSlides,
-          ...fallbackSlides.slice(0, 3 - selectedSlides.length),
+          ...fallbackSlides.slice(0, 6 - selectedSlides.length),
         ];
 
         setSlides(mergedSlides);

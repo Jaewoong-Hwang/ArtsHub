@@ -1,5 +1,6 @@
 package com.example.demo.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,7 @@ public class ProjectResponseDto {
     private ProjectDescriptionDto description;
     private List<RewardDto> rewards;
     private String status;
+    private int currentMembers;
+    @JsonProperty("joined")
+    private boolean joined;
 }

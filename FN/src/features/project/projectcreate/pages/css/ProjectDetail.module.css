@@ -114,3 +114,19 @@
   font-size: 1.25rem;
   color: crimson;
 }
+
+.btnApply {
+  background-color: #2ecc71;
+  color: white;
+  margin-left: 1rem;
+}
+
+.btnApply:hover {
+  background-color: #27ae60;
+}
+
+.btnApply:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+

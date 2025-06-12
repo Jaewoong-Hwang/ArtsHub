@@ -111,6 +111,11 @@ public class ProjectService {
         dto.setDescriptionSummary(project.getDescriptionSummary());
         dto.setStatus(project.getStatus());
 
+        // ✅ 현재 참가자 수 계산 (participantRepository 이용하거나 엔티티로부터 직접 size 구하기)
+        int currentMembers = project.getParticipants() != null ? project.getParticipants().size() : 0;
+        dto.setCurrentMembers(currentMembers);
+
+        // 설명 매핑
         ProjectDescriptionDto descDto = new ProjectDescriptionDto();
         descDto.setSummary(project.getDescription().getSummary());
         descDto.setContent(project.getDescription().getContent());
@@ -121,6 +126,7 @@ public class ProjectService {
         descDto.setCompensation(project.getDescription().getCompensation());
         dto.setDescription(descDto);
 
+        // 리워드 매핑
         List<RewardDto> rewardDtos = project.getRewards().stream().map(r -> {
             RewardDto rd = new RewardDto();
             rd.setTitle(r.getTitle());
@@ -139,6 +145,25 @@ public class ProjectService {
         }).collect(Collectors.toList());
 
         dto.setRewards(rewardDtos);
+
+        return dto;
+    }
+
+
+
+
+
+    public ProjectResponseDto toDto(Project project, User user) {
+        ProjectResponseDto dto = toDto(project); // 기본 정보 설정
+
+        // ✅ 사용자 참여 여부 설정
+        if (user != null) {
+            boolean joined = participantRepository.existsByUserAndProject(user, project);
+            dto.setJoined(joined);
+        } else {
+            dto.setJoined(false);
+        }
+
         return dto;
     }
 
@@ -188,4 +213,94 @@ public class ProjectService {
         project.setRewards(rewards);
         return project;
     }
+
+    public boolean hasUserJoined(String slug, String email) {
+        Project project = projectRepository.findBySlug(slug)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 프로젝트입니다."));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        return participantRepository.existsByUserAndProject(user, project);
+    }
+
+    @Transactional
+    public String leaveProject(String slug, String email) {
+        Project project = projectRepository.findBySlug(slug)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 프로젝트입니다."));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        ProjectParticipant participant = participantRepository.findByUserAndProject(user, project)
+                .orElseThrow(() -> new IllegalArgumentException("참여 기록이 없습니다."));
+
+        participantRepository.delete(participant);
+
+        // ✅ 만약 마감된 상태인데 참여자가 줄어들면 다시 모집중으로 변경
+        long currentCount = participantRepository.countByProject(project);
+        if (project.getStatus().equals("마감") && currentCount < project.getCapacity()) {
+            project.setStatus("모집중");
+        }
+
+        return "참여가 취소되었습니다.";
+    }
+
+
+    private ProjectResponseDto convertToDto(Project project, boolean isJoined) {
+        return new ProjectResponseDto(
+                project.getId(),
+                project.getTitle(),
+                project.getSlug(),
+                project.getGenre(),
+                project.getCapacity(),
+                project.getDeadline().toString(),
+                project.getThumbnail(),
+                project.getDescriptionSummary(),
+                // ➕ 상세 설명
+                new ProjectDescriptionDto(
+                        project.getDescription().getSummary(),
+                        project.getDescription().getContent(),
+                        project.getDescription().getPreviewUrl(),
+                        project.getDescription().getBackground(),
+                        project.getDescription().getRoles(),
+                        project.getDescription().getSchedule(),
+                        project.getDescription().getCompensation()
+                ),
+                // ➕ 리워드 목록
+                project.getRewards().stream().map(reward ->
+                        new RewardDto(
+                                reward.getTitle(),
+                                reward.getPrice(),
+                                reward.getDescription(),
+                                reward.getRewardOptions() != null
+                                        ? reward.getRewardOptions().stream().map(opt ->
+                                                new RewardOptionDto(opt.getOptionName(), opt.getOptionValues()))
+                                        .toList()
+                                        : null
+                        )
+                ).toList(),
+                project.getStatus(),
+                project.getCurrentMembers(),
+                isJoined
+        );
+    }
+
+    public ProjectResponseDto findBySlug(String slug, Long userId) {
+        Project project = projectRepository.findBySlug(slug)
+                .orElseThrow(() -> new RuntimeException("해당 프로젝트 없음"));
+
+        ProjectResponseDto dto = convertToDto(project);
+
+        // ✅ 참여 여부 체크
+        boolean isJoined = false;
+        if (userId != null) {
+            isJoined = participantRepository.existsByProject_IdAndUser_UserId(project.getId(), userId);
+        }
+
+        return convertToDto(project, isJoined);
+    }
+
+    private ProjectResponseDto convertToDto(Project project) {
+        return convertToDto(project, false);
+    }
+
 }

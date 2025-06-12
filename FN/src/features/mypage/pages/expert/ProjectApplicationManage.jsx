@@ -5,9 +5,22 @@ import styles from '../css/expert/ProjectApplicationManage.module.css';
 import sidemenuStyles from '../css/expert/SidemenuExpert.module.css';
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
+import { useAuth } from '../../../auth/context/AuthContext'; // ✅ 추가
 
 const ProjectApplicationManage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user } = useAuth(); // ✅ 사용자 정보
+
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const profileImage = user?.profileImage;
+  const isHttp = profileImage?.startsWith("http");
+  const isDefault = !profileImage || profileImage === "default.png";
+
+  const profileImageSrc = isHttp
+    ? profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${profileImage}`;
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -30,11 +43,11 @@ const ProjectApplicationManage = () => {
         <div className={sidemenuStyles.sidebar_menu}>
           <div className={sidemenuStyles.profile}>
             <img
-              src="/static/img/apple.png"
+              src={profileImageSrc}
               alt="프로필 이미지"
               className={sidemenuStyles["profile-img"]}
             />
-            <p className={sidemenuStyles.nickname}>닉네임</p>
+            <p className={sidemenuStyles.nickname}>{user?.nickname || "닉네임"}</p>
           </div>
 
           <Link to="/UserInforead" className={sidemenuStyles.change}>

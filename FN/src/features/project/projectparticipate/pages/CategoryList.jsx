@@ -16,18 +16,18 @@ import fusionImg from "../../../../assets/images/categories/fusion_icon.png";
 import performanceImg from "../../../../assets/images/categories/performance_icon.png";
 
 const categories = [
-  { name: "뮤지컬", img: musicalImg },
-  { name: "연극", img: dramaImg },
-  { name: "클래식", img: classicImg },
-  { name: "국악", img: gugakImg },
-  { name: "어린이", img: kidsImg },
-  { name: "밴드", img: bandImg },
-  { name: "무용", img: danceImg },
-  { name: "재즈", img: jazzImg },
-  { name: "인디", img: indieImg },
-  { name: "오페라", img: operaImg },
-  { name: "퓨전", img: fusionImg },
-  { name: "퍼포먼스", img: performanceImg },
+  { name: "뮤지컬", emoji: "🎭" },
+  { name: "연극", emoji: "🎬" },
+  { name: "클래식", emoji: "🎻" },
+  { name: "국악", emoji: "🥁" },
+  { name: "어린이", emoji: "👶" },
+  { name: "밴드", emoji: "🎸" },
+  { name: "무용", emoji: "🩰" },
+  { name: "재즈", emoji: "🎷" },
+  { name: "인디", emoji: "🎤" },
+  { name: "오페라", emoji: "🎼" },
+  { name: "퓨전", emoji: "🧙" },
+  { name: "퍼포먼스", emoji: "🕺" },
 ];
 
 const CategoryList = ({ onCategorySelect, selectedCategory }) => {

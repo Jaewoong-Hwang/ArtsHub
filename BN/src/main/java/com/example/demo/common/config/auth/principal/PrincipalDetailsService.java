@@ -30,8 +30,10 @@ public class PrincipalDetailsService implements UserDetailsService{
 			throw new UsernameNotFoundException(username + " 존재하지 않는 계정입니다.");
 
 		//entity-> dto
-		UserDto userDto = UserDto.toDto( userOption.get()    );
-		return new PrincipalDetails(userDto);
+//		UserDto userDto = UserDto.toDto( userOption.get()    );
+//		return new PrincipalDetails(userDto);
+		User user = userOption.get();
+		return new PrincipalDetails(user);
 	}
 
 }

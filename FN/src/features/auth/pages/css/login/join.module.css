@@ -89,6 +89,13 @@ hr {
   font-size: 16px;
 }
 
+.verification{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
 
 
 h6 {

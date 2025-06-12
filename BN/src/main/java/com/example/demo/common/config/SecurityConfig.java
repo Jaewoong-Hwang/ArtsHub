@@ -68,7 +68,7 @@ public class SecurityConfig {
 		//권한체크
 		http.authorizeHttpRequests((auth) -> {
 			auth.requestMatchers(
-					"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico",
+//					"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico",
 					"/api/login",
 					"/api/join",
 					"/api/user/me",
@@ -78,10 +78,11 @@ public class SecurityConfig {
 					"/api/grants/",
 					"/api/grants/preview",
 					"/api/grants/**"  // ✅ 추가된 부분
-			).permitAll();
-
-			auth.requestMatchers("/api/user").hasRole("USER");
-			auth.requestMatchers("/api/manager").hasRole("MANAGER");
+					"/api/verify-code", "/api/send-verification",
+					"/api/send-email-code", "/api/verify-email-code",
+					"/api/mypage/convert-to-expert",
+					"/api/interests/**").permitAll();
+			auth.requestMatchers("/api/mypage/**").hasAnyRole("USER", "EXPERT");
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");
 
 			auth.anyRequest().authenticated();
@@ -152,12 +153,12 @@ public class SecurityConfig {
 	}
 
 
-//	@Bean
-//	public WebSecurityCustomizer webSecurityCustomizer() {
-//		return (web) -> web.ignoring().requestMatchers(
-//				"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico"
-//		);
-//	}
+	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return (web) -> web.ignoring().requestMatchers(
+				"/img/**", "/css/**", "/js/**", "/static/**", "/assets/**", "/favicon.ico"
+		);
+	}
 
 
 }

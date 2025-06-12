@@ -6,6 +6,7 @@ import com.example.demo.common.config.auth.provider.KakaoUserInfo;
 import com.example.demo.common.config.auth.provider.NaverUserinfo;
 import com.example.demo.common.config.auth.provider.OAuth2UserInfo;
 import com.example.demo.user.dto.UserDto;
+import com.example.demo.user.entity.Role;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.user.util.RandomNicknameGenerator;
@@ -107,7 +108,7 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService {
                     .nickname(RandomNicknameGenerator.generate())
                     .phoneNumber("010-0000-0000") // 소셜에서는 없으므로 기본값
                     .profileImage(oAuth2UserInfo.getProfileImage() != null ? oAuth2UserInfo.getProfileImage() : "default.jpg")
-                    .role("ROLE_USER")
+                    .role(Role.ROLE_USER)
                     .build();
             User user = userDto.toEntity();
             userRepository.save(user); //계정 등록

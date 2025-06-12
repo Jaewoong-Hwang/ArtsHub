@@ -5,8 +5,24 @@ import styles from '../../css/user/question/QuestionList.module.css';
 import sidebarStyles from '../../css/user/SidemenuUser.module.css';
 import Header from '../../../../../components/layout/Header';
 import Footer from '../../../../../components/layout/Footer';
+import { useAuth } from '../../../../auth/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionList = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const profileImage = user?.profileImage;
+  const isHttp = profileImage?.startsWith("http");
+  const isDefault = !profileImage || profileImage === "default.png";
+
+  const profileImageSrc = isHttp
+    ? profileImage
+    : isDefault
+    ? "/img/default.png"
+    : `${SPRING_IMAGE_BASE_URL}/${profileImage}`;
+
   return (
     <>
       <Header />
@@ -15,11 +31,11 @@ const QuestionList = () => {
         <div className={sidebarStyles["sidebarMenu"]}>
           <div className={sidebarStyles["profile"]}>
             <img
-              src="/static/img/apple.png"
+              src={profileImageSrc}
               alt="프로필 이미지"
               className={sidebarStyles["profileImg"]}
             />
-            <p className={sidebarStyles["nickname"]}>닉네임</p>
+            <p className={sidebarStyles["nickname"]}>{user?.nickname || "닉네임"}</p>
           </div>
 
           <Link to="/FundingManage" className={sidebarStyles["change"]}>
@@ -60,7 +76,7 @@ const QuestionList = () => {
             <div className={styles["question-card"]}>
               <div className={styles["question-info"]}>
                 <p className={styles["question-title"]}>
-                  <a href="/pages/buyer/question/read.html">아츠허브가 뭔가요?</a>
+                  <a href="/QuestionRead">아츠허브가 뭔가요?</a>
                 </p>
                 <p className={styles["question-date"]}>2025.05.05</p>
               </div>
@@ -71,7 +87,7 @@ const QuestionList = () => {
             <div className={styles["question-card"]}>
               <div className={styles["question-info"]}>
                 <p className={styles["question-title"]}>
-                  <a href="/pages/buyer/question/read.html">뭐냐구요 아츠허브</a>
+                  <a href="/QuestionRead">뭐냐구요 아츠허브</a>
                 </p>
                 <p className={styles["question-date"]}>2025.05.05</p>
               </div>
@@ -80,7 +96,7 @@ const QuestionList = () => {
           </div>
 
           <div className={styles["question-button"]}>
-            <button onClick={() => (window.location.href = './write.html')}>
+            <button onClick={() => navigate('/QuestionWrite')}>
               문의 하기
             </button>
           </div>

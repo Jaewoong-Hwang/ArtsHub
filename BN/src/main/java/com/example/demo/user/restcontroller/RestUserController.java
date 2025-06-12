@@ -6,11 +6,13 @@ import com.example.demo.common.config.auth.jwt.TokenInfo;
 import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.common.config.auth.redis.RedisUtil;
 import com.example.demo.user.dto.UserDto;
+import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.user.util.RandomNicknameGenerator;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URLEncoder;
@@ -103,6 +106,7 @@ public class RestUserController {
                     "name", userDto.getName(),
                     "nickname", userDto.getNickname(),
                     "phoneNumber", userDto.getPhoneNumber(),
+                    "address", userDto.getAddress(),
                     "profile_image", userDto.getProfileImage(),
                     "role", userDto.getRole()
             ));
@@ -113,8 +117,24 @@ public class RestUserController {
 
     // 회원가입 요청 처리 (React의 axios.post("/api/join"))
     @PostMapping("/api/join")
-    public ResponseEntity<?> join(@RequestBody UserDto dto) {
+    public ResponseEntity<?> join(@Valid @RequestBody UserDto dto, BindingResult bindingResult) {
         log.info("회원가입 요청: {}", dto);
+
+        if (bindingResult.hasErrors()) {
+            String errorMsg = bindingResult.getFieldError().getDefaultMessage();
+            return ResponseEntity.badRequest().body(Map.of("message", errorMsg));
+        }
+
+        if (bindingResult.hasErrors()) {
+            String errorMsg = bindingResult.getFieldError().getDefaultMessage();
+            return ResponseEntity.badRequest().body(Map.of("message", errorMsg));
+        }
+
+        // 아이디 중복 체크
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Map.of("message", "이미 존재하는 아이디입니다."));
+        }
 
         // 랜덤 닉네임 지정
         if (dto.getNickname() == null || dto.getNickname().isBlank()) {
@@ -124,6 +144,10 @@ public class RestUserController {
         // 비밀번호 암호화
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(dto.toEntity());
+
+        //엔티티로 변환 db에 저장될 객체 내용 출력
+        User user = dto.toEntity();
+        log.info("저장될 User 엔티티: {}", user);
 
         return ResponseEntity.ok(Map.of("message", "회원가입 완료"));
     }

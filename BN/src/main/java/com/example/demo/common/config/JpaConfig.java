@@ -21,11 +21,14 @@ import java.util.Properties;
         "com.example.demo.project.entity",
         "com.example.demo.grant.entity" // ✅ 추가
 })
+  
 @EnableJpaRepositories(
         basePackages = {
                 "com.example.demo.user.repository",
                 "com.example.demo.project.repository",
                 "com.example.demo.grant.repository" // ✅ 추가
+                "com.example.demo.interest.repository"
+
         },
         transactionManagerRef = "jpaTransactionManager"
 )
@@ -42,6 +45,7 @@ public class JpaConfig {
                 "com.example.demo.user.entity",
                 "com.example.demo.project.entity",
                 "com.example.demo.grant.entity"
+                "com.example.demo.interest.entity"
         );
 
         Properties jpaProperties = new Properties();

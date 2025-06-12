@@ -211,13 +211,18 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String uri = request.getRequestURI();
-        boolean excluded = uri.startsWith("/img/") ||
-                uri.matches("(?i)^/(css|js|static|assets)/.*") ||
+        boolean excluded = uri.matches("(?i)^/(img|css|js|static|assets)/.*") ||  // ✅ 정규식 처리
                 uri.equalsIgnoreCase("/favicon.ico") ||
                 uri.startsWith("/api/login") ||
                 uri.startsWith("/api/join") ||
                 uri.startsWith("/api/check-email") ||
+                uri.startsWith("/api/verify-code") ||
+                uri.startsWith("/api/send-verification") ||
+                uri.startsWith("/api/send-email-code") ||
+                uri.startsWith("/api/verify-email-code") ||
+                uri.startsWith("/api/interests") ||  //  "/**" 대신 정확한 경로
                 uri.startsWith("/error");
+
         log.debug("[JWT FILTER] shouldNotFilter: {} - {}", excluded, uri);
         return excluded;
     }

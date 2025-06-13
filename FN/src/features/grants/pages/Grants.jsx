@@ -60,7 +60,7 @@ const Grants = () => {
     <>
       <Header />
       <div className={styles.grantsPage}>
-        <h2 className={styles.grantsTitle}>🎯 Arts Funding Opportunities</h2>
+        <h2 className={styles.grantsTitle}>공모사업</h2>
 
         <SearchBar onSearch={handleSearch} />
 

@@ -84,10 +84,10 @@ public class SecurityConfig {
 			auth.requestMatchers("/api/projects", "/api/projects/**").hasRole("EXPERT");
 
 			//  전문가 권한 전환은 누구나 가능해야 하므로 permitAll 유지
-			auth.requestMatchers("/api/mypage/convert-to-expert").permitAll();
+			//  auth.requestMatchers("/api/mypage/convert-to-expert").permitAll();
 
 			//  일반 유저 or 전문가 접근 가능
-			auth.requestMatchers("/api/mypage/**", "/api/file/**").hasAnyRole("USER", "EXPERT");
+			auth.requestMatchers("/api/mypage/**", "/api/file/**" ,"/api/mypage/convert-to-expert").hasAnyRole("USER", "EXPERT");
 
 			//  관리자 전용
 			auth.requestMatchers("/api/admin").hasRole("ADMIN");

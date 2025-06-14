@@ -191,4 +191,15 @@ public class MypageController {
         return ResponseEntity.ok(result);
     }
 
+
+
+
+    @DeleteMapping("/projects/{projectId}")
+    public ResponseEntity<?> deleteMyProject(@PathVariable Long projectId,
+                                             @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Long userId = principalDetails.getUser().getUserId();
+        projectService.deleteProjectByOwner(projectId, userId);
+        return ResponseEntity.ok("삭제 완료");
+    }
+
 }

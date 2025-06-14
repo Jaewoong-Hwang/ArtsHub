@@ -1,9 +1,11 @@
 package com.example.demo.project.entity;
 
+import com.example.demo.project.dto.ProjectResponseDto;
 import com.example.demo.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
@@ -13,6 +15,7 @@ import java.util.regex.Pattern;
 @Entity
 @Data
 @Cacheable
+@ToString(exclude = "creator")
 public class Project {
 
     @Id
@@ -79,4 +82,6 @@ public class Project {
     public int getCurrentMembers() {
         return participants != null ? participants.size() : 0;
     }
+
+
 }

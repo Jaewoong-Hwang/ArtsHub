@@ -13,4 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     boolean existsBySlug(String slug);
     @Query("SELECT p FROM Project p WHERE p.creator.userId = :userId")
     List<Project> findByCreatorUserId(@Param("userId") Long userId);
+
+    @Query("SELECT p FROM Project p LEFT JOIN FETCH p.creator")
+    List<Project> findAllWithCreator();
 }

@@ -7,6 +7,7 @@ import Header from '../../../../../components/layout/Header';
 import Footer from '../../../../../components/layout/Footer';
 import { useAuth } from '../../../../auth/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../../../../auth/components/LogoutButton';
 
 const QuestionList = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const QuestionList = () => {
               <Link to="/QuestionList">문의</Link>
             </li>
             <li className={sidebarStyles["menuItem"]} data-target="content-logout">
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>

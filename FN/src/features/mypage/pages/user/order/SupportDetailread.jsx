@@ -6,6 +6,7 @@ import Header from "../../../../../components/layout/Header";
 import Footer from "../../../../../components/layout/Footer";
 import { useNavigate } from "react-router-dom";
 
+
 const SupportDetailread = () => {
   const navigate = useNavigate();
 

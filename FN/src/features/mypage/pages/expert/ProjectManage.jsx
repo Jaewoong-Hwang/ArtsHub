@@ -7,6 +7,7 @@ import styles from "../css/expert/ProjectManage.module.css";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
 import { useAuth } from "../../../auth/context/AuthContext"; // ✅ 추가
+import LogoutButton from "../../../auth/components/LogoutButton";
 
 const ProjectManage = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -44,8 +45,17 @@ const ProjectManage = () => {
   };
 
   const handleSelect = (action, projectId) => {
-    alert(`"${action}" 동작이 프로젝트 #${projectId}에 적용되었습니다.`);
-    setOpenDropdown(null);
+  if (action === "delete") {
+    handleDeleteProject(projectId);
+  } else if (action === "edit") {
+    navigate(`/project/edit/${projectId}`);
+  } else if (action === "end") {
+    // TODO: 모집 종료 API 호출
+  } else if (action === "start") {
+    // TODO: 모집 재개 API 호출
+  }
+
+  setOpenDropdown(null);
   };
 
   const handleConvertToUser = async () => {
@@ -59,8 +69,25 @@ const ProjectManage = () => {
       await fetchUserInfo();
       navigate("/UserInforead");
     } catch (err) {
-      const message = err.response?.data?.message || err.response?.data || "서버 오류";
+      const message =
+        err.response?.data?.message || err.response?.data || "서버 오류";
       alert("전환 실패: " + message);
+    }
+  };
+
+  const handleDeleteProject = async (projectId) => {
+    if (!window.confirm("정말 이 프로젝트를 삭제하시겠습니까?")) return;
+
+    try {
+      await axios.delete(`/api/mypage/projects/${projectId}`, {
+        withCredentials: true,
+      });
+      // 삭제 후 목록 다시 불러오기
+      setProjects((prev) => prev.filter((p) => p.id !== projectId));
+      alert("삭제가 완료되었습니다.");
+    } catch (err) {
+      console.error("삭제 실패:", err);
+      alert("삭제에 실패했습니다.");
     }
   };
 
@@ -91,10 +118,15 @@ const ProjectManage = () => {
               alt="프로필 이미지"
               className={sidemenuStyles["profile-img"]}
             />
-            <p className={sidemenuStyles.nickname}>{user?.nickname || "닉네임"}</p>
+            <p className={sidemenuStyles.nickname}>
+              {user?.nickname || "닉네임"}
+            </p>
           </div>
 
-          <button className={sidemenuStyles.change} onClick={handleConvertToUser}>
+          <button
+            className={sidemenuStyles.change}
+            onClick={handleConvertToUser}
+          >
             <span className="material-symbols-outlined">swap_horiz</span>
             <span>일반으로 전환</span>
           </button>
@@ -104,7 +136,9 @@ const ProjectManage = () => {
             <li className={sidemenuStyles["menu-item"]}>
               <Link to="/FundingManage">펀딩관리</Link>
             </li>
-            <li className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}>
+            <li
+              className={`${sidemenuStyles["menu-item"]} ${sidemenuStyles.active}`}
+            >
               <Link to="/ProjectManage">프로젝트 관리</Link>
               <ul className={sidemenuStyles.submenu}>
                 <li className={sidemenuStyles["submenu-item"]}>
@@ -131,7 +165,7 @@ const ProjectManage = () => {
               <Link to="/ExpertProfile">프로필</Link>
             </li>
             <li className={sidemenuStyles["menu-item"]}>
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>
@@ -140,57 +174,88 @@ const ProjectManage = () => {
           <p className={styles.title}>프로젝트 관리</p>
 
           <div className={styles.projectItem}>
-            {projects.map((project, index) => (
-              <div className={styles.projectCard} key={project.id}>
-                <div className={styles.projectThumbnail}>
-                  <a href="#">
-                    <img
-                      src={`http://localhost:8090/img/thumbnail/${project.thumbnail}`}
-                      alt="썸네일"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "/static/assets/img/default-thumbnail.png";
-                      }}
-                    />
-                  </a>
-                </div>
+            {projects.length === 0 ? (
+              <div className={styles.emptyBox}>
+                <p className={styles.emptyMessage}>
+                  등록한 프로젝트가 없습니다.
+                </p>
+              </div>
+            ) : (
+              projects.map((project, index) => (
+                <div className={styles.projectCard} key={project.id}>
+                  <div className={styles.projectThumbnail}>
+                    <a href="#">
+                      <img
+                        src={`http://localhost:8090/img/thumbnail/${project.thumbnail}`}
+                        alt="썸네일"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "/static/assets/img/default-thumbnail.png";
+                        }}
+                      />
+                    </a>
+                  </div>
 
-                <div className={styles.projectInfo}>
-                  <p className={styles.projectId}>#{project.id}</p>
-                  <p className={styles.projectTitle}>{project.title}</p>
-                  <p className={styles.projectGoal}>모집인원 : {project.capacity}명</p>
-                  <p className={styles.projectSupporter}>현재 멤버 : {project.currentMembers}명</p>
-                  <div className={styles.status}>
+                  <div className={styles.projectInfo}>
+                    <p className={styles.projectId}>#{project.id}</p>
+                    <p className={styles.projectTitle}>{project.title}</p>
+                    <p className={styles.projectGoal}>
+                      모집인원 : {project.capacity}명
+                    </p>
+                    <p className={styles.projectSupporter}>
+                      현재 멤버 : {project.currentMembers}명
+                    </p>
+                    <div className={styles.status}>
+                      <button
+                        className={`${styles.statusBtn} ${
+                          styles[project.status]
+                        }`}
+                      >
+                        {project.status === "RECRUITING"
+                          ? "모집중"
+                          : "모집종료"}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className={styles.editDropdown}>
                     <button
-                      className={`${styles.statusBtn} ${styles[project.status]}`}
+                      className={styles.editButton}
+                      onClick={() => toggleDropdown(index)}
                     >
-                      {project.status === "RECRUITING" ? "모집중" : "모집종료"}
+                      서비스 편집
                     </button>
+
+                    {openDropdown === index && (
+                      <ul className={styles.dropdownMenu}>
+                        {project.status === "RECRUITING" ? (
+                          <li onClick={() => handleSelect("end", project.id)}>
+                            모집 종료
+                          </li>
+                        ) : (
+                          <li onClick={() => handleSelect("start", project.id)}>
+                            모집 진행
+                          </li>
+                        )}
+                        <li onClick={() => handleSelect("edit", project.id)}>
+                          편집
+                        </li>
+                        <li onClick={() => handleSelect("delete", project.id)}>
+                          삭제
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </div>
+              ))
+            )}
+          </div>
 
-                <div className={styles.editDropdown}>
-                  <button
-                    className={styles.editButton}
-                    onClick={() => toggleDropdown(index)}
-                  >
-                    서비스 편집
-                  </button>
-
-                  {openDropdown === index && (
-                    <ul className={styles.dropdownMenu}>
-                      {project.status === "RECRUITING" ? (
-                        <li onClick={() => handleSelect("end", project.id)}>모집 종료</li>
-                      ) : (
-                        <li onClick={() => handleSelect("start", project.id)}>모집 진행</li>
-                      )}
-                      <li onClick={() => handleSelect("edit", project.id)}>편집</li>
-                      <li onClick={() => handleSelect("delete", project.id)}>삭제</li>
-                    </ul>
-                  )}
-                </div>
-              </div>
-            ))}
+          <div className={styles["projectCreateBtn"]}>
+            <button onClick={() => navigate("/project/create/info")}>
+              프로젝트 만들기
+            </button>
           </div>
         </div>
       </div>

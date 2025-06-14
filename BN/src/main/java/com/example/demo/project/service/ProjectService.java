@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,7 +56,7 @@ public class ProjectService {
      * 전체 프로젝트 조회
      */
     public List<Project> findAll() {
-        return projectRepository.findAll();
+        return projectRepository.findAllWithCreator();
     }
 
     /**
@@ -149,6 +150,13 @@ public class ProjectService {
         }).collect(Collectors.toList());
 
         dto.setRewards(rewardDtos);
+
+        //  작성자 닉네임 설정
+        dto.setCreatorNickname(
+                Optional.ofNullable(project.getCreator())
+                        .map(User::getNickname)
+                        .orElse("익명")
+        );
 
         return dto;
     }
@@ -284,7 +292,8 @@ public class ProjectService {
                 ).toList(),
                 project.getStatus(),
                 project.getCurrentMembers(),
-                isJoined
+                isJoined,
+                project.getCreator() != null ? project.getCreator().getNickname() : "익명"
         );
     }
 
@@ -317,5 +326,17 @@ public class ProjectService {
     }
 
 
+    @Transactional
+    public void deleteProjectByOwner(Long projectId, Long userId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("해당 프로젝트 없음"));
 
+        // 본인 소유 프로젝트인지 검증
+        if (!project.getCreator().getUserId().equals(userId)) {
+            throw new RuntimeException("권한이 없습니다.");
+        }
+
+        // 자동 cascade 처리 (rewards, participants 등 포함)
+        projectRepository.delete(project);
+    }
 }

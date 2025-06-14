@@ -6,6 +6,7 @@ import pageStyles from '../../css/user/order/MyFundingSupport.module.css';
 import Header from '../../../../../components/layout/Header';
 import Footer from '../../../../../components/layout/Footer';
 import { useAuth } from '../../../../auth/context/AuthContext';
+import LogoutButton from '../../../../auth/components/LogoutButton';
 
 const MyFundingSupport = () => {
   const { user } = useAuth();
@@ -61,7 +62,7 @@ const MyFundingSupport = () => {
               <Link to="/QuestionList">문의</Link>
             </li>
             <li className={styles["menuItem"]} data-target="content-logout">
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>

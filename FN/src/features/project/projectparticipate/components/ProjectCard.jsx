@@ -89,6 +89,10 @@ const ProjectCard = ({ project, index }) => {
           {project.genre || project.category || "기타"}
         </div>
 
+        <p className={styles.creator}>
+          작성자: {project.creatorNickname || "익명"}
+        </p>
+
         <h3 className={styles.projectTitle}>{project.title ?? "제목 없음"}</h3>
 
         <p className={styles.projectSummary}>

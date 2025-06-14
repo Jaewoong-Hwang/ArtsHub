@@ -6,6 +6,7 @@ import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
 import { useAuth } from '../../../auth/context/AuthContext'; // ✅ 사용자 정보 훅 추가
+import LogoutButton from '../../../auth/components/LogoutButton';
 
 const projects = [/* 기존 내용 생략 */];
 
@@ -74,7 +75,7 @@ const Myprojectrequest = () => {
               <Link to="/ExpertProfile">프로필</Link>
             </li>
             <li className={sidemenuStyles["menu-item"]}>
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>

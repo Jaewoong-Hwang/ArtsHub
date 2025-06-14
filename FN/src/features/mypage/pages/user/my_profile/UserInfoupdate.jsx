@@ -8,6 +8,7 @@ import Footer from "../../../../../components/layout/Footer";
 import axiosInstance from "../../../../../services/axiosInstance";
 import InterestSelect from "../../../components/InterestSelect";
 import { useAuth } from "../../../../auth/context/AuthContext";
+import LogoutButton from "../../../../auth/components/LogoutButton";
 
 const UserInfoupdate = () => {
   const navigate = useNavigate();
@@ -154,7 +155,7 @@ const UserInfoupdate = () => {
               <Link to="/QuestionList">문의</Link>
             </li>
             <li className={styles["menuItem"]}>
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>

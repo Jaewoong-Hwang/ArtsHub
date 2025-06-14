@@ -6,11 +6,14 @@ import Styles from "../../css/user/my_profile/UserInforead.module.css";
 import sidemenuStyles from "../../css/user/SidemenuUser.module.css";
 import Header from "../../../../../components/layout/Header";
 import Footer from "../../../../../components/layout/Footer";
+import { useAuth } from "../../../../auth/context/AuthContext";
+import LogoutButton from "../../../../auth/components/LogoutButton";
 
 function UserInforead() {
   const [userInfo, setUserInfo] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { setUser, refreshUser } = useAuth();
 
   const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img/profile";
   const profileImage = userInfo?.profileImage;
@@ -44,30 +47,25 @@ function UserInforead() {
 
   // 전문가로 전환
   const handleConvertToExpert = async () => {
-    try {
-      const res = await axios.put(
-        "/api/mypage/convert-to-expert",
-        {},
-        { withCredentials: true }
-      );
+  try {
+    await axios.put("/api/mypage/convert-to-expert", {}, { withCredentials: true });
 
-      // role 업데이트
-      setUserInfo((prev) => ({
-        ...prev,
-        role: "ROLE_EXPERT",
-      }));
+    // ✅ 최신 유저 정보를 다시 가져와서 전역 상태 반영
+    await refreshUser(); // 또는 아래처럼 직접 업데이트해도 OK
+    // setUser((prev) => ({ ...prev, role: "ROLE_EXPERT" }));
 
-      alert("전문가로 전환되었습니다!");
-      navigate("/ProjectManage");
-    } catch (err) {
-      const message =
-        err.response?.data?.message ||
-        err.response?.data ||
-        err.message ||
-        "서버 오류";
-      alert("전문가 전환 실패: " + message);
-    }
-  };
+    alert("전문가로 전환되었습니다!");
+    navigate("/ProjectManage");
+    window.location.reload();
+  } catch (err) {
+    const message =
+      err.response?.data?.message ||
+      err.response?.data ||
+      err.message ||
+      "서버 오류";
+    alert("전문가 전환 실패: " + message);
+  }
+};
 
   return (
     <>
@@ -105,7 +103,7 @@ function UserInforead() {
               <Link to="/QuestionList">문의</Link>
             </li>
             <li className={sidemenuStyles["menuItem"]}>
-              <Link to="/logout">로그아웃</Link>
+              <LogoutButton/>
             </li>
           </ul>
         </div>

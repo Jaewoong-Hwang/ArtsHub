@@ -204,14 +204,28 @@ const Join = () => {
   };
 
   //  이메일 인증 확인
-  const handleVerifyEmailCode = () => {
-    if (emailCode === emailVerificationCode) {
+const handleVerifyEmailCode = async () => {
+  const email = document.getElementById("userid").value;
+
+  try {
+    const res = await axiosInstance.post("/api/verify-email-code", {
+      email,
+      code: emailCode,
+    });
+
+    if (res.data.success) {
       setIsEmailVerified(true);
       alert("이메일 인증이 완료되었습니다.");
     } else {
-      alert("인증코드가 일치하지 않습니다.");
+      alert("인증번호가 일치하지 않습니다.");
     }
-  };
+  } catch (err) {
+    alert(
+      "인증 실패: " + (err.response?.data?.message || err.message)
+    );
+  }
+};
+
 
   return (
     <div className={styles.pageWrapper}>

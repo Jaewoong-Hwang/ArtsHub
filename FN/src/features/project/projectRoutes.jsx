@@ -17,7 +17,7 @@ export const ProjectRoutes = () => [
   <Route key="info" path="project/create/info" element={<ExpertRoute><ProjectCreateInfo /></ExpertRoute>} />,
   <Route key="description" path="project/create/description" element={<ExpertRoute><ProjectCreateDescription /></ExpertRoute>} />,
   <Route key="reward" path="project/create/reward" element={<ExpertRoute><ProjectCreateReward /></ExpertRoute>} />,
-  <Route key="Participate" path="project/participate" element={<ProjectParticipateMain />} />,
+  <Route key="Participate" path="project/participate" element={<ExpertRoute><ProjectParticipateMain /></ExpertRoute>} />,
   <Route key="Preview" path="project/preview" element={<ExpertRoute><ProjectPreview /></ExpertRoute>} />,
-  <Route key="Detail" path="project/:slug" element={<ProjectDetail />} />,   // ✅ 수정됨!
+  <Route key="Detail" path="project/:slug" element={<ExpertRoute><ProjectDetail /></ExpertRoute>} />,   // ✅ 수정됨!
 ];

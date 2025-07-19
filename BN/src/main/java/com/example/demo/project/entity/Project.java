@@ -1,8 +1,11 @@
 package com.example.demo.project.entity;
 
+import com.example.demo.project.dto.ProjectResponseDto;
+import com.example.demo.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
@@ -12,6 +15,7 @@ import java.util.regex.Pattern;
 @Entity
 @Data
 @Cacheable
+@ToString(exclude = "creator")
 public class Project {
 
     @Id
@@ -24,6 +28,7 @@ public class Project {
     private String genre;
     private int capacity;
     private String deadline;
+    @Column(name = "thumbnail", length = 300)
     private String thumbnail;
     private String descriptionSummary;
 
@@ -41,6 +46,11 @@ public class Project {
     private int views;
 
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creator;
+
 
     @PrePersist
     public void prePersist() {
@@ -72,4 +82,6 @@ public class Project {
     public int getCurrentMembers() {
         return participants != null ? participants.size() : 0;
     }
+
+
 }

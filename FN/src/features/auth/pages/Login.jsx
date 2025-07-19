@@ -1,16 +1,17 @@
-// Login.jsx (고쳐진 CSS 모듈 클래스 적용)
-
 import React, { useState } from "react";
 import axios from "axios";
 import "../../../assets/styles/reset.css";
 import styles from "./css/login/login.module.css";
+import LogoImg from "../../../assets/images/logo.svg";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // ✅ 폼 기본 제출 동작 방지
+
     try {
       const response = await axios.post(
         "/api/login",
@@ -19,7 +20,6 @@ function Login() {
       );
 
       if (response.status === 200) {
-        alert("로그인 성공!");
         window.location.href = "/";
       }
     } catch (error) {
@@ -31,11 +31,11 @@ function Login() {
     <div className={styles.loginContainer}>
       <div className={styles.mainLogoRow}>
         <a href="/">
-          <img src="/static/img/mainlogo.png" alt="로고" className={styles.mainlogo} />
+          <img src={LogoImg} alt="로고" className={styles.mainlogo} />
         </a>
       </div>
 
-      <div className={styles.box1}>
+      <form className={styles.box1} onSubmit={handleLogin}>
         <div className={styles.inputRow}>
           <input
             type="text"
@@ -67,7 +67,7 @@ function Login() {
 
         <div className="row mt-4">
           <div className="col">
-            <button className={styles.btn1} onClick={handleLogin}>
+            <button type="submit" className={styles.btn1}>
               로그인
             </button>
           </div>
@@ -76,10 +76,14 @@ function Login() {
         <div className="row">
           <div className="col">
             <button
+              type="button"
               className={styles.btn2}
-              onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/kakao"}
+              onClick={() =>
+                (window.location.href =
+                  "http://localhost:8090/oauth2/authorization/kakao")
+              }
             >
-              <img src="/static/img/kakao.png" alt="카카오" className={styles.kakao} /> 카카오로 시작하기
+              카카오로 시작하기
             </button>
           </div>
         </div>
@@ -87,10 +91,14 @@ function Login() {
         <div className="row">
           <div className="col">
             <button
+              type="button"
               className={styles.btn3}
-              onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/naver"}
+              onClick={() =>
+                (window.location.href =
+                  "http://localhost:8090/oauth2/authorization/naver")
+              }
             >
-              <img src="/static/img/naver.png" alt="네이버" className={styles.naver} /> 네이버로 시작하기
+              네이버로 시작하기
             </button>
           </div>
         </div>
@@ -98,19 +106,27 @@ function Login() {
         <div className="row">
           <div className="col">
             <button
+              type="button"
               className={styles.btn4}
-              onClick={() => window.location.href = "http://localhost:8090/oauth2/authorization/google"}
+              onClick={() =>
+                (window.location.href =
+                  "http://localhost:8090/oauth2/authorization/google")
+              }
             >
-              <img src="/static/img/google.png" alt="구글" className={styles.google} /> 구글로 시작하기
+              구글로 시작하기
             </button>
           </div>
         </div>
 
         <div className={styles.hypertext}>
-          <a href="/find" className={styles.link}>아이디/비밀번호 찾기</a>
-          <a href="/join" className={styles.link}>회원가입</a>
+          <a href="/find" className={styles.link}>
+            아이디/비밀번호 찾기
+          </a>
+          <a href="/join" className={styles.link}>
+            회원가입
+          </a>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

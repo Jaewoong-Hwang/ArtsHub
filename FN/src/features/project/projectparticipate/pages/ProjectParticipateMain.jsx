@@ -65,8 +65,9 @@ const ProjectParticipateMain = () => {
         const mappedProjects = serverData.map((p) => ({
           id: p.id,
           title: p.title,
+          creatorNickname: p.creatorNickname,
           category: p.genre,
-          image: p.thumbnail,
+          image: p.thumbnailUrl,
           descriptionSummary: p.descriptionSummary,
           description: p.description,
           views: p.views || 0,

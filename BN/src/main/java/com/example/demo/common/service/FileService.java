@@ -8,34 +8,35 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-@Slf4j
 @Service
+@Slf4j
 public class FileService {
 
-    private static final String UPLOAD_DIR = "C:/upload/profile"; // 또는 resources/static/img 등 원하는 경로
+    private static final String BASE_UPLOAD_DIR = "C:/upload"; // 또는 "src/main/resources/static/img"
 
-    public String save(MultipartFile file) {
+    public String upload(MultipartFile file, String subDir) {
         try {
-            // 디렉토리 없으면 생성
-            File dir = new File(UPLOAD_DIR);
+            // 서브 디렉토리 지정 (예: profile, thumbnail 등)
+            File dir = new File(BASE_UPLOAD_DIR + "/" + subDir);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
 
-            // 저장할 파일명 설정 (예: UUID_원본파일명)
+            // 저장할 파일명 (UUID_원본파일명)
             String originalFilename = file.getOriginalFilename();
             String savedFilename = UUID.randomUUID() + "_" + originalFilename;
 
-            // 실제 저장할 전체 경로
+            // 저장 경로 설정
             File dest = new File(dir, savedFilename);
-
-            // 저장
             file.transferTo(dest);
 
+            log.info(" 파일 저장 경로: {}", dest.getAbsolutePath());
+
+            // 저장된 파일명만 반환 (혹은 전체 경로, 필요 시)
             return savedFilename;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("파일 저장 실패", e);
             throw new RuntimeException("파일 저장 실패");
         }
     }

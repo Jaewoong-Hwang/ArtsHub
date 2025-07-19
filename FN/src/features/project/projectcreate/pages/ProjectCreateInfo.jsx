@@ -6,6 +6,8 @@ import Sidebar from "../components/SideBar";
 
 import "../../../../assets/styles/reset.css";
 import styles from "./css/ProjecCreatetInfo.module.css";
+import axiosInstance from "../../../../services/axiosInstance";
+import ThumbnailUploader from "../components/ThumbnailUploader";
 
 const ProjectCreateInfo = () => {
   const { open } = useStepModal();
@@ -15,8 +17,11 @@ const ProjectCreateInfo = () => {
     genre: "",
     capacity: "",
     deadline: "",
+    thumbnail: "",
+    descriptionSummary: "요약 설명",
   });
 
+  // 로컬 스토리지에서 불러오기
   useEffect(() => {
     const saved = localStorage.getItem("projectInfo");
     if (saved) {
@@ -24,11 +29,18 @@ const ProjectCreateInfo = () => {
     }
   }, []);
 
+  // input 값 변경 핸들러
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // 썸네일 업로드 시 파일명 formData에 반영
+  const handleThumbnailUpload = (fileName) => {
+    setFormData((prev) => ({ ...prev, thumbnail: fileName }));
+  };
+
+  // 임시 저장
   const handleTempSave = () => {
     localStorage.setItem("projectInfo", JSON.stringify(formData));
     console.log("✅ 저장된 데이터:", formData);
@@ -49,6 +61,14 @@ const ProjectCreateInfo = () => {
           <h2 className={styles.heading}>프로젝트 기본 정보</h2>
 
           <form>
+            <label className={styles.label}>썸네일 이미지 업로드</label>
+            <ThumbnailUploader onUpload={handleThumbnailUpload} />
+            {formData.thumbnail && (
+              <p style={{ fontSize: "14px", marginTop: "6px", marginBottom: "30px" }}>
+                서버 저장 파일명: <strong>{formData.thumbnail}</strong>
+              </p>
+            )}
+
             <label className={styles.label}>
               프로젝트명
               <input
@@ -85,7 +105,6 @@ const ProjectCreateInfo = () => {
                 <option>어린이</option>
                 <option>국악</option>
                 <option>밴드</option>
-                <option>어린이</option>
               </select>
             </label>
 
@@ -97,7 +116,7 @@ const ProjectCreateInfo = () => {
                 placeholder="예: 5"
                 min="1"
                 required
-                value={formData.headcount}
+                value={formData.capacity}
                 onChange={handleChange}
                 className={styles.input}
               />

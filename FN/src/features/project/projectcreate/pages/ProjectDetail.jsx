@@ -96,6 +96,7 @@ const ProjectDetail = () => {
     currentMembers,
   } = project;
 
+console.log("🖼️ 이미지 src:", `http://localhost:8090/img/${thumbnail}`);
   const isClosed = currentMembers >= capacity;
 
   // ✅ 버튼 메시지 상태
@@ -109,6 +110,16 @@ const ProjectDetail = () => {
     <div className={styles.previewWrapper}>
       <h1>프로젝트 상세 보기</h1>
 
+      {thumbnail && (
+        <div className={styles.detailThumbnailWrapper}>
+          <img
+            src={`http://localhost:8090/img/thumbnail/${thumbnail}`}
+            alt="프로젝트 썸네일"
+            className={styles.detailThumbnail}
+          />
+        </div>
+      )}
+
       <section className={styles.previewSection}>
         <h2>{title || "제목 없음"}</h2>
         <p>장르: {genre || "장르 없음"}</p>
@@ -121,11 +132,6 @@ const ProjectDetail = () => {
 
       <section className={styles.previewSection}>
         <h3>프로젝트 상세 설명</h3>
-        {description?.previewUrl && (
-          <div className={styles.previewThumbnail}>
-            <img src={description.previewUrl} alt="썸네일" />
-          </div>
-        )}
         <p>
           <strong>개요:</strong> {description?.summary || "없음"}
         </p>
@@ -179,7 +185,7 @@ const ProjectDetail = () => {
       <div className={styles.ctaButtons}>
         <button
           className={`${styles.btn} ${styles.btnPrimary}`}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/project/participate")}
         >
           ← 돌아가기
         </button>

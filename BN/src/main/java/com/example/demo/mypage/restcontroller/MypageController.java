@@ -1,17 +1,26 @@
 package com.example.demo.mypage.restcontroller;
 
+import com.example.demo.common.config.auth.jwt.JwtTokenProvider;
+import com.example.demo.common.config.auth.jwt.TokenInfo;
 import com.example.demo.common.config.auth.principal.PrincipalDetails;
 import com.example.demo.common.service.FileService;
 import com.example.demo.interest.entity.Interest;
 import com.example.demo.interest.repository.InterestRepository;
 import com.example.demo.mypage.Service.MypageService;
 import com.example.demo.mypage.dto.MypageDto;
+import com.example.demo.project.dto.MyProjectDto;
+import com.example.demo.project.entity.Project;
+import com.example.demo.project.repository.ProjectRepository;
+import com.example.demo.project.service.ProjectService;
 import com.example.demo.user.entity.Role;
 import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +48,8 @@ public class MypageController {
     private final FileService fileService;
     private final String uploadDir = "upload/profile/";
     private final MypageService mypageService;
+    private final ProjectService projectService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @PutMapping("/upgrade-role")
     public ResponseEntity<?> upgradeToExpert(Authentication authentication) {
@@ -97,12 +108,13 @@ public class MypageController {
         user.setNickname(dto.getNickname());
         user.setPhoneNumber(dto.getPhoneNumber());
         user.setAddress(dto.getAddress());
-        // TODO: 관심분야 저장 추가 가능
+        user.setProfileImage(dto.getProfileImage()); //
 
         userRepository.save(user);
 
         return ResponseEntity.ok("수정 완료");
     }
+
 
     // 관심분야 수정 (이름 리스트로 받아 연관 설정)
     @PutMapping("/update-interests")
@@ -124,31 +136,63 @@ public class MypageController {
     }
 
     //프로필 이미지 변경
-    @Transactional
-    @PostMapping("/upload-profile")
-    public ResponseEntity<String> uploadProfileImage(
-            @RequestParam("file") MultipartFile file,
-            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+ //   @Transactional
+//    @PostMapping("/upload-profile")
+//    public ResponseEntity<String> uploadProfileImage(
+ //           @RequestParam("file") MultipartFile file,
+ //           @AuthenticationPrincipal PrincipalDetails principalDetails) {
+//
+  //       // 1. 파일 저장
+ //       String savedFilename = fileService.save(file); // 예: "uuid_filename.jpg"
+//
+  //       // 2. DB에 저장
+  //     User user = principalDetails.getUser();
+  //      user.setProfileImage(savedFilename);
+   //     userRepository.save(user);
+//
+   //      // 3. 프론트로 반환 (파일명만 전달)
+     //   return ResponseEntity.ok(savedFilename);
+   // }
 
-        // 1. 파일 저장
-        String savedFilename = fileService.save(file); // 예: "uuid_filename.jpg"
-
-        // 2. DB에 저장
-        User user = principalDetails.getUser();
-        user.setProfileImage(savedFilename);
+    @PutMapping("/update-profile-image")
+    public ResponseEntity<?> updateProfileImage(@RequestParam("fileName") String fileName,
+                                                @AuthenticationPrincipal PrincipalDetails principal) {
+        User user = principal.getUser();
+        user.setProfileImage(fileName);
         userRepository.save(user);
-
-        // 3. 프론트로 반환 (파일명만 전달)
-        return ResponseEntity.ok(savedFilename);
+        return ResponseEntity.ok("프로필 이미지가 저장되었습니다.");
     }
 
     //전문가전환
     @PutMapping("/convert-to-expert")
-    public ResponseEntity<String> convertToExpert(@AuthenticationPrincipal PrincipalDetails principal) {
+    public ResponseEntity<String> convertToExpert(
+            @AuthenticationPrincipal PrincipalDetails principal,
+            HttpServletResponse response) {
+
         String email = principal.getUsername();
-        mypageService.convertToExpert(email);
-        System.out.println("전문가 전환 요청됨 - 이메일: " + email);
-        return ResponseEntity.ok("전문가로 전환 완료");
+
+        // 1️⃣ DB에서 Role 업데이트
+        User user = mypageService.convertToExpert(email);
+
+        // 2️⃣ Role이 바뀐 User로 Authentication 생성
+        PrincipalDetails updatedPrincipal = new PrincipalDetails(user);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                updatedPrincipal,
+                null,
+                updatedPrincipal.getAuthorities()
+        );
+
+        // 3️⃣ generateToken 사용
+        TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+
+        // 4️⃣ accessToken을 쿠키로 내려주기
+        Cookie jwtCookie = new Cookie("access-token", tokenInfo.getAccessToken());
+        jwtCookie.setHttpOnly(true);
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(60 * 60 * 24);
+        response.addCookie(jwtCookie);
+
+        return ResponseEntity.ok("전문가로 전환 완료 및 새 토큰 발급");
     }
 
     //일반으로전환
@@ -168,5 +212,23 @@ public class MypageController {
 
 
 
+    //내가 만든 프로젝트 조회
+    @GetMapping("/my-projects")
+    public ResponseEntity<?> getMyProjects(@AuthenticationPrincipal PrincipalDetails principal) {
+        Long userId = principal.getUser().getUserId();
+        List<MyProjectDto> result = projectService.findProjectsByCreator(userId);
+        return ResponseEntity.ok(result);
+    }
+
+
+
+
+    @DeleteMapping("/projects/{projectId}")
+    public ResponseEntity<?> deleteMyProject(@PathVariable Long projectId,
+                                             @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Long userId = principalDetails.getUser().getUserId();
+        projectService.deleteProjectByOwner(projectId, userId);
+        return ResponseEntity.ok("삭제 완료");
+    }
 
 }

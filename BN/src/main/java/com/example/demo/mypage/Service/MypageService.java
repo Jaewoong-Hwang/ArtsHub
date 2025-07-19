@@ -13,10 +13,11 @@ public class MypageService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void convertToExpert(String email) {
+    public User convertToExpert(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
         user.setRole(Role.ROLE_EXPERT);
+        return user;
     }
 
     @Transactional

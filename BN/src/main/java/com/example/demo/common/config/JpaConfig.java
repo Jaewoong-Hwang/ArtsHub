@@ -19,14 +19,14 @@ import java.util.Properties;
 @EntityScan(basePackages = {
         "com.example.demo.user.entity",
         "com.example.demo.project.entity",
-        "com.example.demo.grant.entity" // ✅ 추가
+        "com.example.demo.grant.entity"
 })
   
 @EnableJpaRepositories(
         basePackages = {
                 "com.example.demo.user.repository",
                 "com.example.demo.project.repository",
-                "com.example.demo.grant.repository" // ✅ 추가
+                "com.example.demo.grant.repository",
                 "com.example.demo.interest.repository"
 
         },
@@ -44,7 +44,7 @@ public class JpaConfig {
         entityManagerFactoryBean.setPackagesToScan(
                 "com.example.demo.user.entity",
                 "com.example.demo.project.entity",
-                "com.example.demo.grant.entity"
+                "com.example.demo.grant.entity",
                 "com.example.demo.interest.entity"
         );
 

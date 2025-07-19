@@ -2,6 +2,7 @@ import React from "react";
 import axiosInstance from "../../../services/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import styles from './css/LogoutButton.module.css';
 
 function LogoutButton() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function LogoutButton() {
     try {
       await axiosInstance.post("/api/logout"); // 백엔드 요청
       setUser(null); // 상태 초기화
-      alert("로그아웃 되었습니다.");
+
       navigate("/login"); // 메인으로 이동
     } catch (err) {
       console.error("로그아웃 실패", err);
@@ -20,7 +21,7 @@ function LogoutButton() {
   };
 
   return (
-    <button onClick={handleLogout} className="logout-btn">
+    <button onClick={handleLogout} className={styles["logout-btn"]}>
       로그아웃
     </button>
   );

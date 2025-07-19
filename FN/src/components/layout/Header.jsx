@@ -4,11 +4,12 @@ import "./css/Header.css";
 import logo from "../../assets/images/logo.svg";
 import LogoutButton from "../../features/auth/components/LogoutButton";
 import { useAuth } from "../../features/auth/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { user } = useAuth();
   const isLogin = !!user;
-  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img";
+  const SPRING_IMAGE_BASE_URL = "http://localhost:8090/img/profile";
 
   const profileImage = user?.profileImage;
   const isHttpUrl = profileImage?.startsWith("http");
@@ -22,6 +23,42 @@ const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const navigate = useNavigate();
+
+    // 역할 따라 경로 이동
+  const handleMyPageClick = () => {
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else if (user.role === "ROLE_EXPERT") {
+      navigate("/ProjectManage");
+    } else {
+      navigate("/UserInforead");
+    }
+  };
+
+  const handleProjectCreateClick = () => {
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else if (user.role !== "ROLE_EXPERT") {
+      alert(
+        "전문가만 프로젝트를 만들 수 있습니다.\n내정보에서 전문가로 전환해주세요."
+      );
+    } else {
+      navigate("/project/create/info");
+    }
+  };
+
+  const handleProjectParticipateClick = () => {
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/project/participate");
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,16 +74,29 @@ const Header = () => {
     if (!isLogin) {
       return (
         <>
-          <li><Link to="/login">로그인</Link></li>
-          <li><Link to="/join">회원가입</Link></li>
+          <li>
+            <Link to="/login">로그인</Link>
+          </li>
+          <li>
+            <Link to="/join">회원가입</Link>
+          </li>
         </>
       );
     }
 
     return (
       <>
-        <li><Link to="/projectmain">프로젝트 둘러보기</Link></li>
-        <li><Link to="/project/create">프로젝트 만들기</Link></li>
+        <li>
+          <Link to="/projectmain">프로젝트 둘러보기</Link>
+        </li>
+        <li>
+          <button
+            className="header-link-btn"
+            onClick={handleProjectCreateClick}
+          >
+            프로젝트 만들기
+          </button>
+        </li>
 
         <li className="dropdown-container" ref={menuRef}>
           <div
@@ -66,7 +116,7 @@ const Header = () => {
             />
             {menuOpen && (
               <div className="dropdown-menu">
-                <Link to="/UserInforead">내 정보</Link>
+                <button onClick={handleMyPageClick}>내 정보</button>
                 <LogoutButton />
               </div>
             )}
@@ -90,33 +140,61 @@ const Header = () => {
             <li>
               <Link to="/funding">Funding</Link>
               <ul className="depth2">
-                <li><a href="#">인기</a></li>
-                <li><a href="#">신규</a></li>
+                <li>
+                  <a href="#">인기</a>
+                </li>
+                <li>
+                  <a href="#">신규</a>
+                </li>
               </ul>
             </li>
 
             <li>
               <Link to="/grants">Grants</Link>
               <ul className="depth2">
-                <li><a href="#">공연 후기</a></li>
-                <li><a href="#">작품 이야기</a></li>
-                <li><a href="#">자유 게시판</a></li>
-                <li><a href="#">정보 공유</a></li>
+                <li>
+                  <a href="#">공연 후기</a>
+                </li>
+                <li>
+                  <a href="#">작품 이야기</a>
+                </li>
+                <li>
+                  <a href="#">자유 게시판</a>
+                </li>
+                <li>
+                  <a href="#">정보 공유</a>
+                </li>
               </ul>
             </li>
 
             <li>
               <Link to="/projectmain">Project</Link>
               <ul className="depth2">
-                <li><Link to="/project/participate">참가하기</Link></li>
-                <li><Link to="/project/create">만들기</Link></li>
+                <li>
+                  <button
+                    className="header-link-btn"
+                    onClick={handleProjectParticipateClick}
+                  >
+                    참가하기
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="header-link-btn"
+                    onClick={handleProjectCreateClick}
+                  >
+                    만들기
+                  </button>
+                </li>
               </ul>
             </li>
           </ul>
         </ul>
 
         <ul className="rightside">{renderRightMenu()}</ul>
-        <a href="#" className="navbar_menu material-symbols-outlined">menu</a>
+        <a href="#" className="navbar_menu material-symbols-outlined">
+          menu
+        </a>
       </nav>
     </header>
   );

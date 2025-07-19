@@ -6,6 +6,7 @@ import sidemenuStyles from "../css/expert/SidemenuExpert.module.css";
 import Header from "../../../../components/layout/Header";
 import Footer from "../../../../components/layout/Footer";
 import { useAuth } from "../../../auth/context/AuthContext"; // ✅ 추가
+import LogoutButton from "../../../auth/components/LogoutButton";
 
 const fundingList = [
   {
@@ -124,7 +125,7 @@ const FundingManage = () => {
             <li className={sidemenuStyles["menu-item"]}><Link to="/Myprojectrequest">내가 신청한 프로젝트</Link></li>
             <li className={sidemenuStyles["menu-item"]}><Link to="/ProfitHistory">수익 관리</Link></li>
             <li className={sidemenuStyles["menu-item"]}><Link to="/ExpertProfile">프로필</Link></li>
-            <li className={sidemenuStyles["menu-item"]}><Link to="/logout">로그아웃</Link></li>
+            <li className={sidemenuStyles["menu-item"]}><LogoutButton/></li>
           </ul>
         </div>
 

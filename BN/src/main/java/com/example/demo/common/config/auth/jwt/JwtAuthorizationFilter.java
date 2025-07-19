@@ -221,6 +221,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 uri.startsWith("/api/send-email-code") ||
                 uri.startsWith("/api/verify-email-code") ||
                 uri.startsWith("/api/interests") ||  //  "/**" 대신 정확한 경로
+                uri.startsWith("/img/") ||
+                uri.startsWith("/img/thumbnail/**")||
                 uri.startsWith("/error");
 
         log.debug("[JWT FILTER] shouldNotFilter: {} - {}", excluded, uri);

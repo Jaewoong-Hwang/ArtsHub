@@ -1,3 +1,5 @@
+
+
 .categoryWrapper {
   position: relative;
   max-width: 1080px;
@@ -38,9 +40,11 @@
 
 .active .emoji {
   background-color: var(--main-blue);
+  color: white;
 }
 
 .emoji {
+  font-size: 2.2rem;
   background-color: #fff;
   border-radius: 50%;
   width: 56px;
@@ -49,14 +53,7 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: background-color 0.3s;
-  overflow: hidden;
-}
-
-.categoryImage {
-  width: 100%;
-  height: 65px;
-  object-fit:cover;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .categoryItemText {
@@ -120,11 +117,4 @@
     width: 16px;
     height: 16px;
   }
-  
 }
-
-.categoryItem:hover .categoryImage {
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
-}
-
